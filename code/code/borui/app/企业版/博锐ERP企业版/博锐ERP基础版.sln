@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "博锐ERP基础版", "博锐ERP基础版.vdproj", "{BF203027-3C0D-4C0C-AC24-BB830B80D727}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF203027-3C0D-4C0C-AC24-BB830B80D727}.Debug|Default.ActiveCfg = Debug
+		{BF203027-3C0D-4C0C-AC24-BB830B80D727}.Debug|Default.Build.0 = Debug
+		{BF203027-3C0D-4C0C-AC24-BB830B80D727}.Release|Default.ActiveCfg = Release
+		{BF203027-3C0D-4C0C-AC24-BB830B80D727}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

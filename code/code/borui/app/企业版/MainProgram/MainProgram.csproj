@@ -1,0 +1,1281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E06BAE4-D540-4257-B9AC-FD60B159277B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MainProgram</RootNamespace>
+    <AssemblyName>MainProgram</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>png-0013.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GlassButton">
+      <HintPath>config\GlassButton.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumiSoft.Net">
+      <HintPath>bin\Debug\LumiSoft.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TIV.Core.BaseCoreLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\sdk\Lib\Debug\TIV.Core.BaseCoreLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bus\AuthorizationAccess.cs" />
+    <Compile Include="bus\BillDataGridViewExtend.cs" />
+    <Compile Include="bus\ControlExtendLib.cs" />
+    <Compile Include="bus\DataGridViewMerge.cs" />
+    <Compile Include="bus\DbPublic.cs" />
+    <Compile Include="bus\ExcelDocProc.cs" />
+    <Compile Include="bus\MobileWeightedUnitPrice.cs" />
+    <Compile Include="bus\PrintBmpFile.cs" />
+    <Compile Include="bus\PrintDataGridView.cs" />
+    <Compile Include="bus\SerialNumberManager.cs" />
+    <Compile Include="bus\SystemActionList.cs" />
+    <Compile Include="model\ITableModel.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielInEarningsOrder.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielInEarningsOrderDetails.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielInOrder.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielInOrderDetails.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielInOtherOrder.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielInOtherOrderDetails.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielOutEarningsOrder.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielOutEarningsOrderDetails.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielOutOrder.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielOutOrderDetails.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielOutOtherOrder.cs" />
+    <Compile Include="model\仓存管理\业务单据\MaterielOutOtherOrderDetails.cs" />
+    <Compile Include="model\公共的\BillNumber.cs" />
+    <Compile Include="model\公共的\Version.cs" />
+    <Compile Include="model\初始化\InitSubSystemSign.cs" />
+    <Compile Include="model\初始化\业务初始化\InitAccountPayable.cs" />
+    <Compile Include="model\初始化\业务初始化\InitAccountReceivable.cs" />
+    <Compile Include="model\初始化\财务初始化\InitBankBalance.cs" />
+    <Compile Include="model\初始化\财务初始化\InitCashBalance.cs" />
+    <Compile Include="model\初始化\业务初始化\InitMateriel.cs" />
+    <Compile Include="model\基础资料\业务\BillConfig.cs" />
+    <Compile Include="model\基础资料\业务\Customer.cs" />
+    <Compile Include="model\基础资料\业务\CustomerOrgStruct.cs" />
+    <Compile Include="model\基础资料\业务\CustomerType.cs" />
+    <Compile Include="model\基础资料\业务\MaterielOrgStruct.cs" />
+    <Compile Include="model\基础资料\业务\MaterielType.cs" />
+    <Compile Include="model\基础资料\业务\Matetiel.cs" />
+    <Compile Include="model\基础资料\业务\SettlmentWay.cs" />
+    <Compile Include="model\基础资料\业务\Supplier.cs" />
+    <Compile Include="model\基础资料\业务\SupplierOrgStruct.cs" />
+    <Compile Include="model\基础资料\业务\SupplierType.cs" />
+    <Compile Include="model\基础资料\其他\OperatorLog.cs" />
+    <Compile Include="model\基础资料\基础信息\Action.cs" />
+    <Compile Include="model\基础资料\基础信息\ActionAndStaff.cs" />
+    <Compile Include="model\基础资料\基础信息\AuxiliaryMaterial.cs" />
+    <Compile Include="model\基础资料\基础信息\CurrentLoginUser.cs" />
+    <Compile Include="model\基础资料\基础信息\StaffOrgStruct.cs" />
+    <Compile Include="model\基础资料\基础信息\Staff.cs" />
+    <Compile Include="model\基础资料\基础信息\SubSystem.cs" />
+    <Compile Include="model\基础资料\基础信息\SystemInfo.cs" />
+    <Compile Include="model\基础资料\基础信息\SystemModule.cs" />
+    <Compile Include="model\基础资料\基础信息\UserOrgStruct.cs" />
+    <Compile Include="model\基础资料\数据库\DbBackConfig.cs" />
+    <Compile Include="model\基础资料\数据库\DbBackupRecord.cs" />
+    <Compile Include="model\基础资料\数据库\DbRollbackRecord.cs" />
+    <Compile Include="model\存货核算\StorageStockDetail.cs" />
+    <Compile Include="model\现金管理\业务\BalanceManager.cs" />
+    <Compile Include="model\现金管理\业务\BankBalanceLastMonth.cs" />
+    <Compile Include="model\现金管理\业务\BankCashsubLedger.cs" />
+    <Compile Include="model\现金管理\业务\CashBalanceLastMonth.cs" />
+    <Compile Include="model\现金管理\业务\CashCashsubLedger.cs" />
+    <Compile Include="model\现金管理\报表\CashAccountPayableDetail.cs" />
+    <Compile Include="model\现金管理\报表\CashAccountReceivableDetail.cs" />
+    <Compile Include="model\现金管理\报表\CompanyProfit.cs" />
+    <Compile Include="model\采购管理\PurchaseInOrder.cs" />
+    <Compile Include="model\采购管理\PurchaseInOrderDetails.cs" />
+    <Compile Include="model\采购管理\PurchaseOrder.cs" />
+    <Compile Include="model\采购管理\PurchaseOrderDetails.cs" />
+    <Compile Include="model\采购管理\SupplierPriceSheet.cs" />
+    <Compile Include="model\销售管理\SaleOutOrder.cs" />
+    <Compile Include="model\销售管理\SaleOutOrderDetails.cs" />
+    <Compile Include="model\销售管理\SaleOrder.cs" />
+    <Compile Include="model\销售管理\SaleOrderDetails.cs" />
+    <Compile Include="model\销售管理\SaleQuotationOrder.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="source\FormFactory.cs" />
+    <Compile Include="view\主界面\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormAbout.designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\主界面\FormModifyPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormModifyPassword.designer.cs">
+      <DependentUpon>FormModifyPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\主界面\FormRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormRegister.designer.cs">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\主界面\FormSendQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormSendQuestion.Designer.cs">
+      <DependentUpon>FormSendQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\FormStorageReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\FormStorageReport.Designer.cs">
+      <DependentUpon>FormStorageReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\入库\FormMaterielIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\入库\FormMaterielIn.designer.cs">
+      <DependentUpon>FormMaterielIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\入库\FormMaterielInEarnings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\入库\FormMaterielInEarnings.designer.cs">
+      <DependentUpon>FormMaterielInEarnings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\入库\FormMaterielInOther.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\入库\FormMaterielInOther.designer.cs">
+      <DependentUpon>FormMaterielInOther.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielOut.designer.cs">
+      <DependentUpon>FormMaterielOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielOutEarnings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielOutEarnings.designer.cs">
+      <DependentUpon>FormMaterielOutEarnings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielOutOther.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielOutOther.designer.cs">
+      <DependentUpon>FormMaterielOutOther.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormMaterielCountAlarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormMaterielCountAlarm.designer.cs">
+      <DependentUpon>FormMaterielCountAlarm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormMaterielStorageAmountHistoryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormMaterielStorageAmountHistoryInfo.designer.cs">
+      <DependentUpon>FormMaterielStorageAmountHistoryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormNewFilterValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormNewFilterValue.Designer.cs">
+      <DependentUpon>FormNewFilterValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormStorageSequenceFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\报表\FormStorageSequenceFilter.designer.cs">
+      <DependentUpon>FormStorageSequenceFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormAccountReceivablerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormAccountReceivablerEdit.designer.cs">
+      <DependentUpon>FormAccountReceivablerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormInitAccountReceivabler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormInitAccountReceivabler.designer.cs">
+      <DependentUpon>FormInitAccountReceivabler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\初始化\财务初始化\FormInitAssets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\初始化\财务初始化\FormInitAssets.Designer.cs">
+      <DependentUpon>FormInitAssets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormInitMateriel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormInitMateriel.designer.cs">
+      <DependentUpon>FormInitMateriel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormInitMaterielEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\初始化\业务初始化\FormInitMaterielEdit.Designer.cs">
+      <DependentUpon>FormInitMaterielEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\FormBaseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\FormBaseInfo.designer.cs">
+      <DependentUpon>FormBaseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\初始化\FormInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\初始化\FormInit.Designer.cs">
+      <DependentUpon>FormInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseBillConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseBillConfig.Designer.cs">
+      <DependentUpon>FormBaseBillConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseCustomer.Designer.cs">
+      <DependentUpon>FormBaseCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseMateriel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseMateriel.designer.cs">
+      <DependentUpon>FormBaseMateriel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseSettlmentWay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseSettlmentWay.designer.cs">
+      <DependentUpon>FormBaseSettlmentWay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBaseSupplier.designer.cs">
+      <DependentUpon>FormBaseSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBillConfigEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormBillConfigEdit.Designer.cs">
+      <DependentUpon>FormBillConfigEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormMaterielEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormMaterielEdit.designer.cs">
+      <DependentUpon>FormMaterielEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormNoForbid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormNoForbid.Designer.cs">
+      <DependentUpon>FormNoForbid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormNoForbidMateriel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormNoForbidMateriel.designer.cs">
+      <DependentUpon>FormNoForbidMateriel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormNoForbidSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormNoForbidSupplier.designer.cs">
+      <DependentUpon>FormNoForbidSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormSettlmentWayEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormSettlmentWayEdit.Designer.cs">
+      <DependentUpon>FormSettlmentWayEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormSupplierEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormSupplierEdit.designer.cs">
+      <DependentUpon>FormSupplierEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\其他\FormBaseOperatorLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\其他\FormBaseOperatorLog.designer.cs">
+      <DependentUpon>FormBaseOperatorLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\其他\OperatorLogSerach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\其他\OperatorLogSerach.Designer.cs">
+      <DependentUpon>OperatorLogSerach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormAuxiliaryMaterialEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormAuxiliaryMaterialEdit.Designer.cs">
+      <DependentUpon>FormAuxiliaryMaterialEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseAuxiliaryMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseAuxiliaryMaterial.Designer.cs">
+      <DependentUpon>FormBaseAuxiliaryMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseStaff.designer.cs">
+      <DependentUpon>FormBaseStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseSystemInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseSystemInfo.Designer.cs">
+      <DependentUpon>FormBaseSystemInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormCustomerEdit.Designer.cs">
+      <DependentUpon>FormCustomerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseUserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormBaseUserManager.designer.cs">
+      <DependentUpon>FormBaseUserManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormCreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormCreateUser.Designer.cs">
+      <DependentUpon>FormCreateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormDutyManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormDutyManager.designer.cs">
+      <DependentUpon>FormDutyManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormStaffEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\基础信息\FormStaffEdit.designer.cs">
+      <DependentUpon>FormStaffEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\数据库\DBBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\数据库\DBBackup.designer.cs">
+      <DependentUpon>DBBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\数据库\FormBaseBackupRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\数据库\FormBaseBackupRecord.designer.cs">
+      <DependentUpon>FormBaseBackupRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\基础资料\数据库\FormBaseRollbackRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\数据库\FormBaseRollbackRecord.designer.cs">
+      <DependentUpon>FormBaseRollbackRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\存货核算\FormInventoryAccounting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\存货核算\FormInventoryAccounting.Designer.cs">
+      <DependentUpon>FormInventoryAccounting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\主界面\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormMain.designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\存货核算\FormInventoryAccountingReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\存货核算\FormInventoryAccountingReport.Designer.cs">
+      <DependentUpon>FormInventoryAccountingReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\存货核算\报表\FormSaleInfoCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\存货核算\报表\FormSaleInfoCount.designer.cs">
+      <DependentUpon>FormSaleInfoCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\存货核算\报表\FormStorageStockDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\存货核算\报表\FormStorageStockDetails.designer.cs">
+      <DependentUpon>FormStorageStockDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\存货核算\报表\FormStorageStockDetailsFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\存货核算\报表\FormStorageStockDetailsFilter.designer.cs">
+      <DependentUpon>FormStorageStockDetailsFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\FormCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\FormCash.designer.cs">
+      <DependentUpon>FormCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\FormCashReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\FormCashReport.designer.cs">
+      <DependentUpon>FormCashReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\业务\FormPaymentOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\业务\FormPaymentOrder.Designer.cs">
+      <DependentUpon>FormPaymentOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\业务\FormReceivableOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\业务\FormReceivableOrder.designer.cs">
+      <DependentUpon>FormReceivableOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormCompanyProfit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormCompanyProfit.designer.cs">
+      <DependentUpon>FormCompanyProfit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormAccountReceivablerCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormAccountReceivablerCount.designer.cs">
+      <DependentUpon>FormAccountReceivablerCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormAccountReceivablerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormAccountReceivablerDetail.designer.cs">
+      <DependentUpon>FormAccountReceivablerDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormBankCashDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormBankCashDetail.designer.cs">
+      <DependentUpon>FormBankCashDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.designer.cs">
+      <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\系统登录\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\系统登录\FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\FormPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\FormPurchase.Designer.cs">
+      <DependentUpon>FormPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\报表分析\FormReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\报表分析\FormReport.Designer.cs">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\FormPurchaseReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\FormPurchaseReport.Designer.cs">
+      <DependentUpon>FormPurchaseReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormAdjustAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormAdjustAmount.Designer.cs">
+      <DependentUpon>FormAdjustAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormPurchaseInOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormPurchaseInOrder.designer.cs">
+      <DependentUpon>FormPurchaseInOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormPurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormPurchaseOrder.designer.cs">
+      <DependentUpon>FormPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMaterielStorageAmountInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMaterielStorageAmountInfo.designer.cs">
+      <DependentUpon>FormMaterielStorageAmountInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormDisplayCountInfoFromSQL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormDisplayCountInfoFromSQL.Designer.cs">
+      <DependentUpon>FormDisplayCountInfoFromSQL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormDisplayCountInfoFromSQLFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormDisplayCountInfoFromSQLFilter.Designer.cs">
+      <DependentUpon>FormDisplayCountInfoFromSQLFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormPurchaseOrderSequence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormPurchaseOrderSequence.designer.cs">
+      <DependentUpon>FormPurchaseOrderSequence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMateirelPriceManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMateirelPriceManager.designer.cs">
+      <DependentUpon>FormMateirelPriceManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMaterielPriceSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMaterielPriceSheet.designer.cs">
+      <DependentUpon>FormMaterielPriceSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMaterielPriceSheetEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\报表\FormMaterielPriceSheetEdit.designer.cs">
+      <DependentUpon>FormMaterielPriceSheetEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\销售管理\FormSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\销售管理\FormSale.Designer.cs">
+      <DependentUpon>FormSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\仓存管理\FormStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\FormStorage.Designer.cs">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\主界面\FunctionZont.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FunctionZont.designer.cs">
+      <DependentUpon>FunctionZont.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\销售管理\FormSaleReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\销售管理\FormSaleReport.Designer.cs">
+      <DependentUpon>FormSaleReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\销售管理\业务\FormSaleOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\销售管理\业务\FormSaleOrder.designer.cs">
+      <DependentUpon>FormSaleOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\销售管理\业务\FormSaleOutOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\销售管理\业务\FormSaleOutOrder.designer.cs">
+      <DependentUpon>FormSaleOutOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\销售管理\业务\FormSaleQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\销售管理\业务\FormSaleQuotation.designer.cs">
+      <DependentUpon>FormSaleQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\销售管理\报表\FormSaleOrderSequence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\销售管理\报表\FormSaleOrderSequence.designer.cs">
+      <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="view\主界面\FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FormModifyPassword.resx">
+      <DependentUpon>FormModifyPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FormRegister.resx">
+      <DependentUpon>FormRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FormSendQuestion.resx">
+      <DependentUpon>FormSendQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\FormStorageReport.resx">
+      <DependentUpon>FormStorageReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\入库\FormMaterielIn.resx">
+      <DependentUpon>FormMaterielIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\入库\FormMaterielInEarnings.resx">
+      <DependentUpon>FormMaterielInEarnings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\入库\FormMaterielInOther.resx">
+      <DependentUpon>FormMaterielInOther.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\出库\FormMaterielOut.resx">
+      <DependentUpon>FormMaterielOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\出库\FormMaterielOutEarnings.resx">
+      <DependentUpon>FormMaterielOutEarnings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\出库\FormMaterielOutOther.resx">
+      <DependentUpon>FormMaterielOutOther.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\报表\FormMaterielCountAlarm.resx">
+      <DependentUpon>FormMaterielCountAlarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\报表\FormMaterielStorageAmountHistoryInfo.resx">
+      <DependentUpon>FormMaterielStorageAmountHistoryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\报表\FormNewFilterValue.resx">
+      <DependentUpon>FormNewFilterValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\报表\FormStorageSequenceFilter.resx">
+      <DependentUpon>FormStorageSequenceFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\初始化\业务初始化\FormAccountReceivablerEdit.resx">
+      <DependentUpon>FormAccountReceivablerEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\初始化\业务初始化\FormInitAccountReceivabler.resx">
+      <DependentUpon>FormInitAccountReceivabler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\初始化\财务初始化\FormInitAssets.resx">
+      <DependentUpon>FormInitAssets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\初始化\业务初始化\FormInitMateriel.resx">
+      <DependentUpon>FormInitMateriel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\初始化\业务初始化\FormInitMaterielEdit.resx">
+      <DependentUpon>FormInitMaterielEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\FormBaseInfo.resx">
+      <DependentUpon>FormBaseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\初始化\FormInit.resx">
+      <DependentUpon>FormInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormBaseBillConfig.resx">
+      <DependentUpon>FormBaseBillConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormBaseCustomer.resx">
+      <DependentUpon>FormBaseCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormBaseMateriel.resx">
+      <DependentUpon>FormBaseMateriel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormBaseSettlmentWay.resx">
+      <DependentUpon>FormBaseSettlmentWay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormBaseSupplier.resx">
+      <DependentUpon>FormBaseSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormBillConfigEdit.resx">
+      <DependentUpon>FormBillConfigEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormMaterielEdit.resx">
+      <DependentUpon>FormMaterielEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormNoForbid.resx">
+      <DependentUpon>FormNoForbid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormNoForbidMateriel.resx">
+      <DependentUpon>FormNoForbidMateriel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormNoForbidSupplier.resx">
+      <DependentUpon>FormNoForbidSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormSettlmentWayEdit.resx">
+      <DependentUpon>FormSettlmentWayEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormSupplierEdit.resx">
+      <DependentUpon>FormSupplierEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\其他\FormBaseOperatorLog.resx">
+      <DependentUpon>FormBaseOperatorLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\其他\OperatorLogSerach.resx">
+      <DependentUpon>OperatorLogSerach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormAuxiliaryMaterialEdit.resx">
+      <DependentUpon>FormAuxiliaryMaterialEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormBaseAuxiliaryMaterial.resx">
+      <DependentUpon>FormBaseAuxiliaryMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormBaseStaff.resx">
+      <DependentUpon>FormBaseStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormBaseSystemInfo.resx">
+      <DependentUpon>FormBaseSystemInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormCustomerEdit.resx">
+      <DependentUpon>FormCustomerEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormBaseUserManager.resx">
+      <DependentUpon>FormBaseUserManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormCreateUser.resx">
+      <DependentUpon>FormCreateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormDutyManager.resx">
+      <DependentUpon>FormDutyManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\基础信息\FormStaffEdit.resx">
+      <DependentUpon>FormStaffEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\数据库\DBBackup.resx">
+      <DependentUpon>DBBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\数据库\FormBaseBackupRecord.resx">
+      <DependentUpon>FormBaseBackupRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\数据库\FormBaseRollbackRecord.resx">
+      <DependentUpon>FormBaseRollbackRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\存货核算\FormInventoryAccounting.resx">
+      <DependentUpon>FormInventoryAccounting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\存货核算\FormInventoryAccountingReport.resx">
+      <DependentUpon>FormInventoryAccountingReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\存货核算\报表\FormSaleInfoCount.resx">
+      <DependentUpon>FormSaleInfoCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\存货核算\报表\FormStorageStockDetails.resx">
+      <DependentUpon>FormStorageStockDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\存货核算\报表\FormStorageStockDetailsFilter.resx">
+      <DependentUpon>FormStorageStockDetailsFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\FormCash.resx">
+      <DependentUpon>FormCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\FormCashReport.resx">
+      <DependentUpon>FormCashReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\业务\FormPaymentOrder.resx">
+      <DependentUpon>FormPaymentOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\业务\FormReceivableOrder.resx">
+      <DependentUpon>FormReceivableOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\报表\FormCompanyProfit.resx">
+      <DependentUpon>FormCompanyProfit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\报表\FormAccountReceivablerCount.resx">
+      <DependentUpon>FormAccountReceivablerCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\报表\FormAccountReceivablerDetail.resx">
+      <DependentUpon>FormAccountReceivablerDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\报表\FormBankCashDetail.resx">
+      <DependentUpon>FormBankCashDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.resx">
+      <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\系统登录\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\FormPurchase.resx">
+      <DependentUpon>FormPurchase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\报表分析\FormReport.resx">
+      <DependentUpon>FormReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\FormPurchaseReport.resx">
+      <DependentUpon>FormPurchaseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\业务\FormAdjustAmount.resx">
+      <DependentUpon>FormAdjustAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\业务\FormPurchaseInOrder.resx">
+      <DependentUpon>FormPurchaseInOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\业务\FormPurchaseOrder.resx">
+      <DependentUpon>FormPurchaseOrder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormMaterielStorageAmountInfo.resx">
+      <DependentUpon>FormMaterielStorageAmountInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormDisplayCountInfoFromSQL.resx">
+      <DependentUpon>FormDisplayCountInfoFromSQL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormDisplayCountInfoFromSQLFilter.resx">
+      <DependentUpon>FormDisplayCountInfoFromSQLFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormPurchaseOrderSequence.resx">
+      <DependentUpon>FormPurchaseOrderSequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormMateirelPriceManager.resx">
+      <DependentUpon>FormMateirelPriceManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormMaterielPriceSheet.resx">
+      <DependentUpon>FormMaterielPriceSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\报表\FormMaterielPriceSheetEdit.resx">
+      <DependentUpon>FormMaterielPriceSheetEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\销售管理\FormSale.resx">
+      <DependentUpon>FormSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\FormStorage.resx">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FunctionZont.resx">
+      <DependentUpon>FunctionZont.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\销售管理\FormSaleReport.resx">
+      <DependentUpon>FormSaleReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\销售管理\业务\FormSaleOrder.resx">
+      <DependentUpon>FormSaleOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\销售管理\业务\FormSaleOutOrder.resx">
+      <DependentUpon>FormSaleOutOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\销售管理\业务\FormSaleQuotation.resx">
+      <DependentUpon>FormSaleQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\销售管理\报表\FormSaleOrderSequence.resx">
+      <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\FunctionZonebackgroundImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\TitleZonebackgroundImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\采购管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\仓存管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\初始化.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\存货核算.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\基础资料.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\主界面\销售管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-物料.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-系统参数.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-系统参数-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-用户管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-用户管理-授权.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\分割线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\下箭头 .PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\右箭头.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\存货核算\存货核算-箭头.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化业务系统-箭头.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-箭头.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\采购管理-报表-基础资料.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-客户.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-供应商.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-辅助资料.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-单据设置.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-结算方式.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-上机日志.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-盘点.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-数据库备份策略.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-数据库恢复.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础资料\基础资料-数据库备份.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\报表-基础资料.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\报表-数据统计.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\报表-序时薄.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-存货初始数据.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-启动财务系统.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-启动业务系统.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-现金流量初始数据.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-银行初始数据.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-应收应付初始数据.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\采购管理\采购管理-采购订单.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\采购管理\采购管理-采购发票.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\销售管理\销售管理-报价单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\销售管理\销售管理-销售出库.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\销售管理\销售管理-销售订单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\销售管理\销售管理-销售发票.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\采购管理\采购管理-采购入库.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\存货核算\存货核算-存货出库核算.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\存货核算\存货核算-自制入库核算.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\存货核算\存货核算-其他入库核算.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\存货核算\存货核算-采购入库核算.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-产品入库.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-盘盈入库.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-其他入库.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-外购入库.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-组装单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-销售出库.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-生产领料.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-盘亏亏损.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\仓库管理\仓存管理-调拨.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\modify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_OPEN.GIF" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SupplierGroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forbid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\noForbid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printers.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printers2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\现金管理\现金管理-付款单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\现金管理\现金管理-收款单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\现金管理\现金管理-结转损益.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preview%2816%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\初始化\初始化-应收账款初始数据.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\已审核.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\红字.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\已入账.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\帮助\png-0023.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\基础图片\login.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back_Down.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back_up.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\review.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\资料.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\红字蓝字.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\记账.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\授权.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\用户管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\部门管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Filter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上一条.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\下一条.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\价格参考.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\帮助\png-0024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="png-0013.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

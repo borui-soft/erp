@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GB2312"?>
+<root>
+	<base backgroundImage="image\FunctionZonebackgroundImage.jpg" buttonWidth="185" buttonHeigth="60" buttonStartPosX="5" buttonStartPosY="40" buttonInterval="1"/>
+	<functionZone>
+		<button name="ButtonFrom1" text="功能测试1   " sequence="1" image="image\test1.png" panelPageName="From1"/>
+		<button name="ButtonFrom2" text="功能测试2   " sequence="2" image="image\test2.png" panelPageName="From2"/>
+		<button name="ButtonFrom3" text="功能测试3   " sequence="3" image="image\test3.png" panelPageName="From3"/>
+		<button name="ButtonFrom4" text="功能测试4   " sequence="4" image="image\test4.png" panelPageName="From4"/>
+		<button name="ButtonFrom5" text="功能测试5   " sequence="5" image="image\test5.png" panelPageName="From5"/>
+		<button name="ButtonFrom6" text="功能测试6   " sequence="6" image="image\test1.png" panelPageName="From5"/>
+		<button name="ButtonFrom7" text="功能测试7   " sequence="7" image="image\test2.png" panelPageName="From7"/>
+	</functionZone>
+</root>

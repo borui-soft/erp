@@ -110,7 +110,8 @@ namespace MainProgram
 
         private void panelStorageAssembly_Click(object sender, EventArgs e)
         {
-
+            FormMaterielProOccupied fmpo = new FormMaterielProOccupied();
+            fmpo.ShowDialog();
         }
 
         private void panelStorageSaleOut_Click(object sender, EventArgs e)

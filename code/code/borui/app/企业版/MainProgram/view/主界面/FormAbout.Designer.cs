@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(125, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V1.9.4 ";
+            this.label3.Text = "当前软件版本：V1.9.4";
             // 
             // pictureBox1
             // 

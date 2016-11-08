@@ -36,7 +36,7 @@
             this.labelStorageProductionOut = new System.Windows.Forms.Label();
             this.panelStorageSaleOut = new System.Windows.Forms.Panel();
             this.labelStorageSaleOut = new System.Windows.Forms.Label();
-            this.panelStorageAssembly = new System.Windows.Forms.Panel();
+            this.panelStorageProOccupied = new System.Windows.Forms.Panel();
             this.labelStorageAssembly = new System.Windows.Forms.Label();
             this.panelStorageAllocate = new System.Windows.Forms.Panel();
             this.labelStorageAllocate = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.panelStorageLossesOut.SuspendLayout();
             this.panelStorageProductionOut.SuspendLayout();
             this.panelStorageSaleOut.SuspendLayout();
-            this.panelStorageAssembly.SuspendLayout();
+            this.panelStorageProOccupied.SuspendLayout();
             this.panelStorageAllocate.SuspendLayout();
             this.panelStorageInventory.SuspendLayout();
             this.panelStorageOtherIn.SuspendLayout();
@@ -177,31 +177,30 @@
             this.labelStorageSaleOut.MouseEnter += new System.EventHandler(this.panelStorageSaleOut_MouseEnter);
             this.labelStorageSaleOut.MouseLeave += new System.EventHandler(this.panelStorageSaleOut_MouseEnter);
             // 
-            // panelStorageAssembly
+            // panelStorageProOccupied
             // 
-            this.panelStorageAssembly.BackgroundImage = global::MainProgram.Properties.Resources.仓存管理_组装单;
-            this.panelStorageAssembly.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelStorageAssembly.Controls.Add(this.labelStorageAssembly);
-            this.panelStorageAssembly.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelStorageAssembly.Location = new System.Drawing.Point(331, 392);
-            this.panelStorageAssembly.Name = "panelStorageAssembly";
-            this.panelStorageAssembly.Size = new System.Drawing.Size(103, 92);
-            this.panelStorageAssembly.TabIndex = 13;
-            this.panelStorageAssembly.Visible = false;
-            this.panelStorageAssembly.Click += new System.EventHandler(this.panelStorageAssembly_Click);
-            this.panelStorageAssembly.MouseEnter += new System.EventHandler(this.panelStorageAssembly_MouseEnter);
-            this.panelStorageAssembly.MouseLeave += new System.EventHandler(this.panelStorageAssembly_MouseEnter);
+            this.panelStorageProOccupied.BackgroundImage = global::MainProgram.Properties.Resources.仓存管理_组装单;
+            this.panelStorageProOccupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelStorageProOccupied.Controls.Add(this.labelStorageAssembly);
+            this.panelStorageProOccupied.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelStorageProOccupied.Location = new System.Drawing.Point(331, 392);
+            this.panelStorageProOccupied.Name = "panelStorageProOccupied";
+            this.panelStorageProOccupied.Size = new System.Drawing.Size(103, 92);
+            this.panelStorageProOccupied.TabIndex = 13;
+            this.panelStorageProOccupied.Click += new System.EventHandler(this.panelStorageAssembly_Click);
+            this.panelStorageProOccupied.MouseEnter += new System.EventHandler(this.panelStorageAssembly_MouseEnter);
+            this.panelStorageProOccupied.MouseLeave += new System.EventHandler(this.panelStorageAssembly_MouseEnter);
             // 
             // labelStorageAssembly
             // 
             this.labelStorageAssembly.AutoSize = true;
             this.labelStorageAssembly.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelStorageAssembly.ForeColor = System.Drawing.Color.Black;
-            this.labelStorageAssembly.Location = new System.Drawing.Point(28, 74);
+            this.labelStorageAssembly.Location = new System.Drawing.Point(21, 74);
             this.labelStorageAssembly.Name = "labelStorageAssembly";
-            this.labelStorageAssembly.Size = new System.Drawing.Size(49, 14);
+            this.labelStorageAssembly.Size = new System.Drawing.Size(63, 14);
             this.labelStorageAssembly.TabIndex = 0;
-            this.labelStorageAssembly.Text = "组装单";
+            this.labelStorageAssembly.Text = "库存预占";
             this.labelStorageAssembly.Click += new System.EventHandler(this.panelStorageAssembly_Click);
             this.labelStorageAssembly.MouseEnter += new System.EventHandler(this.panelStorageAssembly_MouseEnter);
             this.labelStorageAssembly.MouseLeave += new System.EventHandler(this.panelStorageAssembly_MouseEnter);
@@ -395,7 +394,7 @@
             this.Controls.Add(this.panelStorageLossesOut);
             this.Controls.Add(this.panelStorageProductionOut);
             this.Controls.Add(this.panelStorageSaleOut);
-            this.Controls.Add(this.panelStorageAssembly);
+            this.Controls.Add(this.panelStorageProOccupied);
             this.Controls.Add(this.panelStorageAllocate);
             this.Controls.Add(this.panelStorageInventory);
             this.Controls.Add(this.panelStorageOtherIn);
@@ -413,8 +412,8 @@
             this.panelStorageProductionOut.PerformLayout();
             this.panelStorageSaleOut.ResumeLayout(false);
             this.panelStorageSaleOut.PerformLayout();
-            this.panelStorageAssembly.ResumeLayout(false);
-            this.panelStorageAssembly.PerformLayout();
+            this.panelStorageProOccupied.ResumeLayout(false);
+            this.panelStorageProOccupied.PerformLayout();
             this.panelStorageAllocate.ResumeLayout(false);
             this.panelStorageAllocate.PerformLayout();
             this.panelStorageInventory.ResumeLayout(false);
@@ -446,7 +445,7 @@
         private System.Windows.Forms.Label labelStorageInventory;
         private System.Windows.Forms.Panel panelStorageAllocate;
         private System.Windows.Forms.Label labelStorageAllocate;
-        private System.Windows.Forms.Panel panelStorageAssembly;
+        private System.Windows.Forms.Panel panelStorageProOccupied;
         private System.Windows.Forms.Label labelStorageAssembly;
         private System.Windows.Forms.Panel panelStorageOtherOut;
         private System.Windows.Forms.Label labelStorageOtherOut;

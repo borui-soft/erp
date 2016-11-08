@@ -231,6 +231,12 @@
     <Compile Include="view\仓存管理\业务\出库\FormMaterielOutOther.designer.cs">
       <DependentUpon>FormMaterielOutOther.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielProOccupied.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\仓存管理\业务\出库\FormMaterielProOccupied.designer.cs">
+      <DependentUpon>FormMaterielProOccupied.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\仓存管理\报表\FormMaterielCountAlarm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -717,6 +723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\仓存管理\业务\出库\FormMaterielOutOther.resx">
       <DependentUpon>FormMaterielOutOther.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\仓存管理\业务\出库\FormMaterielProOccupied.resx">
+      <DependentUpon>FormMaterielProOccupied.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\仓存管理\报表\FormMaterielCountAlarm.resx">
       <DependentUpon>FormMaterielCountAlarm.cs</DependentUpon>

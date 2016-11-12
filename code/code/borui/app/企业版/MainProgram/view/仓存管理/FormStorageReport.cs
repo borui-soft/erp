@@ -35,7 +35,7 @@ namespace MainProgram
 
         private void labelOrderAllocate_MouseEnter(object sender, EventArgs e)
         {
-            PanelExtend.setLableControlStyle(this.labelOrderAllocate);
+            PanelExtend.setLableControlStyle(this.labelOrderMaterielProOccupied);
         }
 
         private void labelInventory_MouseEnter(object sender, EventArgs e)
@@ -160,7 +160,8 @@ namespace MainProgram
 
         private void labelOrderAllocate_Click(object sender, EventArgs e)
         {
-
+            FormMaterielProOccupiedList fmpol = new FormMaterielProOccupiedList(FormMaterielProOccupiedList.OrderType.MaterielProOccupied);
+            fmpol.ShowDialog();
         }
 
         private void labelInventory_Click(object sender, EventArgs e)

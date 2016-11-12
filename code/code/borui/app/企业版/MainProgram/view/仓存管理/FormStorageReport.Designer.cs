@@ -33,7 +33,7 @@
             this.labelInventory = new System.Windows.Forms.Label();
             this.labelOrderInventory = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.labelOrderAllocate = new System.Windows.Forms.Label();
+            this.labelOrderMaterielProOccupied = new System.Windows.Forms.Label();
             this.labelOrderIn = new System.Windows.Forms.Label();
             this.labelOrderOut = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -121,21 +121,20 @@
             this.pictureBox3.TabIndex = 45;
             this.pictureBox3.TabStop = false;
             // 
-            // labelOrderAllocate
+            // labelOrderMaterielProOccupied
             // 
-            this.labelOrderAllocate.AutoSize = true;
-            this.labelOrderAllocate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelOrderAllocate.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelOrderAllocate.ForeColor = System.Drawing.Color.Black;
-            this.labelOrderAllocate.Location = new System.Drawing.Point(63, 164);
-            this.labelOrderAllocate.Name = "labelOrderAllocate";
-            this.labelOrderAllocate.Size = new System.Drawing.Size(91, 14);
-            this.labelOrderAllocate.TabIndex = 44;
-            this.labelOrderAllocate.Text = "调拨单序时薄";
-            this.labelOrderAllocate.Visible = false;
-            this.labelOrderAllocate.Click += new System.EventHandler(this.labelOrderAllocate_Click);
-            this.labelOrderAllocate.MouseEnter += new System.EventHandler(this.labelOrderAllocate_MouseEnter);
-            this.labelOrderAllocate.MouseLeave += new System.EventHandler(this.labelOrderAllocate_MouseEnter);
+            this.labelOrderMaterielProOccupied.AutoSize = true;
+            this.labelOrderMaterielProOccupied.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelOrderMaterielProOccupied.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelOrderMaterielProOccupied.ForeColor = System.Drawing.Color.Black;
+            this.labelOrderMaterielProOccupied.Location = new System.Drawing.Point(63, 164);
+            this.labelOrderMaterielProOccupied.Name = "labelOrderMaterielProOccupied";
+            this.labelOrderMaterielProOccupied.Size = new System.Drawing.Size(119, 14);
+            this.labelOrderMaterielProOccupied.TabIndex = 44;
+            this.labelOrderMaterielProOccupied.Text = "库存预占单序时薄";
+            this.labelOrderMaterielProOccupied.Click += new System.EventHandler(this.labelOrderAllocate_Click);
+            this.labelOrderMaterielProOccupied.MouseEnter += new System.EventHandler(this.labelOrderAllocate_MouseEnter);
+            this.labelOrderMaterielProOccupied.MouseLeave += new System.EventHandler(this.labelOrderAllocate_MouseEnter);
             // 
             // labelOrderIn
             // 
@@ -328,7 +327,7 @@
             this.Controls.Add(this.labelInventory);
             this.Controls.Add(this.labelOrderInventory);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.labelOrderAllocate);
+            this.Controls.Add(this.labelOrderMaterielProOccupied);
             this.Controls.Add(this.labelOrderIn);
             this.Controls.Add(this.labelOrderOut);
             this.Controls.Add(this.pictureBox2);
@@ -351,7 +350,7 @@
         private System.Windows.Forms.Label labelInventory;
         private System.Windows.Forms.Label labelOrderInventory;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label labelOrderAllocate;
+        private System.Windows.Forms.Label labelOrderMaterielProOccupied;
         private System.Windows.Forms.Label labelOrderIn;
         private System.Windows.Forms.Label labelOrderOut;
         private System.Windows.Forms.PictureBox pictureBox2;

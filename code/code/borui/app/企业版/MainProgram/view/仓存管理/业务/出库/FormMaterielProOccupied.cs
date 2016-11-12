@@ -16,8 +16,7 @@ namespace MainProgram
 {
     public partial class FormMaterielProOccupied : Form
     {
-        private int m_staffSavePkey = -1;
-        private int m_materielOutStaffPkey = -1;
+        private int m_applyStaffPkey = -1;
         private string m_billNumber = "";
         private readonly int BillTypeNumber = 17;
         private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
@@ -28,7 +27,7 @@ namespace MainProgram
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
-        MaterielOutOtherOrderTable m_materieOutOrder = new MaterielOutOtherOrderTable();
+        MaterielProOccupiedOrderTable m_materieOutOrder = new MaterielProOccupiedOrderTable();
 
         private enum DataGridColumnName
         {
@@ -146,7 +145,7 @@ namespace MainProgram
         }
         #endregion
 
-        #region 摘要
+        #region 用途
         private void panelSummary_Click(object sender, EventArgs e)
         {
             if (m_materieOutOrder.isReview == "1")
@@ -190,8 +189,8 @@ namespace MainProgram
                 FormBaseStaff fbs = new FormBaseStaff(true);
                 fbs.ShowDialog();
 
-                m_staffSavePkey = fbs.getSelectRecordPkey();
-                StaffTable record = Staff.getInctance().getStaffInfoFromPkey(m_staffSavePkey);
+                m_applyStaffPkey = fbs.getSelectRecordPkey();
+                StaffTable record = Staff.getInctance().getStaffInfoFromPkey(m_applyStaffPkey);
                 this.textBoxSave.Text = record.name;
                 this.textBoxSave.Visible = true;
             }
@@ -213,11 +212,11 @@ namespace MainProgram
             if (dataList.Count > 0)
             {
                 // 销售订单表头和表尾信息
-                MaterielOutOtherOrderTable record = getMaterielOutOtherOrderValue();
+                MaterielProOccupiedOrderTable record = getMaterielProOccupiedOrderValue();
                 if (orderInfoIsFull(record) && orderDetailsIsFull(dataList))
                 {
-                    MaterielOutOtherOrder.getInctance().insert(record, false);
-                    MaterielOutOtherOrderDetails.getInctance().insert(dataList);
+                    MaterielProOccupiedOrder.getInctance().insert(record, false);
+                    MaterielProOccupiedOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
                     if (m_billNumber.Length == 0)
@@ -234,9 +233,9 @@ namespace MainProgram
             }
         }
 
-        private MaterielOutOtherOrderTable getMaterielOutOtherOrderValue()
+        private MaterielProOccupiedOrderTable getMaterielProOccupiedOrderValue()
         {
-            MaterielOutOtherOrderTable record = new MaterielOutOtherOrderTable();
+            MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
 
             record.tradingDate = this.labelTradingDate.Text;
             record.billNumber = this.labelBillNumber.Text;
@@ -245,8 +244,7 @@ namespace MainProgram
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
 
-            record.staffSaveId = m_staffSavePkey;
-            record.materielOutStaffId = m_materielOutStaffPkey;
+            record.applyStaffId = m_applyStaffPkey;
 
             if (m_billNumber.Length == 0)
             {
@@ -255,15 +253,6 @@ namespace MainProgram
             else 
             {
                 record.makeOrderStaff = m_materieOutOrder.makeOrderStaff;
-            }
-
-            if (m_isRedBill)
-            {
-                record.isRedBill = 1;
-            }
-            else
-            {
-                record.isRedBill = 0;
             }
 
             return record;
@@ -281,7 +270,7 @@ namespace MainProgram
                 }
                 else 
                 {
-                    MaterielOutOtherOrderDetailsTable record = new MaterielOutOtherOrderDetailsTable();
+                    MaterielProOccupiedOrderDetailsTable record = new MaterielProOccupiedOrderDetailsTable();
 
                     record.billNumber = this.labelBillNumber.Text;
                     record.rowNumber = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString();
@@ -297,17 +286,23 @@ namespace MainProgram
             return list;
         }
 
-        private bool orderInfoIsFull(MaterielOutOtherOrderTable record)
+        private bool orderInfoIsFull(MaterielProOccupiedOrderTable record)
         {
             if (record.tradingDate.Length == 0)
             {
-                MessageBoxExtend.messageWarning("日期不完整，单据保存失败");
+                MessageBoxExtend.messageWarning("日期不能为空，单据保存失败");
                 return false;
             }
 
-            if (record.materielOutStaffId == -1)
+            if (record.exchangesUnit.Length == 0)
             {
-                MessageBoxExtend.messageWarning("领料人信息不完整，单据保存失败");
+                MessageBoxExtend.messageWarning("用途信息不能为空，单据保存失败");
+                return false;
+            }
+
+            if (record.applyStaffId == -1)
+            {
+                MessageBoxExtend.messageWarning("申请人信息不完整，单据保存失败");
                 return false;
             }
 
@@ -320,8 +315,8 @@ namespace MainProgram
 
             for (int rowIndex = 0; rowIndex < list.Count; rowIndex++)
             {
-                MaterielOutOtherOrderDetailsTable record = new MaterielOutOtherOrderDetailsTable();
-                record = (MaterielOutOtherOrderDetailsTable)list[rowIndex];
+                MaterielProOccupiedOrderDetailsTable record = new MaterielProOccupiedOrderDetailsTable();
+                record = (MaterielProOccupiedOrderDetailsTable)list[rowIndex];
 
                 if (record.price == 0)
                 {
@@ -346,7 +341,7 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                MaterielOutOtherOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+                MaterielProOccupiedOrder.getInctance().billReview(m_billNumber, m_isRedBill);
             }
             catch (Exception exp)
             {
@@ -528,10 +523,9 @@ namespace MainProgram
         private void readBillInfoToUI()
         {
             // 单据表头表尾信息
-            m_materieOutOrder = MaterielOutOtherOrder.getInctance().getMaterielOutOtherOrderInfoFromBillNumber(m_billNumber);
+            m_materieOutOrder = MaterielProOccupiedOrder.getInctance().getMaterielProOccupiedOrderInfoFromBillNumber(m_billNumber);
 
-            m_staffSavePkey = m_materieOutOrder.staffSaveId;
-            m_materielOutStaffPkey = m_materieOutOrder.materielOutStaffId;
+            m_applyStaffPkey = m_materieOutOrder.applyStaffId;
 
             this.labelTradingDate.Visible = true;
             this.labelBillNumber.Visible = true;
@@ -544,7 +538,7 @@ namespace MainProgram
             this.labelTradingDate.Text = m_materieOutOrder.tradingDate;
             this.labelBillNumber.Text = m_materieOutOrder.billNumber;
             this.labelMakeBillStaff.Text = m_materieOutOrder.makeOrderStaffName;
-            this.labelSave.Text = m_materieOutOrder.staffSaveName;
+            this.labelSave.Text = m_materieOutOrder.applyStaffName;
             this.labelSummary.Text = m_materieOutOrder.exchangesUnit;
 
             // DataGridView 赋值
@@ -577,12 +571,12 @@ namespace MainProgram
         private void writeBillDetailsInfoFromBillNumber(string billNumber)
         {
             // DataGridView 赋值
-            SortedDictionary<int, MaterielOutOtherOrderDetailsTable> orderDetails =
-                MaterielOutOtherOrderDetails.getInctance().getMaterielOutOtherInfoFromBillNumber(billNumber);
+            SortedDictionary<int, MaterielProOccupiedOrderDetailsTable> orderDetails =
+                MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedInfoFromBillNumber(billNumber);
 
-            foreach (KeyValuePair<int, MaterielOutOtherOrderDetailsTable> index in orderDetails)
+            foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index in orderDetails)
             {
-                MaterielOutOtherOrderDetailsTable record = new MaterielOutOtherOrderDetailsTable();
+                MaterielProOccupiedOrderDetailsTable record = new MaterielProOccupiedOrderDetailsTable();
                 record = index.Value;
 
                 int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;

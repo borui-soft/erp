@@ -35,6 +35,9 @@ namespace MainProgram
         private int m_displayDataType;
         private DataGridViewExtend m_dataGridViewExtend = new DataGridViewExtend();
 
+        // m_materielProlist用于存放库存预占信息
+        SortedDictionary<int, MaterielProOccupiedInfo> m_materielProlist = new SortedDictionary<int, MaterielProOccupiedInfo>();
+
         // 参数isDisplayJG代表实现显示单价列
         public FormMaterielStorageAmountInfo(int displayDataType = -1, bool isDisplayJG = true)
         {
@@ -85,24 +88,31 @@ namespace MainProgram
 
             // DataGridView控件初始化
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
-            m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
-            m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("存货数量", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("物料名称", 170);
+            m_dataGridViewExtend.addDataGridViewColumn("型号", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("实际库存", 78);
 
             if (m_isDisplayJG)
             {
-                m_dataGridViewExtend.addDataGridViewColumn("加权单价", 80);
-                m_dataGridViewExtend.addDataGridViewColumn("合计", 80);
+                m_dataGridViewExtend.addDataGridViewColumn("加权单价", 78);
+                m_dataGridViewExtend.addDataGridViewColumn("合计", 60);
             }
 
-            m_dataGridViewExtend.addDataGridViewColumn("单位", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("存货上限", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("存货下限", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("保质期", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 80);
+            // 2016-11-11++ 增加库存预占信息显示
+            m_dataGridViewExtend.addDataGridViewColumn("预占数量", 78);
+            m_dataGridViewExtend.addDataGridViewColumn("预占人", 78);
+            m_dataGridViewExtend.addDataGridViewColumn("可用数量参考", 110);
+            // ++2016-11-11
+
+            m_dataGridViewExtend.addDataGridViewColumn("单位", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("存货上限", 78);
+            m_dataGridViewExtend.addDataGridViewColumn("存货下限", 78);
+            m_dataGridViewExtend.addDataGridViewColumn("保质期", 78);
+            m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 78);
 
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
+
+            getMaterielProOccupiedList();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 
@@ -122,7 +132,6 @@ namespace MainProgram
 
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.name);
-                temp.Add(materiel.nameShort);
                 temp.Add(materiel.model);
 
                 InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(materiel.pkey);
@@ -132,6 +141,22 @@ namespace MainProgram
                 {
                     temp.Add(MaterielCountdata.price);
                     temp.Add((double)(Math.Round(MaterielCountdata.value * MaterielCountdata.price * 100)) / 100);
+                }
+
+                if (m_materielProlist.ContainsKey(materiel.pkey))
+                {
+                    MaterielProOccupiedInfo proOccupiedRecord = new MaterielProOccupiedInfo();
+                    proOccupiedRecord = (MaterielProOccupiedInfo)m_materielProlist[materiel.pkey];
+
+                    temp.Add(proOccupiedRecord.sum);
+                    temp.Add(proOccupiedRecord.applyStaffName);
+                    temp.Add(MaterielCountdata.value - proOccupiedRecord.sum);
+                }
+                else
+                {
+                    temp.Add(0);
+                    temp.Add("-");
+                    temp.Add(MaterielCountdata.value);
                 }
 
                 temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitStorage));
@@ -170,22 +195,32 @@ namespace MainProgram
             // 金额信息保留2位小数儿
             sum = (double)(Math.Round(sum * 100)) / 100;
 
-            m_dataGridViewExtend.initDataGridViewData(materiels, 5);
-            this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-            this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             if (m_isDisplayJG)
             {
+                m_dataGridViewExtend.initDataGridViewData(materiels, 8);
+            }
+            else
+            {
+                m_dataGridViewExtend.initDataGridViewData(materiels, 6);
+            }
+
+            this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[3].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+
+            if (m_isDisplayJG)
+            {
+                this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[8].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+
+                this.labelCountInfo.Text += "  累计金额[" + Convert.ToString(sum) + "]";
+            }
+            else 
+            {
                 this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             }
 
             this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
-
-            if (m_isDisplayJG)
-            {
-                this.labelCountInfo.Text += "  累计金额[" + Convert.ToString(sum) + "]";
-            }
-
         }
 
         private void refreshTreeView()
@@ -351,9 +386,18 @@ namespace MainProgram
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
+            MaterielProOccupiedOrder.getInctance().refrensRecord();
+            MaterielProOccupiedOrderDetails.getInctance().refrensRecord();
+            getMaterielProOccupiedList();
+
             refreshTreeView();
             Materiel.getInctance().refrensRecord();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
+        }
+
+        private void getMaterielProOccupiedList()
+        {
+            m_materielProlist = MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedList();
         }
     }
 }

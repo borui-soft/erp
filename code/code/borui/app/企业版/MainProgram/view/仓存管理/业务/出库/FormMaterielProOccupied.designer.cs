@@ -575,9 +575,9 @@
             // 
             this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(105, 123);
+            this.textBoxSummary.Location = new System.Drawing.Point(99, 123);
             this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(901, 21);
+            this.textBoxSummary.Size = new System.Drawing.Size(906, 21);
             this.textBoxSummary.TabIndex = 43;
             this.textBoxSummary.Visible = false;
             this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
@@ -592,7 +592,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 103;
-            this.label3.Text = "摘要(*):";
+            this.label3.Text = "用途(*):";
             // 
             // panelSummary
             // 
@@ -654,7 +654,7 @@
             this.MinimizeBox = false;
             this.Name = "FormMaterielProOccupied";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "其他出库单";
+            this.Text = "库存预占申请单";
             this.Load += new System.EventHandler(this.FormMaterielProOccupied_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

@@ -191,9 +191,9 @@
             // 
             // dataGridViewList
             // 
-            this.dataGridViewList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewList.Location = new System.Drawing.Point(1, 48);
             this.dataGridViewList.Name = "dataGridViewList";
@@ -201,6 +201,7 @@
             this.dataGridViewList.RowTemplate.Height = 23;
             this.dataGridViewList.Size = new System.Drawing.Size(966, 407);
             this.dataGridViewList.TabIndex = 3;
+            this.dataGridViewList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewList_CellContentClick);
             this.dataGridViewList.Click += new System.EventHandler(this.dataGridViewBilConfigList_Click);
             this.dataGridViewList.DoubleClick += new System.EventHandler(this.dataGridViewList_DoubleClick);
             // 

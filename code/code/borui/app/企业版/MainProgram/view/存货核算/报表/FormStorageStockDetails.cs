@@ -17,6 +17,7 @@ namespace MainProgram
         private int m_currentRecordIndex = 0;
         private int m_dataGridRecordCount = 0;
         private string m_countStartDate, m_countEndDate;
+        private string m_billNumber = "", m_billType = "";
 
         private BillDataGridViewExtend m_dateGridViewExtend = new BillDataGridViewExtend();
         private SortedDictionary<int, MaterielTable> m_materielList = new SortedDictionary<int, MaterielTable>();
@@ -358,6 +359,7 @@ namespace MainProgram
                             if (dataGridViewList.Rows[i].Cells[j].Selected)
                             {
                                 dataGridViewList.Rows[i].Selected = true;
+                                m_billNumber = dataGridViewList.Rows[i].Cells[2].ToString();
                                 return;
                             }
                         }
@@ -397,10 +399,55 @@ namespace MainProgram
                             {
                                 dataGridViewList.Rows[i].Selected = true;
 
-                                string billNumber = dataGridViewList.Rows[i].Cells[2].Value.ToString();
-                                return;
+                                m_billNumber = dataGridViewList.Rows[i].Cells[2].Value.ToString();
+                                m_billType = dataGridViewList.Rows[i].Cells[3].Value.ToString();
+                                break;
                             }
                         }
+                    }
+                }
+
+                if (m_billType.Length > 0 && m_billNumber.Length > 0)
+                {
+                    if (m_billType == "采购入库")
+                    {
+                        FormPurchaseInOrder fpo = new FormPurchaseInOrder(m_billNumber);
+                        fpo.ShowDialog();
+                    }
+                    else if (m_billType == "盘盈入库")
+                    {
+                        FormMaterielInEarningsOrder fmoo = new FormMaterielInEarningsOrder(m_billNumber);
+                        fmoo.ShowDialog();
+                    }
+                    else if (m_billType == "产品入库")
+                    {
+                        FormMaterielInOrder fmoo = new FormMaterielInOrder(m_billNumber);
+                        fmoo.ShowDialog();
+                    }
+                    else if (m_billType == "其他入库")
+                    {
+                        FormMaterielInOtherOrder fmoo = new FormMaterielInOtherOrder(m_billNumber);
+                        fmoo.ShowDialog();
+                    }
+                    else if (m_billType == "生产领料")
+                    {
+                        FormMaterielOutOrder fmoo = new FormMaterielOutOrder(m_billNumber);
+                        fmoo.ShowDialog();
+                    }
+                    else if (m_billType == "其他出库")
+                    {
+                        FormMaterielOutOtherOrder fmoo = new FormMaterielOutOtherOrder(m_billNumber);
+                        fmoo.ShowDialog();
+                    }
+                    else if (m_billType == "盘盈毁损")
+                    {
+                        FormMaterielOutEarningsOrder fmoo = new FormMaterielOutEarningsOrder(m_billNumber);
+                        fmoo.ShowDialog();
+                    }
+                    else if (m_billType == "销售出库")
+                    {
+                        FormSaleOutOrder fpo = new FormSaleOutOrder(m_billNumber);
+                        fpo.ShowDialog();
                     }
                 }
             }
@@ -420,6 +467,11 @@ namespace MainProgram
         {
             m_currentRecordIndex += 1;
             updateDataGridView();
+        }
+
+        private void dataGridViewList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

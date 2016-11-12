@@ -51,9 +51,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 101);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 12);
+            this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V1.9.4";
+            this.label3.Text = "当前软件版本：V1.10.2";
             // 
             // pictureBox1
             // 
@@ -80,7 +80,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(385, 76);
             this.textBox1.TabIndex = 18;
-            this.textBox1.Text = "1、期初成本页面调整的物料单价信息，插入到存货明细表，以解决实际库存和历史库存信息可能不对应的问题";
+            this.textBox1.Text = "1、增加库存预占功能                                            2、存货核算明细账增加双击单据查看单据详情功能";
             // 
             // FormAbout
             // 

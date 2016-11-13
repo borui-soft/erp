@@ -189,10 +189,7 @@ namespace MainProgram.model
 
         public SortedDictionary<int, MaterielProOccupiedInfo> getMaterielProOccupiedList()
         {
-            if (m_materielProlist.Count > 0)
-            {
-                return m_materielProlist;
-            }
+            m_materielProlist.Clear();
 
             SortedDictionary<int, MaterielProOccupiedOrderTable> list =
                 MaterielProOccupiedOrder.getInctance().getAllReviewMaterielProOccupiedOrderInfo();

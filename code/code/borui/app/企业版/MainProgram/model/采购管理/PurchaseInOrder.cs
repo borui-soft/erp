@@ -441,7 +441,7 @@ namespace MainProgram.model
                     if (DbDataConvert.ToString(row["ORDERR_IN_LEDGER"]).Length > 0)
                     {
                         record.orderInLedger = DbDataConvert.ToInt32(row["ORDERR_IN_LEDGER"]);
-                        record.orderInLedgerName = Staff.getInctance().getStaffNameFromPkey(record.orderrReview);
+                        record.orderInLedgerName = Staff.getInctance().getStaffNameFromPkey(record.orderInLedger);
                         record.inLedgerDate = DbDataConvert.ToDateTime(row["IN_LEDGER_DATE"]).ToString("yyyy-MM-dd");
                     }
                     record.isInLedger = DbDataConvert.ToInt32(row["IS_IN_LEDGER"]);

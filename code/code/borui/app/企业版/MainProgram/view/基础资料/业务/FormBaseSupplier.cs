@@ -416,5 +416,37 @@ namespace MainProgram
                 }
             }
         }
+
+        private void textBoxSerach_Click(object sender, EventArgs e)
+        {
+            this.textBoxSerach.Text = "";
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
+        }
+
+        private void textBoxSerach_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBoxSerach.Text = "";
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
+        }
+
+        private void textBoxSerach_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                updateDataGridView(Supplier.getInctance().getSupplierInfoFromSerachTerm(this.textBoxSerach.Text));
+                this.labelSupplierGroupName.Text = "包含[" + this.textBoxSerach.Text + "]关键字的供应商共计[" + Convert.ToString(m_supplierRecordCount) + "]条记录";
+
+                this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
+                this.textBoxSerach.Text = "输入供应商名称，按回车键实现快速查找";
+
+                this.labelSupplierGroupName.Focus();
+            }
+        }
+
+        private void textBoxSerach_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.textBoxSerach.Text = "";
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
+        }
     }
 }

@@ -383,6 +383,8 @@ namespace MainProgram
 
                 this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
                 this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+
+                this.labelCountInfo.Focus();
             }
         }
 

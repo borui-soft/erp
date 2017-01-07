@@ -214,6 +214,29 @@ namespace MainProgram.model
             return supplierList;
         }
 
+        public SortedDictionary<int, SupplierTable> getSupplierInfoFromSerachTerm(string searchTerm)
+        {
+            if (m_noForbidSupplierList.Count == 0)
+            {
+                load();
+            }
+
+            SortedDictionary<int, SupplierTable> supplierList = new SortedDictionary<int, SupplierTable>();
+
+            foreach (KeyValuePair<int, SupplierTable> index in m_noForbidSupplierList)
+            {
+                SupplierTable supplier = new SupplierTable();
+                supplier = index.Value;
+
+                if (supplier.name.IndexOf(searchTerm) >= 0)
+                {
+                    supplierList.Add(supplierList.Count, supplier);
+                }
+            }
+
+            return supplierList;
+        }
+
         public SupplierTable getSupplierInfoFromPkey(int pkey)
         {
             if (m_noForbidSupplierList.Count == 0)

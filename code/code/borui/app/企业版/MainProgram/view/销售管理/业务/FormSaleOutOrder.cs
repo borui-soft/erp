@@ -988,8 +988,8 @@ namespace MainProgram
             {
                 this.panelInLedger.Visible = true;
                 this.registerInLedger.Enabled = false;
-                this.dataGridViewDataList.Enabled = false;
-                this.dataGridViewDataCount.Enabled = false;
+                this.dataGridViewDataList.ReadOnly = true;
+                this.dataGridViewDataCount.ReadOnly = true;
             }
             else 
             {

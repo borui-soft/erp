@@ -213,7 +213,10 @@ namespace MainProgram
                     SaleOrderTable record = new SaleOrderTable();
                     record = (SaleOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         ArrayList temp = new ArrayList();
 
@@ -261,7 +264,10 @@ namespace MainProgram
                     SaleOutOrderTable record = new SaleOutOrderTable();
                     record = (SaleOutOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         ArrayList temp = new ArrayList();
 
@@ -306,7 +312,10 @@ namespace MainProgram
                     SaleOrderTable record = new SaleOrderTable();
                     record = (SaleOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null || 
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         ArrayList temp = new ArrayList();
 
@@ -347,7 +356,10 @@ namespace MainProgram
                     SaleOutOrderTable record = new SaleOutOrderTable();
                     record = (SaleOutOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         ArrayList temp = new ArrayList();
 
@@ -380,7 +392,10 @@ namespace MainProgram
                     SaleQuotationOrderTable record = new SaleQuotationOrderTable();
                     record = (SaleQuotationOrderTable)list[index];
 
-                    if (record.date.CompareTo(m_filter.startDate) >= 0 && record.date.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.date.CompareTo(m_filter.startDate) >= 0 &&
+                        record.date.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         ArrayList temp = new ArrayList();
 
@@ -414,7 +429,10 @@ namespace MainProgram
                     MaterielOutOrderTable record = new MaterielOutOrderTable();
                     record = (MaterielOutOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >=0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         // 等于0代表只显示已审核单据
                         if (m_filter.allReview == "0")
@@ -499,7 +517,10 @@ namespace MainProgram
                     MaterielOutEarningsOrderTable record = new MaterielOutEarningsOrderTable();
                     record = (MaterielOutEarningsOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         // 等于0代表只显示已审核单据
                         if (m_filter.allReview == "0")
@@ -584,7 +605,10 @@ namespace MainProgram
                     MaterielOutOtherOrderTable record = new MaterielOutOtherOrderTable();
                     record = (MaterielOutOtherOrderTable)list[index];
 
-                    if (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                    if (m_filter.startDate == null ||
+                        (record.tradingDate.CompareTo(m_filter.startDate) >= 0 &&
+                        record.tradingDate.CompareTo(m_filter.endDate) <= 0)
+                        )
                     {
                         // 等于0代表只显示已审核单据
                         if (m_filter.allReview == "0")

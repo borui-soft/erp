@@ -808,8 +808,8 @@ namespace MainProgram
 
                 this.save.Enabled = false;
                 this.toolStripButtonReview.Enabled = false;
-                this.dataGridViewDataList.Enabled = false;
-                this.dataGridViewDataCount.Enabled = false;
+                this.dataGridViewDataList.ReadOnly = true;
+                this.dataGridViewDataCount.ReadOnly = true;
 
                 this.panelSaleName.Visible = false;
                 this.panelTradingDate.Visible = false;

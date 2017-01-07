@@ -606,8 +606,8 @@ namespace MainProgram
                 this.dateTimePickerTradingDate.Visible = false;
                 this.textBoxSummary.Visible = false;
 
-                this.dataGridViewDataList.Enabled = false;
-                this.dataGridViewDataCount.Enabled = false;
+                this.dataGridViewDataList.ReadOnly = true;
+                this.dataGridViewDataCount.ReadOnly = true;
             }
             else
             {

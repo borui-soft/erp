@@ -675,6 +675,7 @@
             // 
             // registerInLedger
             // 
+            this.registerInLedger.Enabled = false;
             this.registerInLedger.Image = global::MainProgram.Properties.Resources.记账;
             this.registerInLedger.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.registerInLedger.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;

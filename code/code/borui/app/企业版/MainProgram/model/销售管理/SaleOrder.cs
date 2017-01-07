@@ -144,7 +144,7 @@ namespace MainProgram.model
             string sql = "SELECT [PKEY],[CUSTOMER_ID],[TRADING_DATE],[BILL_NUMBER],[SALE_TYPE],[DELIVERY_DATE],[PAYMENT_DATE],";
             sql += "[EXCHANGES_UNIT],[BUSINESS_PEOPLE_ID],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],";
             sql += "[TOTAL_MONEY], [MAKE_ORDER_STAFF],[ORDERR_REVIEW],[REVIEW_DATE],[IS_REVIEW],[IS_OUT_STORAGE],[ACTUAL_VALUE] ";
-            sql += "FROM [dbo].[SALE_ORDER] ORDER BY PKEY DESC DESC";
+            sql += "FROM [dbo].[SALE_ORDER] ORDER BY PKEY DESC";
 
             m_tableDataList.Clear();
 

@@ -248,9 +248,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 48);
             this.splitContainer1.Name = "splitContainer1";
@@ -270,9 +270,9 @@
             // 
             // treeViewMaterielOrg
             // 
-            this.treeViewMaterielOrg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeViewMaterielOrg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeViewMaterielOrg.ContextMenuStrip = this.contextMenuStripMaterielGroup;
             this.treeViewMaterielOrg.ImageIndex = 0;
             this.treeViewMaterielOrg.ImageList = this.imageList;
@@ -334,9 +334,9 @@
             // 
             // dataGridViewMaterielList
             // 
-            this.dataGridViewMaterielList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewMaterielList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewMaterielList.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewMaterielList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMaterielList.GridColor = System.Drawing.Color.Silver;
@@ -346,7 +346,7 @@
             this.dataGridViewMaterielList.ReadOnly = true;
             this.dataGridViewMaterielList.RowHeadersWidth = 4;
             this.dataGridViewMaterielList.RowTemplate.Height = 23;
-            this.dataGridViewMaterielList.Size = new System.Drawing.Size(854, 489);
+            this.dataGridViewMaterielList.Size = new System.Drawing.Size(856, 489);
             this.dataGridViewMaterielList.TabIndex = 0;
             this.dataGridViewMaterielList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMaterielList_CellMouseDown);
             this.dataGridViewMaterielList.Click += new System.EventHandler(this.dataGridViewMaterielList_Click);
@@ -421,11 +421,11 @@
             // 
             this.textBoxSerach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBoxSerach.Location = new System.Drawing.Point(863, 21);
+            this.textBoxSerach.Location = new System.Drawing.Point(777, 21);
             this.textBoxSerach.Name = "textBoxSerach";
-            this.textBoxSerach.Size = new System.Drawing.Size(211, 21);
+            this.textBoxSerach.Size = new System.Drawing.Size(297, 21);
             this.textBoxSerach.TabIndex = 17;
-            this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+            this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
             this.textBoxSerach.Click += new System.EventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_Click);

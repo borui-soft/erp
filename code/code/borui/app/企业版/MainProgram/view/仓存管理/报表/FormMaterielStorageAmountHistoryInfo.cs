@@ -84,7 +84,8 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
+            m_dataGridViewExtend.addDataGridViewColumn("编码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
             m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
@@ -156,6 +157,7 @@ namespace MainProgram
                 ArrayList temp = new ArrayList();
 
                 temp.Add(materiel.pkey);
+                temp.Add(materiel.num);
                 temp.Add(materiel.name);
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.model);
@@ -207,13 +209,13 @@ namespace MainProgram
             // 金额信息保留2位小数儿
             sum = (double)(Math.Round(sum * 100)) / 100;
 
-            m_dataGridViewExtend.initDataGridViewData(materiels, 5);
-            this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-            this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            m_dataGridViewExtend.initDataGridViewData(materiels, 7);
+            this.dataGridViewMaterielList.Columns[2].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             if (m_isDisplayJG)
             {
-                this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             }
 
             this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
@@ -255,6 +257,13 @@ namespace MainProgram
                 MaterielOrgStructTable record = (MaterielOrgStructTable)nodeList[i];
 
                 nodeName = MaterielType.getInctance().getMaterielTypeNameFromPkey(record.value);
+
+                string groupNum = MaterielType.getInctance().getMaterielTypeNumFromPkey(record.value);
+
+                if (groupNum.Length > 0)
+                {
+                    nodeName += "(" + groupNum + ")";
+                }
 
                 currentNode = m_tree.addNode(node, nodeName, 0, 1, Convert.ToString(record.value));
                 processDutyOrgNode(record.pkey, currentNode);
@@ -382,7 +391,7 @@ namespace MainProgram
                 updateDataGridView(Materiel.getInctance().getMaterielInfoFromSerachTerm(this.textBoxSerach.Text));
 
                 this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
-                this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+                this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
 
                 this.labelCountInfo.Focus();
             }

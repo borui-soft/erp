@@ -226,7 +226,7 @@
             this.dataGridViewMaterielList.ReadOnly = true;
             this.dataGridViewMaterielList.RowHeadersWidth = 4;
             this.dataGridViewMaterielList.RowTemplate.Height = 23;
-            this.dataGridViewMaterielList.Size = new System.Drawing.Size(953, 472);
+            this.dataGridViewMaterielList.Size = new System.Drawing.Size(955, 472);
             this.dataGridViewMaterielList.TabIndex = 0;
             this.dataGridViewMaterielList.Click += new System.EventHandler(this.dataGridViewMaterielList_Click);
             // 
@@ -234,11 +234,11 @@
             // 
             this.textBoxSerach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBoxSerach.Location = new System.Drawing.Point(889, 21);
+            this.textBoxSerach.Location = new System.Drawing.Point(802, 21);
             this.textBoxSerach.Name = "textBoxSerach";
-            this.textBoxSerach.Size = new System.Drawing.Size(211, 21);
+            this.textBoxSerach.Size = new System.Drawing.Size(298, 21);
             this.textBoxSerach.TabIndex = 18;
-            this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+            this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
             this.textBoxSerach.Click += new System.EventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_MouseClick);
             this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_Click);

@@ -313,7 +313,7 @@ namespace MainProgram.model
                 MaterielTable materiel = new MaterielTable();
                 materiel = index.Value;
 
-                if (materiel.name.IndexOf(serachTerm) >= 0)
+                if (materiel.name.IndexOf(serachTerm) >= 0 || materiel.mnemonicCode.IndexOf(serachTerm) >= 0 || materiel.num == serachTerm)
                 {
                     materielList.Add(materielList.Count, materiel);
                 }

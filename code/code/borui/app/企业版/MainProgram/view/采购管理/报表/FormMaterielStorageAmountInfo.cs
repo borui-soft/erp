@@ -87,7 +87,8 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
+            m_dataGridViewExtend.addDataGridViewColumn("编号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 170);
             m_dataGridViewExtend.addDataGridViewColumn("型号", 60);
             m_dataGridViewExtend.addDataGridViewColumn("实际库存", 78);
@@ -131,6 +132,7 @@ namespace MainProgram
                 ArrayList temp = new ArrayList();
 
                 temp.Add(materiel.pkey);
+                temp.Add(materiel.num);
                 temp.Add(materiel.name);
                 temp.Add(materiel.model);
 
@@ -197,30 +199,30 @@ namespace MainProgram
 
             if (m_isDisplayJG)
             {
-                m_dataGridViewExtend.initDataGridViewData(materiels, 8);
+                m_dataGridViewExtend.initDataGridViewData(materiels, 9);
             }
             else
             {
-                m_dataGridViewExtend.initDataGridViewData(materiels, 6);
+                m_dataGridViewExtend.initDataGridViewData(materiels, 7);
             }
 
-            this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-            this.dataGridViewMaterielList.Columns[3].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[2].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
 
             if (m_isDisplayJG)
             {
-                this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-                this.dataGridViewMaterielList.Columns[8].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
 
+                this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
                 this.labelCountInfo.Text += "  累计金额[" + Convert.ToString(sum) + "]";
             }
             else 
             {
-                this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
             }
-
-            this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
         }
 
         private void refreshTreeView()
@@ -253,6 +255,13 @@ namespace MainProgram
                 MaterielOrgStructTable record = (MaterielOrgStructTable)nodeList[i];
 
                 nodeName = MaterielType.getInctance().getMaterielTypeNameFromPkey(record.value);
+
+                string groupNum = MaterielType.getInctance().getMaterielTypeNumFromPkey(record.value);
+
+                if (groupNum.Length > 0)
+                {
+                    nodeName += "(" + groupNum + ")";
+                }
 
                 currentNode = m_tree.addNode(node, nodeName, 0, 1, Convert.ToString(record.value));
                 processDutyOrgNode(record.pkey, currentNode);
@@ -380,7 +389,7 @@ namespace MainProgram
                 updateDataGridView(Materiel.getInctance().getMaterielInfoFromSerachTerm(this.textBoxSerach.Text));
 
                 this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
-                this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+                this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
 
                 this.labelCountInfo.Focus();
             }

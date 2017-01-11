@@ -47,7 +47,6 @@
             this.textBoxSerach = new System.Windows.Forms.TextBox();
             this.dateTimePickerHistoryDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -148,9 +147,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 48);
             this.splitContainer1.Name = "splitContainer1";
@@ -170,9 +169,9 @@
             // 
             // treeViewMaterielOrg
             // 
-            this.treeViewMaterielOrg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeViewMaterielOrg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeViewMaterielOrg.ImageIndex = 0;
             this.treeViewMaterielOrg.ImageList = this.imageList;
             this.treeViewMaterielOrg.Location = new System.Drawing.Point(0, 0);
@@ -195,9 +194,9 @@
             // 
             // dataGridViewMaterielList
             // 
-            this.dataGridViewMaterielList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewMaterielList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewMaterielList.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewMaterielList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMaterielList.GridColor = System.Drawing.Color.Silver;
@@ -207,7 +206,7 @@
             this.dataGridViewMaterielList.ReadOnly = true;
             this.dataGridViewMaterielList.RowHeadersWidth = 4;
             this.dataGridViewMaterielList.RowTemplate.Height = 23;
-            this.dataGridViewMaterielList.Size = new System.Drawing.Size(731, 410);
+            this.dataGridViewMaterielList.Size = new System.Drawing.Size(735, 410);
             this.dataGridViewMaterielList.TabIndex = 0;
             this.dataGridViewMaterielList.Click += new System.EventHandler(this.dataGridViewMaterielList_Click);
             // 
@@ -215,11 +214,11 @@
             // 
             this.textBoxSerach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBoxSerach.Location = new System.Drawing.Point(655, 13);
+            this.textBoxSerach.Location = new System.Drawing.Point(570, 13);
             this.textBoxSerach.Name = "textBoxSerach";
-            this.textBoxSerach.Size = new System.Drawing.Size(211, 21);
+            this.textBoxSerach.Size = new System.Drawing.Size(296, 21);
             this.textBoxSerach.TabIndex = 18;
-            this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+            this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
             this.textBoxSerach.Click += new System.EventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_MouseClick);
             this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_Click);
@@ -227,7 +226,7 @@
             // 
             // dateTimePickerHistoryDate
             // 
-            this.dateTimePickerHistoryDate.Location = new System.Drawing.Point(412, 13);
+            this.dateTimePickerHistoryDate.Location = new System.Drawing.Point(345, 13);
             this.dateTimePickerHistoryDate.Name = "dateTimePickerHistoryDate";
             this.dateTimePickerHistoryDate.Size = new System.Drawing.Size(152, 21);
             this.dateTimePickerHistoryDate.TabIndex = 19;
@@ -237,20 +236,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(356, 18);
+            this.label1.Location = new System.Drawing.Point(289, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 20;
             this.label1.Text = "截止日期";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(599, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "物料名称";
             // 
             // FormMaterielStorageAmountHistoryInfo
             // 
@@ -258,7 +248,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(879, 488);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePickerHistoryDate);
             this.Controls.Add(this.textBoxSerach);
@@ -301,6 +290,5 @@
         private System.Windows.Forms.TextBox textBoxSerach;
         private System.Windows.Forms.DateTimePicker dateTimePickerHistoryDate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
     }
 }

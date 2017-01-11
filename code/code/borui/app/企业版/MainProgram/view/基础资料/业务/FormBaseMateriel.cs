@@ -444,7 +444,7 @@ namespace MainProgram
                 this.labelMaterielGroupName.Text = "[" + this.textBoxSerach.Text + "]物料共计[" + Convert.ToString(m_materielRecordCount) + "]条记录";
 
                 this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
-                this.textBoxSerach.Text = "输入物料名称，按回车键实现快速查找";
+                this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
 
                 this.labelMaterielGroupName.Focus();
             }

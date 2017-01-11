@@ -33,7 +33,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V1.10.2";
+            this.label3.Text = "当前软件版本：V1.10.5";
             // 
             // pictureBox1
             // 
@@ -73,21 +73,21 @@
             this.label1.TabIndex = 17;
             this.label1.Text = "版本更新说明";
             // 
-            // textBox1
+            // richTextBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(14, 144);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(385, 76);
-            this.textBox1.TabIndex = 18;
-            this.textBox1.Text = "1、增加库存预占功能                                            2、存货核算明细账增加双击单据查看单据详情功能";
+            this.richTextBox1.Location = new System.Drawing.Point(14, 140);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(385, 90);
+            this.richTextBox1.TabIndex = 19;
+            this.richTextBox1.Text = "1、入账之后的单据，表格列宽等可调整\n2、供应商页面实现快速搜索\n3、物料及分类中增加编号信息，并在相应的页面把编号做了显示\n4、所有物料类的快速搜索，实现模糊搜" +
+    "索物料名、助记码和物料编号";
             // 
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 253);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
@@ -111,6 +111,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

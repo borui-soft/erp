@@ -74,30 +74,35 @@ namespace MainProgram
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            bool isRet = true;
+
             if(m_isAdd)
             {
                 if (!m_isMaterielGroup)
                 {
-                    addMateriel();
+                    isRet = addMateriel();
                 }
                 else
                 {
-                    addMaterielType();
+                    isRet = addMaterielType();
                 }
             }
             else
             {
                 if (!m_isMaterielGroup)
                 {
-                    modifyMateriel();
+                    isRet = modifyMateriel();
                 }
                 else
                 {
-                    modifyMaterielType();
+                    isRet = modifyMaterielType();
                 }
             }
 
-            this.Close();
+            if (isRet)
+            {
+                this.Close();
+            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -140,11 +145,13 @@ namespace MainProgram
             if (m_isMaterielGroup)
             {
                 this.textBoxMaterielGroupName.Text = m_materielType.name;
+                this.textBoxGroupNum.Text = m_materielType.num;
                 this.textBoxMaterielGroupDesc.Text = m_materielType.desc;
             }
             else
             {
                 this.textBoxName.Text = m_materiel.name;
+                this.textBoxNum.Text = m_materiel.num;
                 this.textBoxShortName.Text = m_materiel.nameShort;
                 this.textBoxModel.Text = m_materiel.model;
                 this.textBoxMnemonicCode.Text = m_materiel.mnemonicCode;
@@ -161,17 +168,31 @@ namespace MainProgram
             }
         }
 
-        private void addMateriel()
+        private bool addMateriel()
         {
             MaterielTable materiel = getPageMaterielActiveData();
 
             if (materiel.name.Length == 0)
             {
-                MessageBoxExtend.messageWarning("物料名称不能为空，请重新输入");
-                return;
+                MessageBoxExtend.messageWarning("物料信息保存失败, 物料名称不能为空，请重新输入");
+                return false;
+            }
+
+            if (materiel.num.Length == 0)
+            {
+                MessageBoxExtend.messageWarning("物料信息保存失败, 物料编号不能为空，请重新输入");
+                return false;
+            }
+
+            if (materiel.mnemonicCode.Length > 10)
+            {
+                MessageBoxExtend.messageWarning("物料信息保存失败, 助记码长度应小于10，请重新输入");
+                return false;
             }
 
             Materiel.getInctance().insert(materiel);
+
+            return true;
         }
 
         private MaterielTable getPageMaterielActiveData()
@@ -180,6 +201,7 @@ namespace MainProgram
 
             materiel.materielType = m_materielGroupPkey;
             materiel.name = this.textBoxName.Text.ToString();
+            materiel.num = this.textBoxNum.Text.ToString();
             materiel.nameShort = this.textBoxShortName.Text.ToString();
             materiel.model = this.textBoxModel.Text.ToString();
             materiel.mnemonicCode = this.textBoxMnemonicCode.Text.ToString();
@@ -251,17 +273,24 @@ namespace MainProgram
             return materiel;
         }
 
-        private void addMaterielType()
+        private bool addMaterielType()
         {
             MaterielTypeTable materielType = new MaterielTypeTable();
 
             materielType.name = this.textBoxMaterielGroupName.Text.ToString();
+            materielType.num = this.textBoxGroupNum.Text.ToString();
             materielType.desc = this.textBoxMaterielGroupDesc.Text.ToString();
 
             if (materielType.name.Length == 0)
             {
-                MessageBoxExtend.messageWarning("组名称不能为空，请重新输入!");
-                return;
+                MessageBoxExtend.messageWarning("物料分组保存失败, 组名称不能为空，请重新输入!");
+                return false;
+            }
+
+            if (materielType.num.Length == 0 || materielType.num.Length > 10)
+            {
+                MessageBoxExtend.messageWarning("物料分组保存失败, 组编号长度必须为1-10位，请重新输入!");
+                return false;
             }
 
             MaterielType.getInctance().insert(materielType);
@@ -273,27 +302,59 @@ namespace MainProgram
             materielOrgInfo.parentPkey = MaterielOrgStruct.getInctance().getPkeyFromValue(m_materielGroupPkey);
             materielOrgInfo.value = MaterielType.getInctance().getMaxPkey();
             MaterielOrgStruct.getInctance().insert(materielOrgInfo);
+
+            return true;
         }
 
-        private void modifyMateriel()
+        private bool modifyMateriel()
         {
             MaterielTable materiel = getPageMaterielActiveData();
+
+            if (materiel.name.Length == 0)
+            {
+                MessageBoxExtend.messageWarning("物料信息保存失败, 物料名称不能为空，请重新输入");
+                return false;
+            }
+
+            if (materiel.num.Length == 0)
+            {
+                MessageBoxExtend.messageWarning("物料信息保存失败, 物料编号不能为空，请重新输入");
+                return false;
+            }
+
+            if (materiel.mnemonicCode.Length > 10)
+            {
+                MessageBoxExtend.messageWarning("物料信息保存失败, 助记码长度应小于10，请重新输入");
+                return false;
+            }
+
             Materiel.getInctance().update(m_materielPkey, materiel);
+
+            return true;
         }
 
-        private void modifyMaterielType()
+        private bool modifyMaterielType()
         {
             MaterielTypeTable materielType = new MaterielTypeTable();
             materielType.name = this.textBoxMaterielGroupName.Text.ToString();
+            materielType.num = this.textBoxGroupNum.Text.ToString();
             materielType.desc = this.textBoxMaterielGroupDesc.Text.ToString();
 
             if (materielType.name.Length == 0)
             {
                 MessageBoxExtend.messageWarning("组名称不能为空，请重新填写!");
-                return;
+                return false;
+            }
+
+            if (materielType.num.Length == 0 || materielType.num.Length > 10)
+            {
+                MessageBoxExtend.messageWarning("物料分组保存失败, 组编号长度必须为1-10位，请重新输入!");
+                return false;
             }
 
             MaterielType.getInctance().update(m_materielGroupPkey, materielType);
+
+            return true;
         }
 
         private void textBoxName_TextChanged(object sender, EventArgs e)
@@ -307,6 +368,7 @@ namespace MainProgram
                         if (m_materiel != null)
                         {
                             if (m_materiel.name.CompareTo(this.textBoxName.Text) != 0 ||
+                                m_materiel.num.CompareTo(this.textBoxNum.Text) != 0 ||
                                 m_materiel.nameShort.CompareTo(this.textBoxShortName.Text) != 0 ||
                                 m_materiel.model.CompareTo(this.textBoxModel.Text) != 0 ||
                                 m_materiel.mnemonicCode.CompareTo(this.textBoxMnemonicCode.Text) != 0 ||
@@ -334,6 +396,7 @@ namespace MainProgram
                         if (m_materielType != null)
                         {
                             if (m_materielType.name.CompareTo(this.textBoxMaterielGroupName.Text) != 0 ||
+                                m_materielType.num.CompareTo(this.textBoxGroupNum.Text) != 0 ||
                                 m_materielType.desc.CompareTo(this.textBoxMaterielGroupDesc.Text) != 0)
                             {
                                 this.buttonAdd.Enabled = true;

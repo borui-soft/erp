@@ -33,12 +33,13 @@ namespace MainProgram.model
 
         public void insert(MaterielTable materiel)
         {
-            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],";
+            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],";
             insert += "[MAX],[MIN],[WARRANTY],[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],";
             insert += "[VALUATION],[NOTE],[STORAGE],[IS_FORBID]) VALUES(";
 
             insert += materiel.materielType + ",";
             insert += "'" + materiel.name + "',";
+            insert += "'" + materiel.num + "',";
             insert += "'" + materiel.nameShort + "',";
             insert += "'" + materiel.model + "',";
             insert += "'" + materiel.mnemonicCode + "',";
@@ -84,6 +85,7 @@ namespace MainProgram.model
 
             //update += "[SUPPLIER_TYPE] = " + materiel.materielType + ",";
             update += "[NAME] = '" + materiel.name + "',";
+            update += "[NUM] = '" + materiel.num + "',";
             update += "[NAME_SHORT] = '" + materiel.nameShort + "',";
             update += "[MODEL] = '" + materiel.model + "',";
             update += "[MNEMONIC_CODE] = '" + materiel.mnemonicCode + "',";
@@ -121,7 +123,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[MAX],[MIN],[WARRANTY],";
+            string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[MAX],[MIN],[WARRANTY],";
             materielQuery += "[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],[VALUATION],[NOTE],[STORAGE],[IS_FORBID]";
             materielQuery += " FROM [dbo].[BASE_MATERIEL_LIST] ORDER BY PKEY";
 
@@ -136,6 +138,7 @@ namespace MainProgram.model
                     materiel.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     materiel.materielType = DbDataConvert.ToInt32(row["SUPPLIER_TYPE"]);
                     materiel.name = DbDataConvert.ToString(row["NAME"]);
+                    materiel.num = DbDataConvert.ToString(row["NUM"]);
                     materiel.nameShort = DbDataConvert.ToString(row["NAME_SHORT"]);
                     materiel.model = DbDataConvert.ToString(row["MODEL"]);
                     materiel.mnemonicCode = DbDataConvert.ToString(row["MNEMONIC_CODE"]);
@@ -325,6 +328,7 @@ namespace MainProgram.model
         public int pkey { get; set; }
         public int materielType { get; set; }
         public string name { get; set; }
+        public string num { get; set; }
         public string nameShort { get; set; }
         public string model { get; set; }
         public string mnemonicCode { get; set; }

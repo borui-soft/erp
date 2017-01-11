@@ -33,7 +33,7 @@ namespace MainProgram.model
         private void load()
         {
             SortedDictionary<int, MaterielTypeTable> materielGroupList = new SortedDictionary<int, MaterielTypeTable>();
-            string materielQuery = "SELECT PKEY, TYPE_NAME, [DESC] FROM  BASE_MATERIEL_TYPE ORDER BY PKEY";
+            string materielQuery = "SELECT PKEY, TYPE_NAME, GROUP_NUM, [DESC] FROM  BASE_MATERIEL_TYPE ORDER BY PKEY";
 
             if (m_MaterielTypeList.Count > 0)
             {
@@ -47,7 +47,8 @@ namespace MainProgram.model
                     MaterielTypeTable materielTyoe = new MaterielTypeTable();
                     materielTyoe.pkey = DbDataConvert.ToInt32(row[0]);
                     materielTyoe.name = DbDataConvert.ToString(row[1]);
-                    materielTyoe.desc = DbDataConvert.ToString(row[2]);
+                    materielTyoe.num = DbDataConvert.ToString(row[2]);
+                    materielTyoe.desc = DbDataConvert.ToString(row[3]);
 
                     materielGroupList.Add(materielTyoe.pkey, materielTyoe);
                 }
@@ -69,6 +70,7 @@ namespace MainProgram.model
             string update = "UPDATE [dbo].[BASE_MATERIEL_TYPE] SET ";
 
             update += "[TYPE_NAME] = '" + materielType.name + "',";
+            update += "[GROUP_NUM] = '" + materielType.num + "',";
             update += "[DESC] = '" + materielType.desc + "' ";
             update += "WHERE PKEY = " + Convert.ToString(pkey);
 
@@ -89,9 +91,10 @@ namespace MainProgram.model
 
         public void insert(MaterielTypeTable materielType)
         {
-            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_TYPE] ([TYPE_NAME],[DESC]) VALUES (";
+            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_TYPE] ([TYPE_NAME],[GROUP_NUM],[DESC]) VALUES (";
 
             insert += "'" + materielType.name + "',";
+            insert += "'" + materielType.num + "',";
             insert += "'" + materielType.desc + "'";
             insert += ")";
 
@@ -119,6 +122,19 @@ namespace MainProgram.model
             }
 
             return materielTypeName;
+        }
+
+        public string getMaterielTypeNumFromPkey(int pkey)
+        {
+            string materielTypeNum = "";
+
+            if (m_MaterielTypeList.ContainsKey(pkey))
+            {
+                MaterielTypeTable record = (MaterielTypeTable)m_MaterielTypeList[pkey];
+                materielTypeNum = record.num;
+            }
+
+            return materielTypeNum;
         }
 
         public MaterielTypeTable getMaterielTypeInfoFromPkey(int pkey)
@@ -153,6 +169,7 @@ namespace MainProgram.model
     {
         public int pkey { get; set; }
         public string name { get; set; }
+        public string num { get; set; }
         public string desc { get; set; }
     }
 }

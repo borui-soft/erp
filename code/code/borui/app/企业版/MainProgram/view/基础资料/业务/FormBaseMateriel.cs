@@ -44,8 +44,9 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
             m_dataGridViewExtend.addDataGridViewColumn("物料组", 200, false);
+            m_dataGridViewExtend.addDataGridViewColumn("编号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
             m_dataGridViewExtend.addDataGridViewColumn("物料简称", 100);
             m_dataGridViewExtend.addDataGridViewColumn("助记码", 100);
@@ -90,6 +91,7 @@ namespace MainProgram
 
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.materielType);
+                temp.Add(materiel.num);
                 temp.Add(materiel.name);
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.mnemonicCode);
@@ -110,7 +112,7 @@ namespace MainProgram
                 materiels.Add(i, temp);
             }
 
-            m_dataGridViewExtend.initDataGridViewData(materiels, 3);
+            m_dataGridViewExtend.initDataGridViewData(materiels, 4);
         }
 
         private void refreshTreeView()
@@ -143,6 +145,13 @@ namespace MainProgram
                 MaterielOrgStructTable record = (MaterielOrgStructTable)nodeList[i];
 
                 nodeName = MaterielType.getInctance().getMaterielTypeNameFromPkey(record.value);
+
+                string groupNum = MaterielType.getInctance().getMaterielTypeNumFromPkey(record.value);
+
+                if (groupNum.Length > 0)
+                {
+                    nodeName += "(" + groupNum + ")";
+                }
 
                 currentNode = m_tree.addNode(node, nodeName, 0, 1, Convert.ToString(record.value));
                 processDutyOrgNode(record.pkey, currentNode);
@@ -283,7 +292,7 @@ namespace MainProgram
                         {
                             dataGridViewMaterielList.Rows[i].Selected = true;
                             m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[i].Cells[0].Value.ToString());
-                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[2].Value.ToString();
+                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[3].Value.ToString();
                             return;
                         }
                     }
@@ -304,7 +313,7 @@ namespace MainProgram
                         {
                             dataGridViewMaterielList.Rows[i].Selected = true;
                             m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[i].Cells[0].Value.ToString());
-                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[2].Value.ToString();
+                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[3].Value.ToString();
                             
                             if (m_isAddRecordMode)
                             {
@@ -387,7 +396,7 @@ namespace MainProgram
 
                 dataGridViewMaterielList.Rows[e.RowIndex].Selected = true;
                 m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[e.RowIndex].Cells[0].Value.ToString());
-                m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[e.RowIndex].Cells[3].Value.ToString();
 
                 contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
             }

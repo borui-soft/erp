@@ -85,8 +85,8 @@ namespace MainProgram
 
             // DataGridView控件初始化
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
-            m_dataGridViewExtend.addDataGridViewColumn("编码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
+            m_dataGridViewExtend.addDataGridViewColumn("物料编码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
             m_dataGridViewExtend.addDataGridViewColumn("存货数量", 80);
@@ -157,8 +157,8 @@ namespace MainProgram
                 ArrayList temp = new ArrayList();
 
                 temp.Add(materiel.pkey);
-                temp.Add(materiel.num);
                 temp.Add(materiel.name);
+                temp.Add(materiel.num);
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.model);
 
@@ -210,7 +210,7 @@ namespace MainProgram
             sum = (double)(Math.Round(sum * 100)) / 100;
 
             m_dataGridViewExtend.initDataGridViewData(materiels, 7);
-            this.dataGridViewMaterielList.Columns[2].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             if (m_isDisplayJG)
             {

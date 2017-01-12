@@ -353,6 +353,12 @@
     <Compile Include="view\基础资料\业务\FormMaterielEdit.designer.cs">
       <DependentUpon>FormMaterielEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\基础资料\业务\FormMaterielTypeModify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\基础资料\业务\FormMaterielTypeModify.designer.cs">
+      <DependentUpon>FormMaterielTypeModify.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\基础资料\业务\FormNoForbid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -791,6 +797,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\基础资料\业务\FormMaterielEdit.resx">
       <DependentUpon>FormMaterielEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\基础资料\业务\FormMaterielTypeModify.resx">
+      <DependentUpon>FormMaterielTypeModify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\基础资料\业务\FormNoForbid.resx">
       <DependentUpon>FormNoForbid.cs</DependentUpon>

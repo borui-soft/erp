@@ -63,6 +63,8 @@
             this.ToolStripMenuItemNoForbidMateriel = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.textBoxSerach = new System.Windows.Forms.TextBox();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemChange = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -248,9 +250,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 48);
             this.splitContainer1.Name = "splitContainer1";
@@ -270,9 +272,9 @@
             // 
             // treeViewMaterielOrg
             // 
-            this.treeViewMaterielOrg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeViewMaterielOrg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.treeViewMaterielOrg.ContextMenuStrip = this.contextMenuStripMaterielGroup;
             this.treeViewMaterielOrg.ImageIndex = 0;
             this.treeViewMaterielOrg.ImageList = this.imageList;
@@ -334,9 +336,9 @@
             // 
             // dataGridViewMaterielList
             // 
-            this.dataGridViewMaterielList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewMaterielList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewMaterielList.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewMaterielList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMaterielList.GridColor = System.Drawing.Color.Silver;
@@ -346,7 +348,7 @@
             this.dataGridViewMaterielList.ReadOnly = true;
             this.dataGridViewMaterielList.RowHeadersWidth = 4;
             this.dataGridViewMaterielList.RowTemplate.Height = 23;
-            this.dataGridViewMaterielList.Size = new System.Drawing.Size(856, 489);
+            this.dataGridViewMaterielList.Size = new System.Drawing.Size(858, 489);
             this.dataGridViewMaterielList.TabIndex = 0;
             this.dataGridViewMaterielList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMaterielList_CellMouseDown);
             this.dataGridViewMaterielList.Click += new System.EventHandler(this.dataGridViewMaterielList_Click);
@@ -358,11 +360,13 @@
             this.ToolStripMenuItemAddMateriel,
             this.ToolStripMenuItemModifyMateriel,
             this.ToolStripMenuItemDeleteMateriel,
+            this.toolStripSeparator7,
+            this.toolStripMenuItemChange,
             this.toolStripSeparator6,
             this.ToolStripMenuItemForbidMateriel,
             this.ToolStripMenuItemNoForbidMateriel});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(113, 120);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 170);
             // 
             // ToolStripMenuItemAddMateriel
             // 
@@ -370,7 +374,7 @@
             this.ToolStripMenuItemAddMateriel.BackgroundImage = global::MainProgram.Properties.Resources.add;
             this.ToolStripMenuItemAddMateriel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemAddMateriel.Name = "ToolStripMenuItemAddMateriel";
-            this.ToolStripMenuItemAddMateriel.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemAddMateriel.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemAddMateriel.Text = "新增";
             this.ToolStripMenuItemAddMateriel.Click += new System.EventHandler(this.add_Click);
             // 
@@ -380,8 +384,8 @@
             this.ToolStripMenuItemModifyMateriel.BackgroundImage = global::MainProgram.Properties.Resources.modify;
             this.ToolStripMenuItemModifyMateriel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemModifyMateriel.Name = "ToolStripMenuItemModifyMateriel";
-            this.ToolStripMenuItemModifyMateriel.Size = new System.Drawing.Size(112, 22);
-            this.ToolStripMenuItemModifyMateriel.Text = "修改";
+            this.ToolStripMenuItemModifyMateriel.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemModifyMateriel.Text = "修改物料信息";
             this.ToolStripMenuItemModifyMateriel.Click += new System.EventHandler(this.modify_Click);
             // 
             // ToolStripMenuItemDeleteMateriel
@@ -390,21 +394,21 @@
             this.ToolStripMenuItemDeleteMateriel.BackgroundImage = global::MainProgram.Properties.Resources.delete;
             this.ToolStripMenuItemDeleteMateriel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemDeleteMateriel.Name = "ToolStripMenuItemDeleteMateriel";
-            this.ToolStripMenuItemDeleteMateriel.Size = new System.Drawing.Size(112, 22);
-            this.ToolStripMenuItemDeleteMateriel.Text = "删除";
+            this.ToolStripMenuItemDeleteMateriel.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDeleteMateriel.Text = "删除物料";
             this.ToolStripMenuItemDeleteMateriel.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(109, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
             // 
             // ToolStripMenuItemForbidMateriel
             // 
             this.ToolStripMenuItemForbidMateriel.BackgroundImage = global::MainProgram.Properties.Resources.forbid;
             this.ToolStripMenuItemForbidMateriel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemForbidMateriel.Name = "ToolStripMenuItemForbidMateriel";
-            this.ToolStripMenuItemForbidMateriel.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemForbidMateriel.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemForbidMateriel.Text = "禁用";
             this.ToolStripMenuItemForbidMateriel.Click += new System.EventHandler(this.forbid_Click);
             // 
@@ -413,7 +417,7 @@
             this.ToolStripMenuItemNoForbidMateriel.BackgroundImage = global::MainProgram.Properties.Resources.noForbid;
             this.ToolStripMenuItemNoForbidMateriel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemNoForbidMateriel.Name = "ToolStripMenuItemNoForbidMateriel";
-            this.ToolStripMenuItemNoForbidMateriel.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemNoForbidMateriel.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemNoForbidMateriel.Text = "反禁用";
             this.ToolStripMenuItemNoForbidMateriel.Click += new System.EventHandler(this.noForbid_Click);
             // 
@@ -430,6 +434,21 @@
             this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSerach_KeyDown);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuItemChange
+            // 
+            this.toolStripMenuItemChange.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItemChange.BackgroundImage = global::MainProgram.Properties.Resources.modify;
+            this.toolStripMenuItemChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItemChange.Name = "toolStripMenuItemChange";
+            this.toolStripMenuItemChange.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemChange.Text = "调整分组";
+            this.toolStripMenuItemChange.Click += new System.EventHandler(this.toolStripMenuItemChange_Click);
             // 
             // FormBaseMateriel
             // 
@@ -495,5 +514,7 @@
         private System.Windows.Forms.ToolStripButton close;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.TextBox textBoxSerach;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChange;
     }
 }

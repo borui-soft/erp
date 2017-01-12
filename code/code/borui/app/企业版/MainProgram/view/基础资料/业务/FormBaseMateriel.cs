@@ -46,8 +46,8 @@ namespace MainProgram
             // DataGridView控件初始化
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
             m_dataGridViewExtend.addDataGridViewColumn("物料组", 200, false);
-            m_dataGridViewExtend.addDataGridViewColumn("编号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
+            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("物料简称", 100);
             m_dataGridViewExtend.addDataGridViewColumn("助记码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 100);
@@ -91,8 +91,8 @@ namespace MainProgram
 
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.materielType);
-                temp.Add(materiel.num);
                 temp.Add(materiel.name);
+                temp.Add(materiel.num);
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.mnemonicCode);
                 temp.Add(materiel.model);
@@ -292,7 +292,7 @@ namespace MainProgram
                         {
                             dataGridViewMaterielList.Rows[i].Selected = true;
                             m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[i].Cells[0].Value.ToString());
-                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[3].Value.ToString();
+                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[2].Value.ToString();
                             return;
                         }
                     }
@@ -313,7 +313,7 @@ namespace MainProgram
                         {
                             dataGridViewMaterielList.Rows[i].Selected = true;
                             m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[i].Cells[0].Value.ToString());
-                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[3].Value.ToString();
+                            m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[i].Cells[2].Value.ToString();
                             
                             if (m_isAddRecordMode)
                             {
@@ -396,7 +396,7 @@ namespace MainProgram
 
                 dataGridViewMaterielList.Rows[e.RowIndex].Selected = true;
                 m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[e.RowIndex].Cells[0].Value.ToString());
-                m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                m_currentDataGridViedRecordCompanyName = dataGridViewMaterielList.Rows[e.RowIndex].Cells[2].Value.ToString();
 
                 contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
             }
@@ -447,6 +447,30 @@ namespace MainProgram
                 this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
 
                 this.labelMaterielGroupName.Focus();
+            }
+        }
+
+        private void toolStripMenuItemChange_Click(object sender, EventArgs e)
+        {
+            FormMaterielTypeModify fmtm = new FormMaterielTypeModify();
+            fmtm.ShowDialog();
+
+            if (fmtm.getIsSave())
+            {
+                int pkey = fmtm.getSelectRecordPkey();
+                string typeName = fmtm.getSelectTypeName();
+
+                if (m_currentDataGridViedRecordCompanyName.Length > 0)
+                {
+                    if (MessageBoxExtend.messageQuestion("确定调整物料[" + m_currentDataGridViedRecordCompanyName + "]至[" + typeName + "]分组吗?"))
+                    {
+                        if (Materiel.getInctance().modifyMaterielType(pkey, m_currentDataGridViedRecordPkey))
+                        {
+                            MessageBoxExtend.messageOK("物料分组调整成功");
+                            updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                        }
+                    }
+                }
             }
         }
     }

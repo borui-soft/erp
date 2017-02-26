@@ -563,6 +563,18 @@
     <Compile Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.designer.cs">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\生产管理\FormProduction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\生产管理\FormProduction.designer.cs">
+      <DependentUpon>FormProduction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\生产管理\FormProductionReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\生产管理\FormProductionReport.designer.cs">
+      <DependentUpon>FormProductionReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\系统登录\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -902,6 +914,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.resx">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\生产管理\FormProduction.resx">
+      <DependentUpon>FormProduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\生产管理\FormProductionReport.resx">
+      <DependentUpon>FormProductionReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\系统登录\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
@@ -1275,7 +1293,11 @@
     <None Include="image\帮助\png-0024.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="image\主界面\生产管理.jpg" />
+    <None Include="image\生产管理\项目信息.png" />
+    <None Include="image\生产管理\总材料表.png" />
     <Content Include="png-0013.ico" />
+    <Content Include="Resources\蓝字.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -1299,6 +1321,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

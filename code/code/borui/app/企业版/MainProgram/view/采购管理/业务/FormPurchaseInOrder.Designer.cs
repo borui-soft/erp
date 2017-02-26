@@ -663,7 +663,7 @@
             // 
             // blueBill
             // 
-            this.blueBill.Image = global::MainProgram.Properties.Resources.红字蓝字;
+            this.blueBill.Image = global::MainProgram.Properties.Resources.蓝字;
             this.blueBill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.blueBill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.blueBill.ImageTransparentColor = System.Drawing.Color.Magenta;

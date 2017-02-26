@@ -89,6 +89,7 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("物料编码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("品牌", 80);
             m_dataGridViewExtend.addDataGridViewColumn("存货数量", 80);
 
             if (m_isDisplayJG)
@@ -161,6 +162,7 @@ namespace MainProgram
                 temp.Add(materiel.num);
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.model);
+                temp.Add(materiel.brand);
 
                 StorageStockDetailTable MaterielHistoryInfo = getMaterielHistoryInfoFromMaterielID(materiel.pkey);
                 materielCountdataPrice = MaterielHistoryInfo.price;
@@ -211,11 +213,11 @@ namespace MainProgram
 
             m_dataGridViewExtend.initDataGridViewData(materiels, 7);
             this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-            this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             if (m_isDisplayJG)
             {
-                this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[8].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
             }
 
             this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";

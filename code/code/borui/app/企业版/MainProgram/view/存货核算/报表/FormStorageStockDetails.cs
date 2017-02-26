@@ -21,6 +21,7 @@ namespace MainProgram
 
         private BillDataGridViewExtend m_dateGridViewExtend = new BillDataGridViewExtend();
         private SortedDictionary<int, MaterielTable> m_materielList = new SortedDictionary<int, MaterielTable>();
+        private PurchaseInOrderTable m_purchaseInOrder = new PurchaseInOrderTable();
 
         public FormStorageStockDetails()
         {
@@ -51,11 +52,14 @@ namespace MainProgram
 
             m_dateGridViewExtend.addDataGridViewColumn("数量\n(入库)", 65);
             m_dateGridViewExtend.addDataGridViewColumn("单价\n(入库)", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("金额", 65);
+            m_dateGridViewExtend.addDataGridViewColumn("金额\n(入库)", 65);
+            m_dateGridViewExtend.addDataGridViewColumn("供应商\n(入库)", 100);
 
             m_dateGridViewExtend.addDataGridViewColumn("数量\n(出库)", 65);
             m_dateGridViewExtend.addDataGridViewColumn("单价\n(出库)", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("金额", 65);
+            m_dateGridViewExtend.addDataGridViewColumn("金额\n(出库)", 65);
+            m_dateGridViewExtend.addDataGridViewColumn("项目编号\n(出库)", 65);
+            m_dateGridViewExtend.addDataGridViewColumn("生成编号\n(出库)", 65);
 
             m_dateGridViewExtend.addDataGridViewColumn("结存数量", 65);
             m_dateGridViewExtend.addDataGridViewColumn("结存单价", 65);
@@ -115,6 +119,9 @@ namespace MainProgram
             firstRow.Add("");
             firstRow.Add("");
             firstRow.Add("");
+            firstRow.Add("");
+            firstRow.Add("");
+            firstRow.Add("");
 
             if (firstRecord != null)
             {
@@ -157,10 +164,30 @@ namespace MainProgram
                     temp.Add("");
                     temp.Add("");
                     temp.Add("");
+                    temp.Add("");
 
                     temp.Add(record.value);
                     temp.Add(record.price);
                     temp.Add(record.value * record.price);
+
+                    // 未完成：这里的信息需要显示项目编号和生产编号，如何添加
+                    string projectNo = "", makeNo = "";
+                    if (record.thingsType == "生产领料")
+                    {
+                        MaterielOutOrderTable materieOutOrder = MaterielOutOrder.getInctance().getMaterielOutOrderInfoFromBillNumber(record.billNumber);
+                        projectNo = materieOutOrder.projectNo;
+                        makeNo = materieOutOrder.makeNo;
+                    }
+                    else if (record.thingsType == "其他出库")
+                    {
+                        MaterielOutOtherOrderTable materieOutOrder = MaterielOutOtherOrder.getInctance().getMaterielOutOtherOrderInfoFromBillNumber(record.billNumber);
+                        projectNo = materieOutOrder.projectNo;
+                        makeNo = materieOutOrder.makeNo;
+                    }
+
+                    temp.Add(projectNo);
+                    temp.Add(makeNo);
+
                     temp.Add(record.storageValue);
                     temp.Add(record.storagePrice);
                     temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
@@ -170,11 +197,25 @@ namespace MainProgram
                 }
                 else if (record.isIn == 1)
                 {
+
                     // 入库类单据
                     temp.Add(record.value);
                     temp.Add(record.price);
+
                     temp.Add(record.value * record.price);
 
+                    if (record.thingsType == "采购入库")
+                    {
+                        m_purchaseInOrder = PurchaseInOrder.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
+                        temp.Add(m_purchaseInOrder.supplierName);
+                    }
+                    else
+                    {
+                        temp.Add("");
+                    }
+
+                    temp.Add("");
+                    temp.Add("");
                     temp.Add("");
                     temp.Add("");
                     temp.Add("");
@@ -189,6 +230,9 @@ namespace MainProgram
                 else
                 {
                     // 其他类型单据
+                    temp.Add("");
+                    temp.Add("");
+                    temp.Add("");
                     temp.Add("");
                     temp.Add("");
                     temp.Add("");
@@ -219,10 +263,13 @@ namespace MainProgram
             sumRow.Add(inSumValue);
             sumRow.Add(getPercentValue(inSumMoney, inSumValue));
             sumRow.Add(inSumMoney);
+            sumRow.Add("");
 
             sumRow.Add(outSumValue);
             sumRow.Add(getPercentValue(outSumMoney, outSumValue));
             sumRow.Add(outSumMoney);
+            sumRow.Add("");
+            sumRow.Add("");
             sumRow.Add("");
             sumRow.Add("");
             sumRow.Add("");
@@ -235,6 +282,9 @@ namespace MainProgram
             lastRow.Add("");
             lastRow.Add("");
             lastRow.Add("期末结存");
+            lastRow.Add("");
+            lastRow.Add("");
+            lastRow.Add("");
             lastRow.Add("");
             lastRow.Add("");
             lastRow.Add("");

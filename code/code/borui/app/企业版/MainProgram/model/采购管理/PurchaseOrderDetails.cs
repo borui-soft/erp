@@ -146,6 +146,7 @@ namespace MainProgram.model
                     MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
                     record.materielName = materiel.name;
                     record.materielModel = materiel.model;
+                    record.brand = materiel.brand;
                     record.materielUnitPurchase = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase);
 
                     record.price = DbDataConvert.ToDouble(row["PRICE"]);
@@ -213,6 +214,7 @@ namespace MainProgram.model
         public int materielID { get; set; }
         public string materielName { get; set; }
         public string materielModel { get; set; }
+        public string brand { get; set; }
         public string materielUnitPurchase { get; set; }
 
         public double price { get; set; }

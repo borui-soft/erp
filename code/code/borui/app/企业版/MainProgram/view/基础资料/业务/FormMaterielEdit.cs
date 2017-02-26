@@ -154,6 +154,7 @@ namespace MainProgram
                 this.textBoxNum.Text = m_materiel.num;
                 this.textBoxShortName.Text = m_materiel.nameShort;
                 this.textBoxModel.Text = m_materiel.model;
+                this.textBoxBrand.Text = m_materiel.brand;
                 this.textBoxMnemonicCode.Text = m_materiel.mnemonicCode;
                 this.textBoxMIN.Text = Convert.ToString(m_materiel.min);
                 this.textBoxMAX.Text = Convert.ToString(m_materiel.max);
@@ -205,6 +206,7 @@ namespace MainProgram
             materiel.nameShort = this.textBoxShortName.Text.ToString();
             materiel.model = this.textBoxModel.Text.ToString();
             materiel.mnemonicCode = this.textBoxMnemonicCode.Text.ToString();
+            materiel.brand = this.textBoxBrand.Text.ToString();
 
             if (this.textBoxMIN.Text.Length > 0)
             {

@@ -153,6 +153,8 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("领料部门", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("日期", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("数量", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("金额", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("领料人", 80);
@@ -181,6 +183,8 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("领料部门", 140, false);
                 m_dateGridViewExtend.addDataGridViewColumn("日期", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("数量", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("金额", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("领料人", 80);
@@ -490,6 +494,8 @@ namespace MainProgram
                         temp.Add(record.departmentName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
+                        temp.Add(record.projectNo);
+                        temp.Add(record.makeNo);
                         temp.Add(record.sumValue);
                         temp.Add(record.sumMoney);
                         temp.Add(record.materielOutStaffName);
@@ -666,6 +672,8 @@ namespace MainProgram
                         temp.Add("");
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
+                        temp.Add(record.projectNo);
+                        temp.Add(record.makeNo);
                         temp.Add(record.sumValue);
                         temp.Add(record.sumMoney);
                         temp.Add(record.materielOutStaffName);

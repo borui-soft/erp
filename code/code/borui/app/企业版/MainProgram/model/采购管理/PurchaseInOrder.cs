@@ -37,7 +37,7 @@ namespace MainProgram.model
             bool isExistReview = false;
             PurchaseInOrderTable oldRecord = new PurchaseInOrderTable();
 
-            string insert = "INSERT INTO [dbo].[PURCHASE_IN_ORDER]([SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[PURCHASE_TYPE],";
+            string insert = "INSERT INTO [dbo].[PURCHASE_IN_ORDER]([SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[CONTRACT_NUM],[PURCHASE_TYPE],";
             insert += "[PAYMENT_DATE],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],[TOTAL_MONEY],";
             insert += "[BUSINESS_PEOPLE_ID],[MAKE_ORDER_STAFF],[SOURCE_BILL_TYPE],[SOURCE_BILL_NUMBER],[STAFF_SAVE_ID],";
             insert += "[STAFF_CHECK_ID],[PAYMENT_OK],[PAYMENT_NO_OK],[IS_RED_BILL],[IS_IN_LEDGER]";
@@ -60,6 +60,9 @@ namespace MainProgram.model
             insert += record.supplierId + ",";
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
+
+            insert += "'" + record.contractNum + "',";
+
             insert += "'" + record.purchaseType + "',";
             insert += "'" + record.paymentDate + "',";
             insert += "'" + record.exchangesUnit + "',";
@@ -378,7 +381,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[PURCHASE_TYPE],[PAYMENT_DATE],";
+            string sql = "SELECT [PKEY],[SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[CONTRACT_NUM],[PURCHASE_TYPE],[PAYMENT_DATE],";
             sql += "[EXCHANGES_UNIT],[BUSINESS_PEOPLE_ID],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],";
             sql += "[TOTAL_MONEY], [MAKE_ORDER_STAFF],[ORDERR_REVIEW],[REVIEW_DATE],[IS_REVIEW],";
             sql += "[SOURCE_BILL_TYPE], [SOURCE_BILL_NUMBER],[STAFF_SAVE_ID],[STAFF_CHECK_ID],[PAYMENT_OK],[PAYMENT_NO_OK],";
@@ -398,6 +401,7 @@ namespace MainProgram.model
                     record.supplierName = Supplier.getInctance().getSupplierNameFromPkey(record.supplierId);
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
+                    record.contractNum = DbDataConvert.ToString(row["CONTRACT_NUM"]);
                     record.purchaseType = DbDataConvert.ToString(row["PURCHASE_TYPE"]);
                     record.paymentDate = DbDataConvert.ToDateTime(row["PAYMENT_DATE"]).ToString("yyyy-MM-dd");
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
@@ -499,6 +503,11 @@ namespace MainProgram.model
 
         public PurchaseInOrderTable getPurchaseInfoFromBillNumber(string billNumber)
         {
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
             PurchaseInOrderTable record = new PurchaseInOrderTable();
 
             foreach (KeyValuePair<int, PurchaseInOrderTable> index in m_tableDataList)
@@ -648,5 +657,9 @@ namespace MainProgram.model
         public string orderInLedgerName { get; set; }
         public string inLedgerDate { get; set; }
         public int isInLedger { get; set; }
+
+        // 合同编号
+        public string contractNum { get; set; }
+        
     }
 }

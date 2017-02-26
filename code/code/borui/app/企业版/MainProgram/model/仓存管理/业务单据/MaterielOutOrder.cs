@@ -37,7 +37,7 @@ namespace MainProgram.model
             MaterielOutOrderTable oldRecord = new MaterielOutOrderTable();
 
             string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT]([DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],";
-            insert += "[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(";
+            insert += "[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(";
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
             if (checkBillIsExist(record.billNumber))
@@ -48,6 +48,10 @@ namespace MainProgram.model
             insert += record.departmentID + ",";
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
+
+            insert += "'" + record.projectNo + "',";
+            insert += "'" + record.makeNo + "',";
+
             insert += "'" + record.exchangesUnit + "',";
             insert += "'" + record.sumValue + "',";
             insert += "'" + record.sumMoney + "',";
@@ -217,7 +221,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],";
+            string sql = "SELECT [PKEY],[DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],";
             sql += "[MAKE_ORDER_STAFF],[MATERIEL_STAFF],[ORDERR_REVIEW],[REVIEW_DATE],[IS_REVIEW],[STAFF_SAVE_ID],[IS_RED_BILL] ";
             sql += "FROM [dbo].[WAREHOUSE_MANAGEMENT_OUT] ORDER BY PKEY";
 
@@ -234,6 +238,9 @@ namespace MainProgram.model
                     record.departmentName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_DEPARTMENT_LIST", record.departmentID);
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
+
+                    record.projectNo = DbDataConvert.ToString(row["PROJECT_NO"]);
+                    record.makeNo = DbDataConvert.ToString(row["MAKE_NO"]);
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
 
                     record.sumValue = DbDataConvert.ToString(row["SUM_VALUE"]);
@@ -372,6 +379,11 @@ namespace MainProgram.model
         public string departmentName { get; set; }
         public string tradingDate { get; set; }
         public string billNumber { get; set; }
+
+        // 2017-1-15 新增项目编号和生产编码
+        public string projectNo { get; set; }
+        public string makeNo { get; set; }
+
         public string exchangesUnit { get; set; }
 
         public string sumValue { get; set; }

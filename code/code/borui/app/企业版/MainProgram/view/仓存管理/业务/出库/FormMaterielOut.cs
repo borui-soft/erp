@@ -77,7 +77,7 @@ namespace MainProgram
         {
             // 物料资料初始化
             m_dateGridVeiwListDataList.addDataGridViewColumn("行号", 55, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料编码(*)", 100, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\\编码(*)", 100, true, false);
 
             if (DateGridVeiwListDataListRowCount > 12)
             {
@@ -328,6 +328,9 @@ namespace MainProgram
             record.billNumber = this.labelBillNumber.Text;
             record.exchangesUnit = this.labelSummary.Text;
 
+            record.projectNo = this.labelProjectNo.Text;
+            record.makeNo = this.labelMakeNo.Text;
+
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
 
@@ -507,7 +510,7 @@ namespace MainProgram
                 // 当用户选择的相应物料后，自动对DataGridView行某些值进行赋值
                 if (dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString().Length > 0)
                 {
-                    setMatetielInfoToDataGridView(Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString()));
+                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
                 }
             }
             else if (e.ColumnIndex == (int)DataGridColumnName.Price || e.ColumnIndex == (int)DataGridColumnName.Value)
@@ -517,31 +520,42 @@ namespace MainProgram
             }
         }
         
-        private void setMatetielInfoToDataGridView(double pkey)
+        private void setMatetielInfoToDataGridView(string id)
         {
             /* 如果是物料编码列，需要判断该物料编码是否存在
             * 如果存在读取相应的值填充DataGridView中对应的其他列，如果不存在该物料编码，则清空该行
             * */
-            MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
 
-            if (pkey != record.pkey || record.pkey == 0)
-            {
-                MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
-                    "]不存在，请重新输入或选择");
-                m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
-            }
-            else
-            {
-                InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID((int)pkey);
+            double pkey = Convert.ToDouble(id.ToString());
+            //使用这个输入的值，匹配物料编号
+            MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
-                AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
+            if (id != record.num || record.pkey == 0)
+            {
+                //使用这个输入的值，匹配物料key
+
+                record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+
+                if (pkey != record.pkey || record.pkey == 0)
+                {
+                    MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                        "]不存在，请重新输入或选择");
+                    m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+
+                    return;
+                }
             }
+
+            InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID((int)pkey);
+
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
+            AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
         }
 
         private void setTurnoverInfoDataGridView()
@@ -635,6 +649,8 @@ namespace MainProgram
             this.labelSave.Visible = true;
             this.labelVerify.Visible = true;
             this.labelSummary.Visible = true;
+            this.labelProjectNo.Visible = true;
+            this.labelMakeNo.Visible = true;
             
             this.labelSaleName.Text = m_materieOutOrder.departmentName;
             this.labelTradingDate.Text = m_materieOutOrder.tradingDate;
@@ -643,6 +659,9 @@ namespace MainProgram
             this.labelSave.Text = m_materieOutOrder.staffSaveName;
             this.labelVerify.Text = m_materieOutOrder.materielOutStaffName;
             this.labelSummary.Text = m_materieOutOrder.exchangesUnit;
+
+            this.labelProjectNo.Text = m_materieOutOrder.projectNo;
+            this.labelMakeNo.Text = m_materieOutOrder.makeNo;
 
             // DataGridView 赋值
             writeBillDetailsInfoFromBillNumber(m_billNumber);
@@ -747,5 +766,45 @@ namespace MainProgram
                 }
             }
         }
+
+        private void textBoxProjectNo_Click(object sender, EventArgs e)
+        {
+            if (m_materieOutOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelProjectNo.Visible = false;
+            this.textBoxProjectNo.Visible = true;
+            this.textBoxProjectNo.Focus();
+        }
+
+        private void textBoxProjectNo_Leave(object sender, EventArgs e)
+        {
+            this.textBoxProjectNo.Visible = false;
+            this.labelProjectNo.Visible = true;
+            this.labelProjectNo.Text = this.textBoxProjectNo.Text;
+            this.textBoxProjectNo.Text = "";
+        }
+
+        private void textBoxMakeNo_Click(object sender, EventArgs e)
+        {
+            if (m_materieOutOrder.isReview == "1")
+            {
+                return;
+            }
+            this.labelMakeNo.Visible = false;
+            this.textBoxMakeNo.Visible = true;
+            this.textBoxMakeNo.Focus();
+        }
+
+        private void textBoxMakeNo_Leave(object sender, EventArgs e)
+        {
+            this.textBoxMakeNo.Visible = false;
+            this.labelMakeNo.Visible = true;
+            this.labelMakeNo.Text = this.textBoxMakeNo.Text;
+            this.textBoxMakeNo.Text = "";
+        }
+
     }
 }

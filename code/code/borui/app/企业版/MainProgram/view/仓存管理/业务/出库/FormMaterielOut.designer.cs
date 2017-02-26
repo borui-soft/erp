@@ -97,6 +97,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panelSummary = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
+            this.textBoxProjectNo = new System.Windows.Forms.TextBox();
+            this.panelProject = new System.Windows.Forms.Panel();
+            this.labelProjectNo = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.textBoxMakeNo = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.labelMakeNo = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -108,6 +118,8 @@
             this.groupBox18.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.panelSummary.SuspendLayout();
+            this.panelProject.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -292,8 +304,8 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 164);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
@@ -333,9 +345,9 @@
             // 
             this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(98, 144);
+            this.groupBox9.Location = new System.Drawing.Point(837, 144);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(908, 1);
+            this.groupBox9.Size = new System.Drawing.Size(169, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
             // 
@@ -519,8 +531,8 @@
             // 
             // dataGridViewDataCount
             // 
-            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 420);
             this.dataGridViewDataCount.Name = "dataGridViewDataCount";
@@ -803,9 +815,9 @@
             // 
             this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(99, 123);
+            this.textBoxSummary.Location = new System.Drawing.Point(838, 123);
             this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(907, 21);
+            this.textBoxSummary.Size = new System.Drawing.Size(168, 21);
             this.textBoxSummary.TabIndex = 43;
             this.textBoxSummary.Visible = false;
             this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
@@ -816,7 +828,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(18, 128);
+            this.label3.Location = new System.Drawing.Point(752, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 103;
@@ -825,9 +837,9 @@
             // panelSummary
             // 
             this.panelSummary.Controls.Add(this.labelSummary);
-            this.panelSummary.Location = new System.Drawing.Point(98, 122);
+            this.panelSummary.Location = new System.Drawing.Point(837, 122);
             this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(908, 22);
+            this.panelSummary.Size = new System.Drawing.Size(169, 22);
             this.panelSummary.TabIndex = 104;
             this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
             // 
@@ -840,12 +852,124 @@
             this.labelSummary.TabIndex = 105;
             this.labelSummary.Visible = false;
             // 
+            // textBoxProjectNo
+            // 
+            this.textBoxProjectNo.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxProjectNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxProjectNo.Location = new System.Drawing.Point(96, 122);
+            this.textBoxProjectNo.Name = "textBoxProjectNo";
+            this.textBoxProjectNo.Size = new System.Drawing.Size(164, 21);
+            this.textBoxProjectNo.TabIndex = 106;
+            this.textBoxProjectNo.Visible = false;
+            this.textBoxProjectNo.Click += new System.EventHandler(this.textBoxProjectNo_Click);
+            this.textBoxProjectNo.Leave += new System.EventHandler(this.textBoxProjectNo_Leave);
+            // 
+            // panelProject
+            // 
+            this.panelProject.Controls.Add(this.labelProjectNo);
+            this.panelProject.Location = new System.Drawing.Point(95, 121);
+            this.panelProject.Name = "panelProject";
+            this.panelProject.Size = new System.Drawing.Size(166, 22);
+            this.panelProject.TabIndex = 108;
+            this.panelProject.Click += new System.EventHandler(this.textBoxProjectNo_Click);
+            this.panelProject.Leave += new System.EventHandler(this.textBoxProjectNo_Leave);
+            // 
+            // labelProjectNo
+            // 
+            this.labelProjectNo.AutoSize = true;
+            this.labelProjectNo.Location = new System.Drawing.Point(0, 10);
+            this.labelProjectNo.Name = "labelProjectNo";
+            this.labelProjectNo.Size = new System.Drawing.Size(0, 12);
+            this.labelProjectNo.TabIndex = 105;
+            this.labelProjectNo.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(18, 127);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 12);
+            this.label6.TabIndex = 107;
+            this.label6.Text = "项目编号:";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox7.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox7.Location = new System.Drawing.Point(95, 143);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(166, 1);
+            this.groupBox7.TabIndex = 105;
+            this.groupBox7.TabStop = false;
+            // 
+            // textBoxMakeNo
+            // 
+            this.textBoxMakeNo.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxMakeNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxMakeNo.Location = new System.Drawing.Point(485, 121);
+            this.textBoxMakeNo.Name = "textBoxMakeNo";
+            this.textBoxMakeNo.Size = new System.Drawing.Size(165, 21);
+            this.textBoxMakeNo.TabIndex = 110;
+            this.textBoxMakeNo.Visible = false;
+            this.textBoxMakeNo.Click += new System.EventHandler(this.textBoxMakeNo_Click);
+            this.textBoxMakeNo.Leave += new System.EventHandler(this.textBoxMakeNo_Leave);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.labelMakeNo);
+            this.panel4.Location = new System.Drawing.Point(484, 120);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(166, 22);
+            this.panel4.TabIndex = 112;
+            this.panel4.Click += new System.EventHandler(this.textBoxMakeNo_Click);
+            this.panel4.Leave += new System.EventHandler(this.textBoxMakeNo_Leave);
+            // 
+            // labelMakeNo
+            // 
+            this.labelMakeNo.AutoSize = true;
+            this.labelMakeNo.Location = new System.Drawing.Point(0, 10);
+            this.labelMakeNo.Name = "labelMakeNo";
+            this.labelMakeNo.Size = new System.Drawing.Size(0, 12);
+            this.labelMakeNo.TabIndex = 105;
+            this.labelMakeNo.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(396, 127);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 12);
+            this.label10.TabIndex = 111;
+            this.label10.Text = "生产编号:";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox8.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox8.Location = new System.Drawing.Point(484, 142);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(166, 1);
+            this.groupBox8.TabIndex = 109;
+            this.groupBox8.TabStop = false;
+            // 
             // FormMaterielOutOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1029, 529);
+            this.Controls.Add(this.textBoxMakeNo);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.textBoxProjectNo);
+            this.Controls.Add(this.panelProject);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.textBoxSummary);
             this.Controls.Add(this.panelSummary);
             this.Controls.Add(this.label3);
@@ -909,6 +1033,10 @@
             this.groupBox20.ResumeLayout(false);
             this.panelSummary.ResumeLayout(false);
             this.panelSummary.PerformLayout();
+            this.panelProject.ResumeLayout(false);
+            this.panelProject.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -983,6 +1111,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panelSummary;
         private System.Windows.Forms.Label labelSummary;
+        private System.Windows.Forms.TextBox textBoxProjectNo;
+        private System.Windows.Forms.Panel panelProject;
+        private System.Windows.Forms.Label labelProjectNo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TextBox textBoxMakeNo;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label labelMakeNo;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox8;
 
     }
 }

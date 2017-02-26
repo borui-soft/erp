@@ -91,6 +91,7 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 170);
             m_dataGridViewExtend.addDataGridViewColumn("物料编号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("型号", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("品牌", 60);
             m_dataGridViewExtend.addDataGridViewColumn("实际库存", 78);
 
             if (m_isDisplayJG)
@@ -135,6 +136,7 @@ namespace MainProgram
                 temp.Add(materiel.name);
                 temp.Add(materiel.num);
                 temp.Add(materiel.model);
+                temp.Add(materiel.brand);
 
                 InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(materiel.pkey);
                 temp.Add(MaterielCountdata.value);
@@ -207,20 +209,20 @@ namespace MainProgram
             }
 
             this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-            this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
 
             if (m_isDisplayJG)
             {
-                this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[10].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
 
                 this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
                 this.labelCountInfo.Text += "  累计金额[" + Convert.ToString(sum) + "]";
             }
             else 
             {
-                this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[8].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
             }
         }

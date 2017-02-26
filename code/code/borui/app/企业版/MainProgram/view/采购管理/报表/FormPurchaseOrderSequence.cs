@@ -102,7 +102,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("交易类型", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("合同编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("约定到货日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -120,8 +120,9 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易类型", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("合同编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -291,6 +292,7 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.purchaseType);
+                        temp.Add(record.contractNum);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sourceBillNumber);
                         temp.Add(record.sumMoney);

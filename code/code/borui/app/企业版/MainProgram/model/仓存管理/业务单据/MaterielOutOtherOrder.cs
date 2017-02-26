@@ -37,7 +37,7 @@ namespace MainProgram.model
             MaterielOutOtherOrderTable oldRecord = new MaterielOutOtherOrderTable();
 
             string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT_OTHER]([TRADING_DATE],[BILL_NUMBER],";
-            insert += "[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(";
+            insert += "[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(";
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
             if (checkBillIsExist(record.billNumber))
@@ -47,6 +47,10 @@ namespace MainProgram.model
 
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
+
+            insert += "'" + record.projectNo + "',";
+            insert += "'" + record.makeNo + "',";
+
             insert += "'" + record.exchangesUnit + "',";
             insert += "'" + record.sumValue + "',";
             insert += "'" + record.sumMoney + "',";
@@ -233,7 +237,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[TRADING_DATE],[BILL_NUMBER],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],";
+            string sql = "SELECT [PKEY],[TRADING_DATE],[BILL_NUMBER],[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],";
             sql += "[MAKE_ORDER_STAFF],[MATERIEL_STAFF],[ORDERR_REVIEW],[REVIEW_DATE],[IS_REVIEW],[STAFF_SAVE_ID],[IS_RED_BILL] ";
             sql += "FROM [dbo].[WAREHOUSE_MANAGEMENT_OUT_OTHER] ORDER BY PKEY";
 
@@ -249,6 +253,9 @@ namespace MainProgram.model
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
+
+                    record.projectNo = DbDataConvert.ToString(row["PROJECT_NO"]);
+                    record.makeNo = DbDataConvert.ToString(row["MAKE_NO"]);
 
                     record.sumValue = DbDataConvert.ToString(row["SUM_VALUE"]);
                     record.sumMoney = DbDataConvert.ToString(row["SUM_MONEY"]);
@@ -307,6 +314,11 @@ namespace MainProgram.model
 
         public SortedDictionary<int, MaterielOutOtherOrderTable> getAllNotReviewMaterielOutOtherOrderInfo()
         {
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
             SortedDictionary<int, MaterielOutOtherOrderTable> list = new SortedDictionary<int, MaterielOutOtherOrderTable>();
 
             foreach (KeyValuePair<int, MaterielOutOtherOrderTable> index in m_tableDataList)
@@ -325,6 +337,11 @@ namespace MainProgram.model
 
         public MaterielOutOtherOrderTable getMaterielOutOtherOrderInfoFromBillNumber(string billNumber)
         {
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
             MaterielOutOtherOrderTable record = new MaterielOutOtherOrderTable();
 
             foreach (KeyValuePair<int, MaterielOutOtherOrderTable> index in m_tableDataList)
@@ -385,6 +402,10 @@ namespace MainProgram.model
         public string tradingDate { get; set; }
         public string billNumber { get; set; }
         public string exchangesUnit { get; set; }
+
+        // 2017-1-15 新增项目编号和生产编码
+        public string projectNo { get; set; }
+        public string makeNo { get; set; }
 
         public string sumValue { get; set; }
         public string sumMoney { get; set; }

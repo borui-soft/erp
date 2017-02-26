@@ -51,9 +51,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 101);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 12);
+            this.label3.Size = new System.Drawing.Size(137, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V1.10.5";
+            this.label3.Text = "当前软件版本：V1.10.10";
             // 
             // pictureBox1
             // 
@@ -79,8 +79,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、入账之后的单据，表格列宽等可调整\n2、供应商页面实现快速搜索\n3、物料及分类中增加编号信息，并在相应的页面把编号做了显示\n4、所有物料类的快速搜索，实现模糊搜" +
-    "索物料名、助记码和物料编号";
+            this.richTextBox1.Text = "1、物料页面，重新把物料ID显示出来\n2、采购入库页面，统一了合同编号的控件风格\n3、采购入库序时薄中，解决合同编号和物料类型显示顺序错误的问题\n4、生产领料序时" +
+    "薄和其他出库序时薄中，增加了项目编号和生产编号的显示\n5、所有出入库单据，录入物料明细时，可在页面上输入物料编码或物料ID后，直接将物料信息现在在页面上，增加易" +
+    "用性";
             // 
             // FormAbout
             // 

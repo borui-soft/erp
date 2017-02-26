@@ -33,7 +33,7 @@ namespace MainProgram.model
 
         public void insert(MaterielTable materiel)
         {
-            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],";
+            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],";
             insert += "[MAX],[MIN],[WARRANTY],[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],";
             insert += "[VALUATION],[NOTE],[STORAGE],[IS_FORBID]) VALUES(";
 
@@ -43,6 +43,7 @@ namespace MainProgram.model
             insert += "'" + materiel.nameShort + "',";
             insert += "'" + materiel.model + "',";
             insert += "'" + materiel.mnemonicCode + "',";
+            insert += "'" + materiel.brand + "',";
             insert += materiel.max + ",";
             insert += materiel.min + ",";
             insert += materiel.warramty + ",";
@@ -100,6 +101,7 @@ namespace MainProgram.model
             update += "[UNIT_SALE] = " + materiel.unitSale + ",";
             update += "[UNIT_STORAGE] = " + materiel.unitStorage + ",";
             update += "[VALUATION] = " + materiel.valuation + ",";
+            update += "[BRAND] = '" + materiel.brand + "',";
 
             update += "[NOTE] = '" + materiel.note + "'";
 
@@ -123,7 +125,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[MAX],[MIN],[WARRANTY],";
+            string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[MAX],[MIN],[WARRANTY],";
             materielQuery += "[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],[VALUATION],[NOTE],[STORAGE],[IS_FORBID]";
             materielQuery += " FROM [dbo].[BASE_MATERIEL_LIST] ORDER BY PKEY";
 
@@ -142,6 +144,7 @@ namespace MainProgram.model
                     materiel.nameShort = DbDataConvert.ToString(row["NAME_SHORT"]);
                     materiel.model = DbDataConvert.ToString(row["MODEL"]);
                     materiel.mnemonicCode = DbDataConvert.ToString(row["MNEMONIC_CODE"]);
+                    materiel.brand = DbDataConvert.ToString(row["BRAND"]);
                     materiel.max = DbDataConvert.ToInt32(row["MAX"]);
                     materiel.min = DbDataConvert.ToInt32(row["MIN"]);
                     materiel.warramty = DbDataConvert.ToInt32(row["WARRANTY"]);
@@ -232,6 +235,31 @@ namespace MainProgram.model
                 if (record.pkey == pkey)
                 {
                     materiel = record;
+                    break;
+                }
+            }
+
+            return materiel;
+        }
+
+        public MaterielTable getMaterielInfoFromNum(string num)
+        {
+            if (m_noForbidMaterielList.Count == 0)
+            {
+                load();
+            }
+
+            MaterielTable materiel = new MaterielTable();
+
+            foreach (KeyValuePair<int, MaterielTable> index in m_noForbidMaterielList)
+            {
+                MaterielTable record = new MaterielTable();
+                record = index.Value;
+
+                if (record.num == num)
+                {
+                    materiel = record;
+                    break;
                 }
             }
 
@@ -354,6 +382,7 @@ namespace MainProgram.model
         public string nameShort { get; set; }
         public string model { get; set; }
         public string mnemonicCode { get; set; }
+        public string brand { get; set; }
         public int max { get; set; }
         public int min { get; set; }
         public int warramty { get; set; }

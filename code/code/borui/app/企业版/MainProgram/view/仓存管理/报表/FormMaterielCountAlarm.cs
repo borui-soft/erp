@@ -54,6 +54,7 @@ namespace MainProgram
                 m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
                 m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
+                m_dataGridViewExtend.addDataGridViewColumn("品牌", 80);
                 m_dataGridViewExtend.addDataGridViewColumn("基本单位", 80);
                 m_dataGridViewExtend.addDataGridViewColumn("存货上限", 80);
                 m_dataGridViewExtend.addDataGridViewColumn("存货下限", 80);
@@ -66,6 +67,7 @@ namespace MainProgram
                 m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
                 m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
+                m_dataGridViewExtend.addDataGridViewColumn("品牌", 80);
                 m_dataGridViewExtend.addDataGridViewColumn("基本单位", 80);
                 m_dataGridViewExtend.addDataGridViewColumn("当前库存", 80);
                 m_dataGridViewExtend.addDataGridViewColumn("1-30天", 80);
@@ -99,6 +101,7 @@ namespace MainProgram
                     temp.Add(materiel.pkey);
                     temp.Add(materiel.name);
                     temp.Add(materiel.model);
+                    temp.Add(materiel.brand);
 
                     temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unit));
 
@@ -136,6 +139,7 @@ namespace MainProgram
                     temp.Add(materiel.pkey);
                     temp.Add(materiel.name);
                     temp.Add(materiel.model);
+                    temp.Add(materiel.brand);
                     temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unit));
 
                     // 计算当前物料的账龄

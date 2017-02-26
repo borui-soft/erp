@@ -76,7 +76,7 @@ namespace MainProgram
         {
             // 物料资料初始化
             m_dateGridVeiwListDataList.addDataGridViewColumn("行号", 55, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料编码(*)", 100, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\\编码(*)", 100, true, false);
 
             if (DateGridVeiwListDataListRowCount > 12)
             {
@@ -499,7 +499,7 @@ namespace MainProgram
                 // 当用户选择的相应物料后，自动对DataGridView行某些值进行赋值
                 if (dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString().Length > 0)
                 {
-                    setMatetielInfoToDataGridView(Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString()));
+                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
                 }
             }
             else if (e.ColumnIndex == (int)DataGridColumnName.Price || e.ColumnIndex == (int)DataGridColumnName.Value)
@@ -509,31 +509,41 @@ namespace MainProgram
             }
         }
         
-        private void setMatetielInfoToDataGridView(double pkey)
+        private void setMatetielInfoToDataGridView(string id)
         {
             /* 如果是物料编码列，需要判断该物料编码是否存在
             * 如果存在读取相应的值填充DataGridView中对应的其他列，如果不存在该物料编码，则清空该行
             * */
-            MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+            double pkey = Convert.ToDouble(id.ToString());
+            //使用这个输入的值，匹配物料编号
+            MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (pkey != record.pkey || record.pkey == 0)
+            if (id != record.num || record.pkey == 0)
             {
-                MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
-                    "]不存在，请重新输入或选择");
-                m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
-            }
-            else
-            {
-                InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID((int)pkey);
+                //使用这个输入的值，匹配物料key
 
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
-                AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
+                record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+
+                if (pkey != record.pkey || record.pkey == 0)
+                {
+                    MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                        "]不存在，请重新输入或选择");
+                    m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+
+                    return;
+                }
             }
+
+            InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID((int)pkey);
+
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
+            AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
         }
 
         private void setTurnoverInfoDataGridView()

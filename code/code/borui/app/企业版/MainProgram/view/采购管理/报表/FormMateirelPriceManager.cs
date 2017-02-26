@@ -72,6 +72,7 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
             m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("品牌", 80);
             m_dataGridViewExtend.addDataGridViewColumn("存货数量", 80, false);
             m_dataGridViewExtend.addDataGridViewColumn("加权单价", 80, false);
             m_dataGridViewExtend.addDataGridViewColumn("基本单位", 80);
@@ -101,6 +102,7 @@ namespace MainProgram
                 temp.Add(materiel.name);
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.model);
+                temp.Add(materiel.brand);
 
                 InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(materiel.pkey);
                 temp.Add(MaterielCountdata.value);
@@ -115,9 +117,9 @@ namespace MainProgram
             }
 
             m_dataGridViewExtend.initDataGridViewData(materiels, 5);
-            this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+            //this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+            //this.dataGridViewMaterielList.Columns[4].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+            //this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
         }
 
         private void refreshTreeView()

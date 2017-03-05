@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GB2312"?>
+<root>
+	<base backgroundImage="image\主界面\FunctionZonebackgroundImage.jpg" buttonWidth="185" buttonHeigth="57" buttonStartPosX="5" buttonStartPosY="40" buttonInterval="1"/>
+	<functionZone>
+		<button name="ButtonFrom1" text="采购管理   " sequence="1" image="image\主界面\采购管理.png" panelPageName="FormPurchase" reportPanelPageName="FormPurchaseReport"/>
+		<button name="ButtonFrom2" text="销售管理   " sequence="2" image="image\主界面\销售管理.png" panelPageName="FormSale" reportPanelPageName="FormSaleReport"/>
+		<button name="ButtonFrom3" text="仓存管理   " sequence="3" image="image\主界面\仓存管理.png" panelPageName="FormStorage" reportPanelPageName="FormStorageReport"/>
+		<button name="ButtonFrom4" text="存货核算   " sequence="5" image="image\主界面\存货核算.png" panelPageName="FormInventoryAccounting" reportPanelPageName="FormInventoryAccountingReport"/>
+		<button name="ButtonFrom5" text="项目管理   " sequence="4" image="image\主界面\生产管理.png" panelPageName="FormProduction" reportPanelPageName="FormProductionReport"/>
+		<button name="ButtonFrom6" text="现金管理   " sequence="6" image="image\主界面\现金管理.png" panelPageName="FormCash" reportPanelPageName="FormCashReport"/>
+		<button name="ButtonFrom7" text="初始化     " sequence="7" image="image\主界面\初始化.png" panelPageName="FormInit" reportPanelPageName=""/>
+		<button name="ButtonFrom8" text="基础资料   " sequence="8" image="image\主界面\基础资料.png" panelPageName="FormBaseInfo" reportPanelPageName=""/>
+	</functionZone>
+</root>
+

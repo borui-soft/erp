@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+<DatabaseConfiguration>
+	<Connection name="DB-ERP">
+		<DatabaseType>MSSQLSERVER</DatabaseType>
+		<ConnectionType>MSSQLCLIENT</ConnectionType>
+		<ServerAddress>192.168.1.103</ServerAddress>
+		<UserName>sa</UserName>
+		<Password>juchuanhuanbao</Password>
+		<ConnTimeOut>2000</ConnTimeOut>
+		<ConnectionString>Provider=SQLNCLI10.1;Data Source=192.168.1.103;Initial Catalog=ERP;User Id=sa;Password=juchuanhuanbao;</ConnectionString>
+		<ConnDatabase>ERP</ConnDatabase>
+	</Connection>
+</DatabaseConfiguration>
+</Root>

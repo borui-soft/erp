@@ -893,6 +893,36 @@ namespace MainProgram.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 生产管理_工程总材料表 {
+            get {
+                object obj = ResourceManager.GetObject("生产管理-工程总材料表", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 生产管理_电器总材料表 {
+            get {
+                object obj = ResourceManager.GetObject("生产管理-电器总材料表", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 生产管理_设备总材料表_ {
+            get {
+                object obj = ResourceManager.GetObject("生产管理-设备总材料表 ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 用户管理 {
             get {
                 object obj = ResourceManager.GetObject("用户管理", resourceCulture);

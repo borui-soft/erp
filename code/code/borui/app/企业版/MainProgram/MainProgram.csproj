@@ -168,6 +168,11 @@
     <Compile Include="model\销售管理\SaleQuotationOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="source\FormFactory.cs" />
     <Compile Include="view\主界面\FormAbout.cs">
       <SubType>Form</SubType>
@@ -565,16 +570,16 @@
     <Compile Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.designer.cs">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\生产管理\FormProduction.cs">
+    <Compile Include="view\项目管理\FormProduction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\生产管理\FormProduction.designer.cs">
+    <Compile Include="view\项目管理\FormProduction.designer.cs">
       <DependentUpon>FormProduction.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\生产管理\FormProductionReport.cs">
+    <Compile Include="view\项目管理\FormProductionReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\生产管理\FormProductionReport.designer.cs">
+    <Compile Include="view\项目管理\FormProductionReport.designer.cs">
       <DependentUpon>FormProductionReport.cs</DependentUpon>
     </Compile>
     <Compile Include="view\系统登录\FormLogin.cs">
@@ -717,14 +722,9 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="view\主界面\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -923,10 +923,10 @@
     <EmbeddedResource Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.resx">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\生产管理\FormProduction.resx">
+    <EmbeddedResource Include="view\项目管理\FormProduction.resx">
       <DependentUpon>FormProduction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\生产管理\FormProductionReport.resx">
+    <EmbeddedResource Include="view\项目管理\FormProductionReport.resx">
       <DependentUpon>FormProductionReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\系统登录\FormLogin.resx">
@@ -1308,6 +1308,13 @@
     <None Include="image\生产管理\项目信息.png" />
     <None Include="image\生产管理\总材料表.png" />
     <None Include="image\采购管理\采购管理-采购申请.png" />
+    <None Include="image\生产管理\设备总材料表.png" />
+    <None Include="image\生产管理\电器总材料表.png" />
+    <None Include="image\生产管理\工程总材料表.png" />
+    <None Include="image\生产管理\设备总材料表 .png" />
+    <None Include="image\生产管理\生产管理-电器总材料表.png" />
+    <None Include="image\生产管理\生产管理-工程总材料表.png" />
+    <None Include="image\生产管理\生产管理-设备总材料表 .png" />
     <Content Include="png-0013.ico" />
     <Content Include="Resources\蓝字.gif" />
   </ItemGroup>

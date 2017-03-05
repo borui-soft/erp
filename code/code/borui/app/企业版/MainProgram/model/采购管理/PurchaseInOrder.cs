@@ -658,7 +658,7 @@ namespace MainProgram.model
         public string inLedgerDate { get; set; }
         public int isInLedger { get; set; }
 
-        // 合同编号
+        // 项目合同编号
         public string contractNum { get; set; }
         
     }

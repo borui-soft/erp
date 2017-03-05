@@ -53,5 +53,16 @@ namespace MainProgram
         {
 
         }
+
+        private void panelPurchaseApply_Click(object sender, EventArgs e)
+        {
+            FormPurchaseApply fpa = new FormPurchaseApply();
+            fpa.ShowDialog();
+        }
+
+        private void panelPurchaseApply_MouseEnter(object sender, EventArgs e)
+        {
+            PanelExtend.setLableControlStyle(this.labelPurchaseApply);
+        }
     }
 }

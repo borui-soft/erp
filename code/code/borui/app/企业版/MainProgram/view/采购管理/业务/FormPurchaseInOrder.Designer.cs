@@ -1319,7 +1319,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 12);
             this.label11.TabIndex = 96;
-            this.label11.Text = "合同编号:";
+            this.label11.Text = "项目编号:";
             // 
             // groupBox22
             // 

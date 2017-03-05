@@ -154,6 +154,8 @@
     <Compile Include="model\现金管理\报表\CashAccountPayableDetail.cs" />
     <Compile Include="model\现金管理\报表\CashAccountReceivableDetail.cs" />
     <Compile Include="model\现金管理\报表\CompanyProfit.cs" />
+    <Compile Include="model\采购管理\PurchaseApplyOrder.cs" />
+    <Compile Include="model\采购管理\PurchaseApplyOrderDetails.cs" />
     <Compile Include="model\采购管理\PurchaseInOrder.cs" />
     <Compile Include="model\采购管理\PurchaseInOrderDetails.cs" />
     <Compile Include="model\采购管理\PurchaseOrder.cs" />
@@ -605,6 +607,12 @@
     <Compile Include="view\采购管理\业务\FormAdjustAmount.Designer.cs">
       <DependentUpon>FormAdjustAmount.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\采购管理\业务\FormPurchaseApply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormPurchaseApply.designer.cs">
+      <DependentUpon>FormPurchaseApply.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\采购管理\业务\FormPurchaseInOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -937,6 +945,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\采购管理\业务\FormAdjustAmount.resx">
       <DependentUpon>FormAdjustAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\业务\FormPurchaseApply.resx">
+      <DependentUpon>FormPurchaseApply.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\采购管理\业务\FormPurchaseInOrder.resx">
       <DependentUpon>FormPurchaseInOrder.cs</DependentUpon>
@@ -1296,6 +1307,7 @@
     <Content Include="image\主界面\生产管理.jpg" />
     <None Include="image\生产管理\项目信息.png" />
     <None Include="image\生产管理\总材料表.png" />
+    <None Include="image\采购管理\采购管理-采购申请.png" />
     <Content Include="png-0013.ico" />
     <Content Include="Resources\蓝字.gif" />
   </ItemGroup>

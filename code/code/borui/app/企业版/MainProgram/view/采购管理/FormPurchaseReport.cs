@@ -172,5 +172,16 @@ namespace MainProgram
         {
             PanelExtend.setLableControlStyle(this.labelInventoryHistory);
         }
+
+        private void labelPurchaseApplyOrder_Click(object sender, EventArgs e)
+        {
+            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseApplyOrder);
+            fpos.ShowDialog();
+        }
+
+        private void labelPurchaseApplyOrder_MouseEnter(object sender, EventArgs e)
+        {
+            PanelExtend.setLableControlStyle(this.labelPurchaseApplyOrder);
+        }
     }
 }

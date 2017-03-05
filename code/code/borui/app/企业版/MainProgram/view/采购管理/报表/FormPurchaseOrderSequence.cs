@@ -16,6 +16,9 @@ namespace MainProgram
     {
         public enum OrderType
         {
+            // 采购申请单序时簿
+            PurchaseApplyOrder,
+
             // 采购订单序时簿
             PurchaseOrder,
 
@@ -58,6 +61,10 @@ namespace MainProgram
             if (m_orderType == OrderType.PurchaseOrder)
             {
                 this.Text = "采购订单序时薄";
+            }
+            else if (m_orderType == OrderType.PurchaseApplyOrder)
+            {
+                this.Text = "采购申请单序时薄";
             }
             else if (m_orderType == OrderType.PurchaseIn)
             {
@@ -102,7 +109,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("合同编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("约定到货日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -115,6 +122,20 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("审核员", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 100);
             }
+            else if (m_orderType == OrderType.PurchaseApplyOrder)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("申请人", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("期望到货日期", 140);
+                m_dateGridViewExtend.addDataGridViewColumn("总金额", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 100);
+            }
             else if (m_orderType == OrderType.PurchaseIn)
             {
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
@@ -122,7 +143,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易类型", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("合同编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -251,6 +272,49 @@ namespace MainProgram
                         temp.Add(record.sumOtherCost);
                         temp.Add(record.totalMoney);
                         temp.Add(record.businessPeopleName);
+                        temp.Add(record.makeOrderStaffName);
+
+                        if (record.isReview == "0")
+                        {
+                            temp.Add("否");
+                        }
+                        else
+                        {
+                            temp.Add("是");
+                        }
+
+                        temp.Add(record.orderrReviewName);
+                        temp.Add(record.reviewDate);
+
+                        sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
+                    }
+                }
+
+                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+            }
+            else if (m_orderType == OrderType.PurchaseApplyOrder)
+            {
+                SortedDictionary<int, PurchaseApplyOrderTable> list = new SortedDictionary<int, PurchaseApplyOrderTable>();
+                list = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfo();
+
+                m_dataGridRecordCount = list.Count;
+
+                for (int index = 0; index < list.Count; index++)
+                {
+                    PurchaseApplyOrderTable record = new PurchaseApplyOrderTable();
+                    record = (PurchaseApplyOrderTable)list[index];
+
+                    if (m_filter.startDate == null || (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0))
+                    {
+                        ArrayList temp = new ArrayList();
+
+                        temp.Add(record.pkey);
+                        temp.Add(record.applyName);
+                        temp.Add(record.tradingDate);
+                        temp.Add(record.billNumber);
+                        temp.Add(record.proNum);
+                        temp.Add(record.paymentDate);
+                        temp.Add(record.totalMoney);
                         temp.Add(record.makeOrderStaffName);
 
                         if (record.isReview == "0")
@@ -774,6 +838,12 @@ namespace MainProgram
                 {
                     FormMaterielInOtherOrder fmoo = new FormMaterielInOtherOrder(m_billNumber);
                     fmoo.ShowDialog();
+                    updateDataGridView();
+                }
+                else if (m_orderType == OrderType.PurchaseApplyOrder)
+                {
+                    FormPurchaseApply fpa = new FormPurchaseApply(m_billNumber);
+                    fpa.ShowDialog();
                     updateDataGridView();
                 }
                 else

@@ -993,6 +993,16 @@ namespace MainProgram.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 采购管理_采购申请 {
+            get {
+                object obj = ResourceManager.GetObject("采购管理-采购申请", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 采购管理_采购订单 {
             get {
                 object obj = ResourceManager.GetObject("采购管理-采购订单", resourceCulture);

@@ -47,6 +47,7 @@ namespace MainProgram
         private int m_dataGridRecordCount = 0;
         private OrderType m_orderType;
         private string m_billNumber = "";
+        private string m_projectNum = "";
         private bool m_isSelectOrderNumber;
 
         private DataGridViewExtend m_dateGridViewExtend = new DataGridViewExtend();
@@ -782,6 +783,7 @@ namespace MainProgram
                             {
                                 dataGridViewList.Rows[i].Selected = true;
                                 m_billNumber = dataGridViewList.Rows[i].Cells[3].Value.ToString();
+                                m_projectNum = dataGridViewList.Rows[i].Cells[4].Value.ToString();
                                 checkAccountBillDetaile();
                                 return;
                             }
@@ -856,6 +858,11 @@ namespace MainProgram
         public string getSelectOrderNumber()
         {
             return m_billNumber;
+        }
+
+        public string getSelectOrderProjectNum()
+        {
+            return m_projectNum;
         }
 
         public void setDataFilter(FormStorageSequenceFilterValue filter)

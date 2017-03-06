@@ -395,6 +395,9 @@ namespace MainProgram
             record.paymentDate = this.labelPaymentDate.Text;
             record.exchangesUnit = this.labelSummary.Text;
 
+            record.projectNum = this.labelContractNum.Text;
+            record.srcOrderNum = this.labelSourceOrderNumber.Text;
+
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
 
@@ -775,6 +778,9 @@ namespace MainProgram
             this.labelMakeBillStaff.Visible = true;
             this.labelReviewBillStaff.Visible = true;
             this.labelReviewDate.Visible = true;
+
+            this.labelContractNum.Visible = true;
+            this.labelSourceOrderNumber.Visible = true;
             
             this.labelPurchaseName.Text = m_purchaseOrder.supplierName;
             this.labelTradingDate.Text = m_purchaseOrder.tradingDate;
@@ -783,6 +789,9 @@ namespace MainProgram
             this.labelDeliveryDate.Text = m_purchaseOrder.deliveryDate;
             this.labelPaymentDate.Text = m_purchaseOrder.paymentDate;
             this.labelSummary.Text = m_purchaseOrder.exchangesUnit;
+
+            this.labelContractNum.Text = m_purchaseOrder.projectNum;
+            this.labelSourceOrderNumber.Text = m_purchaseOrder.srcOrderNum;
 
             m_staffPkey = m_purchaseOrder.businessPeopleId;
             this.labelBusinessPeople.Text = m_purchaseOrder.businessPeopleName;
@@ -865,6 +874,112 @@ namespace MainProgram
                     UserInterfaceActonState.setUserInterfaceActonState(activeObject,
                         ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
                 }
+            }
+        }
+
+        private void textBoxContractNum_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelContractNum.Visible = false;
+            this.textBoxContractNum.Visible = true;
+
+            this.textBoxContractNum.Text = this.labelContractNum.Text;
+            this.textBoxContractNum.Focus();
+        }
+
+        private void panelContractNum_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelContractNum.Visible = false;
+            this.textBoxContractNum.Visible = true;
+
+            this.textBoxContractNum.Text = this.labelContractNum.Text;
+            this.textBoxContractNum.Focus();
+        }
+
+        private void panelContractNum_Leave(object sender, EventArgs e)
+        {
+            this.textBoxContractNum.Visible = false;
+            this.labelContractNum.Text = this.textBoxContractNum.Text.ToString();
+            this.labelContractNum.Visible = this.textBoxContractNum.Text.Length > 0;
+        }
+
+        private void panelSourceOrderNumber_DoubleClick(object sender, EventArgs e)
+        {
+            if (!this.textBoxSourceOrderNumber.Visible)
+            {
+                this.labelSourceOrderNumber.Visible = false;
+                this.textBoxSourceOrderNumber.Visible = true;
+            }
+            else
+            {
+                FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseApplyOrder, true);
+                fpos.ShowDialog();
+
+                string strSrcApplyOrderNum = fpos.getSelectOrderNumber();
+                this.labelContractNum.Text = fpos.getSelectOrderProjectNum();
+
+                this.textBoxSourceOrderNumber.Text = strSrcApplyOrderNum;
+                this.textBoxSourceOrderNumber.Visible = true;
+                this.labelContractNum.Visible = true;
+
+                writeBillDetailsInfoFromBillNumber(strSrcApplyOrderNum);
+            }
+        }
+
+        private void panelSourceOrderNumber_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseOrder.isReview == "1")
+            {
+                return;
+            }
+
+            if (!this.textBoxSourceOrderNumber.Visible)
+            {
+                this.labelSourceOrderNumber.Visible = false;
+                this.textBoxSourceOrderNumber.Visible = true;
+                this.textBoxSourceOrderNumber.Focus();
+            }
+        }
+
+        private void textBoxSourceOrderNumber_Leave(object sender, EventArgs e)
+        {
+            this.textBoxSourceOrderNumber.Visible = false;
+            this.labelSourceOrderNumber.Text = this.textBoxSourceOrderNumber.Text.ToString();
+            this.labelSourceOrderNumber.Visible = this.textBoxSourceOrderNumber.Text.Length > 0;
+        }
+
+        private void writeBillDetailsInfoFromBillNumber(string billNumber)
+        {
+            // DataGridView 赋值
+            SortedDictionary<int, PurchaseApplyOrderDetailsTable> purchaseOrderDetails =
+                PurchaseApplyOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
+
+            foreach (KeyValuePair<int, PurchaseApplyOrderDetailsTable> index in purchaseOrderDetails)
+            {
+                PurchaseApplyOrderDetailsTable record = new PurchaseApplyOrderDetailsTable();
+                record = index.Value;
+
+                int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = 0;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
             }
         }
     }

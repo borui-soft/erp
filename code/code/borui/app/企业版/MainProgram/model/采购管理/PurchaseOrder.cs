@@ -34,7 +34,7 @@ namespace MainProgram.model
         public void insert(PurchaseOrderTable record, bool isDisplayMessageBox = true)
         {
             string insert = "INSERT INTO [dbo].[PURCHASE_ORDER]([SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[PURCHASE_TYPE],";
-            insert += "[DELIVERY_DATE],[PAYMENT_DATE],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],[TOTAL_MONEY],";
+            insert += "[DELIVERY_DATE],[PAYMENT_DATE],[PROJECT_NUM],[SRC_ORDER_NUM],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],[TOTAL_MONEY],";
             insert += "[BUSINESS_PEOPLE_ID],[MAKE_ORDER_STAFF],[IS_REVIEW],[IS_IN_STORAGE],[ACTUAL_VALUE]) VALUES(";
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
@@ -49,6 +49,10 @@ namespace MainProgram.model
             insert += "'" + record.purchaseType + "',";
             insert += "'" + record.deliveryDate + "',";
             insert += "'" + record.paymentDate + "',";
+
+            insert += "'" + record.projectNum + "',";
+            insert += "'" + record.srcOrderNum + "',";
+
             insert += "'" + record.exchangesUnit + "',";
             insert += "'" + record.sumValue + "',";
             insert += "'" + record.sumMoney + "',";
@@ -147,7 +151,7 @@ namespace MainProgram.model
         private void load()
         {
             string sql = "SELECT [PKEY],[SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[PURCHASE_TYPE],[DELIVERY_DATE],[PAYMENT_DATE],";
-            sql += "[EXCHANGES_UNIT],[BUSINESS_PEOPLE_ID],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],";
+            sql += "[PROJECT_NUM],[SRC_ORDER_NUM],[EXCHANGES_UNIT],[BUSINESS_PEOPLE_ID],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],";
             sql += "[TOTAL_MONEY], [MAKE_ORDER_STAFF],[ORDERR_REVIEW],[REVIEW_DATE],[IS_REVIEW],[IS_IN_STORAGE],[ACTUAL_VALUE] ";
             sql += "FROM [dbo].[PURCHASE_ORDER] ORDER BY PKEY DESC";
 
@@ -167,6 +171,8 @@ namespace MainProgram.model
                     record.purchaseType = DbDataConvert.ToString(row["PURCHASE_TYPE"]);
                     record.deliveryDate = DbDataConvert.ToDateTime(row["DELIVERY_DATE"]).ToString("yyyy-MM-dd");
                     record.paymentDate = DbDataConvert.ToDateTime(row["PAYMENT_DATE"]).ToString("yyyy-MM-dd");
+                    record.projectNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
+                    record.srcOrderNum = DbDataConvert.ToString(row["SRC_ORDER_NUM"]);
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
 
                     record.businessPeopleId = DbDataConvert.ToInt32(row["BUSINESS_PEOPLE_ID"]);
@@ -306,5 +312,9 @@ namespace MainProgram.model
 
         public string isInStorage { get; set; }
         public string actualValue { get; set; }
+
+        // 增加项目编号和原始项目编号
+        public string projectNum { get; set; }
+        public string srcOrderNum { get; set; }
     }
 }

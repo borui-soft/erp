@@ -25,7 +25,7 @@ namespace MainProgram
 
         private void labelSupplier_MouseEnter(object sender, EventArgs e)
         {
-            PanelExtend.setLableControlStyle(this.labelSupplier);
+            PanelExtend.setLableControlStyle(this.labelProjectInfo);
         }
 
         private void labelPurchasePirce_MouseEnter(object sender, EventArgs e)

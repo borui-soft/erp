@@ -26,7 +26,7 @@ namespace MainProgram
                     DbPublic.getInctance().setCurrentLoginUserName(m_currentLoginUser.staffName);
                     DbPublic.getInctance().setCurrentLoginUserID(m_currentLoginUser.pkey);
 
-                    Application.Run(new FormMain());
+                    Application.Run(new FormProjectMaterielOrder(1));
 
                     return;
                 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelSupplier = new System.Windows.Forms.Label();
+            this.labelProjectInfo = new System.Windows.Forms.Label();
             this.labelMateriel = new System.Windows.Forms.Label();
             this.labelPurchasePirce = new System.Windows.Forms.Label();
             this.labelPurchaseInvoice = new System.Windows.Forms.Label();
@@ -50,21 +50,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelSupplier
+            // labelProjectInfo
             // 
-            this.labelSupplier.AutoSize = true;
-            this.labelSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelSupplier.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelSupplier.ForeColor = System.Drawing.Color.Black;
-            this.labelSupplier.Location = new System.Drawing.Point(63, 68);
-            this.labelSupplier.Name = "labelSupplier";
-            this.labelSupplier.Size = new System.Drawing.Size(49, 14);
-            this.labelSupplier.TabIndex = 11;
-            this.labelSupplier.Text = "供应商";
-            this.labelSupplier.Visible = false;
-            this.labelSupplier.Click += new System.EventHandler(this.labelSupplier_Click);
-            this.labelSupplier.MouseEnter += new System.EventHandler(this.labelSupplier_MouseEnter);
-            this.labelSupplier.MouseLeave += new System.EventHandler(this.labelSupplier_MouseEnter);
+            this.labelProjectInfo.AutoSize = true;
+            this.labelProjectInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelProjectInfo.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelProjectInfo.ForeColor = System.Drawing.Color.Black;
+            this.labelProjectInfo.Location = new System.Drawing.Point(63, 68);
+            this.labelProjectInfo.Name = "labelProjectInfo";
+            this.labelProjectInfo.Size = new System.Drawing.Size(77, 14);
+            this.labelProjectInfo.TabIndex = 11;
+            this.labelProjectInfo.Text = "项目资料表";
+            this.labelProjectInfo.Click += new System.EventHandler(this.labelSupplier_Click);
+            this.labelProjectInfo.MouseEnter += new System.EventHandler(this.labelSupplier_MouseEnter);
+            this.labelProjectInfo.MouseLeave += new System.EventHandler(this.labelSupplier_MouseEnter);
             // 
             // labelMateriel
             // 
@@ -105,10 +104,9 @@
             this.labelPurchaseInvoice.ForeColor = System.Drawing.Color.Black;
             this.labelPurchaseInvoice.Location = new System.Drawing.Point(63, 212);
             this.labelPurchaseInvoice.Name = "labelPurchaseInvoice";
-            this.labelPurchaseInvoice.Size = new System.Drawing.Size(105, 14);
+            this.labelPurchaseInvoice.Size = new System.Drawing.Size(133, 14);
             this.labelPurchaseInvoice.TabIndex = 17;
-            this.labelPurchaseInvoice.Text = "采购发票序时薄";
-            this.labelPurchaseInvoice.Visible = false;
+            this.labelPurchaseInvoice.Text = "工程总材料表序时薄";
             this.labelPurchaseInvoice.Click += new System.EventHandler(this.labelPurchaseInvoice_Click);
             this.labelPurchaseInvoice.MouseEnter += new System.EventHandler(this.labelPurchaseInvoice_MouseEnter);
             this.labelPurchaseInvoice.MouseLeave += new System.EventHandler(this.labelPurchaseInvoice_MouseEnter);
@@ -121,9 +119,9 @@
             this.labelPurchaseOrder.ForeColor = System.Drawing.Color.Black;
             this.labelPurchaseOrder.Location = new System.Drawing.Point(63, 164);
             this.labelPurchaseOrder.Name = "labelPurchaseOrder";
-            this.labelPurchaseOrder.Size = new System.Drawing.Size(77, 14);
+            this.labelPurchaseOrder.Size = new System.Drawing.Size(133, 14);
             this.labelPurchaseOrder.TabIndex = 16;
-            this.labelPurchaseOrder.Text = "项目资料表";
+            this.labelPurchaseOrder.Text = "设备总材料表序时薄";
             this.labelPurchaseOrder.Click += new System.EventHandler(this.labelPurchaseOrder_Click);
             this.labelPurchaseOrder.MouseEnter += new System.EventHandler(this.labelPurchaseOrder_MouseEnter);
             this.labelPurchaseOrder.MouseLeave += new System.EventHandler(this.labelPurchaseOrder_MouseEnter);
@@ -136,10 +134,9 @@
             this.labelPurchaseIn.ForeColor = System.Drawing.Color.Black;
             this.labelPurchaseIn.Location = new System.Drawing.Point(63, 188);
             this.labelPurchaseIn.Name = "labelPurchaseIn";
-            this.labelPurchaseIn.Size = new System.Drawing.Size(105, 14);
+            this.labelPurchaseIn.Size = new System.Drawing.Size(133, 14);
             this.labelPurchaseIn.TabIndex = 15;
-            this.labelPurchaseIn.Text = "采购入库序时薄";
-            this.labelPurchaseIn.Visible = false;
+            this.labelPurchaseIn.Text = "电器总材料表序时薄";
             this.labelPurchaseIn.Click += new System.EventHandler(this.labelPurchaseIn_Click);
             this.labelPurchaseIn.MouseEnter += new System.EventHandler(this.labelPurchaseIn_MouseEnter);
             this.labelPurchaseIn.MouseLeave += new System.EventHandler(this.labelPurchaseIn_MouseEnter);
@@ -154,8 +151,7 @@
             this.labelPurchaseInPayment.Name = "labelPurchaseInPayment";
             this.labelPurchaseInPayment.Size = new System.Drawing.Size(119, 14);
             this.labelPurchaseInPayment.TabIndex = 21;
-            this.labelPurchaseInPayment.Text = "采购入库付款情况";
-            this.labelPurchaseInPayment.Visible = false;
+            this.labelPurchaseInPayment.Text = "工程总材料表跟踪";
             this.labelPurchaseInPayment.Click += new System.EventHandler(this.labelPurchaseInPayment_Click);
             this.labelPurchaseInPayment.MouseEnter += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
             this.labelPurchaseInPayment.MouseLeave += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
@@ -168,9 +164,9 @@
             this.labelInventory.ForeColor = System.Drawing.Color.Black;
             this.labelInventory.Location = new System.Drawing.Point(63, 261);
             this.labelInventory.Name = "labelInventory";
-            this.labelInventory.Size = new System.Drawing.Size(91, 14);
+            this.labelInventory.Size = new System.Drawing.Size(119, 14);
             this.labelInventory.TabIndex = 20;
-            this.labelInventory.Text = "项目跟踪情况";
+            this.labelInventory.Text = "项目整体跟踪情况";
             this.labelInventory.Click += new System.EventHandler(this.labelInventory_Click);
             this.labelInventory.MouseEnter += new System.EventHandler(this.labelInventory_MouseEnter);
             this.labelInventory.MouseLeave += new System.EventHandler(this.labelInventory_MouseEnter);
@@ -185,8 +181,7 @@
             this.labelPurchaseOrderExecute.Name = "labelPurchaseOrderExecute";
             this.labelPurchaseOrderExecute.Size = new System.Drawing.Size(119, 14);
             this.labelPurchaseOrderExecute.TabIndex = 19;
-            this.labelPurchaseOrderExecute.Text = "采购订单执行情况";
-            this.labelPurchaseOrderExecute.Visible = false;
+            this.labelPurchaseOrderExecute.Text = "电器总材料表跟踪";
             this.labelPurchaseOrderExecute.Click += new System.EventHandler(this.labelPurchaseOrderExecute_Click);
             this.labelPurchaseOrderExecute.MouseEnter += new System.EventHandler(this.labelPurchaseOrderExecute_MouseEnter);
             this.labelPurchaseOrderExecute.MouseLeave += new System.EventHandler(this.labelPurchaseOrderExecute_MouseEnter);
@@ -295,8 +290,7 @@
             this.labelInventoryHistory.Name = "labelInventoryHistory";
             this.labelInventoryHistory.Size = new System.Drawing.Size(119, 14);
             this.labelInventoryHistory.TabIndex = 26;
-            this.labelInventoryHistory.Text = "历史库存表(物料)";
-            this.labelInventoryHistory.Visible = false;
+            this.labelInventoryHistory.Text = "设备总材料表跟踪";
             this.labelInventoryHistory.Click += new System.EventHandler(this.labelInventoryHistory_Click);
             this.labelInventoryHistory.MouseEnter += new System.EventHandler(this.labelInventoryHistory_MouseEnter);
             this.labelInventoryHistory.MouseLeave += new System.EventHandler(this.labelInventoryHistory_MouseEnter);
@@ -322,7 +316,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.labelPurchasePirce);
             this.Controls.Add(this.labelMateriel);
-            this.Controls.Add(this.labelSupplier);
+            this.Controls.Add(this.labelProjectInfo);
             this.Controls.Add(this.pictureBox1);
             this.Name = "FormProductionReport";
             this.Text = "项目管理报表";
@@ -337,7 +331,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label labelSupplier;
+        private System.Windows.Forms.Label labelProjectInfo;
         private System.Windows.Forms.Label labelMateriel;
         private System.Windows.Forms.Label labelPurchasePirce;
         private System.Windows.Forms.Label labelPurchaseInvoice;

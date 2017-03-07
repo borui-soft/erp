@@ -34,14 +34,16 @@ namespace MainProgram
 
         private void panelPurchaseOrder_Click(object sender, EventArgs e)
         {
-            FormPurchaseOrder fpo = new FormPurchaseOrder();
-            fpo.ShowDialog();
+            // 设备总材料表
+            FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(1);
+            fpmo.ShowDialog();
         }
 
         private void panelPurchaseIn_Click(object sender, EventArgs e)
         {
-            FormPurchaseInOrder fpio = new FormPurchaseInOrder();
-            fpio.ShowDialog();
+            // 电器总材料表
+            FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(2);
+            fpmo.ShowDialog();
         }
 
         private void panelPurchaseInvoice_Click(object sender, EventArgs e)
@@ -71,8 +73,9 @@ namespace MainProgram
 
         private void panelStorageProductionOut_Click(object sender, EventArgs e)
         {
-            FormMaterielOutOrder fmoo = new FormMaterielOutOrder();
-            fmoo.ShowDialog();
+            // 电器总材料
+            FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(3);
+            fpmo.ShowDialog();
         }
 
         private void panelStorageSaleOut_Click(object sender, EventArgs e)

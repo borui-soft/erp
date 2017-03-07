@@ -59,7 +59,7 @@
             this.panelStorageProductionOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelStorageProductionOut.Controls.Add(this.labelStorageProductionOut);
             this.panelStorageProductionOut.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelStorageProductionOut.Location = new System.Drawing.Point(557, 172);
+            this.panelStorageProductionOut.Location = new System.Drawing.Point(557, 261);
             this.panelStorageProductionOut.Name = "panelStorageProductionOut";
             this.panelStorageProductionOut.Size = new System.Drawing.Size(103, 92);
             this.panelStorageProductionOut.TabIndex = 29;
@@ -84,7 +84,7 @@
             this.panelPurchaseOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelPurchaseOrder.Controls.Add(this.labelPurchaseOrder);
             this.panelPurchaseOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelPurchaseOrder.Location = new System.Drawing.Point(85, 172);
+            this.panelPurchaseOrder.Location = new System.Drawing.Point(85, 261);
             this.panelPurchaseOrder.Name = "panelPurchaseOrder";
             this.panelPurchaseOrder.Size = new System.Drawing.Size(103, 92);
             this.panelPurchaseOrder.TabIndex = 18;
@@ -110,11 +110,12 @@
             // 
             this.pictureBox6.BackgroundImage = global::MainProgram.Properties.Resources.存货核算_箭头;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox6.Location = new System.Drawing.Point(127, 266);
+            this.pictureBox6.Location = new System.Drawing.Point(127, 451);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(509, 110);
             this.pictureBox6.TabIndex = 31;
             this.pictureBox6.TabStop = false;
+            this.pictureBox6.Visible = false;
             // 
             // panelProBom
             // 
@@ -122,7 +123,7 @@
             this.panelProBom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelProBom.Controls.Add(this.labelProBom);
             this.panelProBom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelProBom.Location = new System.Drawing.Point(85, 8);
+            this.panelProBom.Location = new System.Drawing.Point(85, 97);
             this.panelProBom.Name = "panelProBom";
             this.panelProBom.Size = new System.Drawing.Size(103, 92);
             this.panelProBom.TabIndex = 30;
@@ -173,10 +174,11 @@
             this.panelProjectMaterieCount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelProjectMaterieCount.Controls.Add(this.labelProjectMaterieCount);
             this.panelProjectMaterieCount.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelProjectMaterieCount.Location = new System.Drawing.Point(322, 379);
+            this.panelProjectMaterieCount.Location = new System.Drawing.Point(0, 469);
             this.panelProjectMaterieCount.Name = "panelProjectMaterieCount";
             this.panelProjectMaterieCount.Size = new System.Drawing.Size(103, 92);
             this.panelProjectMaterieCount.TabIndex = 26;
+            this.panelProjectMaterieCount.Visible = false;
             this.panelProjectMaterieCount.Click += new System.EventHandler(this.panelProjectMaterieCount_Click);
             this.panelProjectMaterieCount.MouseEnter += new System.EventHandler(this.panelProjectMaterieCount_MouseEnter);
             this.panelProjectMaterieCount.MouseLeave += new System.EventHandler(this.panelProjectMaterieCount_MouseEnter);
@@ -198,7 +200,7 @@
             this.panelProjectInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelProjectInfo.Controls.Add(this.labelProjectInfo);
             this.panelProjectInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelProjectInfo.Location = new System.Drawing.Point(322, 8);
+            this.panelProjectInfo.Location = new System.Drawing.Point(322, 97);
             this.panelProjectInfo.Name = "panelProjectInfo";
             this.panelProjectInfo.Size = new System.Drawing.Size(103, 92);
             this.panelProjectInfo.TabIndex = 25;
@@ -223,7 +225,7 @@
             this.panelPurchaseIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelPurchaseIn.Controls.Add(this.labelPurchaseIn);
             this.panelPurchaseIn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelPurchaseIn.Location = new System.Drawing.Point(322, 172);
+            this.panelPurchaseIn.Location = new System.Drawing.Point(322, 261);
             this.panelPurchaseIn.Name = "panelPurchaseIn";
             this.panelPurchaseIn.Size = new System.Drawing.Size(103, 92);
             this.panelPurchaseIn.TabIndex = 19;

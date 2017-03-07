@@ -166,6 +166,7 @@
     <Compile Include="model\销售管理\SaleOrder.cs" />
     <Compile Include="model\销售管理\SaleOrderDetails.cs" />
     <Compile Include="model\销售管理\SaleQuotationOrder.cs" />
+    <Compile Include="model\项目管理\ProjectManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -720,6 +721,12 @@
     <Compile Include="view\销售管理\报表\FormSaleOrderSequence.designer.cs">
       <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.designer.cs">
+      <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -1000,6 +1007,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\销售管理\报表\FormSaleOrderSequence.resx">
       <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielOrder.resx">
+      <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

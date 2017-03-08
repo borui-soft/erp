@@ -156,16 +156,54 @@ CREATE TABLE [dbo].[PROJECT_MATERIE_MANAGER](
 	[DEVICE_NAME] [nvarchar](30) COLLATE Chinese_PRC_CI_AS NOT NULL,
 	[NOTE] [nvarchar](100) COLLATE Chinese_PRC_CI_AS NULL,
 	
+	[MAKE_ORDER_STAFF] [int] NOT NULL,
+	[DESIGN_ID] [int] NOT NULL,
+	[REVIEW_STAFF_ID] [int] NULL,
+	[REVIEW_DATE] [datetime] NULL,
+	[IS_REVIEW] [int] NULL
+) ON [PRIMARY];
+
+--2017-3-8 项目总材料管理表详细内容(PROJECT_MATERIE_MANAGER_DETAILS)
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PROJECT_MATERIE_MANAGER_DETAILS]') AND type in (N'U'))
+DROP TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS]
+CREATE TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS](
+	[PKEY] [int] IDENTITY(1,1) NOT NULL,
+	[BILL_NUMBER] [nvarchar](20) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	
 	[ROW_NUMBER] [int] NOT NULL,
 	[MATERIEL_ID] [int] NOT NULL,
 	[VALUE] [int] NOT NULL,
 	[MAKE_TYPE] [nvarchar](10) COLLATE Chinese_PRC_CI_AS NOT NULL,
-	[MATERIEL_NOTE] [nvarchar](100) COLLATE Chinese_PRC_CI_AS NULL,
-	
-
-	[MAKE_ORDER_STAFF] [int] NOT NULL,
-	[DESIGN_ID] [int] NOT NULL,
-	[REVIEW_STAFF_ID] [int] NOT NULL,
-	[REVIEW_DATE] [datetime] NULL,
-	[IS_REVIEW] [int] NULL
+	[MATERIEL_NOTE] [nvarchar](100) COLLATE Chinese_PRC_CI_AS NULL
 ) ON [PRIMARY];
+
+--2017-3-8 采购申请单相关权限分配
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (106, '采购申请单', 1);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'save', 106);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonReview', 106);
+
+--2017-3-8 项目管理页面权限分配
+insert Into [BASE_SUB_SYSTEM_LIST] ([name],ID) values ('项目管理', 8);
+
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (801, '设备总材料表', 8);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (802, '电器总材料表', 8);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (803, '工程总材料表', 8);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (804, '材料表序时薄权限', 8);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (805, '总材料表跟踪情况', 8);
+
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'save', 801);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonReview', 801);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'save', 802);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonReview', 802);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'save', 803);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonReview', 803);
+
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('设备总材料表序时薄', 'labelPurchaseOrder', 804);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('电器总材料表序时薄', 'labelPurchaseIn', 804);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('工程总材料表序时薄', 'labelPurchaseInvoice', 804);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('总材料表跟踪', 'labelInventory', 805);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('设备总材料表跟踪', 'labelInventoryHistory', 805);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('电器总材料表跟踪', 'labelPurchaseOrderExecute', 805);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('工程总材料表跟踪', 'labelPurchaseInPayment', 805);

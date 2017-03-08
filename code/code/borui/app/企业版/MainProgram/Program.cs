@@ -17,20 +17,20 @@ namespace MainProgram
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (args.Length == 1 && args[0].CompareTo("DEBUG") == 0)
-            {
-                LoginUserInfo m_currentLoginUser = new LoginUserInfo();
+            //if (args.Length == 1 && args[0].CompareTo("DEBUG") == 0)
+            //{
+            //    LoginUserInfo m_currentLoginUser = new LoginUserInfo();
 
-                if (AccessAuthorization.getInctance().passwordIsValidate("Manager", "Manager", out m_currentLoginUser))
-                {
-                    DbPublic.getInctance().setCurrentLoginUserName(m_currentLoginUser.staffName);
-                    DbPublic.getInctance().setCurrentLoginUserID(m_currentLoginUser.pkey);
+            //    if (AccessAuthorization.getInctance().passwordIsValidate("Manager", "Manager", out m_currentLoginUser))
+            //    {
+            //        DbPublic.getInctance().setCurrentLoginUserName(m_currentLoginUser.staffName);
+            //        DbPublic.getInctance().setCurrentLoginUserID(m_currentLoginUser.pkey);
 
-                    Application.Run(new FormProjectMaterielOrder(1));
+            //        Application.Run(new FormMain());
 
-                    return;
-                }
-            }
+            //        return;
+            //    }
+            //}
 
             FormLogin login = new FormLogin();
             login.ShowDialog();

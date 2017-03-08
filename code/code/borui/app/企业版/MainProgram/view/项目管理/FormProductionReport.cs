@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MainProgram.bus;
+using MainProgram.model;
 
 namespace MainProgram
 {
@@ -110,19 +111,19 @@ namespace MainProgram
 
         private void labelPurchaseOrder_Click(object sender, EventArgs e)
         {
-            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseOrder);
+            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.DevMaterielInfo);
             fpos.ShowDialog();
         }
 
         private void labelPurchaseIn_Click(object sender, EventArgs e)
         {
-            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseIn);
+            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.EleMaterielInfo);
             fpos.ShowDialog();
         }
 
         private void labelPurchaseInvoice_Click(object sender, EventArgs e)
         {
-            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseInvoice);
+            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.EngMaterielInfo);
             fpos.ShowDialog();
         }
 
@@ -171,6 +172,34 @@ namespace MainProgram
         private void labelInventoryHistory_MouseEnter(object sender, EventArgs e)
         {
             PanelExtend.setLableControlStyle(this.labelInventoryHistory);
+        }
+
+        private void setPageActionEnable(int authID)
+        {
+            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(authID);
+
+            foreach (KeyValuePair<int, ActionTable> index in list)
+            {
+                object activeObject = this.GetType().GetField(index.Value.uiActionName,
+                    System.Reflection.BindingFlags.NonPublic |
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.IgnoreCase).GetValue(this);
+
+                bool isEnable = AccessAuthorization.getInctance().isAccessAuthorization(index.Value.pkey,
+                    Convert.ToString(DbPublic.getInctance().getCurrentLoginUserID()));
+
+                if (activeObject != null)
+                {
+                    UserInterfaceActonState.setUserInterfaceActonState(activeObject,
+                        ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
+                }
+            }
+        }
+
+        private void FormProductionReport_Load(object sender, EventArgs e)
+        {
+            setPageActionEnable(804);
+            setPageActionEnable(805);
         }
     }
 }

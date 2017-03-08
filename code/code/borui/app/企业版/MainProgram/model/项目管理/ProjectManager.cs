@@ -34,7 +34,6 @@ namespace MainProgram.model
         public void insert(FormProjectMaterielTable record, bool isDisplayMessageBox = true)
         {
             string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
-            insert += ",[ROW_NUMBER],[MATERIEL_ID],[VALUE],[MAKE_TYPE],[MATERIEL_NOTE]";
             insert += ",[MAKE_ORDER_STAFF],[DESIGN_ID])VALUES(";
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
@@ -47,15 +46,10 @@ namespace MainProgram.model
             insert += "'" + record.deviceMode + "',";
             insert += "'" + record.makeDate + "',";
             insert += "'" + record.billNumber + "',";
+            insert += "'" + record.projectNum + "',";
             insert += "'" + record.makeNum + "',";
             insert += "'" + record.deviceName + "',";
             insert += "'" + record.note + "',";
-
-            insert += record.rowNumber + ",";
-            insert += record.materielID + ",";
-            insert += record.value + ",";
-            insert += "'" + record.makeType + "',";
-            insert += "'" + record.materielNote + "',";
 
             insert += record.makeOrderStaffID + ",";
             insert += record.designStaffID;
@@ -131,7 +125,6 @@ namespace MainProgram.model
         private void load()
         {
             string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
-            sql += ",[ROW_NUMBER],[MATERIEL_ID],[VALUE],[MAKE_TYPE],[MATERIEL_NOTE]";
             sql += ",[MAKE_ORDER_STAFF],[DESIGN_ID],[REVIEW_STAFF_ID],[REVIEW_DATE],[IS_REVIEW] ";
             sql += "FROM [ERP].[dbo].[PROJECT_MATERIE_MANAGER] ORDER BY PKEY DESC";
 
@@ -145,26 +138,13 @@ namespace MainProgram.model
 
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.dataType = DbDataConvert.ToInt32(row["DATE_TYPE"]);
-                    record.billNumber = DbDataConvert.ToString(row["DEVICE_MODE"]);
+                    record.deviceMode = DbDataConvert.ToString(row["DEVICE_MODE"]);
                     record.makeDate = DbDataConvert.ToDateTime(row["MAKE_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
                     record.projectNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
                     record.makeNum = DbDataConvert.ToString(row["MAKE_NUM"]);
                     record.deviceName = DbDataConvert.ToString(row["DEVICE_NAME"]);
                     record.note = DbDataConvert.ToString(row["NOTE"]);
-
-                    record.rowNumber = DbDataConvert.ToInt32(row["ROW_NUMBER"]);
-                    record.materielID = DbDataConvert.ToInt32(row["MATERIEL_ID"]);
-                    
-                    MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
-                    record.materielBrand = materiel.brand;
-                    record.materielName = materiel.name;
-                    record.materielModel = materiel.model;
-                    record.materielSize = "";
-                    record.materielUnit = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase);
-                    record.value = DbDataConvert.ToDouble(row["VALUE"]);
-                    record.makeType = DbDataConvert.ToString(row["MAKE_TYPE"]);
-                    record.materielNote = DbDataConvert.ToString(row["MATERIEL_NOTE"]);
 
 
                     record.makeOrderStaffID = DbDataConvert.ToInt32(row["MAKE_ORDER_STAFF"]);
@@ -186,14 +166,27 @@ namespace MainProgram.model
             }
         }
 
-        public SortedDictionary<int, FormProjectMaterielTable> getAllPurchaseOrderInfo()
+        public SortedDictionary<int, FormProjectMaterielTable> getAllPurchaseOrderInfo(int dataType)
         {
             if (m_tableDataList.Count == 0)
             {
                 load();
             }
 
-            return m_tableDataList;
+            SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
+
+            foreach (KeyValuePair<int, FormProjectMaterielTable> index in m_tableDataList)
+            {
+                FormProjectMaterielTable record = new FormProjectMaterielTable();
+                record = index.Value;
+
+                if (index.Value.dataType == dataType)
+                {
+                    list.Add(list.Count, index.Value);
+                }
+            }
+
+            return list;
         }
 
         public SortedDictionary<int, FormProjectMaterielTable> getAllReviewPurchaseOrderInfo()
@@ -282,18 +275,6 @@ namespace MainProgram.model
         public string makeNum { get; set; }
         public string deviceName { get; set; }
         public string note { get; set; }
-
-        // 物料详细信息
-        public int rowNumber { get; set; }
-        public int materielID { get; set; }
-        public string materielBrand { get; set; }
-        public string materielName { get; set; }
-        public string materielModel { get; set; }
-        public string materielSize { get; set; }
-        public string materielUnit { get; set; }
-        public double value { get; set; }
-        public string makeType { get; set; }
-        public string materielNote { get; set; }
 
         // 制单人、设计人、审核人
         public int makeOrderStaffID { get; set; }

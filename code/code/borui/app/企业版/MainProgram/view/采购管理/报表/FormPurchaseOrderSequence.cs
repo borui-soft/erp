@@ -42,6 +42,11 @@ namespace MainProgram
 
             // 其他入库
             StorageInOther,
+
+            // 设备总材料表
+            DevMaterielInfo,
+            EleMaterielInfo,
+            EngMaterielInfo
         };
 
         private int m_dataGridRecordCount = 0;
@@ -98,6 +103,21 @@ namespace MainProgram
                 // 仓存管理-其他入库
                 this.Text = "其他入库序时薄";
             }
+            else if (m_orderType == OrderType.DevMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                this.Text = "设备总材料表序时薄";
+            }
+            else if (m_orderType == OrderType.EleMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                this.Text = "电器总材料表序时薄";
+            }
+            else if (m_orderType == OrderType.EngMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                this.Text = "工程总材料表序时薄";
+            }
 
             m_isSelectOrderNumber = isSelectOrderNumber;
         }
@@ -136,6 +156,21 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("是否审核", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("审核员", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 100);
+            }
+            else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("设备型号", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("制表日期", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("所属部件", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("设计", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
             }
             else if (m_orderType == OrderType.PurchaseIn)
             {
@@ -317,6 +352,64 @@ namespace MainProgram
                         temp.Add(record.paymentDate);
                         temp.Add(record.totalMoney);
                         temp.Add(record.makeOrderStaffName);
+
+                        if (record.isReview == "0")
+                        {
+                            temp.Add("否");
+                        }
+                        else
+                        {
+                            temp.Add("是");
+                        }
+
+                        temp.Add(record.orderrReviewName);
+                        temp.Add(record.reviewDate);
+
+                        sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
+                    }
+                }
+
+                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+            }
+            else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+            {
+                int dataType = 1;
+                if (m_orderType == OrderType.DevMaterielInfo)
+                {
+                    dataType = 1;
+                }
+                else if (m_orderType == OrderType.EleMaterielInfo)
+                {
+                    dataType = 2;
+                }
+                else if (m_orderType == OrderType.EngMaterielInfo)
+                {
+                    dataType = 3;
+                }
+
+                SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
+                list = FormProject.getInctance().getAllPurchaseOrderInfo(dataType);
+
+                m_dataGridRecordCount = list.Count;
+
+                for (int index = 0; index < list.Count; index++)
+                {
+                    FormProjectMaterielTable record = new FormProjectMaterielTable();
+                    record = (FormProjectMaterielTable)list[index];
+
+                    if (m_filter.startDate == null || (record.makeDate.CompareTo(m_filter.startDate) >= 0 && record.makeDate.CompareTo(m_filter.endDate) <= 0))
+                    {
+                        ArrayList temp = new ArrayList();
+
+                        temp.Add(record.pkey);
+                        temp.Add(record.deviceMode);
+                        temp.Add(record.makeDate);
+                        temp.Add(record.billNumber);
+                        temp.Add(record.projectNum);
+                        temp.Add(record.makeNum);
+                        temp.Add(record.deviceName);
+                        temp.Add(record.makeOrderStaffName);
+                        temp.Add(record.designStaffName);
 
                         if (record.isReview == "0")
                         {
@@ -846,6 +939,27 @@ namespace MainProgram
                 {
                     FormPurchaseApply fpa = new FormPurchaseApply(m_billNumber);
                     fpa.ShowDialog();
+                    updateDataGridView();
+                }
+
+                else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+                {
+                    int dataType = 1;
+                    if (m_orderType == OrderType.DevMaterielInfo)
+                    {
+                        dataType = 1;
+                    }
+                    else if (m_orderType == OrderType.EleMaterielInfo)
+                    {
+                        dataType = 2;
+                    }
+                    else if (m_orderType == OrderType.EngMaterielInfo)
+                    {
+                        dataType = 3;
+                    }
+
+                    FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(dataType, m_billNumber);
+                    fpmo.ShowDialog();
                     updateDataGridView();
                 }
                 else

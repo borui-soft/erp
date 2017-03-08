@@ -17,7 +17,6 @@ namespace MainProgram
 {
     public partial class FormProjectMaterielOrder : Form
     {
-        private int m_supplierPkey = -1;
         private int m_staffPkey = -1;
         private string m_billNumber = "";
         private int m_tablesType;
@@ -29,7 +28,7 @@ namespace MainProgram
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
-        FormProjectMaterielTable m_purchaseOrder = new FormProjectMaterielTable();
+        FormProjectMaterielTable m_ProjectInfo = new FormProjectMaterielTable();
 
         FormProjectMaterielTable m_currentOrderInfo = new FormProjectMaterielTable();
 
@@ -158,7 +157,7 @@ namespace MainProgram
         #region 供应日期
         private void panelDateTime_Click(object sender, EventArgs e)
         {
-            if (m_purchaseOrder.isReview == "1")
+            if (m_ProjectInfo.isReview == "1")
             {
                 return;
             }
@@ -185,7 +184,7 @@ namespace MainProgram
         #region 摘要
         private void panelSummary_Click(object sender, EventArgs e)
         {
-            if (m_purchaseOrder.isReview == "1")
+            if (m_ProjectInfo.isReview == "1")
             {
                 return;
             }
@@ -256,24 +255,8 @@ namespace MainProgram
 
                 if (purchaseOrderIsFull(m_currentOrderInfo) && purchaseOrderDetailsIsFull(dataList))
                 {
-                    for (int rowIndex = 0; rowIndex < dataList.Count; rowIndex++)
-                    {
-                        FormProjectMaterielTable record = new FormProjectMaterielTable();
-                        record = (FormProjectMaterielTable)dataList[rowIndex];
-                        record.dataType = m_currentOrderInfo.dataType;
-                        record.deviceMode = m_currentOrderInfo.deviceMode;
-                        record.makeDate = m_currentOrderInfo.makeDate;
-                        record.billNumber = m_currentOrderInfo.billNumber;
-                        record.projectNum = m_currentOrderInfo.projectNum;
-                        record.makeNum = m_currentOrderInfo.makeNum;
-                        record.deviceName = m_currentOrderInfo.deviceName;
-                        record.note = m_currentOrderInfo.note;
-                        record.makeOrderStaffID = m_currentOrderInfo.makeOrderStaffID;
-                        record.designStaffID = m_currentOrderInfo.designStaffID;
-
-                        FormProject.getInctance().insert(record, false);
-                    }
-
+                    FormProject.getInctance().insert(m_currentOrderInfo, false);
+                    ProjectManagerDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
                     if (m_billNumber.Length == 0)
@@ -310,7 +293,7 @@ namespace MainProgram
             }
             else 
             {
-                m_currentOrderInfo.designStaffID = m_purchaseOrder.designStaffID;
+                m_currentOrderInfo.designStaffID = m_ProjectInfo.designStaffID;
             }
         }
 
@@ -373,13 +356,15 @@ namespace MainProgram
                 }
                 else
                 {
-                    FormProjectMaterielTable currentRowInfo = new FormProjectMaterielTable();
+                    ProjectManagerDetailsTable currentRowInfo = new ProjectManagerDetailsTable();
 
+                    currentRowInfo.billNumber = this.labelBillNumber.Text;
                     currentRowInfo.rowNumber = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString());
                     currentRowInfo.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
                     currentRowInfo.value = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     currentRowInfo.makeType = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value.ToString();
-                    currentRowInfo.note = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
+                    currentRowInfo.materielNote = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
+
                     list.Add(currentRowInfo);
                 }
             }
@@ -393,8 +378,8 @@ namespace MainProgram
 
             for (int rowIndex = 0; rowIndex < list.Count; rowIndex++)
             {
-                PurchaseOrderDetailsTable record = new PurchaseOrderDetailsTable();
-                record = (PurchaseOrderDetailsTable)list[rowIndex];
+                ProjectManagerDetailsTable record = new ProjectManagerDetailsTable();
+                record = (ProjectManagerDetailsTable)list[rowIndex];
 
                 if (record.value == 0)
                 {
@@ -411,9 +396,12 @@ namespace MainProgram
         {
             try
             {
-                save_Click(sender, e);
-                PurchaseOrder.getInctance().billReview(m_billNumber);
-                MessageBoxExtend.messageOK("单据审核成功");
+                if (m_billNumber.Length > 0)
+                {
+                    save_Click(sender, e);
+                    FormProject.getInctance().billReview(m_billNumber);
+                    MessageBoxExtend.messageOK("单据审核成功");
+                }
             }
             catch (Exception exp)
             {
@@ -589,116 +577,87 @@ namespace MainProgram
 
         private void readBillInfoToUI()
         {
-          //  // 单据表头表尾信息
-          //  m_purchaseOrder = FormProject.getInctance().getProjectInfoFromBillNumber(m_billNumber);
+            this.labelDeviceMode.Visible = true;
+            this.labelTradingDate.Visible = true;
+            this.labelBillNumber.Visible = true;
+            this.labelContractNum.Visible = true;
+            this.labelMakeNum.Visible = true;
+            this.labelDeviceName.Visible = true;
+            this.labelSummary.Visible = true;
+            this.labelMakeBillStaff.Visible = true;
+            this.labelBusinessPeople.Visible = true;
+            this.labelReviewBillStaff.Visible = true;
+            this.labelReviewDate.Visible = true;
 
-          //  m_supplierPkey = m_purchaseOrder.supplierId;
 
-          //  //this.labelPurchaseName.Visible = true;
-          //  this.labelTradingDate.Visible = true;
-          //  this.labelBillNumber.Visible = true;
-          // // this.labelPurchaseType.Visible = true;
-          //  //this.labelDeliveryDate.Visible = true;
-          //  //this.labelPaymentDate.Visible = true;
-          //  this.labelSummary.Visible = true;
-          //  this.labelBusinessPeople.Visible = true;
-          //  this.labelMakeBillStaff.Visible = true;
-          //  this.labelReviewBillStaff.Visible = true;
-          //  this.labelReviewDate.Visible = true;
+            // 单据表头表尾信息
+            m_ProjectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(m_billNumber);
 
-          //  this.labelContractNum.Visible = true;
-          // // this.labelSourceOrderNumber.Visible = true;
-            
-          // // this.labelPurchaseName.Text = m_purchaseOrder.supplierName;
-          //  this.labelTradingDate.Text = m_purchaseOrder.tradingDate;
-          //  this.labelBillNumber.Text = m_purchaseOrder.billNumber;
-          // // this.labelPurchaseType.Text = m_purchaseOrder.purchaseType;
-          // // this.labelDeliveryDate.Text = m_purchaseOrder.deliveryDate;
-          // // this.labelPaymentDate.Text = m_purchaseOrder.paymentDate;
-          //  this.labelSummary.Text = m_purchaseOrder.exchangesUnit;
+            this.labelDeviceMode.Text = m_ProjectInfo.deviceMode;
+            this.labelTradingDate.Text = m_ProjectInfo.makeDate;
+            this.labelBillNumber.Text = m_ProjectInfo.billNumber;
+            this.labelContractNum.Text = m_ProjectInfo.projectNum;
+            this.labelMakeNum.Text = m_ProjectInfo.makeNum;
+            this.labelDeviceName.Text = m_ProjectInfo.deviceName;
+            this.labelSummary.Text = m_ProjectInfo.note;
+            this.labelMakeBillStaff.Text = m_ProjectInfo.makeOrderStaffName;
+            this.labelBusinessPeople.Text = m_ProjectInfo.designStaffName;
+            this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
+            this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
 
-          //  this.labelContractNum.Text = m_purchaseOrder.projectNum;
-          ////  this.labelSourceOrderNumber.Text = m_purchaseOrder.srcOrderNum;
+            // DataGridView 赋值
+            SortedDictionary<int, ProjectManagerDetailsTable> purchaseOrderDetails =
+                ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(m_billNumber);
 
-          //  m_staffPkey = m_purchaseOrder.businessPeopleId;
-          //  this.labelBusinessPeople.Text = m_purchaseOrder.businessPeopleName;
-          //  this.labelMakeBillStaff.Text = m_purchaseOrder.makeOrderStaffName;
-
-          //  // DataGridView 赋值
-          //  SortedDictionary<int, PurchaseOrderDetailsTable> purchaseOrderDetails = 
-          //      PurchaseOrderDetails.getInctance().getPurchaseInfoFromBillNumber(m_billNumber);
-
-          //  foreach (KeyValuePair<int, PurchaseOrderDetailsTable> index in purchaseOrderDetails)
-          //  {
-          //      PurchaseOrderDetailsTable record = new PurchaseOrderDetailsTable();
-          //      record = index.Value;
-
-          //      int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
-
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = record.transportationCost;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
-          //      dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
-          //  }
-
-          //  // 如果单据已审核，则禁用页面所有控件
-          //  if (m_purchaseOrder.isReview == "1")
-          //  {
-          //      this.labelReviewBillStaff.Text = m_purchaseOrder.orderrReviewName;
-          //      this.labelReviewDate.Text = m_purchaseOrder.reviewDate;
-          //      this.panelIsReview.Visible = true;
-
-          //      this.save.Enabled = false;
-          //      this.toolStripButtonReview.Enabled = false;
-          //      this.dataGridViewDataList.ReadOnly = true;
-          //      this.dataGridViewDataCount.ReadOnly = true;
-
-          //      this.panelSummary.Visible = false;
-
-          //      this.dateTimePickerTradingDate.Visible = false;
-
-          //      this.textBoxSummary.Visible = false;
-
-          //      this.panelBusinessPeople.Visible = false;
-          //  }
-          //  else
-          //  {
-          //      this.labelReviewBillStaff.Visible = false;
-          //      this.labelReviewDate.Visible = false;
-          //  }
-        }
-
-        private void setPageActionEnable()
-        {
-            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(101);
-
-            foreach (KeyValuePair<int, ActionTable> index in list)
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in purchaseOrderDetails)
             {
-                object activeObject = this.GetType().GetField(index.Value.uiActionName,
-                    System.Reflection.BindingFlags.NonPublic |
-                    System.Reflection.BindingFlags.Instance |
-                    System.Reflection.BindingFlags.IgnoreCase).GetValue(this);
+                ProjectManagerDetailsTable record = new ProjectManagerDetailsTable();
+                record = index.Value;
 
-                bool isEnable = AccessAuthorization.getInctance().isAccessAuthorization(index.Value.pkey,
-                    Convert.ToString(DbPublic.getInctance().getCurrentLoginUserID()));
+                int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
 
-                if (activeObject != null)
-                {
-                    UserInterfaceActonState.setUserInterfaceActonState(activeObject,
-                        ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
-                }
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
+            }
+
+            // 如果单据已审核，则禁用页面所有控件
+            if (m_ProjectInfo.isReview == "1")
+            {
+                this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
+                this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
+                this.panelIsReview.Visible = true;
+
+                this.save.Enabled = false;
+                this.toolStripButtonReview.Enabled = false;
+                this.dataGridViewDataList.ReadOnly = true;
+                this.dataGridViewDataCount.ReadOnly = true;
+
+                this.panelSummary.Visible = false;
+
+                this.dateTimePickerTradingDate.Visible = false;
+
+                this.textBoxSummary.Visible = false;
+
+                this.panelBusinessPeople.Visible = false;
+            }
+            else
+            {
+                this.labelReviewBillStaff.Visible = false;
+                this.labelReviewDate.Visible = false;
             }
         }
 
         private void panelContractNum_Click(object sender, EventArgs e)
         {
-            if (m_purchaseOrder.isReview == "1")
+            if (m_ProjectInfo.isReview == "1")
             {
                 return;
             }
@@ -747,7 +706,7 @@ namespace MainProgram
 
         private void panelDeviceMode_Click(object sender, EventArgs e)
         {
-            if (m_purchaseOrder.isReview == "1")
+            if (m_ProjectInfo.isReview == "1")
             {
                 return;
             }
@@ -777,7 +736,7 @@ namespace MainProgram
 
         private void panelMakeNum_Click(object sender, EventArgs e)
         {
-            if (m_purchaseOrder.isReview == "1")
+            if (m_ProjectInfo.isReview == "1")
             {
                 return;
             }
@@ -799,7 +758,7 @@ namespace MainProgram
 
         private void panelDeviceName_Click(object sender, EventArgs e)
         {
-            if (m_purchaseOrder.isReview == "1")
+            if (m_ProjectInfo.isReview == "1")
             {
                 return;
             }
@@ -809,6 +768,43 @@ namespace MainProgram
             this.textBoxDeviceName.Visible = true;
             this.textBoxDeviceName.Text = this.labelDeviceName.Text;
             this.textBoxDeviceName.Focus();
+        }
+
+        private void setPageActionEnable()
+        {
+            int authID = 801;
+
+            if (m_tablesType == 1)
+            {
+                authID = 801;
+            }
+            else if (m_tablesType == 2)
+            {
+                authID = 802;
+            }
+            else if (m_tablesType == 3)
+            {
+                authID = 803;
+            }
+
+            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(authID);
+
+            foreach (KeyValuePair<int, ActionTable> index in list)
+            {
+                object activeObject = this.GetType().GetField(index.Value.uiActionName,
+                    System.Reflection.BindingFlags.NonPublic |
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.IgnoreCase).GetValue(this);
+
+                bool isEnable = AccessAuthorization.getInctance().isAccessAuthorization(index.Value.pkey,
+                    Convert.ToString(DbPublic.getInctance().getCurrentLoginUserID()));
+
+                if (activeObject != null)
+                {
+                    UserInterfaceActonState.setUserInterfaceActonState(activeObject,
+                        ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
+                }
+            }
         }
     }
 }

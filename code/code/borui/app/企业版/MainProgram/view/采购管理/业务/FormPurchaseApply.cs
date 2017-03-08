@@ -717,7 +717,7 @@ namespace MainProgram
 
         private void setPageActionEnable()
         {
-            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(101);
+            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(106);
 
             foreach (KeyValuePair<int, ActionTable> index in list)
             {

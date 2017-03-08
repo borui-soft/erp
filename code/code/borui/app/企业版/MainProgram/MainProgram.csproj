@@ -722,6 +722,12 @@
     <Compile Include="view\销售管理\报表\FormSaleOrderSequence.designer.cs">
       <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrack.designer.cs">
+      <DependentUpon>FormProjectInfoTrack.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1008,6 +1014,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\销售管理\报表\FormSaleOrderSequence.resx">
       <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectInfoTrack.resx">
+      <DependentUpon>FormProjectInfoTrack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielOrder.resx">
       <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>

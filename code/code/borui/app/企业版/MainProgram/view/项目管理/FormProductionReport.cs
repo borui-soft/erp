@@ -87,14 +87,12 @@ namespace MainProgram
 
         private void labelMateriel_Click(object sender, EventArgs e)
         {
-            FormBaseMateriel fbm = new FormBaseMateriel();
-            fbm.ShowDialog();
+            MessageBoxExtend.messageOK("功能研发中...");
         }
 
         private void labelSupplier_Click(object sender, EventArgs e)
         {
-            FormBaseSupplier fbs = new FormBaseSupplier();
-            fbs.ShowDialog();
+            MessageBoxExtend.messageOK("功能研发中...");
         }
 
         private void labelPurchasePirce_Click(object sender, EventArgs e)
@@ -129,14 +127,14 @@ namespace MainProgram
 
         private void labelInventory_Click(object sender, EventArgs e)
         {
-            FormMaterielStorageAmountInfo fmc = new FormMaterielStorageAmountInfo((int)FormMaterielStorageAmountInfo.DisplayDataType.Materiel);
-            fmc.ShowDialog();
+            FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.ALL);
+            fptt.ShowDialog();
         }
 
         private void labelPurchaseOrderExecute_Click(object sender, EventArgs e)
         {
-            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseOrderExcute);
-            fpos.ShowDialog();
+            FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.EleMaterielInfo);
+            fptt.ShowDialog();
         }
 
         private void labelPurchaseInPayment_Click(object sender, EventArgs e)
@@ -147,8 +145,8 @@ namespace MainProgram
 
         private void labelAmountCountByMateriel_Click(object sender, EventArgs e)
         {
-            FormDisplayCountInfoFromSQL fpic = new FormDisplayCountInfoFromSQL(FormDisplayCountInfoFromSQL.CountType.PurchaseMateriel);
-            fpic.ShowDialog();
+            FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.EngMaterielInfo);
+            fptt.ShowDialog();
         }
 
         private void labelAmountCountByPeople_Click(object sender, EventArgs e)
@@ -165,8 +163,8 @@ namespace MainProgram
 
         private void labelInventoryHistory_Click(object sender, EventArgs e)
         {
-            FormMaterielStorageAmountHistoryInfo fmc = new FormMaterielStorageAmountHistoryInfo((int)FormMaterielStorageAmountInfo.DisplayDataType.Materiel, true);
-            fmc.ShowDialog();
+            FormProjectInfoTrack fptt = new FormProjectInfoTrack((int)FormProjectInfoTrack.OrderType.DevMaterielInfo);
+            fptt.ShowDialog();
         }
 
         private void labelInventoryHistory_MouseEnter(object sender, EventArgs e)

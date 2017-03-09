@@ -139,14 +139,14 @@ namespace MainProgram
 
         private void labelPurchaseInPayment_Click(object sender, EventArgs e)
         {
-            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseInOrderExcute);
-            fpos.ShowDialog();
+            FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.EngMaterielInfo);
+            fptt.ShowDialog();
         }
 
         private void labelAmountCountByMateriel_Click(object sender, EventArgs e)
         {
-            FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.EngMaterielInfo);
-            fptt.ShowDialog();
+            //FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.EngMaterielInfo);
+            //fptt.ShowDialog();
         }
 
         private void labelAmountCountByPeople_Click(object sender, EventArgs e)

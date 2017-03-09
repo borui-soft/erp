@@ -728,11 +728,23 @@
     <Compile Include="view\项目管理\业务\FormProjectInfoTrack.designer.cs">
       <DependentUpon>FormProjectInfoTrack.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrackFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrackFilter.designer.cs">
+      <DependentUpon>FormProjectInfoTrackFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.designer.cs">
       <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\RowMergeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\RowMergeView.designer.cs">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1018,8 +1030,14 @@
     <EmbeddedResource Include="view\项目管理\业务\FormProjectInfoTrack.resx">
       <DependentUpon>FormProjectInfoTrack.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectInfoTrackFilter.resx">
+      <DependentUpon>FormProjectInfoTrackFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielOrder.resx">
       <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\RowMergeView.resx">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

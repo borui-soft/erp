@@ -24,138 +24,112 @@ namespace MainProgram
         };
 
         private int m_dataGridRecordCount = 0;
-        private OrderType m_orderType;
+        private int m_orderType;
+        private OrderType m_orderTypeEnum;
         private string m_billNumber = "";
         private string m_projectNum = "";
         private bool m_isSelectOrderNumber;
 
-        private DataGridViewExtend m_dateGridViewExtend = new DataGridViewExtend();
+        private RowMergeView m_dateGridViewExtend = new RowMergeView();
         private FormStorageSequenceFilterValue m_filter = new FormStorageSequenceFilterValue();
+        private FormProjectInfoTrackFilterValue m_projectInfoTrackFilter = new FormProjectInfoTrackFilterValue();
+        private SortedDictionary<int, FormProjectMaterielTable> m_dataList = new SortedDictionary<int, FormProjectMaterielTable>();
 
         public FormProjectInfoTrack(OrderType orderType, bool isSelectOrderNumber = false)
         {
             InitializeComponent();
+            m_orderTypeEnum = orderType;
 
-            m_orderType = orderType;
-
-            if (m_orderType == OrderType.DevMaterielInfo)
+            if (m_orderTypeEnum == OrderType.DevMaterielInfo)
             {
                 this.Text = "设备总材料表跟踪情况";
+                m_orderType = 1;
             }
-            else if (m_orderType == OrderType.EleMaterielInfo)
+            else if (m_orderTypeEnum == OrderType.EleMaterielInfo)
             {
                 this.Text = "电器总材料表跟踪情况";
+                m_orderType = 2;
             }
-            else if (m_orderType == OrderType.EngMaterielInfo)
+            else if (m_orderTypeEnum == OrderType.EngMaterielInfo)
             {
                 this.Text = "工程总材料表跟踪情况";
+                m_orderType = 3;
             }
-            else if (m_orderType == OrderType.ALL)
+            else if (m_orderTypeEnum == OrderType.ALL)
             {
                 this.Text = "项目整体情况跟踪情况";
+                m_orderType = 4;
             }
 
             m_isSelectOrderNumber = isSelectOrderNumber;
+
+            FormProjectInfoTrackFilter fssf = new FormProjectInfoTrackFilter(false);
+
+            if (fssf.ShowDialog() == DialogResult.OK)
+            {
+                m_projectInfoTrackFilter = fssf.getFilterUIValue();
+            }
         }
 
         private void FormProjectInfoTrack_Load(object sender, EventArgs e)
         {
-            if (m_orderType == OrderType.DevMaterielInfo || 
-                m_orderType == OrderType.EleMaterielInfo || 
-                m_orderType == OrderType.EngMaterielInfo)
-            {
-                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
-                m_dateGridViewExtend.addDataGridViewColumn("设备型号", 100);
-                m_dateGridViewExtend.addDataGridViewColumn("制表日期", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("所属部件", 100);
-                m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("设计", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
-            }
-            else if (m_orderType == OrderType.ALL)
-            {
-            }
-            else
-            {
-                MessageBoxExtend.messageWarning("暂时不支持的序时薄类型");
-            }
+            this.rowMergeView1.ColumnHeadersHeight = 40;
+            this.rowMergeView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.rowMergeView1.MergeColumnNames.Add("单据编号");
+            this.rowMergeView1.MergeColumnNames.Add("设备型号");
+            this.rowMergeView1.AddSpanHeader(3, 4, "物料基本信息");
+            this.rowMergeView1.AddSpanHeader(7, 3, "库存情况");
 
-            m_dateGridViewExtend.initDataGridViewColumn(this.dataGridViewList);
             updateDataGridView();
         }
 
         private void updateDataGridView()
         {
+            SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
             SortedDictionary<int, ArrayList> sortedDictionaryList = new SortedDictionary<int, ArrayList>();
 
-            if (m_orderType == OrderType.DevMaterielInfo 
-                || m_orderType == OrderType.EleMaterielInfo 
-                || m_orderType == OrderType.EngMaterielInfo)
+            SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
+            list = FormProject.getInctance().getAllPurchaseOrderInfo(
+                m_projectInfoTrackFilter.projectNum, m_projectInfoTrackFilter.allReview, m_orderType);;
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("单据编号");
+            dt.Columns.Add("设备型号");
+            dt.Columns.Add("所属部件");
+
+            dt.Columns.Add("物料编码");
+            dt.Columns.Add("物料名称");
+            dt.Columns.Add("型号");
+            dt.Columns.Add("数量");
+
+            dt.Columns.Add("实际库存");
+            dt.Columns.Add("预占库存");
+            dt.Columns.Add("可用库存");
+
+            dt.Columns.Add("转采购申请数量");
+            dt.Columns.Add("采购订单数量");
+            dt.Columns.Add("采购入库数量");
+            dt.Columns.Add("生产领料数量");
+            
+            for (int index = 0; index < list.Count; index++)
             {
-                int dataType = 1;
-                if (m_orderType == OrderType.DevMaterielInfo)
+                FormProjectMaterielTable record = new FormProjectMaterielTable();
+                record = (FormProjectMaterielTable)list[index];
+
+                listDetails.Clear();
+                listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
+
+                for (int index2 = 0; index2 < listDetails.Count; index2++)
                 {
-                    dataType = 1;
+                    ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+                    tmp = (ProjectManagerDetailsTable)listDetails[index2];
+
+                    dt.Rows.Add(record.billNumber, record.deviceMode, record.deviceName, 
+                        tmp.materielID, tmp.materielName,tmp.materielModel, tmp.value);
                 }
-                else if (m_orderType == OrderType.EleMaterielInfo)
-                {
-                    dataType = 2;
-                }
-                else if (m_orderType == OrderType.EngMaterielInfo)
-                {
-                    dataType = 3;
-                }
-
-                SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
-                list = FormProject.getInctance().getAllPurchaseOrderInfo(dataType);
-
-                m_dataGridRecordCount = list.Count;
-
-                for (int index = 0; index < list.Count; index++)
-                {
-                    FormProjectMaterielTable record = new FormProjectMaterielTable();
-                    record = (FormProjectMaterielTable)list[index];
-
-                    if (m_filter.startDate == null || (record.makeDate.CompareTo(m_filter.startDate) >= 0 && record.makeDate.CompareTo(m_filter.endDate) <= 0))
-                    {
-                        ArrayList temp = new ArrayList();
-
-                        temp.Add(record.pkey);
-                        temp.Add(record.deviceMode);
-                        temp.Add(record.makeDate);
-                        temp.Add(record.billNumber);
-                        temp.Add(record.projectNum);
-                        temp.Add(record.makeNum);
-                        temp.Add(record.deviceName);
-                        temp.Add(record.makeOrderStaffName);
-                        temp.Add(record.designStaffName);
-
-                        if (record.isReview == "0")
-                        {
-                            temp.Add("否");
-                        }
-                        else
-                        {
-                            temp.Add("是");
-                        }
-
-                        temp.Add(record.orderrReviewName);
-                        temp.Add(record.reviewDate);
-
-                        sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
-                    }
-                }
-
-                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
             }
-            else if (m_orderType == OrderType.ALL)
-            {
-            }
+
+            this.rowMergeView1.DataSource = dt;
         }
 
         private void billDetail_Click(object sender, EventArgs e)
@@ -173,7 +147,7 @@ namespace MainProgram
 
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    m_dateGridViewExtend.dataGridViewExportToExecl(saveFileDialog1.FileName);
+                   // m_dateGridViewExtend.dataGridViewExportToExecl(saveFileDialog1.FileName);
                 }
             }
             else
@@ -184,7 +158,7 @@ namespace MainProgram
 
         private void print_Click(object sender, EventArgs e)
         {
-            m_dateGridViewExtend.printDataGridView();
+            //m_dateGridViewExtend.printDataGridView();
         }
 
         private void close_Click(object sender, EventArgs e)
@@ -257,30 +231,15 @@ namespace MainProgram
             }
 
             // checkAccountBillDetaile函数需要完成弹出一个新的窗口，用来显示单据编号关联的具体单据
-            if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
-            {
-                int dataType = 1;
-                if (m_orderType == OrderType.DevMaterielInfo)
-                {
-                    dataType = 1;
-                }
-                else if (m_orderType == OrderType.EleMaterielInfo)
-                {
-                    dataType = 2;
-                }
-                else if (m_orderType == OrderType.EngMaterielInfo)
-                {
-                    dataType = 3;
-                }
+            //FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(m_dataType, m_billNumber);
+            //fpmo.ShowDialog();
+            //updateDataGridView();
 
-                FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(dataType, m_billNumber);
-                fpmo.ShowDialog();
-                updateDataGridView();
-            }
-            else
-            {
-                MessageBoxExtend.messageWarning("暂时不支持的序时薄类型");
-            }
+            //}
+            //else
+            //{
+            //    MessageBoxExtend.messageWarning("暂时不支持的序时薄类型");
+            //}
         }
 
         public string getSelectOrderNumber()

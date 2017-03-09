@@ -1021,6 +1021,11 @@ namespace MainProgram
                 // 仓存管理-其他入库
                 MaterielInOtherOrder.getInctance().refreshRecord();
             }
+            else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                FormProject.getInctance().refreshRecord();
+            }
 
             updateDataGridView();
         }

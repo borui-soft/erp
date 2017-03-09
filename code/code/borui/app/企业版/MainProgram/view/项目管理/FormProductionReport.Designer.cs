@@ -34,7 +34,6 @@
             this.labelPurchaseInvoice = new System.Windows.Forms.Label();
             this.labelPurchaseOrder = new System.Windows.Forms.Label();
             this.labelPurchaseIn = new System.Windows.Forms.Label();
-            this.labelPurchaseInPayment = new System.Windows.Forms.Label();
             this.labelInventory = new System.Windows.Forms.Label();
             this.labelPurchaseOrderExecute = new System.Windows.Forms.Label();
             this.labelAmountCountByMateriel = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelPurchasePirceHistory = new System.Windows.Forms.Label();
             this.labelInventoryHistory = new System.Windows.Forms.Label();
+            this.labelPurchaseInPayment = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,21 +140,6 @@
             this.labelPurchaseIn.Click += new System.EventHandler(this.labelPurchaseIn_Click);
             this.labelPurchaseIn.MouseEnter += new System.EventHandler(this.labelPurchaseIn_MouseEnter);
             this.labelPurchaseIn.MouseLeave += new System.EventHandler(this.labelPurchaseIn_MouseEnter);
-            // 
-            // labelPurchaseInPayment
-            // 
-            this.labelPurchaseInPayment.AutoSize = true;
-            this.labelPurchaseInPayment.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelPurchaseInPayment.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelPurchaseInPayment.ForeColor = System.Drawing.Color.Black;
-            this.labelPurchaseInPayment.Location = new System.Drawing.Point(63, 333);
-            this.labelPurchaseInPayment.Name = "labelPurchaseInPayment";
-            this.labelPurchaseInPayment.Size = new System.Drawing.Size(119, 14);
-            this.labelPurchaseInPayment.TabIndex = 21;
-            this.labelPurchaseInPayment.Text = "工程总材料表跟踪";
-            this.labelPurchaseInPayment.Click += new System.EventHandler(this.labelPurchaseInPayment_Click);
-            this.labelPurchaseInPayment.MouseEnter += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
-            this.labelPurchaseInPayment.MouseLeave += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
             // 
             // labelInventory
             // 
@@ -295,6 +280,21 @@
             this.labelInventoryHistory.MouseEnter += new System.EventHandler(this.labelInventoryHistory_MouseEnter);
             this.labelInventoryHistory.MouseLeave += new System.EventHandler(this.labelInventoryHistory_MouseEnter);
             // 
+            // labelPurchaseInPayment
+            // 
+            this.labelPurchaseInPayment.AutoSize = true;
+            this.labelPurchaseInPayment.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelPurchaseInPayment.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelPurchaseInPayment.ForeColor = System.Drawing.Color.Black;
+            this.labelPurchaseInPayment.Location = new System.Drawing.Point(63, 333);
+            this.labelPurchaseInPayment.Name = "labelPurchaseInPayment";
+            this.labelPurchaseInPayment.Size = new System.Drawing.Size(119, 14);
+            this.labelPurchaseInPayment.TabIndex = 21;
+            this.labelPurchaseInPayment.Text = "工程总材料表跟踪";
+            this.labelPurchaseInPayment.Click += new System.EventHandler(this.labelPurchaseInPayment_Click);
+            this.labelPurchaseInPayment.MouseEnter += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
+            this.labelPurchaseInPayment.MouseLeave += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
+            // 
             // FormProductionReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -339,7 +339,6 @@
         private System.Windows.Forms.Label labelPurchaseOrder;
         private System.Windows.Forms.Label labelPurchaseIn;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label labelPurchaseInPayment;
         private System.Windows.Forms.Label labelInventory;
         private System.Windows.Forms.Label labelPurchaseOrderExecute;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -348,6 +347,7 @@
         private System.Windows.Forms.Label labelAmountCountByPeople;
         private System.Windows.Forms.Label labelPurchasePirceHistory;
         private System.Windows.Forms.Label labelInventoryHistory;
+        private System.Windows.Forms.Label labelPurchaseInPayment;
 
     }
 }

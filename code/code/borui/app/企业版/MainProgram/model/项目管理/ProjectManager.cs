@@ -31,6 +31,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         public void insert(FormProjectMaterielTable record, bool isDisplayMessageBox = true)
         {
             string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
@@ -117,11 +122,6 @@ namespace MainProgram.model
             writeOperatorLog(101, OperatorLogType.Review, billNumber);
         }
 
-        public void refreshRecord()
-        {
-            load();
-        }
-
         private void load()
         {
             string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
@@ -183,6 +183,59 @@ namespace MainProgram.model
                 if (index.Value.dataType == dataType)
                 {
                     list.Add(list.Count, index.Value);
+                }
+            }
+
+            return list;
+        }
+
+        public SortedDictionary<int, FormProjectMaterielTable> getAllPurchaseOrderInfo(string projectNum, string reviewStatus, int dataType)
+        {
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
+            SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
+
+            foreach (KeyValuePair<int, FormProjectMaterielTable> index in m_tableDataList)
+            {
+                FormProjectMaterielTable record = new FormProjectMaterielTable();
+                record = index.Value;
+
+                if (index.Value.projectNum == projectNum)
+                {
+                    if (dataType == 4)
+                    {
+                        if (reviewStatus == "0")
+                        {
+                            if (index.Value.isReview == "1")
+                            {
+                                list.Add(list.Count, index.Value);
+                            }
+                        }
+                        else
+                        {
+                            list.Add(list.Count, index.Value);
+                        }
+                    }
+                    else
+                    {
+                        if (index.Value.dataType == dataType)
+                        {
+                            if (reviewStatus == "0")
+                            {
+                                if (index.Value.isReview == "1")
+                                {
+                                    list.Add(list.Count, index.Value);
+                                }
+                            }
+                            else
+                            {
+                                list.Add(list.Count, index.Value);
+                            }
+                        }
+                    }
                 }
             }
 

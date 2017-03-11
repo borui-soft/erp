@@ -34,6 +34,7 @@ namespace MainProgram
         private FormStorageSequenceFilterValue m_filter = new FormStorageSequenceFilterValue();
         private FormProjectInfoTrackFilterValue m_projectInfoTrackFilter = new FormProjectInfoTrackFilterValue();
         private SortedDictionary<int, FormProjectMaterielTable> m_dataList = new SortedDictionary<int, FormProjectMaterielTable>();
+        private SortedDictionary<int, DataGridViewColumnInfoStruct> m_columnsInfo = new SortedDictionary<int, DataGridViewColumnInfoStruct>();
 
         public FormProjectInfoTrack(OrderType orderType, bool isSelectOrderNumber = false)
         {
@@ -73,6 +74,26 @@ namespace MainProgram
 
         private void FormProjectInfoTrack_Load(object sender, EventArgs e)
         {
+            addDataGridViewColumn("单据编号", 60);
+            addDataGridViewColumn("设备型号", 100);
+            addDataGridViewColumn("所属部件", 200);
+
+            addDataGridViewColumn("物料编码", 60);
+            addDataGridViewColumn("物料名称", 100);
+            addDataGridViewColumn("型号", 200);
+            addDataGridViewColumn("数量", 60);
+
+            addDataGridViewColumn("实际库存", 100);
+            addDataGridViewColumn("预占库存", 200);
+            addDataGridViewColumn("可用库存", 60);
+
+            addDataGridViewColumn("转采购申请数量", 100);
+            addDataGridViewColumn("采购订单数量", 200);
+            addDataGridViewColumn("采购入库数量", 200);
+            addDataGridViewColumn("生产领料数量", 200);
+
+            initDataGridViewColumn();
+
             this.rowMergeView1.ColumnHeadersHeight = 40;
             this.rowMergeView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.rowMergeView1.MergeColumnNames.Add("单据编号");
@@ -83,6 +104,90 @@ namespace MainProgram
             updateDataGridView();
         }
 
+        #region DataGridView自定义方法
+
+        public void addDataGridViewColumn(string headerText, int Width, bool isVisiable = true)
+        {
+            DataGridViewColumnInfoStruct column = new DataGridViewColumnInfoStruct();
+
+            column.headerText = headerText;
+            column.Width = Width;
+            column.isVisiable = isVisiable;
+
+            m_columnsInfo.Add(m_columnsInfo.Count, column);
+        }
+
+        private void setDataGridViewStyle()
+        {
+            this.rowMergeView1.BackgroundColor = System.Drawing.Color.White;
+
+            // 灰色网格线
+            this.rowMergeView1.GridColor = System.Drawing.Color.Silver;
+
+            // 数据为只读
+            this.rowMergeView1.ReadOnly = true;
+
+            // 不能同时选中多行
+            this.rowMergeView1.MultiSelect = false;
+
+            // 禁止用户往DataGridView尾部添加新行
+            this.rowMergeView1.AllowUserToAddRows = false;
+
+            // 行头是否显示
+            this.rowMergeView1.RowHeadersVisible = false;
+
+            // 禁止用户用鼠标拖动DataGridView行高
+            this.rowMergeView1.EnableHeadersVisualStyles = false;
+            this.rowMergeView1.AllowUserToResizeRows = false;
+        }
+
+        public void initDataGridViewColumn()
+        {
+            this.rowMergeView1.ColumnCount = m_columnsInfo.Count;
+            setDataGridViewStyle();
+
+            for (int i = 0; i < m_columnsInfo.Count; i++)
+            {
+                DataGridViewColumnInfoStruct column = new DataGridViewColumnInfoStruct();
+                column = (DataGridViewColumnInfoStruct)m_columnsInfo[i];
+
+                this.rowMergeView1.Columns[i].Width = column.Width;
+                this.rowMergeView1.Columns[i].HeaderText = column.headerText;
+                this.rowMergeView1.Columns[i].Visible = column.isVisiable;
+            }
+        }
+
+        public void initDataGridViewData(SortedDictionary<int, ArrayList> data, int columnFrozenCount = 0)
+        {
+            if (data.Count > 0)
+            {
+                this.rowMergeView1.RowCount = data.Count;
+                for (int i = 0; i < data.Count; i++)
+                {
+                    ArrayList temp = new ArrayList();
+                    temp = (ArrayList)data[i];
+
+                    for (int j = 0; j < temp.Count; j++)
+                    {
+                        this.rowMergeView1.Rows[i].Cells[j].Value = temp[j];
+                        this.rowMergeView1.Rows[i].Height = 18;
+                    }
+                }
+
+                if (columnFrozenCount != 0)
+                {
+                    this.rowMergeView1.Columns[columnFrozenCount].Frozen = true;
+                }
+            }
+            else
+            {
+                this.rowMergeView1.Rows.Clear();
+            }
+        }
+
+
+        #endregion
+
         private void updateDataGridView()
         {
             SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
@@ -92,44 +197,49 @@ namespace MainProgram
             list = FormProject.getInctance().getAllPurchaseOrderInfo(
                 m_projectInfoTrackFilter.projectNum, m_projectInfoTrackFilter.allReview, m_orderType);;
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("单据编号");
-            dt.Columns.Add("设备型号");
-            dt.Columns.Add("所属部件");
 
-            dt.Columns.Add("物料编码");
-            dt.Columns.Add("物料名称");
-            dt.Columns.Add("型号");
-            dt.Columns.Add("数量");
 
-            dt.Columns.Add("实际库存");
-            dt.Columns.Add("预占库存");
-            dt.Columns.Add("可用库存");
+            //initDataGridViewData(list);
 
-            dt.Columns.Add("转采购申请数量");
-            dt.Columns.Add("采购订单数量");
-            dt.Columns.Add("采购入库数量");
-            dt.Columns.Add("生产领料数量");
+
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("单据编号");
+            //dt.Columns.Add("设备型号");
+            //dt.Columns.Add("所属部件");
+
+            //dt.Columns.Add("物料编码");
+            //dt.Columns.Add("物料名称");
+            //dt.Columns.Add("型号");
+            //dt.Columns.Add("数量");
+
+            //dt.Columns.Add("实际库存");
+            //dt.Columns.Add("预占库存");
+            //dt.Columns.Add("可用库存");
+
+            //dt.Columns.Add("转采购申请数量");
+            //dt.Columns.Add("采购订单数量");
+            //dt.Columns.Add("采购入库数量");
+            //dt.Columns.Add("生产领料数量");
             
-            for (int index = 0; index < list.Count; index++)
-            {
-                FormProjectMaterielTable record = new FormProjectMaterielTable();
-                record = (FormProjectMaterielTable)list[index];
+            //for (int index = 0; index < list.Count; index++)
+            //{
+            //    FormProjectMaterielTable record = new FormProjectMaterielTable();
+            //    record = (FormProjectMaterielTable)list[index];
 
-                listDetails.Clear();
-                listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
+            //    listDetails.Clear();
+            //    listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
 
-                for (int index2 = 0; index2 < listDetails.Count; index2++)
-                {
-                    ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
-                    tmp = (ProjectManagerDetailsTable)listDetails[index2];
+            //    for (int index2 = 0; index2 < listDetails.Count; index2++)
+            //    {
+            //        ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+            //        tmp = (ProjectManagerDetailsTable)listDetails[index2];
 
-                    dt.Rows.Add(record.billNumber, record.deviceMode, record.deviceName, 
-                        tmp.materielID, tmp.materielName,tmp.materielModel, tmp.value);
-                }
-            }
+            //        dt.Rows.Add(record.billNumber, record.deviceMode, record.deviceName, 
+            //            tmp.materielID, tmp.materielName,tmp.materielModel, tmp.value);
+            //    }
+            //}
 
-            this.rowMergeView1.DataSource = dt;
+            //this.rowMergeView1.DataSource = dt;
         }
 
         private void billDetail_Click(object sender, EventArgs e)

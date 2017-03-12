@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections;
 using MainProgram.model;
 using MainProgram.bus;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace MainProgram
 {
@@ -27,7 +28,7 @@ namespace MainProgram
         private int m_orderType;
         private OrderType m_orderTypeEnum;
         private string m_billNumber = "";
-        private string m_projectNum = "";
+        private int m_materielPKey = -1;
         private bool m_isSelectOrderNumber;
 
         private RowMergeView m_dateGridViewExtend = new RowMergeView();
@@ -36,29 +37,37 @@ namespace MainProgram
         private SortedDictionary<int, FormProjectMaterielTable> m_dataList = new SortedDictionary<int, FormProjectMaterielTable>();
         private SortedDictionary<int, DataGridViewColumnInfoStruct> m_columnsInfo = new SortedDictionary<int, DataGridViewColumnInfoStruct>();
 
+        // m_materielProlist用于存放库存预占信息
+        SortedDictionary<int, MaterielProOccupiedInfo> m_materielProlist = new SortedDictionary<int, MaterielProOccupiedInfo>();
+
         public FormProjectInfoTrack(OrderType orderType, bool isSelectOrderNumber = false)
         {
             InitializeComponent();
             m_orderTypeEnum = orderType;
+            string orderTypeText = "";
 
             if (m_orderTypeEnum == OrderType.DevMaterielInfo)
             {
                 this.Text = "设备总材料表跟踪情况";
                 m_orderType = 1;
+                orderTypeText = "设备总材料表";
             }
             else if (m_orderTypeEnum == OrderType.EleMaterielInfo)
             {
                 this.Text = "电器总材料表跟踪情况";
                 m_orderType = 2;
+                orderTypeText = "电器总材料表";
             }
             else if (m_orderTypeEnum == OrderType.EngMaterielInfo)
             {
                 this.Text = "工程总材料表跟踪情况";
                 m_orderType = 3;
+                orderTypeText = "工程总材料";
             }
             else if (m_orderTypeEnum == OrderType.ALL)
             {
                 this.Text = "项目整体情况跟踪情况";
+                orderTypeText = "项目总材料表";
                 m_orderType = 4;
             }
 
@@ -70,207 +79,177 @@ namespace MainProgram
             {
                 m_projectInfoTrackFilter = fssf.getFilterUIValue();
             }
+
+            this.toolStripStatusLabel.Text = "材料表类型：" + orderTypeText + ",     项目编号：" + m_projectInfoTrackFilter.projectNum + ",     单据类型:" + m_projectInfoTrackFilter.allReview;
         }
 
         private void FormProjectInfoTrack_Load(object sender, EventArgs e)
         {
-            addDataGridViewColumn("单据编号", 60);
+            addDataGridViewColumn("单据编号", 135);
             addDataGridViewColumn("设备型号", 100);
-            addDataGridViewColumn("所属部件", 200);
+            addDataGridViewColumn("所属部件", 100);
 
-            addDataGridViewColumn("物料编码", 60);
+            addDataGridViewColumn("ID", 60, false);
             addDataGridViewColumn("物料名称", 100);
-            addDataGridViewColumn("型号", 200);
+            addDataGridViewColumn("物料编码", 60);
+            addDataGridViewColumn("型号", 60);
             addDataGridViewColumn("数量", 60);
 
             addDataGridViewColumn("实际库存", 100);
-            addDataGridViewColumn("预占库存", 200);
-            addDataGridViewColumn("可用库存", 60);
+            addDataGridViewColumn("预占库存", 100);
+            addDataGridViewColumn("可用库存", 100);
 
-            addDataGridViewColumn("转采购申请数量", 100);
-            addDataGridViewColumn("采购订单数量", 200);
-            addDataGridViewColumn("采购入库数量", 200);
-            addDataGridViewColumn("生产领料数量", 200);
+            addDataGridViewColumn("转采购申请\n数量", 100);
+            addDataGridViewColumn("采购(订单)\n数量", 100);
+            addDataGridViewColumn("采购入库\n数量", 100);
+            addDataGridViewColumn("生产领料\n数量", 100);
 
             initDataGridViewColumn();
 
-            this.rowMergeView1.ColumnHeadersHeight = 40;
-            this.rowMergeView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.rowMergeView1.MergeColumnNames.Add("单据编号");
-            this.rowMergeView1.MergeColumnNames.Add("设备型号");
-            this.rowMergeView1.AddSpanHeader(3, 4, "物料基本信息");
-            this.rowMergeView1.AddSpanHeader(7, 3, "库存情况");
+            this.projectRowMergeView.ColumnHeadersHeight = 40;
+            this.projectRowMergeView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.projectRowMergeView.MergeColumnNames.Add("单据编号");
+            this.projectRowMergeView.AddSpanHeader(4, 4, "物料需求");
+            this.projectRowMergeView.AddSpanHeader(8, 3, "库存情况");
 
+            getMaterielProOccupiedList();
             updateDataGridView();
         }
 
-        #region DataGridView自定义方法
-
-        public void addDataGridViewColumn(string headerText, int Width, bool isVisiable = true)
+        private void getMaterielProOccupiedList()
         {
-            DataGridViewColumnInfoStruct column = new DataGridViewColumnInfoStruct();
-
-            column.headerText = headerText;
-            column.Width = Width;
-            column.isVisiable = isVisiable;
-
-            m_columnsInfo.Add(m_columnsInfo.Count, column);
+            m_materielProlist = MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedList();
         }
-
-        private void setDataGridViewStyle()
-        {
-            this.rowMergeView1.BackgroundColor = System.Drawing.Color.White;
-
-            // 灰色网格线
-            this.rowMergeView1.GridColor = System.Drawing.Color.Silver;
-
-            // 数据为只读
-            this.rowMergeView1.ReadOnly = true;
-
-            // 不能同时选中多行
-            this.rowMergeView1.MultiSelect = false;
-
-            // 禁止用户往DataGridView尾部添加新行
-            this.rowMergeView1.AllowUserToAddRows = false;
-
-            // 行头是否显示
-            this.rowMergeView1.RowHeadersVisible = false;
-
-            // 禁止用户用鼠标拖动DataGridView行高
-            this.rowMergeView1.EnableHeadersVisualStyles = false;
-            this.rowMergeView1.AllowUserToResizeRows = false;
-        }
-
-        public void initDataGridViewColumn()
-        {
-            this.rowMergeView1.ColumnCount = m_columnsInfo.Count;
-            setDataGridViewStyle();
-
-            for (int i = 0; i < m_columnsInfo.Count; i++)
-            {
-                DataGridViewColumnInfoStruct column = new DataGridViewColumnInfoStruct();
-                column = (DataGridViewColumnInfoStruct)m_columnsInfo[i];
-
-                this.rowMergeView1.Columns[i].Width = column.Width;
-                this.rowMergeView1.Columns[i].HeaderText = column.headerText;
-                this.rowMergeView1.Columns[i].Visible = column.isVisiable;
-            }
-        }
-
-        public void initDataGridViewData(SortedDictionary<int, ArrayList> data, int columnFrozenCount = 0)
-        {
-            if (data.Count > 0)
-            {
-                this.rowMergeView1.RowCount = data.Count;
-                for (int i = 0; i < data.Count; i++)
-                {
-                    ArrayList temp = new ArrayList();
-                    temp = (ArrayList)data[i];
-
-                    for (int j = 0; j < temp.Count; j++)
-                    {
-                        this.rowMergeView1.Rows[i].Cells[j].Value = temp[j];
-                        this.rowMergeView1.Rows[i].Height = 18;
-                    }
-                }
-
-                if (columnFrozenCount != 0)
-                {
-                    this.rowMergeView1.Columns[columnFrozenCount].Frozen = true;
-                }
-            }
-            else
-            {
-                this.rowMergeView1.Rows.Clear();
-            }
-        }
-
-
-        #endregion
 
         private void updateDataGridView()
         {
             SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
-            SortedDictionary<int, ArrayList> sortedDictionaryList = new SortedDictionary<int, ArrayList>();
+            SortedDictionary<int, ArrayList> projectInfoList = new SortedDictionary<int, ArrayList>();
 
             SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
             list = FormProject.getInctance().getAllPurchaseOrderInfo(
                 m_projectInfoTrackFilter.projectNum, m_projectInfoTrackFilter.allReview, m_orderType);;
 
+            for (int index = 0; index < list.Count; index++)
+            {
+                FormProjectMaterielTable record = new FormProjectMaterielTable();
+                record = (FormProjectMaterielTable)list[index];
 
+                listDetails.Clear();
+                listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
 
-            //initDataGridViewData(list);
+                for (int index2 = 0; index2 < listDetails.Count; index2++)
+                {
+                    ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+                    tmp = (ProjectManagerDetailsTable)listDetails[index2];
 
+                    ArrayList temp = new ArrayList();
 
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("单据编号");
-            //dt.Columns.Add("设备型号");
-            //dt.Columns.Add("所属部件");
+                    temp.Add(record.billNumber);
+                    temp.Add(record.deviceMode);
+                    temp.Add(record.deviceName);
 
-            //dt.Columns.Add("物料编码");
-            //dt.Columns.Add("物料名称");
-            //dt.Columns.Add("型号");
-            //dt.Columns.Add("数量");
+                    temp.Add(tmp.materielID);
+                    temp.Add(tmp.materielName);
+                    temp.Add(tmp.num);
+                    temp.Add(tmp.materielModel);
+                    temp.Add(tmp.value);
 
-            //dt.Columns.Add("实际库存");
-            //dt.Columns.Add("预占库存");
-            //dt.Columns.Add("可用库存");
+                    // 得到实际库存
+                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.pkey);
+                    temp.Add(MaterielCountdata.value);
 
-            //dt.Columns.Add("转采购申请数量");
-            //dt.Columns.Add("采购订单数量");
-            //dt.Columns.Add("采购入库数量");
-            //dt.Columns.Add("生产领料数量");
-            
-            //for (int index = 0; index < list.Count; index++)
-            //{
-            //    FormProjectMaterielTable record = new FormProjectMaterielTable();
-            //    record = (FormProjectMaterielTable)list[index];
+                    // 库存预占情况
+                    if (m_materielProlist.ContainsKey(tmp.pkey))
+                    {
+                        MaterielProOccupiedInfo proOccupiedRecord = new MaterielProOccupiedInfo();
+                        proOccupiedRecord = (MaterielProOccupiedInfo)m_materielProlist[tmp.pkey];
 
-            //    listDetails.Clear();
-            //    listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
+                        temp.Add(proOccupiedRecord.sum);
+                        temp.Add(MaterielCountdata.value - proOccupiedRecord.sum);
+                    }
+                    else
+                    {
+                        temp.Add(0);
+                        temp.Add(MaterielCountdata.value);
+                    }
 
-            //    for (int index2 = 0; index2 < listDetails.Count; index2++)
-            //    {
-            //        ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
-            //        tmp = (ProjectManagerDetailsTable)listDetails[index2];
+                    // 转采购申请单数量
+                    SortedDictionary<int, PurchaseApplyOrderTable> listApplyList = new SortedDictionary<int, PurchaseApplyOrderTable>();
+                    listApplyList = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
 
-            //        dt.Rows.Add(record.billNumber, record.deviceMode, record.deviceName, 
-            //            tmp.materielID, tmp.materielName,tmp.materielModel, tmp.value);
-            //    }
-            //}
+                    double appylyCount = 0;
+                    for (int indexApplyList = 0; indexApplyList < listApplyList.Count; indexApplyList++)
+                    {
+                        PurchaseApplyOrderTable recordlistApply = new PurchaseApplyOrderTable();
+                        recordlistApply = (PurchaseApplyOrderTable)listApplyList[indexApplyList];
 
-            //this.rowMergeView1.DataSource = dt;
+                        appylyCount += PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordlistApply.billNumber, tmp.materielID);
+                    }
+                    temp.Add(appylyCount);
+
+                    // 采购订单数量
+                    SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
+                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+
+                    double orderCount = 0;
+                    for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
+                    {
+                        PurchaseOrderTable recordOrder = new PurchaseOrderTable();
+                        recordOrder = (PurchaseOrderTable)listOrderList[indexOrderList];
+
+                        orderCount += PurchaseOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                    }
+                    temp.Add(orderCount);
+
+                    // 采购入库数量
+                    SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
+                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+
+                    double purchaseInOrderValueCount = 0;
+                    for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
+                    {
+                        PurchaseInOrderTable recordOrder = new PurchaseInOrderTable();
+                        recordOrder = (PurchaseInOrderTable)purchaseInOrderList[indexOrderList];
+
+                        purchaseInOrderValueCount += PurchaseInOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                    }
+                    temp.Add(purchaseInOrderValueCount);
+
+                    // 生产领料数量
+                    SortedDictionary<int, MaterielOutOrderTable> materielOutOrderList = new SortedDictionary<int, MaterielOutOrderTable>();
+                    materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+
+                    double materielOutOrderValueCount = 0;
+                    for (int indexOrderList = 0; indexOrderList < materielOutOrderList.Count; indexOrderList++)
+                    {
+                        MaterielOutOrderTable recordOrder = new MaterielOutOrderTable();
+                        recordOrder = (MaterielOutOrderTable)materielOutOrderList[indexOrderList];
+
+                        materielOutOrderValueCount += MaterielOutOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                    }
+                    temp.Add(materielOutOrderValueCount);
+
+                    projectInfoList.Add(projectInfoList.Count, temp);
+                }
+            }
+
+            initDataGridViewData(projectInfoList, 3);
+
+            m_dataGridRecordCount = projectInfoList.Count;
         }
 
         private void billDetail_Click(object sender, EventArgs e)
         {
-            checkAccountBillDetaile();
-        }
-
-        private void export_Click(object sender, EventArgs e)
-        {
-            // 此处需要添加导入DataGridViewer数据到Excel的功能
-            if (m_dataGridRecordCount > 0)
+            if (m_billNumber.Length > 0)
             {
-                this.saveFileDialog1.Filter = "Excel 2007格式 (*.xlsx)|*.xlsx|Excel 2003格式 (*.xls)|*.xls";
-                this.saveFileDialog1.RestoreDirectory = true;
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                   // m_dateGridViewExtend.dataGridViewExportToExecl(saveFileDialog1.FileName);
-                }
+                checkAccountBillDetaile();
             }
-            else
+            else 
             {
-                MessageBoxExtend.messageWarning("数据为空，无数据可导出!");
+                MessageBoxExtend.messageWarning("数据为空，无详细数据!");
             }
         }
-
-        private void print_Click(object sender, EventArgs e)
-        {
-            //m_dateGridViewExtend.printDataGridView();
-        }
-
         private void close_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -283,14 +262,14 @@ namespace MainProgram
                 if (m_dataGridRecordCount > 0)
                 {
                     // 当单击某个单元格时，自动选择整行
-                    for (int i = 0; i < this.dataGridViewList.RowCount; i++)
+                    for (int i = 0; i < this.projectRowMergeView.RowCount; i++)
                     {
-                        for (int j = 0; j < dataGridViewList.ColumnCount; j++)
+                        for (int j = 0; j < projectRowMergeView.ColumnCount; j++)
                         {
-                            if (dataGridViewList.Rows[i].Cells[j].Selected)
+                            if (projectRowMergeView.Rows[i].Cells[j].Selected)
                             {
-                                dataGridViewList.Rows[i].Selected = true;
-                                m_billNumber = dataGridViewList.Rows[i].Cells[3].Value.ToString();
+                                projectRowMergeView.Rows[i].Selected = true;
+                                m_billNumber = projectRowMergeView.Rows[i].Cells[3].Value.ToString();
                                 return;
                             }
                         }
@@ -310,15 +289,15 @@ namespace MainProgram
                 if (m_dataGridRecordCount > 0)
                 {
                     // 当单击某个单元格时，自动选择整行
-                    for (int i = 0; i < this.dataGridViewList.RowCount; i++)
+                    for (int i = 0; i < this.projectRowMergeView.RowCount; i++)
                     {
-                        for (int j = 0; j < dataGridViewList.ColumnCount; j++)
+                        for (int j = 0; j < projectRowMergeView.ColumnCount; j++)
                         {
-                            if (dataGridViewList.Rows[i].Cells[j].Selected)
+                            if (projectRowMergeView.Rows[i].Cells[j].Selected)
                             {
-                                dataGridViewList.Rows[i].Selected = true;
-                                m_billNumber = dataGridViewList.Rows[i].Cells[3].Value.ToString();
-                                m_projectNum = dataGridViewList.Rows[i].Cells[4].Value.ToString();
+                                projectRowMergeView.Rows[i].Selected = true;
+                                m_billNumber = projectRowMergeView.Rows[i].Cells[0].Value.ToString();
+                                m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[i].Cells[3].Value.ToString());
                                 checkAccountBillDetaile();
                                 return;
                             }
@@ -334,32 +313,13 @@ namespace MainProgram
 
         private void checkAccountBillDetaile()
         {
-            if (m_isSelectOrderNumber)
-            {
-                this.Close();
-                return;
-            }
-
-            // checkAccountBillDetaile函数需要完成弹出一个新的窗口，用来显示单据编号关联的具体单据
-            //FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(m_dataType, m_billNumber);
-            //fpmo.ShowDialog();
-            //updateDataGridView();
-
-            //}
-            //else
-            //{
-            //    MessageBoxExtend.messageWarning("暂时不支持的序时薄类型");
-            //}
+            FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(m_orderType, m_billNumber);
+            fpmo.ShowDialog();
         }
 
         public string getSelectOrderNumber()
         {
             return m_billNumber;
-        }
-
-        public string getSelectOrderProjectNum()
-        {
-            return m_projectNum;
         }
 
         public void setDataFilter(FormStorageSequenceFilterValue filter)
@@ -369,43 +329,259 @@ namespace MainProgram
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            //// 刷新按钮逻辑
-            //if (m_orderType == OrderType.PurchaseOrder)
-            //{
-            //    PurchaseOrder.getInctance().refreshRecord();
-            //}
-            //else if (m_orderType == OrderType.PurchaseIn)
-            //{
-            //    PurchaseInOrder.getInctance().refreshRecord();
-            //}
-            //else if (m_orderType == OrderType.PurchaseInvoice)
-            //{
-            //}
-            //else if (m_orderType == OrderType.PurchaseOrderExcute)
-            //{
-            //    PurchaseOrder.getInctance().refreshRecord();
-            //}
-            //else if (m_orderType == OrderType.PurchaseInOrderExcute)
-            //{
-            //    PurchaseInOrder.getInctance().refreshRecord();
-            //}
-            //else if (m_orderType == OrderType.StorageProductIn)
-            //{
-            //    // 仓存管理-产品入库
-            //    MaterielInOrder.getInctance().refreshRecord();
-            //}
-            //else if (m_orderType == OrderType.StorageInCheck)
-            //{
-            //    // 仓存管理-盘盈入库
-            //    MaterielInEarningsOrder.getInctance().refreshRecord();
-            //}
-            //else if (m_orderType == OrderType.StorageInOther)
-            //{
-            //    // 仓存管理-其他入库
-            //    MaterielInOtherOrder.getInctance().refreshRecord();
-            //}
-
+            getMaterielProOccupiedList();
             updateDataGridView();
+        }
+
+        private void rowMergeView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            projectRowMergeView.Rows[e.RowIndex].Selected = true;
+
+            m_billNumber = projectRowMergeView.Rows[e.RowIndex].Cells[0].Value.ToString();
+            m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[e.RowIndex].Cells[3].Value.ToString());
+        }
+
+        #region DataGridView自定义方法
+
+        public void addDataGridViewColumn(string headerText, int Width, bool isVisiable = true)
+        {
+            DataGridViewColumnInfoStruct column = new DataGridViewColumnInfoStruct();
+
+            column.headerText = headerText;
+            column.Width = Width;
+            column.isVisiable = isVisiable;
+
+            m_columnsInfo.Add(m_columnsInfo.Count, column);
+        }
+
+        private void setDataGridViewStyle()
+        {
+            this.projectRowMergeView.BackgroundColor = System.Drawing.Color.White;
+
+            // 灰色网格线
+            this.projectRowMergeView.GridColor = System.Drawing.Color.Silver;
+
+            // 数据为只读
+            this.projectRowMergeView.ReadOnly = true;
+
+            // 不能同时选中多行
+            this.projectRowMergeView.MultiSelect = false;
+
+            // 禁止用户往DataGridView尾部添加新行
+            this.projectRowMergeView.AllowUserToAddRows = false;
+
+            // 行头是否显示
+            this.projectRowMergeView.RowHeadersVisible = false;
+
+            // 禁止用户用鼠标拖动DataGridView行高
+            this.projectRowMergeView.EnableHeadersVisualStyles = false;
+            this.projectRowMergeView.AllowUserToResizeRows = false;
+        }
+
+        public void initDataGridViewColumn()
+        {
+            this.projectRowMergeView.ColumnCount = m_columnsInfo.Count;
+            setDataGridViewStyle();
+
+            for (int i = 0; i < m_columnsInfo.Count; i++)
+            {
+                DataGridViewColumnInfoStruct column = new DataGridViewColumnInfoStruct();
+                column = (DataGridViewColumnInfoStruct)m_columnsInfo[i];
+
+                this.projectRowMergeView.Columns[i].Name = column.headerText;
+                this.projectRowMergeView.Columns[i].Width = column.Width;
+                this.projectRowMergeView.Columns[i].HeaderText = column.headerText;
+                this.projectRowMergeView.Columns[i].Visible = column.isVisiable;
+            }
+        }
+
+        public void initDataGridViewData(SortedDictionary<int, ArrayList> data, int columnFrozenCount = 0)
+        {
+            if (data.Count > 0)
+            {
+                this.projectRowMergeView.RowCount = data.Count;
+                for (int i = 0; i < data.Count; i++)
+                {
+                    ArrayList temp = new ArrayList();
+                    temp = (ArrayList)data[i];
+
+                    for (int j = 0; j < temp.Count; j++)
+                    {
+                        this.projectRowMergeView.Rows[i].Cells[j].Value = temp[j];
+                        this.projectRowMergeView.Rows[i].Height = 18;
+                    }
+                }
+
+                if (columnFrozenCount != 0)
+                {
+                    this.projectRowMergeView.Columns[columnFrozenCount].Frozen = true;
+                }
+            }
+            else
+            {
+                this.projectRowMergeView.Rows.Clear();
+            }
+        }
+
+
+        private void export_Click(object sender, EventArgs e)
+        {
+            // 此处需要添加导入DataGridViewer数据到Excel的功能
+            if (m_dataGridRecordCount > 0)
+            {
+                this.saveFileDialog1.Filter = "Excel 2007格式 (*.xlsx)|*.xlsx|Excel 2003格式 (*.xls)|*.xls";
+                this.saveFileDialog1.RestoreDirectory = true;
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                        Excel.Workbook excelWorkbook = excelApp.Workbooks.Add();
+                        Excel.Worksheet excelSheet = (Excel.Worksheet)excelWorkbook.Sheets["Sheet1"];
+
+                        if (excelApp == null)
+                        {
+                            MessageBoxExtend.messageWarning("数据导出失败, Excel安装进程存在异常，请关闭到其他已经打开的Excel文件后重试一次.");
+                            return;
+                        }
+
+                        if (excelWorkbook == null)
+                        {
+                            MessageBoxExtend.messageWarning("数据导出失败, Excel工作表存在异常，请关闭到其他已经打开的Excel文件后重试一次.");
+                            return;
+                        }
+
+                        if (excelSheet == null)
+                        {
+                            MessageBoxExtend.messageWarning("数据导出失败, Excel sheet表存在异常，请关闭到其他已经打开的Excel文件后重试一次.");
+                            return;
+                        }
+
+                        excelApp.Visible = false;
+
+                        try
+                        {
+                            //向Excel中写入表格的表头
+                            int displayColumnsCount = 1;
+                            for (int i = 0; i <= this.projectRowMergeView.ColumnCount - 1; i++)
+                            {
+                                if (projectRowMergeView.Columns[i].Visible)
+                                {
+                                    excelApp.Cells[1, displayColumnsCount] = projectRowMergeView.Columns[i].HeaderText.Trim();
+                                    ((Excel.Range)excelSheet.Columns[displayColumnsCount, System.Type.Missing]).ColumnWidth = projectRowMergeView.Columns[i].Width * 1.0 / 8;
+                                    displayColumnsCount++;
+                                }
+                            }
+
+                            for (int row = 0; row < projectRowMergeView.RowCount; row++)
+                            {
+                                displayColumnsCount = 1;
+                                for (int col = 0; col < projectRowMergeView.ColumnCount; col++)
+                                {
+                                    if (projectRowMergeView.Rows[row].Cells[col].Visible)
+                                    {
+                                        excelApp.Cells[row + 2, displayColumnsCount] = projectRowMergeView.Rows[row].Cells[col].Value.ToString().Trim();
+                                        displayColumnsCount++;
+                                    }
+                                }
+                            }
+
+                            excelWorkbook.SaveAs(saveFileDialog1.FileName);
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBoxExtend.messageWarning(error.Message);
+                            return;
+                        }
+                        finally
+                        {
+                            //关闭Excel应用    
+                            if (excelWorkbook != null)
+                            {
+                                excelWorkbook.Close();
+                            }
+
+                            if (excelApp.Workbooks != null)
+                            {
+                                excelApp.Workbooks.Close();
+                            }
+
+                            if (excelApp != null)
+                            {
+                                excelApp.Quit();
+                            }
+
+                            excelWorkbook = null;
+                            excelApp = null;
+                        }
+
+                        MessageBoxExtend.messageOK("导出成功\n\n" + saveFileDialog1.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBoxExtend.messageError(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("数据为空，无数据可导出!");
+            }
+        }
+
+        private void print_Click(object sender, EventArgs e)
+        {
+            PrintDataGridView.Print_DataGridView(projectRowMergeView);
+        }
+
+        #endregion
+
+        private void projectRowMergeView_DoubleClick(object sender, EventArgs e)
+        {
+            billDetail_Click(null, null);
+        }
+
+        private void projectRowMergeView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < m_dataGridRecordCount))
+            {
+                projectRowMergeView.Rows[e.RowIndex].Selected = true;
+                m_billNumber = projectRowMergeView.Rows[e.RowIndex].Cells[0].Value.ToString();
+                m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[e.RowIndex].Cells[3].Value.ToString());
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void ToolStripMenuItemToApply_Click(object sender, EventArgs e)
+        {
+            FormPurchaseApply fpa = new FormPurchaseApply("", m_projectInfoTrackFilter.projectNum);
+            fpa.ShowDialog();
+        }
+
+        private void ToolStripMenuItemPurchaseApplyOrderInfo_Click(object sender, EventArgs e)
+        {
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseApplyOrder, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            fpod.ShowDialog();
+        }
+
+        private void ToolStripMenuItemPurchaseOrderInfo_Click(object sender, EventArgs e)
+        {
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseOrder, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            fpod.ShowDialog();
+        }
+
+        private void toolStripMenuItemPurchaseInOrderInfo_Click(object sender, EventArgs e)
+        {
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseIn, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            fpod.ShowDialog();
+        }
+
+        private void ToolStripMenuItemMaterielOutOrderInfo_Click(object sender, EventArgs e)
+        {
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.StorageMaterielOut, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            fpod.ShowDialog();
         }
     }
 }

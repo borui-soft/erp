@@ -123,7 +123,9 @@ namespace MainProgram.model
                     record.materielName = materiel.name;
                     record.materielModel = materiel.model;
                     record.materielSize = "";
+                    record.num = materiel.num;
                     record.materielUnit = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase);
+
 
                     record.value = DbDataConvert.ToDouble(row["VALUE"]);
                     record.makeType = DbDataConvert.ToString(row["MAKE_TYPE"]);
@@ -191,6 +193,7 @@ namespace MainProgram.model
         // 物料详细信息
         public int rowNumber { get; set; }
         public int materielID { get; set; }
+        public string num { get; set; }
 
         public string materielBrand { get; set; }
         public string materielName { get; set; }

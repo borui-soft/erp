@@ -44,10 +44,19 @@ namespace MainProgram
             SumTurnover
         };
 
-        public FormPurchaseApply(string billNumber = "")
+        public FormPurchaseApply(string billNumber = "", string projectNumber = "")
         {
             InitializeComponent();
             m_billNumber = billNumber;
+
+            if (projectNumber.Length > 0)
+            {
+                this.labelProject.Visible = true;
+                this.labelProject.Text = projectNumber;
+                this.panelProjectNum.Visible = false;
+                this.textBoxProject.Visible = false;
+                this.textBoxProject.ReadOnly = true;
+            }
         }
 
         private void FormPurchaseApply_Load(object sender, EventArgs e)

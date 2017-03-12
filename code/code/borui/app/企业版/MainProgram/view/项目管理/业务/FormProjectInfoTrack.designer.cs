@@ -28,26 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectInfoTrack));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.billDetail = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.export = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.billDetail = new System.Windows.Forms.ToolStripButton();
+            this.export = new System.Windows.Forms.ToolStripButton();
             this.printDisplay = new System.Windows.Forms.ToolStripButton();
             this.print = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.close = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.dataGridViewList = new System.Windows.Forms.DataGridView();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.rowMergeView1 = new RowMergeView();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemToApply = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemPurchaseApplyOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemPurchaseOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemPurchaseInOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemMaterielOutOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectRowMergeView = new RowMergeView();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowMergeView1)).BeginInit();
+            this.statusStrip.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.projectRowMergeView)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -67,9 +78,50 @@
             this.toolStripSeparator5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(967, 45);
+            this.toolStrip1.Size = new System.Drawing.Size(1330, 45);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 45);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 45);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 45);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 45);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 722);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1330, 22);
+            this.statusStrip.TabIndex = 29;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel1";
             // 
             // billDetail
             // 
@@ -84,11 +136,6 @@
             this.billDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.billDetail.Click += new System.EventHandler(this.billDetail_Click);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 45);
-            // 
             // export
             // 
             this.export.Image = global::MainProgram.Properties.Resources.export;
@@ -101,11 +148,6 @@
             this.export.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.export.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.export.Click += new System.EventHandler(this.export_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 45);
             // 
             // printDisplay
             // 
@@ -133,11 +175,6 @@
             this.print.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.print.Click += new System.EventHandler(this.print_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 45);
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.Image = global::MainProgram.Properties.Resources.review;
@@ -152,11 +189,6 @@
             this.toolStripButton1.ToolTipText = "刷新";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
-            // 
             // close
             // 
             this.close.Image = global::MainProgram.Properties.Resources.close;
@@ -170,56 +202,106 @@
             this.close.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.close.Click += new System.EventHandler(this.close_Click);
             // 
-            // toolStripSeparator5
+            // contextMenuStripDataGridView
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 45);
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemToApply,
+            this.toolStripSeparator7,
+            this.ToolStripMenuItemPurchaseApplyOrderInfo,
+            this.ToolStripMenuItemPurchaseOrderInfo,
+            this.toolStripMenuItemPurchaseInOrderInfo,
+            this.toolStripSeparator6,
+            this.ToolStripMenuItemMaterielOutOrderInfo});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 148);
             // 
-            // dataGridViewList
+            // ToolStripMenuItemToApply
             // 
-            this.dataGridViewList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewList.Location = new System.Drawing.Point(837, 428);
-            this.dataGridViewList.Name = "dataGridViewList";
-            this.dataGridViewList.RowHeadersWidth = 4;
-            this.dataGridViewList.RowTemplate.Height = 23;
-            this.dataGridViewList.Size = new System.Drawing.Size(130, 55);
-            this.dataGridViewList.TabIndex = 3;
-            this.dataGridViewList.Click += new System.EventHandler(this.dataGridViewBilConfigList_Click);
-            this.dataGridViewList.DoubleClick += new System.EventHandler(this.dataGridViewMaterielList_DoubleClick);
+            this.ToolStripMenuItemToApply.BackColor = System.Drawing.Color.Transparent;
+            this.ToolStripMenuItemToApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ToolStripMenuItemToApply.Name = "ToolStripMenuItemToApply";
+            this.ToolStripMenuItemToApply.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemToApply.Text = "转采购申请";
+            this.ToolStripMenuItemToApply.Click += new System.EventHandler(this.ToolStripMenuItemToApply_Click);
             // 
-            // rowMergeView1
+            // ToolStripMenuItemPurchaseApplyOrderInfo
             // 
-            this.rowMergeView1.AllowUserToAddRows = false;
-            this.rowMergeView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.rowMergeView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.rowMergeView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.rowMergeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rowMergeView1.Location = new System.Drawing.Point(0, 45);
-            this.rowMergeView1.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
-            this.rowMergeView1.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("rowMergeView1.MergeColumnNames")));
-            this.rowMergeView1.Name = "rowMergeView1";
-            this.rowMergeView1.ReadOnly = true;
-            this.rowMergeView1.RowTemplate.Height = 23;
-            this.rowMergeView1.Size = new System.Drawing.Size(967, 435);
-            this.rowMergeView1.TabIndex = 4;
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.BackColor = System.Drawing.Color.Transparent;
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.Name = "ToolStripMenuItemPurchaseApplyOrderInfo";
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.Text = "采购申请详情";
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemPurchaseApplyOrderInfo_Click);
+            // 
+            // ToolStripMenuItemPurchaseOrderInfo
+            // 
+            this.ToolStripMenuItemPurchaseOrderInfo.BackColor = System.Drawing.Color.Transparent;
+            this.ToolStripMenuItemPurchaseOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ToolStripMenuItemPurchaseOrderInfo.Name = "ToolStripMenuItemPurchaseOrderInfo";
+            this.ToolStripMenuItemPurchaseOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemPurchaseOrderInfo.Text = "采购订单详情";
+            this.ToolStripMenuItemPurchaseOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemPurchaseOrderInfo_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuItemPurchaseInOrderInfo
+            // 
+            this.toolStripMenuItemPurchaseInOrderInfo.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItemPurchaseInOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItemPurchaseInOrderInfo.Name = "toolStripMenuItemPurchaseInOrderInfo";
+            this.toolStripMenuItemPurchaseInOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemPurchaseInOrderInfo.Text = "采购入库详情";
+            this.toolStripMenuItemPurchaseInOrderInfo.Click += new System.EventHandler(this.toolStripMenuItemPurchaseInOrderInfo_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ToolStripMenuItemMaterielOutOrderInfo
+            // 
+            this.ToolStripMenuItemMaterielOutOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ToolStripMenuItemMaterielOutOrderInfo.Name = "ToolStripMenuItemMaterielOutOrderInfo";
+            this.ToolStripMenuItemMaterielOutOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemMaterielOutOrderInfo.Text = "生产领料详情";
+            this.ToolStripMenuItemMaterielOutOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemMaterielOutOrderInfo_Click);
+            // 
+            // projectRowMergeView
+            // 
+            this.projectRowMergeView.AllowUserToAddRows = false;
+            this.projectRowMergeView.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectRowMergeView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.projectRowMergeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.projectRowMergeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectRowMergeView.Location = new System.Drawing.Point(0, 45);
+            this.projectRowMergeView.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
+            this.projectRowMergeView.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("projectRowMergeView.MergeColumnNames")));
+            this.projectRowMergeView.Name = "projectRowMergeView";
+            this.projectRowMergeView.ReadOnly = true;
+            this.projectRowMergeView.RowTemplate.Height = 23;
+            this.projectRowMergeView.Size = new System.Drawing.Size(1330, 699);
+            this.projectRowMergeView.TabIndex = 4;
+            this.projectRowMergeView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.rowMergeView1_CellClick);
+            this.projectRowMergeView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.projectRowMergeView_CellMouseDown);
+            this.projectRowMergeView.DoubleClick += new System.EventHandler(this.projectRowMergeView_DoubleClick);
             // 
             // FormProjectInfoTrack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 480);
-            this.Controls.Add(this.rowMergeView1);
-            this.Controls.Add(this.dataGridViewList);
+            this.ClientSize = new System.Drawing.Size(1330, 744);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.projectRowMergeView);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormProjectInfoTrack";
@@ -228,9 +310,12 @@
             this.Load += new System.EventHandler(this.FormProjectInfoTrack_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowMergeView1)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.projectRowMergeView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -244,12 +329,21 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton close;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.DataGridView dataGridViewList;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton billDetail;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private RowMergeView rowMergeView1;
+        private RowMergeView projectRowMergeView;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemToApply;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemPurchaseApplyOrderInfo;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemPurchaseOrderInfo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPurchaseInOrderInfo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemMaterielOutOrderInfo;
     }
 }

@@ -91,7 +91,7 @@ namespace MainProgram
 
         private void panelProjectInfo_Click(object sender, EventArgs e)
         {
-
+            MessageBoxExtend.messageOK("功能研发中...");
         }
 
         private void panelProBom_MouseEnter(object sender, EventArgs e)
@@ -101,7 +101,7 @@ namespace MainProgram
 
         private void panelProBom_Click(object sender, EventArgs e)
         {
-
+            MessageBoxExtend.messageOK("功能研发中...");
         }
 
     }

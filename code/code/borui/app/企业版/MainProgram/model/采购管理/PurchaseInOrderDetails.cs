@@ -161,6 +161,22 @@ namespace MainProgram.model
             }
         }
 
+        public double getPurchaseValueFromBillNumber(string billNumber, int materielID)
+        {
+            double value = 0;
+            SortedDictionary<int, PurchaseInOrderDetailsTable> list = new SortedDictionary<int, PurchaseInOrderDetailsTable>();
+
+            foreach (KeyValuePair<int, PurchaseInOrderDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
+                {
+                    value = index.Value.value;
+                }
+            }
+
+            return value;
+        }
+
         public SortedDictionary<int, PurchaseInOrderDetailsTable> getAllPurchaseInOrderInfo()
         {
             if (m_tableDataList.Count == 0)

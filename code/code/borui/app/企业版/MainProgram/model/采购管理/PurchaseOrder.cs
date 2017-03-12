@@ -204,6 +204,24 @@ namespace MainProgram.model
             }
         }
 
+        public SortedDictionary<int, PurchaseOrderTable> getAllPurchaseOrderInfoFromProjectNum(string projectNum)
+        {
+            SortedDictionary<int, PurchaseOrderTable> list = new SortedDictionary<int, PurchaseOrderTable>();
+
+            foreach (KeyValuePair<int, PurchaseOrderTable> index in m_tableDataList)
+            {
+                PurchaseOrderTable record = new PurchaseOrderTable();
+                record = index.Value;
+
+                if (index.Value.projectNum == projectNum)
+                {
+                    list.Add(list.Count, index.Value);
+                }
+            }
+
+            return list;
+        }
+
         public SortedDictionary<int, PurchaseOrderTable> getAllPurchaseOrderInfo()
         {
             if (m_tableDataList.Count == 0)

@@ -171,6 +171,22 @@ namespace MainProgram.model
             return m_tableDataList;
         }
 
+        public double getPurchaseValueFromBillNumber(string billNumber, int materielID)
+        {
+            double value = 0;
+            SortedDictionary<int, PurchaseOrderDetailsTable> list = new SortedDictionary<int, PurchaseOrderDetailsTable>();
+
+            foreach (KeyValuePair<int, PurchaseOrderDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
+                {
+                    value = index.Value.value;
+                }
+            }
+
+            return value;
+        }
+
         public SortedDictionary<int, PurchaseOrderDetailsTable> getPurchaseInfoFromBillNumber(string billNumber)
         {
             SortedDictionary<int, PurchaseOrderDetailsTable> list = new SortedDictionary<int, PurchaseOrderDetailsTable>();

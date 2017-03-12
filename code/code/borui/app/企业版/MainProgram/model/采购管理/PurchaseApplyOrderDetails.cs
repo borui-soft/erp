@@ -184,6 +184,22 @@ namespace MainProgram.model
             return list;
         }
 
+        public double getPurchaseValueFromBillNumber(string billNumber, int materielID)
+        {
+            double value = 0;
+            SortedDictionary<int, PurchaseApplyOrderDetailsTable> list = new SortedDictionary<int, PurchaseApplyOrderDetailsTable>();
+
+            foreach (KeyValuePair<int, PurchaseApplyOrderDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
+                {
+                    value = index.Value.value;
+                }
+            }
+
+            return value;
+        }
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

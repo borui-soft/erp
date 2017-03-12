@@ -111,7 +111,7 @@ namespace MainProgram
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
                 temp.Add(materiel.note);
-                materiels.Add(i, temp);
+                materiels.Add(materiels.Count, temp);
             }
 
             m_dataGridViewExtend.initDataGridViewData(materiels, 4);

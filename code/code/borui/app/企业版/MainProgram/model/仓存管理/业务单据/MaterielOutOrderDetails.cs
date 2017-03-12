@@ -271,6 +271,22 @@ namespace MainProgram.model
 
             return dataList;
         }
+
+        public double getPurchaseValueFromBillNumber(string billNumber, int materielID)
+        {
+            double value = 0;
+            SortedDictionary<int, MaterielOutOrderDetailsTable> list = new SortedDictionary<int, MaterielOutOrderDetailsTable>();
+
+            foreach (KeyValuePair<int, MaterielOutOrderDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
+                {
+                    value = index.Value.value;
+                }
+            }
+
+            return value;
+        }
     }
 
     public class MaterielOutOrderDetailsTable

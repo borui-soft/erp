@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectInfoTrackFilter));
             this.buttonEnter = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxProjectNum = new System.Windows.Forms.TextBox();
             this.labelProjectNum = new System.Windows.Forms.Label();
             this.comboBoxReview = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxProjectNum = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +60,13 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "过滤条件";
+            // 
+            // textBoxProjectNum
+            // 
+            this.textBoxProjectNum.Location = new System.Drawing.Point(79, 21);
+            this.textBoxProjectNum.Name = "textBoxProjectNum";
+            this.textBoxProjectNum.Size = new System.Drawing.Size(339, 21);
+            this.textBoxProjectNum.TabIndex = 0;
             // 
             // labelProjectNum
             // 
@@ -87,13 +94,6 @@
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "审核标志";
-            // 
-            // textBoxProjectNum
-            // 
-            this.textBoxProjectNum.Location = new System.Drawing.Point(79, 21);
-            this.textBoxProjectNum.Name = "textBoxProjectNum";
-            this.textBoxProjectNum.Size = new System.Drawing.Size(339, 21);
-            this.textBoxProjectNum.TabIndex = 10;
             // 
             // FormProjectInfoTrackFilter
             // 

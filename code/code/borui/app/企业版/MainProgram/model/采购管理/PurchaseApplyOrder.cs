@@ -231,6 +231,24 @@ namespace MainProgram.model
             return record;
         }
 
+        public SortedDictionary<int, PurchaseApplyOrderTable> getAllPurchaseOrderInfoFromProjectNum(string projectNum)
+        {
+            SortedDictionary<int, PurchaseApplyOrderTable> list = new SortedDictionary<int, PurchaseApplyOrderTable>();
+
+            foreach (KeyValuePair<int, PurchaseApplyOrderTable> index in m_tableDataList)
+            {
+                PurchaseApplyOrderTable record = new PurchaseApplyOrderTable();
+                record = index.Value;
+
+                if (index.Value.proNum == projectNum)
+                {
+                    list.Add(list.Count, index.Value);
+                }
+            }
+
+            return list;
+        }
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

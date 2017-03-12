@@ -280,6 +280,24 @@ namespace MainProgram.model
             return m_tableDataList;
         }
 
+        public SortedDictionary<int, MaterielOutOrderTable> getAllPurchaseOrderInfoFromProjectNum(string projectNum)
+        {
+            SortedDictionary<int, MaterielOutOrderTable> list = new SortedDictionary<int, MaterielOutOrderTable>();
+
+            foreach (KeyValuePair<int, MaterielOutOrderTable> index in m_tableDataList)
+            {
+                MaterielOutOrderTable record = new MaterielOutOrderTable();
+                record = index.Value;
+
+                if (index.Value.projectNo == projectNum)
+                {
+                    list.Add(list.Count, index.Value);
+                }
+            }
+
+            return list;
+        }
+
         public SortedDictionary<int, MaterielOutOrderTable> getAllReviewMaterielOutOrderInfo()
         {
             SortedDictionary<int, MaterielOutOrderTable> list = new SortedDictionary<int, MaterielOutOrderTable>();

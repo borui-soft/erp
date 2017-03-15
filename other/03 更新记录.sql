@@ -207,3 +207,11 @@ insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) value
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('设备总材料表跟踪', 'labelInventoryHistory', 805);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('电器总材料表跟踪', 'labelPurchaseOrderExecute', 805);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('工程总材料表跟踪', 'labelPurchaseInPayment', 805);
+
+
+
+--2017-3-15 物料列表（BASE_MATERIEL_LIST）增加参数字段
+ALTER TABLE [dbo].[BASE_MATERIEL_LIST] ADD PARAMETER [nvarchar](20);
+
+--2017-3-15 采购入库单详细信息表（PURCHASE_IN_ORDER_DETAILS）增加合同编号字段
+ALTER TABLE [dbo].[PURCHASE_IN_ORDER_DETAILS] ADD CONTRACT_MATERIEL_NAME [nvarchar](50);

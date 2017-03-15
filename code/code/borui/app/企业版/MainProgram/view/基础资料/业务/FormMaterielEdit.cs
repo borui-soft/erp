@@ -207,6 +207,7 @@ namespace MainProgram
             materiel.model = this.textBoxModel.Text.ToString();
             materiel.mnemonicCode = this.textBoxMnemonicCode.Text.ToString();
             materiel.brand = this.textBoxBrand.Text.ToString();
+            materiel.materielParameter = this.textBoxParameter.Text.ToString();
 
             if (this.textBoxMIN.Text.Length > 0)
             {
@@ -372,6 +373,8 @@ namespace MainProgram
                             if (m_materiel.name.CompareTo(this.textBoxName.Text) != 0 ||
                                 m_materiel.num.CompareTo(this.textBoxNum.Text) != 0 ||
                                 m_materiel.nameShort.CompareTo(this.textBoxShortName.Text) != 0 ||
+                                m_materiel.materielParameter.CompareTo(this.textBoxParameter.Text) != 0 ||
+                                m_materiel.brand.CompareTo(this.textBoxBrand.Text) != 0 ||
                                 m_materiel.model.CompareTo(this.textBoxModel.Text) != 0 ||
                                 m_materiel.mnemonicCode.CompareTo(this.textBoxMnemonicCode.Text) != 0 ||
                                 m_materiel.min != ConvertExtend.toInt32(this.textBoxMIN.Text.ToString()) ||

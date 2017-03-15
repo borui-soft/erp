@@ -93,6 +93,7 @@ namespace MainProgram
             addDataGridViewColumn("物料名称", 100);
             addDataGridViewColumn("物料编码", 60);
             addDataGridViewColumn("型号", 60);
+            addDataGridViewColumn("参数", 60);
             addDataGridViewColumn("数量", 60);
 
             addDataGridViewColumn("实际库存", 100);
@@ -109,8 +110,8 @@ namespace MainProgram
             this.projectRowMergeView.ColumnHeadersHeight = 40;
             this.projectRowMergeView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.projectRowMergeView.MergeColumnNames.Add("单据编号");
-            this.projectRowMergeView.AddSpanHeader(4, 4, "物料需求");
-            this.projectRowMergeView.AddSpanHeader(8, 3, "库存情况");
+            this.projectRowMergeView.AddSpanHeader(4, 5, "物料需求");
+            this.projectRowMergeView.AddSpanHeader(9, 3, "库存情况");
 
             getMaterielProOccupiedList();
             updateDataGridView();
@@ -153,6 +154,7 @@ namespace MainProgram
                     temp.Add(tmp.materielName);
                     temp.Add(tmp.num);
                     temp.Add(tmp.materielModel);
+                    temp.Add(tmp.materielParameter);
                     temp.Add(tmp.value);
 
                     // 得到实际库存
@@ -582,6 +584,12 @@ namespace MainProgram
         {
             FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.StorageMaterielOut, m_projectInfoTrackFilter.projectNum, m_materielPKey);
             fpod.ShowDialog();
+        }
+
+        // 转生产领料
+        private void toolStripMenuItemToProduce_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

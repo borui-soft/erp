@@ -122,6 +122,7 @@ namespace MainProgram.model
                     record.materielBrand = materiel.name;
                     record.materielName = materiel.name;
                     record.materielModel = materiel.model;
+                    record.materielParameter = materiel.materielParameter;
                     record.materielSize = "";
                     record.num = materiel.num;
                     record.materielUnit = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase);
@@ -200,6 +201,7 @@ namespace MainProgram.model
         public string materielModel { get; set; }
         public string materielSize { get; set; }
         public string materielUnit { get; set; }
+        public string materielParameter { get; set; }
 
         public double value { get; set; }
         public string makeType { get; set; }

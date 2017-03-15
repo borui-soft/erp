@@ -44,6 +44,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.tabPageBaseInfo = new System.Windows.Forms.TabPage();
             this.groupBoxBaseInfo = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxBrand = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxNum = new System.Windows.Forms.TextBox();
@@ -77,8 +79,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxModel = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBoxBrand = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxParameter = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.groupBoxMaterielGroup.SuspendLayout();
             this.tabPageBaseInfo.SuspendLayout();
@@ -168,8 +170,8 @@
             // 
             // textBoxGroupNum
             // 
-            this.textBoxGroupNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxGroupNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxGroupNum.Location = new System.Drawing.Point(353, 25);
             this.textBoxGroupNum.Name = "textBoxGroupNum";
             this.textBoxGroupNum.Size = new System.Drawing.Size(113, 21);
@@ -206,8 +208,8 @@
             // 
             // textBoxMaterielGroupName
             // 
-            this.textBoxMaterielGroupName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMaterielGroupName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMaterielGroupName.Location = new System.Drawing.Point(61, 24);
             this.textBoxMaterielGroupName.Name = "textBoxMaterielGroupName";
             this.textBoxMaterielGroupName.Size = new System.Drawing.Size(219, 21);
@@ -216,8 +218,8 @@
             // 
             // textBoxMaterielGroupDesc
             // 
-            this.textBoxMaterielGroupDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMaterielGroupDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMaterielGroupDesc.Location = new System.Drawing.Point(62, 57);
             this.textBoxMaterielGroupDesc.Name = "textBoxMaterielGroupDesc";
             this.textBoxMaterielGroupDesc.Size = new System.Drawing.Size(535, 21);
@@ -246,6 +248,8 @@
             // 
             // groupBoxBaseInfo
             // 
+            this.groupBoxBaseInfo.Controls.Add(this.label11);
+            this.groupBoxBaseInfo.Controls.Add(this.textBoxParameter);
             this.groupBoxBaseInfo.Controls.Add(this.label10);
             this.groupBoxBaseInfo.Controls.Add(this.textBoxBrand);
             this.groupBoxBaseInfo.Controls.Add(this.label7);
@@ -286,6 +290,25 @@
             this.groupBoxBaseInfo.TabIndex = 35;
             this.groupBoxBaseInfo.TabStop = false;
             this.groupBoxBaseInfo.Text = "基础信息";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(194, 91);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 60;
+            this.label10.Text = "品牌";
+            // 
+            // textBoxBrand
+            // 
+            this.textBoxBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxBrand.Location = new System.Drawing.Point(274, 89);
+            this.textBoxBrand.Name = "textBoxBrand";
+            this.textBoxBrand.Size = new System.Drawing.Size(89, 21);
+            this.textBoxBrand.TabIndex = 61;
+            this.textBoxBrand.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
             // label7
             // 
@@ -364,8 +387,8 @@
             // 
             // textBoxNote
             // 
-            this.textBoxNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNote.Location = new System.Drawing.Point(85, 218);
             this.textBoxNote.Multiline = true;
             this.textBoxNote.Name = "textBoxNote";
@@ -494,16 +517,16 @@
             // 
             this.comboBoxMaterielAttribut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMaterielAttribut.FormattingEnabled = true;
-            this.comboBoxMaterielAttribut.Location = new System.Drawing.Point(85, 121);
+            this.comboBoxMaterielAttribut.Location = new System.Drawing.Point(274, 121);
             this.comboBoxMaterielAttribut.Name = "comboBoxMaterielAttribut";
-            this.comboBoxMaterielAttribut.Size = new System.Drawing.Size(281, 20);
+            this.comboBoxMaterielAttribut.Size = new System.Drawing.Size(92, 20);
             this.comboBoxMaterielAttribut.TabIndex = 38;
             this.comboBoxMaterielAttribut.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(5, 124);
+            this.label14.Location = new System.Drawing.Point(195, 128);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 12);
             this.label14.TabIndex = 37;
@@ -549,8 +572,8 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Location = new System.Drawing.Point(85, 24);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(281, 21);
@@ -559,8 +582,8 @@
             // 
             // textBoxShortName
             // 
-            this.textBoxShortName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxShortName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxShortName.Location = new System.Drawing.Point(451, 23);
             this.textBoxShortName.Name = "textBoxShortName";
             this.textBoxShortName.Size = new System.Drawing.Size(126, 21);
@@ -597,9 +620,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPageBaseInfo);
             this.tabControl1.Location = new System.Drawing.Point(13, 48);
             this.tabControl1.Name = "tabControl1";
@@ -607,23 +630,24 @@
             this.tabControl1.Size = new System.Drawing.Size(609, 345);
             this.tabControl1.TabIndex = 16;
             // 
-            // label10
+            // label11
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(232, 91);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
-            this.label10.TabIndex = 60;
-            this.label10.Text = "品牌";
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 124);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 62;
+            this.label11.Text = "参数";
             // 
-            // textBoxBrand
+            // textBoxParameter
             // 
-            this.textBoxBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBrand.Location = new System.Drawing.Point(274, 89);
-            this.textBoxBrand.Name = "textBoxBrand";
-            this.textBoxBrand.Size = new System.Drawing.Size(89, 21);
-            this.textBoxBrand.TabIndex = 61;
+            this.textBoxParameter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxParameter.Location = new System.Drawing.Point(85, 122);
+            this.textBoxParameter.Name = "textBoxParameter";
+            this.textBoxParameter.Size = new System.Drawing.Size(89, 21);
+            this.textBoxParameter.TabIndex = 63;
+            this.textBoxParameter.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
             // FormMaterielEdit
             // 
@@ -703,5 +727,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxBrand;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxParameter;
     }
 }

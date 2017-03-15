@@ -33,7 +33,7 @@ namespace MainProgram.model
 
         public void insert(MaterielTable materiel)
         {
-            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],";
+            string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[PARAMETER],";
             insert += "[MAX],[MIN],[WARRANTY],[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],";
             insert += "[VALUATION],[NOTE],[STORAGE],[IS_FORBID]) VALUES(";
 
@@ -44,6 +44,7 @@ namespace MainProgram.model
             insert += "'" + materiel.model + "',";
             insert += "'" + materiel.mnemonicCode + "',";
             insert += "'" + materiel.brand + "',";
+            insert += "'" + materiel.materielParameter + "',";
             insert += materiel.max + ",";
             insert += materiel.min + ",";
             insert += materiel.warramty + ",";
@@ -102,6 +103,7 @@ namespace MainProgram.model
             update += "[UNIT_STORAGE] = " + materiel.unitStorage + ",";
             update += "[VALUATION] = " + materiel.valuation + ",";
             update += "[BRAND] = '" + materiel.brand + "',";
+            update += "[PARAMETER] = '" + materiel.materielParameter + "',";
 
             update += "[NOTE] = '" + materiel.note + "'";
 
@@ -125,7 +127,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[MAX],[MIN],[WARRANTY],";
+            string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[PARAMETER], [MAX],[MIN],[WARRANTY],";
             materielQuery += "[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],[VALUATION],[NOTE],[STORAGE],[IS_FORBID]";
             materielQuery += " FROM [dbo].[BASE_MATERIEL_LIST] ORDER BY PKEY";
 
@@ -145,6 +147,7 @@ namespace MainProgram.model
                     materiel.model = DbDataConvert.ToString(row["MODEL"]);
                     materiel.mnemonicCode = DbDataConvert.ToString(row["MNEMONIC_CODE"]);
                     materiel.brand = DbDataConvert.ToString(row["BRAND"]);
+                    materiel.materielParameter = DbDataConvert.ToString(row["PARAMETER"]);
                     materiel.max = DbDataConvert.ToInt32(row["MAX"]);
                     materiel.min = DbDataConvert.ToInt32(row["MIN"]);
                     materiel.warramty = DbDataConvert.ToInt32(row["WARRANTY"]);
@@ -395,5 +398,9 @@ namespace MainProgram.model
         public int valuation { get; set; }
         public string note { get; set; }
         public int isForbid { get; set; }
+
+        // 参数
+        public string materielParameter { get; set; }
+        
     }
 }

@@ -53,12 +53,14 @@ namespace MainProgram.model
                             delete(record.billNumber);
                         }
 
-                        string insert = "INSERT INTO [dbo].[PURCHASE_IN_ORDER_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER]";
+                        string insert = "INSERT INTO [dbo].[PURCHASE_IN_ORDER_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER], [CONTRACT_MATERIEL_NAME]";
                         insert += ",[PRICE],[VALUE],[TRANSPORTATION_COST],[OTHER_COST])VALUES(";
 
                         insert += "'" + record.rowNumber + "',";
                         insert += record.materielID + ",";
                         insert += "'" + record.billNumber + "',";
+                        insert += "'" + record.contractMaterielName + "',";
+
                         insert += record.price + ",";
                         insert += record.value + ",";
                         insert += record.costApportionments + ",";
@@ -125,7 +127,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER],[PRICE],[VALUE]";
+            string sql = "SELECT [PKEY],[ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER],[CONTRACT_MATERIEL_NAME],[PRICE],[VALUE]";
             sql += ",[TRANSPORTATION_COST],[OTHER_COST] FROM [dbo].[PURCHASE_IN_ORDER_DETAILS] ORDER BY PKEY";
 
             m_tableDataList.Clear();
@@ -138,14 +140,15 @@ namespace MainProgram.model
 
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.rowNumber = DbDataConvert.ToString(row["ROW_NUMBER"]);
-                    record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
-
                     record.materielID = DbDataConvert.ToInt32(row["MATERIEL_ID"]);
+                    record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
+                    record.contractMaterielName = DbDataConvert.ToString(row["CONTRACT_MATERIEL_NAME"]);
 
                     // 根据物料ID得到物料相关信息
                     MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
                     record.materielName = materiel.name;
                     record.materielModel = materiel.model;
+                    record.parameter = materiel.materielParameter;
                     record.brand = materiel.brand;
                     record.materielUnitPurchase = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase);
 
@@ -304,7 +307,9 @@ namespace MainProgram.model
 
         public int materielID { get; set; }
         public string materielName { get; set; }
+        public string contractMaterielName { get; set; }
         public string materielModel { get; set; }
+        public string parameter { get; set; }
         public string brand { get; set; }
         public string materielUnitPurchase { get; set; }
 

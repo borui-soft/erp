@@ -60,6 +60,9 @@
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonReview = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonChange = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonChangeReview = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.printDisplay = new System.Windows.Forms.ToolStripButton();
             this.print = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -412,6 +415,9 @@
             this.save,
             this.toolStripButtonReview,
             this.toolStripSeparator1,
+            this.toolStripButtonChange,
+            this.toolStripButtonChangeReview,
+            this.toolStripSeparator3,
             this.printDisplay,
             this.print,
             this.toolStripSeparator2,
@@ -434,9 +440,10 @@
             this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(36, 42);
-            this.save.Text = "保存";
+            this.save.Text = "变更";
             this.save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.save.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.save.ToolTipText = "保存";
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // toolStripButtonReview
@@ -456,6 +463,38 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
+            // 
+            // toolStripButtonChange
+            // 
+            this.toolStripButtonChange.Enabled = false;
+            this.toolStripButtonChange.Image = global::MainProgram.Properties.Resources.Printers;
+            this.toolStripButtonChange.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonChange.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonChange.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonChange.Name = "toolStripButtonChange";
+            this.toolStripButtonChange.Size = new System.Drawing.Size(36, 42);
+            this.toolStripButtonChange.Text = "变更";
+            this.toolStripButtonChange.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonChange.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonChange.Click += new System.EventHandler(this.toolStripButtonChange_Click);
+            // 
+            // toolStripButtonChangeReview
+            // 
+            this.toolStripButtonChangeReview.Enabled = false;
+            this.toolStripButtonChangeReview.Image = global::MainProgram.Properties.Resources.noForbid;
+            this.toolStripButtonChangeReview.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonChangeReview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonChangeReview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonChangeReview.Name = "toolStripButtonChangeReview";
+            this.toolStripButtonChangeReview.Size = new System.Drawing.Size(60, 42);
+            this.toolStripButtonChangeReview.Text = "审核变更";
+            this.toolStripButtonChangeReview.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonChangeReview.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 45);
             // 
             // printDisplay
             // 
@@ -1065,6 +1104,9 @@
         private System.Windows.Forms.TextBox textBoxDeviceName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panelProject;
+        private System.Windows.Forms.ToolStripButton toolStripButtonChange;
+        private System.Windows.Forms.ToolStripButton toolStripButtonChangeReview;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
     }
 }

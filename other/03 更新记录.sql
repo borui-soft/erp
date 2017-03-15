@@ -215,3 +215,11 @@ ALTER TABLE [dbo].[BASE_MATERIEL_LIST] ADD PARAMETER [nvarchar](20);
 
 --2017-3-15 采购入库单详细信息表（PURCHASE_IN_ORDER_DETAILS）增加合同编号字段
 ALTER TABLE [dbo].[PURCHASE_IN_ORDER_DETAILS] ADD CONTRACT_MATERIEL_NAME [nvarchar](50);
+
+--2017-3-15 xxx材料表录入界面，增加变更和审核变更按钮
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'change', 801);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonChangeReview', 801);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'change', 802);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonChangeReview', 802);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'change', 803);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonChangeReview', 803);

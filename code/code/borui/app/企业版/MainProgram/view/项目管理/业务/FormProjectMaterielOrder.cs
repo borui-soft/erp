@@ -58,19 +58,23 @@ namespace MainProgram
             if (m_tablesType == 1)
             {
                 this.labelName.Text = "设备总材料表";
+                this.Text = "设备总材料表";
             }
             else if (m_tablesType == 2)
             {
                 this.labelName.Text = "电器总材料表";
+                this.Text = "电器总材料表";
             }
             else if (m_tablesType == 3)
             {
-                this.labelName.Text = "电器总材料表";
+                this.labelName.Text = "工程总材料表";
+                this.Text = "工程总材料表";
             }
             else 
             {
                 m_tablesType = 1;
                 this.labelName.Text = "设备总材料表";
+                this.Text = "设备总材料表";
             }
 
             m_billNumber = billNumber;
@@ -659,6 +663,9 @@ namespace MainProgram
                 this.textBoxSummary.Visible = false;
 
                 this.panelBusinessPeople.Visible = false;
+
+                // 变更按钮处于可用状态
+                this.toolStripButtonChange.Enabled = true;
             }
             else
             {
@@ -817,6 +824,23 @@ namespace MainProgram
                         ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
                 }
             }
+        }
+
+        private void toolStripButtonChange_Click(object sender, EventArgs e)
+        {
+            this.labelDeviceMode.Visible = true;
+            this.labelTradingDate.Visible = true;
+            this.labelBillNumber.Visible = true;
+            this.labelContractNum.Visible = true;
+            this.labelMakeNum.Visible = true;
+            this.labelDeviceName.Visible = true;
+            this.labelSummary.Visible = true;
+            this.labelMakeBillStaff.Visible = true;
+            this.labelBusinessPeople.Visible = true;
+            this.labelReviewBillStaff.Visible = true;
+            this.labelReviewDate.Visible = true;
+
+            this.save.Enabled = true;
         }
     }
 }

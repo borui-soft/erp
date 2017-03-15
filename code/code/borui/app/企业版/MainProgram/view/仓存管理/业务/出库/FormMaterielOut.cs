@@ -20,6 +20,7 @@ namespace MainProgram
         private int m_staffSavePkey = -1;
         private int m_materielOutStaffPkey = -1;
         private string m_billNumber = "";
+        private string m_projectNum = "";
         private readonly int BillTypeNumber = 14;
         private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
         private int m_rowIndex = -1, m_columnIndex = -1;
@@ -44,10 +45,23 @@ namespace MainProgram
             Note
         };
 
-        public FormMaterielOutOrder(string billNumber = "")
+        public FormMaterielOutOrder(string billNumber = "", string projectNum = "")
         {
             InitializeComponent();
             m_billNumber = billNumber;
+
+            if (projectNum.Length > 0)
+            {
+                this.textBoxProjectNo.Visible = false;
+                this.textBoxProjectNo.ReadOnly = true;
+
+                this.labelProjectNo.Visible = true;
+                this.labelProjectNo.Text = projectNum;
+                this.labelProjectNo.Visible = true;
+                
+            }
+
+            m_projectNum = projectNum;
         }
 
         private void FormMaterielOutOrder_Load(object sender, EventArgs e)
@@ -781,6 +795,11 @@ namespace MainProgram
 
         private void textBoxProjectNo_Click(object sender, EventArgs e)
         {
+            if (m_projectNum.Length > 0)
+            {
+                return;
+            }
+
             if (m_materieOutOrder.isReview == "1")
             {
                 return;
@@ -793,6 +812,11 @@ namespace MainProgram
 
         private void textBoxProjectNo_Leave(object sender, EventArgs e)
         {
+            if (m_projectNum.Length > 0)
+            {
+                return;
+            }
+
             this.textBoxProjectNo.Visible = false;
             this.labelProjectNo.Visible = true;
             this.labelProjectNo.Text = this.textBoxProjectNo.Text;

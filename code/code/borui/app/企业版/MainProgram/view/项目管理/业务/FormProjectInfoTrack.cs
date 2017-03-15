@@ -589,7 +589,8 @@ namespace MainProgram
         // 转生产领料
         private void toolStripMenuItemToProduce_Click(object sender, EventArgs e)
         {
-
+            FormMaterielOutOrder fmoo = new FormMaterielOutOrder("", m_projectInfoTrackFilter.projectNum);
+            fmoo.ShowDialog();
         }
     }
 }

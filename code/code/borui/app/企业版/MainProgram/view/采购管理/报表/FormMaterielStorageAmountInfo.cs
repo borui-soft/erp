@@ -412,5 +412,22 @@ namespace MainProgram
         {
             m_materielProlist = MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedList();
         }
+
+        private void ToolStripMenuItemToApply_Click(object sender, EventArgs e)
+        {
+            FormPurchaseApply fpa = new FormPurchaseApply("", "");
+            fpa.ShowDialog();
+        }
+
+        private void dataGridViewMaterielList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < m_materielRecordCount))
+            {
+                dataGridViewMaterielList.Rows[e.RowIndex].Selected = true;
+                m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
     }
 }

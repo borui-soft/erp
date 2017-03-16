@@ -114,14 +114,14 @@ namespace MainProgram
 
             if (DateGridVeiwListDataListRowCount > 12)
             {
-                m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称(*)", 140, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称(*)", 151, true, true);
             }
             else
             {
                 m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称(*)", 160, true, true);
             }
 
-            m_dateGridVeiwListDataList.addDataGridViewColumn(" 规格\n 型号", 140, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn(" 规格\n 型号", 130, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("尺寸", 100, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn(" 基本\n 单位", 100, true, true);
 
@@ -365,7 +365,7 @@ namespace MainProgram
                     currentRowInfo.billNumber = this.labelBillNumber.Text;
                     currentRowInfo.rowNumber = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString());
                     currentRowInfo.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
-                    currentRowInfo.value = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
+                    currentRowInfo.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     currentRowInfo.makeType = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value.ToString();
                     currentRowInfo.materielNote = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
 
@@ -604,7 +604,9 @@ namespace MainProgram
             this.labelBusinessPeople.Visible = true;
             this.labelReviewBillStaff.Visible = true;
             this.labelReviewDate.Visible = true;
-
+            this.labelChange.Visible = true;
+            this.labelChangeReview.Visible = true;
+            
 
             // 单据表头表尾信息
             m_ProjectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(m_billNumber);
@@ -620,6 +622,10 @@ namespace MainProgram
             this.labelBusinessPeople.Text = m_ProjectInfo.designStaffName;
             this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
             this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
+
+            this.labelChange.Text = m_ProjectInfo.changeStaffName;
+            this.labelChangeReview.Text = m_ProjectInfo.changeReviewStaffName;
+
 
             // DataGridView 赋值
             SortedDictionary<int, ProjectManagerDetailsTable> purchaseOrderDetails =
@@ -667,10 +673,40 @@ namespace MainProgram
                 // 变更按钮处于可用状态
                 this.toolStripButtonChange.Enabled = true;
             }
+            else if (m_ProjectInfo.isReview == "2")
+            {
+                this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
+                this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
+                this.panelIsReview.Visible = true;
+
+                this.save.Enabled = false;
+                this.toolStripButtonReview.Enabled = false;
+                this.dataGridViewDataList.ReadOnly = true;
+                this.dataGridViewDataCount.ReadOnly = true;
+
+                this.panelSummary.Visible = false;
+
+                this.dateTimePickerTradingDate.Visible = false;
+
+                this.textBoxSummary.Visible = false;
+
+                this.panelBusinessPeople.Visible = false;
+
+                // 变更按钮处于可用状态
+                this.panelIsReview.Visible = false;
+                this.panelChange.Visible = true;
+                this.toolStripButtonChange.Enabled = false;
+                this.toolStripButtonChangeReview.Enabled = true;
+            }
             else
             {
                 this.labelReviewBillStaff.Visible = false;
                 this.labelReviewDate.Visible = false;
+            }
+
+            if (m_ProjectInfo.changeStaffName.Length > 0 || m_ProjectInfo.changeReviewStaffName.Length > 0)
+            {
+                this.panelChange.Visible = true;
             }
         }
 
@@ -828,19 +864,40 @@ namespace MainProgram
 
         private void toolStripButtonChange_Click(object sender, EventArgs e)
         {
-            this.labelDeviceMode.Visible = true;
-            this.labelTradingDate.Visible = true;
-            this.labelBillNumber.Visible = true;
-            this.labelContractNum.Visible = true;
-            this.labelMakeNum.Visible = true;
-            this.labelDeviceName.Visible = true;
-            this.labelSummary.Visible = true;
-            this.labelMakeBillStaff.Visible = true;
-            this.labelBusinessPeople.Visible = true;
-            this.labelReviewBillStaff.Visible = true;
-            this.labelReviewDate.Visible = true;
+            //this.labelDeviceMode.Visible = true;
+            //this.labelTradingDate.Visible = true;
+            //this.labelBillNumber.Visible = true;
+            //this.labelContractNum.Visible = true;
+            //this.labelMakeNum.Visible = true;
+            //this.labelDeviceName.Visible = true;
+            //this.labelSummary.Visible = true;
+            //this.labelMakeBillStaff.Visible = true;
+            //this.labelBusinessPeople.Visible = true;
+            //this.labelReviewBillStaff.Visible = true;
+            //this.labelReviewDate.Visible = true;
 
-            this.save.Enabled = true;
+            //this.save.Enabled = true;
+
+            this.panelChange.Visible = true;
+
+            this.toolStripButtonChange.Enabled = false;
+            this.toolStripButtonChangeReview.Enabled = true;
+            this.panelIsReview.Visible = false;
+
+            FormProject.getInctance().billChange(m_billNumber);
+
+            this.Close();
+        }
+
+        // 变更审批按钮
+        private void toolStripButtonChangeReview_Click(object sender, EventArgs e)
+        {
+            FormProject.getInctance().billChangeReview(m_billNumber);
+
+            this.toolStripButtonChange.Enabled = false;
+            this.toolStripButtonChangeReview.Enabled = false;
+
+            this.Close();
         }
     }
 }

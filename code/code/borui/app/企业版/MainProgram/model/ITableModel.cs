@@ -15,6 +15,8 @@ namespace MainProgram.model
         {
             Add,
             Review,
+            Change,
+            ChangeReview,
             Register
         }
 
@@ -51,6 +53,14 @@ namespace MainProgram.model
             else if (type == OperatorLogType.Review)
             {
                 logDesc = "审核单据[";
+            }
+            else if (type == OperatorLogType.Change)
+            {
+                logDesc = "申请变更单据[";
+            }
+            else if (type == OperatorLogType.ChangeReview)
+            {
+                logDesc = "审批变更单据[";
             }
             else 
             {

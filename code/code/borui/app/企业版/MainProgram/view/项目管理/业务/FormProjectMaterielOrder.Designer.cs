@@ -33,7 +33,6 @@
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.panelTradingDate = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelTradingDate = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -51,7 +50,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.panelSummary = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
             this.textBoxSummary = new System.Windows.Forms.TextBox();
@@ -79,7 +77,6 @@
             this.labelReviewDate = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.panelIsReview = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.panelContractNum = new System.Windows.Forms.Panel();
@@ -87,24 +84,34 @@
             this.labelContractNum = new System.Windows.Forms.Label();
             this.textBoxContractNum = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.panelMakeNum = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelMakeNum = new System.Windows.Forms.Label();
             this.textBoxMakeNum = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panelDeviceMode = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.labelDeviceMode = new System.Windows.Forms.Label();
             this.textBoxDeviceMode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.panelDeviceName = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.labelDeviceName = new System.Windows.Forms.Label();
             this.textBoxDeviceName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.labelChangeReview = new System.Windows.Forms.Label();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelChange = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panelChange = new System.Windows.Forms.Panel();
+            this.panelDeviceName = new System.Windows.Forms.Panel();
+            this.panelDeviceMode = new System.Windows.Forms.Panel();
+            this.panelMakeNum = new System.Windows.Forms.Panel();
+            this.panelIsReview = new System.Windows.Forms.Panel();
+            this.panelSummary = new System.Windows.Forms.Panel();
+            this.panelTradingDate = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).BeginInit();
             this.panel7.SuspendLayout();
@@ -149,17 +156,6 @@
             this.groupBox5.Size = new System.Drawing.Size(165, 1);
             this.groupBox5.TabIndex = 23;
             this.groupBox5.TabStop = false;
-            // 
-            // panelTradingDate
-            // 
-            this.panelTradingDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelTradingDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelTradingDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelTradingDate.Location = new System.Drawing.Point(676, 86);
-            this.panelTradingDate.Name = "panelTradingDate";
-            this.panelTradingDate.Size = new System.Drawing.Size(21, 21);
-            this.panelTradingDate.TabIndex = 21;
-            this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
             // 
             // groupBox2
             // 
@@ -248,7 +244,7 @@
             this.groupBox4.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox4.Location = new System.Drawing.Point(74, 521);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(163, 1);
+            this.groupBox4.Size = new System.Drawing.Size(110, 1);
             this.groupBox4.TabIndex = 31;
             this.groupBox4.TabStop = false;
             // 
@@ -258,7 +254,7 @@
             this.panel7.Controls.Add(this.labelBusinessPeople);
             this.panel7.Controls.Add(this.panelBusinessPeople);
             this.panel7.Controls.Add(this.textBoxBusinessPeople);
-            this.panel7.Location = new System.Drawing.Point(397, 501);
+            this.panel7.Location = new System.Drawing.Point(98, 166);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(165, 21);
             this.panel7.TabIndex = 29;
@@ -302,7 +298,7 @@
             // 
             this.textBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(395, 501);
+            this.textBox2.Location = new System.Drawing.Point(96, 166);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(165, 21);
             this.textBox2.TabIndex = 6;
@@ -313,7 +309,7 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox7.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox7.Controls.Add(this.groupBox8);
-            this.groupBox7.Location = new System.Drawing.Point(395, 522);
+            this.groupBox7.Location = new System.Drawing.Point(96, 187);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(165, 1);
             this.groupBox7.TabIndex = 28;
@@ -346,31 +342,20 @@
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(326, 509);
+            this.label13.Location = new System.Drawing.Point(12, 172);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 12);
             this.label13.TabIndex = 26;
             this.label13.Text = "设计人(*):";
-            // 
-            // panelSummary
-            // 
-            this.panelSummary.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelSummary.Location = new System.Drawing.Point(1084, 164);
-            this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(21, 21);
-            this.panelSummary.TabIndex = 42;
-            this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
             // 
             // panel10
             // 
             this.panel10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel10.Controls.Add(this.labelSummary);
             this.panel10.Controls.Add(this.textBoxSummary);
-            this.panel10.Location = new System.Drawing.Point(100, 163);
+            this.panel10.Location = new System.Drawing.Point(533, 163);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(991, 21);
+            this.panel10.Size = new System.Drawing.Size(558, 21);
             this.panel10.TabIndex = 40;
             this.panel10.Click += new System.EventHandler(this.panelSummary_Click);
             // 
@@ -402,7 +387,7 @@
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.Location = new System.Drawing.Point(12, 166);
+            this.label18.Location = new System.Drawing.Point(445, 171);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(35, 12);
             this.label18.TabIndex = 37;
@@ -440,7 +425,7 @@
             this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(36, 42);
-            this.save.Text = "变更";
+            this.save.Text = "保存";
             this.save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.save.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.save.ToolTipText = "保存";
@@ -472,8 +457,8 @@
             this.toolStripButtonChange.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonChange.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonChange.Name = "toolStripButtonChange";
-            this.toolStripButtonChange.Size = new System.Drawing.Size(36, 42);
-            this.toolStripButtonChange.Text = "变更";
+            this.toolStripButtonChange.Size = new System.Drawing.Size(60, 42);
+            this.toolStripButtonChange.Text = "变更申请";
             this.toolStripButtonChange.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonChange.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.toolStripButtonChange.Click += new System.EventHandler(this.toolStripButtonChange_Click);
@@ -487,9 +472,10 @@
             this.toolStripButtonChangeReview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonChangeReview.Name = "toolStripButtonChangeReview";
             this.toolStripButtonChangeReview.Size = new System.Drawing.Size(60, 42);
-            this.toolStripButtonChangeReview.Text = "审核变更";
+            this.toolStripButtonChangeReview.Text = "变更审批";
             this.toolStripButtonChangeReview.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonChangeReview.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonChangeReview.Click += new System.EventHandler(this.toolStripButtonChangeReview_Click);
             // 
             // toolStripSeparator3
             // 
@@ -599,7 +585,7 @@
             // labelReviewBillStaff
             // 
             this.labelReviewBillStaff.AutoSize = true;
-            this.labelReviewBillStaff.Location = new System.Drawing.Point(670, 509);
+            this.labelReviewBillStaff.Location = new System.Drawing.Point(287, 509);
             this.labelReviewBillStaff.Name = "labelReviewBillStaff";
             this.labelReviewBillStaff.Size = new System.Drawing.Size(125, 12);
             this.labelReviewBillStaff.TabIndex = 61;
@@ -610,9 +596,9 @@
             // 
             this.groupBox13.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox13.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox13.Location = new System.Drawing.Point(668, 522);
+            this.groupBox13.Location = new System.Drawing.Point(291, 522);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(163, 1);
+            this.groupBox13.Size = new System.Drawing.Size(110, 1);
             this.groupBox13.TabIndex = 63;
             this.groupBox13.TabStop = false;
             // 
@@ -622,7 +608,7 @@
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label23.Location = new System.Drawing.Point(611, 509);
+            this.label23.Location = new System.Drawing.Point(234, 509);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(47, 12);
             this.label23.TabIndex = 62;
@@ -631,7 +617,7 @@
             // labelReviewDate
             // 
             this.labelReviewDate.AutoSize = true;
-            this.labelReviewDate.Location = new System.Drawing.Point(951, 510);
+            this.labelReviewDate.Location = new System.Drawing.Point(523, 510);
             this.labelReviewDate.Name = "labelReviewDate";
             this.labelReviewDate.Size = new System.Drawing.Size(95, 12);
             this.labelReviewDate.TabIndex = 64;
@@ -642,9 +628,9 @@
             // 
             this.groupBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox6.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox6.Location = new System.Drawing.Point(949, 522);
+            this.groupBox6.Location = new System.Drawing.Point(521, 522);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(163, 1);
+            this.groupBox6.Size = new System.Drawing.Size(110, 1);
             this.groupBox6.TabIndex = 66;
             this.groupBox6.TabStop = false;
             // 
@@ -654,28 +640,19 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(892, 509);
+            this.label9.Location = new System.Drawing.Point(464, 509);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 12);
             this.label9.TabIndex = 65;
             this.label9.Text = "审核日期:";
             // 
-            // panelIsReview
-            // 
-            this.panelIsReview.BackgroundImage = global::MainProgram.Properties.Resources.已审核;
-            this.panelIsReview.Location = new System.Drawing.Point(1062, 13);
-            this.panelIsReview.Name = "panelIsReview";
-            this.panelIsReview.Size = new System.Drawing.Size(61, 33);
-            this.panelIsReview.TabIndex = 75;
-            this.panelIsReview.Visible = false;
-            // 
             // groupBox9
             // 
             this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(100, 185);
+            this.groupBox9.Location = new System.Drawing.Point(535, 184);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(987, 1);
+            this.groupBox9.Size = new System.Drawing.Size(650, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
             // 
@@ -747,18 +724,6 @@
             this.label11.TabIndex = 100;
             this.label11.Text = "项目编号(*):";
             // 
-            // panelMakeNum
-            // 
-            this.panelMakeNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelMakeNum.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelMakeNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelMakeNum.Location = new System.Drawing.Point(680, 122);
-            this.panelMakeNum.Name = "panelMakeNum";
-            this.panelMakeNum.Size = new System.Drawing.Size(21, 21);
-            this.panelMakeNum.TabIndex = 109;
-            this.panelMakeNum.Click += new System.EventHandler(this.panelMakeNum_Click);
-            this.panelMakeNum.Leave += new System.EventHandler(this.panelMakeNum_Leave);
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -813,18 +778,6 @@
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 106;
             this.label2.Text = "生产编号(*):";
-            // 
-            // panelDeviceMode
-            // 
-            this.panelDeviceMode.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelDeviceMode.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelDeviceMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelDeviceMode.Location = new System.Drawing.Point(247, 85);
-            this.panelDeviceMode.Name = "panelDeviceMode";
-            this.panelDeviceMode.Size = new System.Drawing.Size(21, 21);
-            this.panelDeviceMode.TabIndex = 113;
-            this.panelDeviceMode.Click += new System.EventHandler(this.panelDeviceMode_Click);
-            this.panelDeviceMode.Leave += new System.EventHandler(this.panelDeviceMode_Leave);
             // 
             // groupBox3
             // 
@@ -881,18 +834,6 @@
             this.label8.TabIndex = 110;
             this.label8.Text = "设备型号(*)";
             // 
-            // panelDeviceName
-            // 
-            this.panelDeviceName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelDeviceName.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelDeviceName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelDeviceName.Location = new System.Drawing.Point(1086, 121);
-            this.panelDeviceName.Name = "panelDeviceName";
-            this.panelDeviceName.Size = new System.Drawing.Size(21, 21);
-            this.panelDeviceName.TabIndex = 117;
-            this.panelDeviceName.Click += new System.EventHandler(this.panelDeviceName_Click);
-            this.panelDeviceName.Leave += new System.EventHandler(this.panelDeviceName_Leave);
-            // 
             // groupBox10
             // 
             this.groupBox10.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -948,12 +889,159 @@
             this.label6.TabIndex = 114;
             this.label6.Text = "所属部件(*):";
             // 
+            // labelChangeReview
+            // 
+            this.labelChangeReview.AutoSize = true;
+            this.labelChangeReview.Location = new System.Drawing.Point(999, 511);
+            this.labelChangeReview.Name = "labelChangeReview";
+            this.labelChangeReview.Size = new System.Drawing.Size(41, 12);
+            this.labelChangeReview.TabIndex = 121;
+            this.labelChangeReview.Text = "label1";
+            this.labelChangeReview.Visible = false;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupBox11.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox11.Location = new System.Drawing.Point(997, 523);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(110, 1);
+            this.groupBox11.TabIndex = 123;
+            this.groupBox11.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(924, 510);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 12);
+            this.label3.TabIndex = 122;
+            this.label3.Text = "变更审批人:";
+            // 
+            // labelChange
+            // 
+            this.labelChange.AutoSize = true;
+            this.labelChange.Location = new System.Drawing.Point(779, 510);
+            this.labelChange.Name = "labelChange";
+            this.labelChange.Size = new System.Drawing.Size(41, 12);
+            this.labelChange.TabIndex = 118;
+            this.labelChange.Text = "label5";
+            this.labelChange.Visible = false;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupBox12.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox12.Location = new System.Drawing.Point(783, 523);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(110, 1);
+            this.groupBox12.TabIndex = 120;
+            this.groupBox12.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(705, 510);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 12);
+            this.label10.TabIndex = 119;
+            this.label10.Text = "变更申请人:";
+            // 
+            // panelChange
+            // 
+            this.panelChange.BackgroundImage = global::MainProgram.Properties.Resources.变更单据;
+            this.panelChange.Location = new System.Drawing.Point(1049, 48);
+            this.panelChange.Name = "panelChange";
+            this.panelChange.Size = new System.Drawing.Size(77, 29);
+            this.panelChange.TabIndex = 76;
+            this.panelChange.Visible = false;
+            // 
+            // panelDeviceName
+            // 
+            this.panelDeviceName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelDeviceName.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelDeviceName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelDeviceName.Location = new System.Drawing.Point(1086, 121);
+            this.panelDeviceName.Name = "panelDeviceName";
+            this.panelDeviceName.Size = new System.Drawing.Size(21, 21);
+            this.panelDeviceName.TabIndex = 117;
+            this.panelDeviceName.Click += new System.EventHandler(this.panelDeviceName_Click);
+            this.panelDeviceName.Leave += new System.EventHandler(this.panelDeviceName_Leave);
+            // 
+            // panelDeviceMode
+            // 
+            this.panelDeviceMode.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelDeviceMode.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelDeviceMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelDeviceMode.Location = new System.Drawing.Point(247, 85);
+            this.panelDeviceMode.Name = "panelDeviceMode";
+            this.panelDeviceMode.Size = new System.Drawing.Size(21, 21);
+            this.panelDeviceMode.TabIndex = 113;
+            this.panelDeviceMode.Click += new System.EventHandler(this.panelDeviceMode_Click);
+            this.panelDeviceMode.Leave += new System.EventHandler(this.panelDeviceMode_Leave);
+            // 
+            // panelMakeNum
+            // 
+            this.panelMakeNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelMakeNum.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelMakeNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelMakeNum.Location = new System.Drawing.Point(680, 122);
+            this.panelMakeNum.Name = "panelMakeNum";
+            this.panelMakeNum.Size = new System.Drawing.Size(21, 21);
+            this.panelMakeNum.TabIndex = 109;
+            this.panelMakeNum.Click += new System.EventHandler(this.panelMakeNum_Click);
+            this.panelMakeNum.Leave += new System.EventHandler(this.panelMakeNum_Leave);
+            // 
+            // panelIsReview
+            // 
+            this.panelIsReview.BackgroundImage = global::MainProgram.Properties.Resources.已审核;
+            this.panelIsReview.Location = new System.Drawing.Point(1062, 13);
+            this.panelIsReview.Name = "panelIsReview";
+            this.panelIsReview.Size = new System.Drawing.Size(61, 33);
+            this.panelIsReview.TabIndex = 75;
+            this.panelIsReview.Visible = false;
+            // 
+            // panelSummary
+            // 
+            this.panelSummary.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelSummary.Location = new System.Drawing.Point(1084, 164);
+            this.panelSummary.Name = "panelSummary";
+            this.panelSummary.Size = new System.Drawing.Size(21, 21);
+            this.panelSummary.TabIndex = 42;
+            this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
+            // 
+            // panelTradingDate
+            // 
+            this.panelTradingDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelTradingDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelTradingDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelTradingDate.Location = new System.Drawing.Point(676, 86);
+            this.panelTradingDate.Name = "panelTradingDate";
+            this.panelTradingDate.Size = new System.Drawing.Size(21, 21);
+            this.panelTradingDate.TabIndex = 21;
+            this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
+            // 
             // FormProjectMaterielOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1126, 536);
+            this.Controls.Add(this.panelChange);
+            this.Controls.Add(this.labelChangeReview);
+            this.Controls.Add(this.groupBox11);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelChange);
+            this.Controls.Add(this.groupBox12);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.panelDeviceName);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.panel6);
@@ -1107,6 +1195,13 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonChange;
         private System.Windows.Forms.ToolStripButton toolStripButtonChangeReview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.Label labelChangeReview;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelChange;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panelChange;
 
     }
 }

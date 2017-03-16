@@ -51,9 +51,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 101);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 12);
+            this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.0.01";
+            this.label3.Text = "当前软件版本：V2.1.02";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、采购模块增加采购申请单\n2、为采购申请单、采购订单、采购入库单、生产领料单增加了项目编号\n3、新增项目管理模块，以便跟踪项目信息";
+            this.richTextBox1.Text = "1、所有单据物料ID\\编码栏，允许输入非数字字符\n2、采购入库单，增加合同物料名称栏\n3、物料基本信息中增加参数信息，并在物料表、xx总材料表、采购申请单、采购入库单中都做了显示\n4、xx材料跟踪表，支持转生产领料单的功能\n5、库存页面，支持转采购申请单功能\n6、实现xx材料表允许变更的功能";
             // 
             // FormAbout
             // 

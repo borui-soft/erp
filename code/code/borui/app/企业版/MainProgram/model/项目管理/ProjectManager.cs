@@ -38,15 +38,30 @@ namespace MainProgram.model
 
         public void insert(FormProjectMaterielTable record, bool isDisplayMessageBox = true)
         {
-            string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
-            insert += ",[MAKE_ORDER_STAFF],[DESIGN_ID])VALUES(";
+            FormProjectMaterielTable tmpRecord  = new FormProjectMaterielTable();
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
             if (checkBillIsExist(record.billNumber))
             {
+                tmpRecord = getProjectInfoFromBillNumber(record.billNumber);
                 delete(record.billNumber);
             }
 
+            string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
+            insert += ",[MAKE_ORDER_STAFF],[DESIGN_ID]";
+
+            if (tmpRecord.billNumber != null && tmpRecord.changeStaffName.Length > 0)
+            {
+                insert += ", [CHANGE_STAFF_ID]";
+            }
+
+            if (tmpRecord.billNumber != null && tmpRecord.changeReviewStaffName.Length > 0)
+            {
+                insert += ", [CHANGE_REVIEW_STAFF_ID]";
+            }
+
+            insert += ")VALUES(";
+            
             insert += record.dataType + ",";
             insert += "'" + record.deviceMode + "',";
             insert += "'" + record.makeDate + "',";
@@ -58,6 +73,19 @@ namespace MainProgram.model
 
             insert += record.makeOrderStaffID + ",";
             insert += record.designStaffID;
+
+            if (tmpRecord.billNumber != null && tmpRecord.changeStaffName.Length > 0)
+            {
+                insert += ", ";
+                insert += tmpRecord.changeStaffID;
+            }
+
+            if (tmpRecord.billNumber != null && tmpRecord.changeReviewStaffName.Length > 0)
+            {
+                insert += ", ";
+                insert += tmpRecord.changeReviewStaffID;
+            }
+
             insert += ")";
 
             try
@@ -119,13 +147,63 @@ namespace MainProgram.model
                 return;
             }
 
+            writeOperatorLog(101, OperatorLogType.Change, billNumber);
+        }
+
+        public void billChange(string billNumber)
+        {
+            string update = "UPDATE [dbo].[PROJECT_MATERIE_MANAGER] SET ";
+
+            update += "[CHANGE_STAFF_ID] = " + DbPublic.getInctance().getCurrentLoginUserID() + ",";
+            update += "IS_REVIEW = 2";
+            update += " WHERE BILL_NUMBER = '" + billNumber + "'";
+
+            try
+            {
+                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]已转换为等待变更审批状态!");
+
+                load();
+            }
+            catch (Exception error)
+            {
+                MessageBoxExtend.messageWarning(error.Message);
+                return;
+            }
+
+            writeOperatorLog(101, OperatorLogType.ChangeReview, billNumber);
+        }
+
+        public void billChangeReview(string billNumber)
+        {
+            string update = "UPDATE [dbo].[PROJECT_MATERIE_MANAGER] SET ";
+
+            update += "[CHANGE_REVIEW_STAFF_ID] = " + DbPublic.getInctance().getCurrentLoginUserID() + ",";
+            update += "IS_REVIEW = 0";
+            update += " WHERE BILL_NUMBER = '" + billNumber + "'";
+
+            try
+            {
+                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]变更审批成功,再次进入可编辑修改状态");
+
+                load();
+            }
+            catch (Exception error)
+            {
+                MessageBoxExtend.messageWarning(error.Message);
+                return;
+            }
+
             writeOperatorLog(101, OperatorLogType.Review, billNumber);
         }
 
         private void load()
         {
             string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
-            sql += ",[MAKE_ORDER_STAFF],[DESIGN_ID],[REVIEW_STAFF_ID],[REVIEW_DATE],[IS_REVIEW] ";
+            sql += ",[MAKE_ORDER_STAFF],[DESIGN_ID],[REVIEW_STAFF_ID],[REVIEW_DATE],[IS_REVIEW],[CHANGE_REVIEW_STAFF_ID],[CHANGE_STAFF_ID]  ";
             sql += "FROM [ERP].[dbo].[PROJECT_MATERIE_MANAGER] ORDER BY PKEY DESC";
 
             m_tableDataList.Clear();
@@ -151,6 +229,27 @@ namespace MainProgram.model
                     record.makeOrderStaffName = Staff.getInctance().getStaffNameFromPkey(record.makeOrderStaffID);
                     record.designStaffID = DbDataConvert.ToInt32(row["DESIGN_ID"]);
                     record.designStaffName = Staff.getInctance().getStaffNameFromPkey(record.designStaffID);
+
+                    // 变更和变更审核人
+                    if (DbDataConvert.ToString(row["CHANGE_REVIEW_STAFF_ID"]).Length > 0)
+                    {
+                        record.changeReviewStaffID = DbDataConvert.ToInt32(row["CHANGE_REVIEW_STAFF_ID"]);
+                        record.changeReviewStaffName = Staff.getInctance().getStaffNameFromPkey(record.changeReviewStaffID);
+                    }
+                    else
+                    {
+                        record.changeReviewStaffName = "";
+                    }
+
+                    if (DbDataConvert.ToString(row["CHANGE_STAFF_ID"]).Length > 0)
+                    {
+                        record.changeStaffID = DbDataConvert.ToInt32(row["CHANGE_STAFF_ID"]);
+                        record.changeStaffName = Staff.getInctance().getStaffNameFromPkey(record.changeStaffID);
+                    }
+                    else 
+                    {
+                        record.changeStaffName = "";
+                    }
 
                     if (DbDataConvert.ToString(row["REVIEW_STAFF_ID"]).Length > 0)
                     {
@@ -338,5 +437,11 @@ namespace MainProgram.model
         public string orderrReviewName { get; set; }
         public string reviewDate { get; set; }
         public string isReview { get; set; }
+
+        // 变更和变更审核人
+        public int changeStaffID { get; set; }
+        public string changeStaffName { get; set; }
+        public int changeReviewStaffID { get; set; }
+        public string changeReviewStaffName { get; set; }
     }
 }

@@ -119,7 +119,7 @@ namespace MainProgram.model
 
                     // 根据物料ID得到物料相关信息
                     MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
-                    record.materielBrand = materiel.name;
+                    record.materielBrand = materiel.brand;
                     record.materielName = materiel.name;
                     record.materielModel = materiel.model;
                     record.materielParameter = materiel.materielParameter;

@@ -288,7 +288,7 @@ namespace MainProgram.model
                         {
                             InitMaterielTable record = new InitMaterielTable();
                             record.materielID = Convert.ToInt32(materielID.ToString());
-                            record.value = Convert.ToInt32(value.ToString());
+                            record.value = Convert.ToDouble(value.ToString());
                             record.price = Convert.ToDouble(price.ToString());
 
                             insert(record, false);

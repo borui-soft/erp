@@ -223,3 +223,11 @@ insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) value
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonChangeReview', 802);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'change', 803);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonChangeReview', 803);
+
+
+
+--2017-3-16 项目管理表（PROJECT_MATERIE_MANAGER）增加变更申请人和变更审批人
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ADD CHANGE_STAFF_ID [int] NULL;
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ADD CHANGE_REVIEW_STAFF_ID [int] NULL;
+
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ALTER COLUMN VALUE FLOAT;

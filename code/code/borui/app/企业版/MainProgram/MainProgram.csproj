@@ -1363,6 +1363,7 @@
     <None Include="image\生产管理\生产管理-工程总材料表.png" />
     <None Include="image\生产管理\生产管理-设备总材料表 .png" />
     <Content Include="png-0013.ico" />
+    <None Include="Resources\变更单据.png" />
     <Content Include="Resources\蓝字.gif" />
   </ItemGroup>
   <ItemGroup>

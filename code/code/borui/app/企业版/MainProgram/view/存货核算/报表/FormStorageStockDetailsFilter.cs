@@ -49,21 +49,17 @@ namespace MainProgram
 
             if(radioButtonMateriel.Checked)
             {
-                string materielName = this.textBoxName.Text;
-                MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromMaterielName(materielName);
-
-                if (materiel != null)
-                {
-                    m_materielPkey = materiel.pkey;
-                    this.Close();
-                }
-                else 
+                if (this.textBoxName.Text.Length <= 0)
                 {
                     m_materielPkey = -1;
-                    MessageBoxExtend.messageWarning("输出的物料名称: " + materielName + ", 查询不到对应的物料信息, 请重新输出或点击物料选择按钮");
+                    MessageBoxExtend.messageWarning("输出的物料名称为空, 查询不到对应的物料信息, 请重新输出或点击物料选择按钮");
                     this.textBoxName.Text = "";
+
+                    return;
                 }
             }
+
+            this.Close();
         }
 
         public string getFilterStartDate()

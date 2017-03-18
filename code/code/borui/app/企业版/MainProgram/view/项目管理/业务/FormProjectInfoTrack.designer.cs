@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectInfoTrack));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.billDetail = new System.Windows.Forms.ToolStripButton();
@@ -48,6 +48,7 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemToApply = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemToProduce = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemPurchaseApplyOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemPurchaseOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +56,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemMaterielOutOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.projectRowMergeView = new RowMergeView();
-            this.toolStripMenuItemToProduce = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemProOccupied = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.contextMenuStripDataGridView.SuspendLayout();
@@ -206,6 +207,7 @@
             // contextMenuStripDataGridView
             // 
             this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemProOccupied,
             this.ToolStripMenuItemToApply,
             this.toolStripMenuItemToProduce,
             this.toolStripSeparator7,
@@ -215,28 +217,37 @@
             this.toolStripSeparator6,
             this.ToolStripMenuItemMaterielOutOrderInfo});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 170);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 192);
             // 
             // ToolStripMenuItemToApply
             // 
             this.ToolStripMenuItemToApply.BackColor = System.Drawing.Color.Transparent;
             this.ToolStripMenuItemToApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemToApply.Name = "ToolStripMenuItemToApply";
-            this.ToolStripMenuItemToApply.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemToApply.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemToApply.Text = "转采购申请";
             this.ToolStripMenuItemToApply.Click += new System.EventHandler(this.ToolStripMenuItemToApply_Click);
+            // 
+            // toolStripMenuItemToProduce
+            // 
+            this.toolStripMenuItemToProduce.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItemToProduce.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItemToProduce.Name = "toolStripMenuItemToProduce";
+            this.toolStripMenuItemToProduce.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItemToProduce.Text = "转生产领料";
+            this.toolStripMenuItemToProduce.Click += new System.EventHandler(this.toolStripMenuItemToProduce_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
             // 
             // ToolStripMenuItemPurchaseApplyOrderInfo
             // 
             this.ToolStripMenuItemPurchaseApplyOrderInfo.BackColor = System.Drawing.Color.Transparent;
             this.ToolStripMenuItemPurchaseApplyOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemPurchaseApplyOrderInfo.Name = "ToolStripMenuItemPurchaseApplyOrderInfo";
-            this.ToolStripMenuItemPurchaseApplyOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemPurchaseApplyOrderInfo.Text = "采购申请详情";
             this.ToolStripMenuItemPurchaseApplyOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemPurchaseApplyOrderInfo_Click);
             // 
@@ -245,7 +256,7 @@
             this.ToolStripMenuItemPurchaseOrderInfo.BackColor = System.Drawing.Color.Transparent;
             this.ToolStripMenuItemPurchaseOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemPurchaseOrderInfo.Name = "ToolStripMenuItemPurchaseOrderInfo";
-            this.ToolStripMenuItemPurchaseOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemPurchaseOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemPurchaseOrderInfo.Text = "采购订单详情";
             this.ToolStripMenuItemPurchaseOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemPurchaseOrderInfo_Click);
             // 
@@ -254,20 +265,20 @@
             this.toolStripMenuItemPurchaseInOrderInfo.BackColor = System.Drawing.Color.Transparent;
             this.toolStripMenuItemPurchaseInOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStripMenuItemPurchaseInOrderInfo.Name = "toolStripMenuItemPurchaseInOrderInfo";
-            this.toolStripMenuItemPurchaseInOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemPurchaseInOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItemPurchaseInOrderInfo.Text = "采购入库详情";
             this.toolStripMenuItemPurchaseInOrderInfo.Click += new System.EventHandler(this.toolStripMenuItemPurchaseInOrderInfo_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(145, 6);
             // 
             // ToolStripMenuItemMaterielOutOrderInfo
             // 
             this.ToolStripMenuItemMaterielOutOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemMaterielOutOrderInfo.Name = "ToolStripMenuItemMaterielOutOrderInfo";
-            this.ToolStripMenuItemMaterielOutOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemMaterielOutOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemMaterielOutOrderInfo.Text = "生产领料详情";
             this.ToolStripMenuItemMaterielOutOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemMaterielOutOrderInfo_Click);
             // 
@@ -275,14 +286,14 @@
             // 
             this.projectRowMergeView.AllowUserToAddRows = false;
             this.projectRowMergeView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectRowMergeView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectRowMergeView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.projectRowMergeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.projectRowMergeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.projectRowMergeView.Location = new System.Drawing.Point(0, 45);
@@ -297,14 +308,14 @@
             this.projectRowMergeView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.projectRowMergeView_CellMouseDown);
             this.projectRowMergeView.DoubleClick += new System.EventHandler(this.projectRowMergeView_DoubleClick);
             // 
-            // toolStripMenuItemToProduce
+            // toolStripMenuItemProOccupied
             // 
-            this.toolStripMenuItemToProduce.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripMenuItemToProduce.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStripMenuItemToProduce.Name = "toolStripMenuItemToProduce";
-            this.toolStripMenuItemToProduce.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemToProduce.Text = "转生产领料";
-            this.toolStripMenuItemToProduce.Click += new System.EventHandler(this.toolStripMenuItemToProduce_Click);
+            this.toolStripMenuItemProOccupied.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItemProOccupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItemProOccupied.Name = "toolStripMenuItemProOccupied";
+            this.toolStripMenuItemProOccupied.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemProOccupied.Text = "转库存预占";
+            this.toolStripMenuItemProOccupied.Click += new System.EventHandler(this.toolStripMenuItemProOccupied_Click);
             // 
             // FormProjectInfoTrack
             // 
@@ -357,5 +368,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemMaterielOutOrderInfo;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemToProduce;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemProOccupied;
     }
 }

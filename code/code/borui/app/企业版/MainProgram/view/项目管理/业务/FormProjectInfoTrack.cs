@@ -592,5 +592,45 @@ namespace MainProgram
             FormMaterielOutOrder fmoo = new FormMaterielOutOrder("", m_projectInfoTrackFilter.projectNum);
             fmoo.ShowDialog();
         }
+
+        // 转预占库存
+        private void toolStripMenuItemProOccupied_Click(object sender, EventArgs e)
+        {
+            // 存放需要转预占的数据
+            SortedDictionary<int, ArrayList> proInfoList = new SortedDictionary<int, ArrayList>();
+
+            // 根据单据,得到单据详细信息
+            SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
+            listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(m_billNumber);
+
+            for (int index = 0; index < listDetails.Count; index++)
+            {
+                ArrayList record = new ArrayList();
+
+                ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+                tmp = (ProjectManagerDetailsTable)listDetails[index];
+
+                record.Add(tmp.materielID);
+                record.Add(tmp.materielName);
+                record.Add(tmp.value);
+
+                // 筛选出，可以转为预占库存的数据(如果预占数量小于项目所需数量，则可以形成预占)
+                if (m_materielProlist.ContainsKey(tmp.pkey))
+                {
+                    MaterielProOccupiedInfo proOccupiedRecord = new MaterielProOccupiedInfo();
+                    proOccupiedRecord = (MaterielProOccupiedInfo)m_materielProlist[tmp.pkey];
+
+                    record.Add(proOccupiedRecord.sum);
+                }
+                else 
+                {
+                    record.Add(0);
+                }
+
+
+                proInfoList.Add(proInfoList.Count, record);
+            }
+
+        }
     }
 }

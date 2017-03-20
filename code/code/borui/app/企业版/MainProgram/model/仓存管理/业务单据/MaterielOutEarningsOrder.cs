@@ -96,6 +96,7 @@ namespace MainProgram.model
 
         public void billReview(string billNumber, bool isRedBill = false)
         {
+            writeOperatorLog(305, OperatorLogType.Review, billNumber, "开始");
             m_isRedBill = isRedBill;
 
             if (updateMaterielData(billNumber))
@@ -122,7 +123,7 @@ namespace MainProgram.model
                 }
             }
 
-            writeOperatorLog(305, OperatorLogType.Review, billNumber);
+            writeOperatorLog(305, OperatorLogType.Review, billNumber, "结束");
         }
 
         private bool updateMaterielData(string billNumber)
@@ -203,7 +204,7 @@ namespace MainProgram.model
 
                     StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
                     storageStockDetailRecord.materielID = record.materielID;
-                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd");
+                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
                     storageStockDetailRecord.billNumber = billNumber;
                     storageStockDetailRecord.thingsType = "盘盈毁损";
                     storageStockDetailRecord.isIn = 0;

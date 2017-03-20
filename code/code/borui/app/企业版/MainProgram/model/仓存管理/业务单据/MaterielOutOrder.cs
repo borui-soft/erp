@@ -104,6 +104,8 @@ namespace MainProgram.model
         {
             m_isRedBill = isRedBill;
 
+            writeOperatorLog(304, OperatorLogType.Review, billNumber + "开始");
+
             if (updateMaterielData(billNumber))
             {
                 // 更新单据审核标志，把审核标志置为1
@@ -128,7 +130,7 @@ namespace MainProgram.model
                 }
             }
 
-            writeOperatorLog(304, OperatorLogType.Review, billNumber);
+            writeOperatorLog(304, OperatorLogType.Review, billNumber + "结束");
         }
 
         private bool updateMaterielData(string billNumber)
@@ -191,7 +193,7 @@ namespace MainProgram.model
 
                     StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
                     storageStockDetailRecord.materielID = record.materielID;
-                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd");
+                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
                     storageStockDetailRecord.billNumber = billNumber;
                     storageStockDetailRecord.thingsType = "生产领料";
                     storageStockDetailRecord.isIn = 0;

@@ -166,6 +166,8 @@ namespace MainProgram.model
              * 3、如果单据是根据采购订单生成，更新对应采购订单中的实际入库数量
              */
 
+            writeOperatorLog(203, OperatorLogType.Register, billNumber, "开始");
+
             m_isRedBill = isRedBill;
 
             // 更新库存表
@@ -199,7 +201,7 @@ namespace MainProgram.model
                 updataActualValue(billNumber);
             }
 
-            writeOperatorLog(203, OperatorLogType.Register, billNumber);
+            writeOperatorLog(203, OperatorLogType.Register, billNumber, "结束");
         }
 
         public void updataReceivedInfo(string billNumber, double paymentOK)
@@ -364,7 +366,7 @@ namespace MainProgram.model
                     
                     StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
                     storageStockDetailRecord.materielID = record.materielID;
-                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd");
+                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
                     storageStockDetailRecord.billNumber = billNumber;
                     storageStockDetailRecord.thingsType = "销售出库";
                     storageStockDetailRecord.isIn = 0;

@@ -148,6 +148,7 @@ namespace MainProgram.model
 
         public void registerInLedger(string billNumber, bool isRedBill)
         {
+            writeOperatorLog(303, OperatorLogType.Register, billNumber, "开始");
             /*函数处理逻辑如下：
              * 1、根据输入的产品单价，更新对应的库存数量，库存单价
              * 2、更新单据是否入账标示，把标示修改为1(已入账)
@@ -178,7 +179,7 @@ namespace MainProgram.model
                 return;
             }
 
-            writeOperatorLog(303, OperatorLogType.Register, billNumber);
+            writeOperatorLog(303, OperatorLogType.Register, billNumber, "结束");
         }
 
         private void updateMaterielData(string billNumber)
@@ -223,7 +224,7 @@ namespace MainProgram.model
                 #region 更新存货明细账表(STORAGE_STOCK_DETAIL) 2012-1-16 01:22
                 StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
                 storageStockDetailRecord.materielID = record.materielID;
-                storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd");
+                storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
                 storageStockDetailRecord.billNumber = billNumber;
                 storageStockDetailRecord.thingsType = "其他入库";
                 storageStockDetailRecord.isIn = 1;

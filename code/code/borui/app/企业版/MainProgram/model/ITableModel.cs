@@ -42,7 +42,7 @@ namespace MainProgram.model
             }
         }
 
-        protected void writeOperatorLog(int billType, OperatorLogType type, string billNumber)
+        protected void writeOperatorLog(int billType, OperatorLogType type, string billNumber, string otherContent = "")
         {
             string logDesc = "";
 
@@ -67,7 +67,7 @@ namespace MainProgram.model
                 logDesc = "单据入账[";
             }
 
-            logDesc += billNumber + "]";
+            logDesc += billNumber + "]" + otherContent;
 
 
             OperatorLog.getInctance().insert(billType, logDesc);

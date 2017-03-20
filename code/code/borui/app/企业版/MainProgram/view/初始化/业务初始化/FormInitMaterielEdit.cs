@@ -86,7 +86,7 @@ namespace MainProgram
                     // 第一步 插入插入到存货明细表（STORAGE_STOCK_DETAIL），已解决实际库存和历史库存信息可能不对应的问题
                     StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
                     storageStockDetailRecord.materielID = m_materielPkey;
-                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd");
+                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
                     storageStockDetailRecord.billNumber = BillNumber.getInctance().getNewBillNumber(20, DateTime.Now.ToString("yyyy-MM-dd"));
                     storageStockDetailRecord.thingsType = "期初成本调整";
                     storageStockDetailRecord.isIn = 3;

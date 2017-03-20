@@ -415,7 +415,7 @@ namespace MainProgram
 
         private void ToolStripMenuItemToApply_Click(object sender, EventArgs e)
         {
-            FormPurchaseApply fpa = new FormPurchaseApply("", "");
+            FormPurchaseApply fpa = new FormPurchaseApply("");
             fpa.ShowDialog();
         }
 

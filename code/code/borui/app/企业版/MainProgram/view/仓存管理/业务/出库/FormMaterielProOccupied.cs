@@ -49,7 +49,11 @@ namespace MainProgram
         {
             InitializeComponent();
             m_billNumber = billNumber;
-            m_proInfoList = proInfoList;
+
+            if (proInfoList != null)
+            {
+                m_proInfoList = proInfoList;
+            }
         }
 
         private void FormMaterielProOccupied_Load(object sender, EventArgs e)
@@ -622,6 +626,7 @@ namespace MainProgram
 
                 if (index == 0)
                 {
+                    this.labelTradingDate.Visible = true;
                     this.labelTradingDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
                     // 单据号

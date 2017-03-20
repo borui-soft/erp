@@ -20,7 +20,6 @@ namespace MainProgram
         private int m_staffSavePkey = -1;
         private int m_materielOutStaffPkey = -1;
         private string m_billNumber = "";
-        private string m_projectNum = "";
         private readonly int BillTypeNumber = 14;
         private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
         private int m_rowIndex = -1, m_columnIndex = -1;
@@ -31,6 +30,9 @@ namespace MainProgram
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         MaterielOutOrderTable m_materieOutOrder = new MaterielOutOrderTable();
+
+        // 根据项目跟踪状况，直接形成转领料单
+        public SortedDictionary<int, ArrayList> m_proInfoList = new SortedDictionary<int, ArrayList>();
 
         private enum DataGridColumnName
         {
@@ -45,29 +47,27 @@ namespace MainProgram
             Note
         };
 
-        public FormMaterielOutOrder(string billNumber = "", string projectNum = "")
+        public FormMaterielOutOrder(string billNumber = "", SortedDictionary<int, ArrayList> proInfoList = null)
         {
             InitializeComponent();
             m_billNumber = billNumber;
 
-            if (projectNum.Length > 0)
+            if (proInfoList != null)
             {
-                this.textBoxProjectNo.Visible = false;
-                this.textBoxProjectNo.ReadOnly = true;
-
-                this.labelProjectNo.Visible = true;
-                this.labelProjectNo.Text = projectNum;
-                this.labelProjectNo.Visible = true;
-                
+                m_proInfoList = proInfoList;
             }
-
-            m_projectNum = projectNum;
         }
 
         private void FormMaterielOutOrder_Load(object sender, EventArgs e)
         {
             // DataGridView初始化
             dataGridViewInit();
+
+            if (m_proInfoList.Count > 0)
+            {
+                readProInfoListToUI();
+                return;
+            }
 
             if (m_billNumber.Length == 0)
             {
@@ -210,13 +210,12 @@ namespace MainProgram
         #region 摘要
         private void panelSummary_Click(object sender, EventArgs e)
         {
-            if (m_materieOutOrder.isReview == "1")
+            if (m_proInfoList.Count > 0 || m_materieOutOrder.isReview != "1")
             {
-                return;
+                this.labelSummary.Visible = false;
+                this.textBoxSummary.Visible = true;
+                this.textBoxSummary.Focus();
             }
-            this.labelSummary.Visible = false;
-            this.textBoxSummary.Visible = true;
-            this.textBoxSummary.Focus();
         }
 
         private void textBoxSummary_Leave(object sender, EventArgs e)
@@ -519,22 +518,34 @@ namespace MainProgram
 
         private void dataGridViewDataList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (m_proInfoList.Count > 0 && e.ColumnIndex == (int)DataGridColumnName.Value)
+            {
+                // 当value被改变后，
+                if (Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value.ToString()) >
+                    getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString()))
+                {
+                    MessageBoxExtend.messageWarning("物料数量以超过允许的最大值" + getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString()) +
+                        ", 已强制修改为默认最大值");
+                    dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
+                }
+            }
+
             if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
             {
                 // 当用户选择的相应物料后，自动对DataGridView行某些值进行赋值
                 if (dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString().Length > 0)
                 {
-                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString(), m_rowIndex);
                 }
             }
             else if (e.ColumnIndex == (int)DataGridColumnName.Price || e.ColumnIndex == (int)DataGridColumnName.Value)
             {
                 // 当单价和数量有变化时，自动计算物料金额
-                setTurnoverInfoDataGridView();
+                setTurnoverInfoDataGridView(m_rowIndex);
             }
         }
         
-        private void setMatetielInfoToDataGridView(string id)
+        private void setMatetielInfoToDataGridView(string id, int rowIndex)
         {
             /* 如果是物料编码列，需要判断该物料编码是否存在
             * 如果存在读取相应的值填充DataGridView中对应的其他列，如果不存在该物料编码，则清空该行
@@ -555,18 +566,18 @@ namespace MainProgram
 
                     if (pkey != record.pkey || record.pkey == 0)
                     {
-                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                             "]不存在，请重新输入或选择");
-                        m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+                        m_dateGridVeiwListDataList.clearDataGridViewRow(rowIndex);
 
                         return;
                     }
                 }
                 catch
                 {
-                    MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                    MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                         "]不存在，请重新输入或选择");
-                    m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+                    m_dateGridVeiwListDataList.clearDataGridViewRow(rowIndex);
 
                     return;
                 }
@@ -574,29 +585,29 @@ namespace MainProgram
 
             InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID((int)pkey);
 
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
             AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
         }
 
-        private void setTurnoverInfoDataGridView()
+        private void setTurnoverInfoDataGridView(int rowIndex)
         {
-            if (dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString().Length > 0 &&
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString().Length > 0)
+            if (dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString().Length > 0 &&
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString().Length > 0)
             {
-                double price = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
-                double value = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
+                double price = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
+                double value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                 double turnover = price * value;
 
                 // 金额信息保留2位小数儿
                 turnover = (double)(Math.Round(turnover * 100)) / 100;
 
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = Convert.ToString(turnover);
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = Convert.ToString(turnover);
             }
         }
 
@@ -795,11 +806,6 @@ namespace MainProgram
 
         private void textBoxProjectNo_Click(object sender, EventArgs e)
         {
-            if (m_projectNum.Length > 0)
-            {
-                return;
-            }
-
             if (m_materieOutOrder.isReview == "1")
             {
                 return;
@@ -812,11 +818,6 @@ namespace MainProgram
 
         private void textBoxProjectNo_Leave(object sender, EventArgs e)
         {
-            if (m_projectNum.Length > 0)
-            {
-                return;
-            }
-
             this.textBoxProjectNo.Visible = false;
             this.labelProjectNo.Visible = true;
             this.labelProjectNo.Text = this.textBoxProjectNo.Text;
@@ -825,13 +826,12 @@ namespace MainProgram
 
         private void textBoxMakeNo_Click(object sender, EventArgs e)
         {
-            if (m_materieOutOrder.isReview == "1")
+            if (m_proInfoList.Count > 0 || m_materieOutOrder.isReview != "1")
             {
-                return;
+                this.labelMakeNo.Visible = false;
+                this.textBoxMakeNo.Visible = true;
+                this.textBoxMakeNo.Focus();
             }
-            this.labelMakeNo.Visible = false;
-            this.textBoxMakeNo.Visible = true;
-            this.textBoxMakeNo.Focus();
         }
 
         private void textBoxMakeNo_Leave(object sender, EventArgs e)
@@ -842,5 +842,60 @@ namespace MainProgram
             this.textBoxMakeNo.Text = "";
         }
 
+        private void readProInfoListToUI()
+        {
+            for (int index = 0; index < m_proInfoList.Count; index++)
+            {
+                ArrayList record = new ArrayList();
+
+                record = m_proInfoList[index];
+
+                if (index == 0)
+                {
+                    this.labelTradingDate.Visible = true;
+                    this.labelTradingDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    // 单据号
+                    this.labelBillNumber.Text = BillNumber.getInctance().getNewBillNumber(BillTypeNumber, DateTime.Now.ToString("yyyy-MM-dd"));
+
+                    // 制单人初始化
+                    this.labelMakeBillStaff.Visible = true;
+                    this.labelMakeBillStaff.Text = DbPublic.getInctance().getCurrentLoginUserName();
+
+                    this.textBoxProjectNo.Visible = false;
+                    this.textBoxProjectNo.ReadOnly = true;
+
+                    this.labelProjectNo.Visible = true;
+                    this.labelProjectNo.Text = record[0].ToString();
+                    this.labelProjectNo.Visible = true;
+
+                    m_materieOutOrder.isReview = "1";
+                }
+
+                setMatetielInfoToDataGridView(Convert.ToString(record[1]), index);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
+
+                setTurnoverInfoDataGridView(index);
+            }
+        }
+
+        private double getMaxValue(string materielID)
+        {
+            double value = 0.0;
+
+            for (int index = 0; index < m_proInfoList.Count; index++)
+            {
+                ArrayList record = new ArrayList();
+
+                record = m_proInfoList[index];
+
+                if (record[1].ToString() == materielID)
+                {
+                    value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
+                    break;
+                }
+            }
+            return value;
+        }
     }
 }

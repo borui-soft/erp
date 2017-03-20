@@ -287,6 +287,24 @@ namespace MainProgram.model
 
             return value;
         }
+
+        public double getMaterielCountInfoFromProject(string projectNum, int materielID)
+        {
+            SortedDictionary<int, MaterielOutOrderTable> materielOutOrderList = new SortedDictionary<int, MaterielOutOrderTable>();
+            materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(projectNum);
+
+            double materielOutOrderValueCount = 0;
+            for (int indexOrderList = 0; indexOrderList < materielOutOrderList.Count; indexOrderList++)
+            {
+                MaterielOutOrderTable recordOrder = new MaterielOutOrderTable();
+                recordOrder = (MaterielOutOrderTable)materielOutOrderList[indexOrderList];
+
+                materielOutOrderValueCount += MaterielOutOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, materielID);
+            }
+
+            return materielOutOrderValueCount;
+        }
+    
     }
 
     public class MaterielOutOrderDetailsTable

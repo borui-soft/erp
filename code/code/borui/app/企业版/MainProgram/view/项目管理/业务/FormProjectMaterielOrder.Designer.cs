@@ -311,7 +311,7 @@
             this.groupBox7.Controls.Add(this.groupBox8);
             this.groupBox7.Location = new System.Drawing.Point(96, 187);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(165, 1);
+            this.groupBox7.Size = new System.Drawing.Size(145, 1);
             this.groupBox7.TabIndex = 28;
             this.groupBox7.TabStop = false;
             // 
@@ -652,7 +652,7 @@
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox9.Location = new System.Drawing.Point(535, 184);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(650, 1);
+            this.groupBox9.Size = new System.Drawing.Size(550, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
             // 

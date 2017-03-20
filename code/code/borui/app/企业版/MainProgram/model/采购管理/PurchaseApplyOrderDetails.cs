@@ -201,6 +201,24 @@ namespace MainProgram.model
             return value;
         }
 
+        public double getPurchaseValueFromProjectNumber(string projectNum, int materielID)
+        {
+            double appylyCount = 0.0;
+
+            SortedDictionary<int, PurchaseApplyOrderTable> listApplyList = new SortedDictionary<int, PurchaseApplyOrderTable>();
+            listApplyList = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(projectNum);
+
+            for (int indexApplyList = 0; indexApplyList < listApplyList.Count; indexApplyList++)
+            {
+                PurchaseApplyOrderTable recordlistApply = new PurchaseApplyOrderTable();
+                recordlistApply = (PurchaseApplyOrderTable)listApplyList[indexApplyList];
+
+                appylyCount += PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordlistApply.billNumber, materielID);
+            }
+
+            return appylyCount;
+        }
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

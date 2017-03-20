@@ -33,12 +33,9 @@ namespace MainProgram
 
         private RowMergeView m_dateGridViewExtend = new RowMergeView();
         private FormStorageSequenceFilterValue m_filter = new FormStorageSequenceFilterValue();
-        private FormProjectInfoTrackFilterValue m_projectInfoTrackFilter = new FormProjectInfoTrackFilterValue();
+        private FormProjectInfoTrackFilterValue m_proInfoTrackFilter = new FormProjectInfoTrackFilterValue();
         private SortedDictionary<int, FormProjectMaterielTable> m_dataList = new SortedDictionary<int, FormProjectMaterielTable>();
         private SortedDictionary<int, DataGridViewColumnInfoStruct> m_columnsInfo = new SortedDictionary<int, DataGridViewColumnInfoStruct>();
-
-        // m_materielProlist用于存放库存预占信息
-        SortedDictionary<int, MaterielProOccupiedInfo> m_materielProlist = new SortedDictionary<int, MaterielProOccupiedInfo>();
 
         public FormProjectInfoTrack(OrderType orderType, bool isSelectOrderNumber = false)
         {
@@ -77,10 +74,10 @@ namespace MainProgram
 
             if (fssf.ShowDialog() == DialogResult.OK)
             {
-                m_projectInfoTrackFilter = fssf.getFilterUIValue();
+                m_proInfoTrackFilter = fssf.getFilterUIValue();
             }
 
-            this.toolStripStatusLabel.Text = "材料表类型：" + orderTypeText + ",     项目编号：" + m_projectInfoTrackFilter.projectNum + ",     单据类型:" + m_projectInfoTrackFilter.allReview;
+            this.toolStripStatusLabel.Text = "材料表类型：" + orderTypeText + ",     项目编号：" + m_proInfoTrackFilter.projectNum + ",     单据类型:" + m_proInfoTrackFilter.allReview;
         }
 
         private void FormProjectInfoTrack_Load(object sender, EventArgs e)
@@ -97,8 +94,8 @@ namespace MainProgram
             addDataGridViewColumn("数量", 60);
 
             addDataGridViewColumn("实际库存", 100);
-            addDataGridViewColumn("预占库存", 100);
-            addDataGridViewColumn("可用库存", 100);
+            addDataGridViewColumn("预占库存总量", 100);
+            addDataGridViewColumn("本项目预占数量", 100);
 
             addDataGridViewColumn("转采购申请\n数量", 100);
             addDataGridViewColumn("采购(订单)\n数量", 100);
@@ -113,30 +110,22 @@ namespace MainProgram
             this.projectRowMergeView.AddSpanHeader(4, 5, "物料需求");
             this.projectRowMergeView.AddSpanHeader(9, 3, "库存情况");
 
-            getMaterielProOccupiedList();
             updateDataGridView();
-        }
-
-        private void getMaterielProOccupiedList()
-        {
-            m_materielProlist = MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedList();
         }
 
         private void updateDataGridView()
         {
-            SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
             SortedDictionary<int, ArrayList> projectInfoList = new SortedDictionary<int, ArrayList>();
 
             SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
-            list = FormProject.getInctance().getAllPurchaseOrderInfo(
-                m_projectInfoTrackFilter.projectNum, m_projectInfoTrackFilter.allReview, m_orderType);;
+            list = FormProject.getInctance().getAllPurchaseOrderInfo(m_proInfoTrackFilter.projectNum, m_proInfoTrackFilter.allReview, m_orderType);;
 
             for (int index = 0; index < list.Count; index++)
             {
                 FormProjectMaterielTable record = new FormProjectMaterielTable();
                 record = (FormProjectMaterielTable)list[index];
 
-                listDetails.Clear();
+                SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
                 listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
 
                 for (int index2 = 0; index2 < listDetails.Count; index2++)
@@ -161,24 +150,14 @@ namespace MainProgram
                     InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.pkey);
                     temp.Add(MaterielCountdata.value);
 
-                    // 库存预占情况
-                    if (m_materielProlist.ContainsKey(tmp.pkey))
-                    {
-                        MaterielProOccupiedInfo proOccupiedRecord = new MaterielProOccupiedInfo();
-                        proOccupiedRecord = (MaterielProOccupiedInfo)m_materielProlist[tmp.pkey];
-
-                        temp.Add(proOccupiedRecord.sum);
-                        temp.Add(MaterielCountdata.value - proOccupiedRecord.sum);
-                    }
-                    else
-                    {
-                        temp.Add(0);
-                        temp.Add(MaterielCountdata.value);
-                    }
+                    // 库存预占情况,包含总预占量和本项目预占量
+                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
+                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, m_proInfoTrackFilter.projectNum));
+                    
 
                     // 转采购申请单数量
                     SortedDictionary<int, PurchaseApplyOrderTable> listApplyList = new SortedDictionary<int, PurchaseApplyOrderTable>();
-                    listApplyList = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+                    listApplyList = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfoTrackFilter.projectNum);
 
                     double appylyCount = 0;
                     for (int indexApplyList = 0; indexApplyList < listApplyList.Count; indexApplyList++)
@@ -192,7 +171,7 @@ namespace MainProgram
 
                     // 采购订单数量
                     SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
-                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfoTrackFilter.projectNum);
 
                     double orderCount = 0;
                     for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
@@ -206,7 +185,7 @@ namespace MainProgram
 
                     // 采购入库数量
                     SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
-                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfoTrackFilter.projectNum);
 
                     double purchaseInOrderValueCount = 0;
                     for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
@@ -220,7 +199,7 @@ namespace MainProgram
 
                     // 生产领料数量
                     SortedDictionary<int, MaterielOutOrderTable> materielOutOrderList = new SortedDictionary<int, MaterielOutOrderTable>();
-                    materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectInfoTrackFilter.projectNum);
+                    materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfoTrackFilter.projectNum);
 
                     double materielOutOrderValueCount = 0;
                     for (int indexOrderList = 0; indexOrderList < materielOutOrderList.Count; indexOrderList++)
@@ -331,7 +310,6 @@ namespace MainProgram
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            getMaterielProOccupiedList();
             updateDataGridView();
         }
 
@@ -558,38 +536,38 @@ namespace MainProgram
 
         private void ToolStripMenuItemToApply_Click(object sender, EventArgs e)
         {
-            FormPurchaseApply fpa = new FormPurchaseApply("", m_projectInfoTrackFilter.projectNum);
+            FormPurchaseApply fpa = new FormPurchaseApply("", m_proInfoTrackFilter.projectNum);
             fpa.ShowDialog();
         }
 
         private void ToolStripMenuItemPurchaseApplyOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseApplyOrder, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseApplyOrder, m_proInfoTrackFilter.projectNum, m_materielPKey);
             fpod.ShowDialog();
         }
 
         private void ToolStripMenuItemPurchaseOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseOrder, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseOrder, m_proInfoTrackFilter.projectNum, m_materielPKey);
             fpod.ShowDialog();
         }
 
         private void toolStripMenuItemPurchaseInOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseIn, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseIn, m_proInfoTrackFilter.projectNum, m_materielPKey);
             fpod.ShowDialog();
         }
 
         private void ToolStripMenuItemMaterielOutOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.StorageMaterielOut, m_projectInfoTrackFilter.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.StorageMaterielOut, m_proInfoTrackFilter.projectNum, m_materielPKey);
             fpod.ShowDialog();
         }
 
         // 转生产领料
         private void toolStripMenuItemToProduce_Click(object sender, EventArgs e)
         {
-            FormMaterielOutOrder fmoo = new FormMaterielOutOrder("", m_projectInfoTrackFilter.projectNum);
+            FormMaterielOutOrder fmoo = new FormMaterielOutOrder("", m_proInfoTrackFilter.projectNum);
             fmoo.ShowDialog();
         }
 
@@ -597,6 +575,7 @@ namespace MainProgram
         private void toolStripMenuItemProOccupied_Click(object sender, EventArgs e)
         {
             // 存放需要转预占的数据
+            int recordCount = 0;
             SortedDictionary<int, ArrayList> proInfoList = new SortedDictionary<int, ArrayList>();
 
             // 根据单据,得到单据详细信息
@@ -605,32 +584,33 @@ namespace MainProgram
 
             for (int index = 0; index < listDetails.Count; index++)
             {
+                recordCount++;
                 ArrayList record = new ArrayList();
 
                 ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
                 tmp = (ProjectManagerDetailsTable)listDetails[index];
 
+                record.Add(m_proInfoTrackFilter.projectNum);
                 record.Add(tmp.materielID);
-                record.Add(tmp.materielName);
                 record.Add(tmp.value);
-
-                // 筛选出，可以转为预占库存的数据(如果预占数量小于项目所需数量，则可以形成预占)
-                if (m_materielProlist.ContainsKey(tmp.pkey))
-                {
-                    MaterielProOccupiedInfo proOccupiedRecord = new MaterielProOccupiedInfo();
-                    proOccupiedRecord = (MaterielProOccupiedInfo)m_materielProlist[tmp.pkey];
-
-                    record.Add(proOccupiedRecord.sum);
-                }
-                else 
-                {
-                    record.Add(0);
-                }
-
+                record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, m_proInfoTrackFilter.projectNum));
 
                 proInfoList.Add(proInfoList.Count, record);
+
+                if (recordCount % 12 == 0)
+                {
+                    FormMaterielProOccupied fmpo = new FormMaterielProOccupied("", proInfoList);
+                    fmpo.ShowDialog();
+
+                    proInfoList.Clear();
+                }
             }
 
+            if (proInfoList.Count > 0)
+            {
+                FormMaterielProOccupied fmpo = new FormMaterielProOccupied("", proInfoList);
+                fmpo.ShowDialog();
+            }
         }
     }
 }

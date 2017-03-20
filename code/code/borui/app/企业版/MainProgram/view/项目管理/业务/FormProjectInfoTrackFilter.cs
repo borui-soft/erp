@@ -27,6 +27,8 @@ namespace MainProgram
             this.comboBoxReview.Items.Add("已审核单据");
             this.comboBoxReview.Items.Add("全部单据");
             this.comboBoxReview.SelectedIndex = 1;
+
+            this.textBoxProjectNum.Focus();
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)

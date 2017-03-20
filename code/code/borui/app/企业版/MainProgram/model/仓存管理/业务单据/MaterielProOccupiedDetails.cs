@@ -214,6 +214,41 @@ namespace MainProgram.model
             return m_materielProlist;
         }
 
+        public double getMaterielProCountInfoFromProject(int materielID, string projectNum = "")
+        {
+            double sum = 0.0;
+            m_materielProlist.Clear();
+
+            SortedDictionary<int, MaterielProOccupiedOrderTable> list =
+                MaterielProOccupiedOrder.getInctance().getAllMaterielProOccupiedOrderInfo();
+
+            for (int index = 0; index < list.Count; index++)
+            {
+                MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
+                record = (MaterielProOccupiedOrderTable)list[index];
+
+                if (projectNum.Length == 0 ||
+                    (projectNum.Length > 0 && record.exchangesUnit == projectNum))
+                {
+                    SortedDictionary<int, MaterielProOccupiedOrderDetailsTable> listDetails =
+                        MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedInfoFromBillNumber(record.billNumber);
+
+                    for (int index2 = 0; index2 < listDetails.Count; index2++)
+                    {
+                        MaterielProOccupiedOrderDetailsTable recordDeatils = new MaterielProOccupiedOrderDetailsTable();
+                        recordDeatils = (MaterielProOccupiedOrderDetailsTable)listDetails[index2];
+
+                        if (recordDeatils.materielID == materielID)
+                        {
+                            sum += recordDeatils.value;
+                        }
+                    }
+                }
+            }
+
+            return sum;
+        }
+
         private void addDeatisToList(int materielID, string applyStaffName, double value)
         {
             if (m_materielProlist.ContainsKey(materielID))

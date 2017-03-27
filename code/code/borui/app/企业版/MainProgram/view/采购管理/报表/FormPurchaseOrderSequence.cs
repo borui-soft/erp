@@ -397,13 +397,13 @@ namespace MainProgram
                     FormProjectMaterielTable record = new FormProjectMaterielTable();
                     record = (FormProjectMaterielTable)list[index];
 
-                    if (m_filter.startDate == null || (record.makeDate.CompareTo(m_filter.startDate) >= 0 && record.makeDate.CompareTo(m_filter.endDate) <= 0))
+                    if (m_filter.startDate == null || (record.useDate.CompareTo(m_filter.startDate) >= 0 && record.useDate.CompareTo(m_filter.endDate) <= 0))
                     {
                         ArrayList temp = new ArrayList();
 
                         temp.Add(record.pkey);
                         temp.Add(record.deviceMode);
-                        temp.Add(record.makeDate);
+                        temp.Add(record.useDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.projectNum);
                         temp.Add(record.makeNum);

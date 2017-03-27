@@ -99,12 +99,6 @@
             this.labelDeviceName = new System.Windows.Forms.Label();
             this.textBoxDeviceName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.labelChangeReview = new System.Windows.Forms.Label();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.labelChange = new System.Windows.Forms.Label();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.panelChange = new System.Windows.Forms.Panel();
             this.panelDeviceName = new System.Windows.Forms.Panel();
             this.panelDeviceMode = new System.Windows.Forms.Panel();
@@ -112,6 +106,9 @@
             this.panelIsReview = new System.Windows.Forms.Panel();
             this.panelSummary = new System.Windows.Forms.Panel();
             this.panelTradingDate = new System.Windows.Forms.Panel();
+            this.labelMakeDate = new System.Windows.Forms.Label();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).BeginInit();
             this.panel7.SuspendLayout();
@@ -208,7 +205,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 7;
-            this.label4.Text = "制表日期(*):";
+            this.label4.Text = "使用日期(*):";
             // 
             // labelName
             // 
@@ -585,7 +582,7 @@
             // labelReviewBillStaff
             // 
             this.labelReviewBillStaff.AutoSize = true;
-            this.labelReviewBillStaff.Location = new System.Drawing.Point(287, 509);
+            this.labelReviewBillStaff.Location = new System.Drawing.Point(544, 509);
             this.labelReviewBillStaff.Name = "labelReviewBillStaff";
             this.labelReviewBillStaff.Size = new System.Drawing.Size(125, 12);
             this.labelReviewBillStaff.TabIndex = 61;
@@ -596,7 +593,7 @@
             // 
             this.groupBox13.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox13.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox13.Location = new System.Drawing.Point(291, 522);
+            this.groupBox13.Location = new System.Drawing.Point(548, 522);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Size = new System.Drawing.Size(110, 1);
             this.groupBox13.TabIndex = 63;
@@ -608,7 +605,7 @@
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label23.Location = new System.Drawing.Point(234, 509);
+            this.label23.Location = new System.Drawing.Point(491, 509);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(47, 12);
             this.label23.TabIndex = 62;
@@ -617,7 +614,7 @@
             // labelReviewDate
             // 
             this.labelReviewDate.AutoSize = true;
-            this.labelReviewDate.Location = new System.Drawing.Point(523, 510);
+            this.labelReviewDate.Location = new System.Drawing.Point(780, 510);
             this.labelReviewDate.Name = "labelReviewDate";
             this.labelReviewDate.Size = new System.Drawing.Size(95, 12);
             this.labelReviewDate.TabIndex = 64;
@@ -628,7 +625,7 @@
             // 
             this.groupBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox6.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox6.Location = new System.Drawing.Point(521, 522);
+            this.groupBox6.Location = new System.Drawing.Point(778, 522);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(110, 1);
             this.groupBox6.TabIndex = 66;
@@ -640,7 +637,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(464, 509);
+            this.label9.Location = new System.Drawing.Point(721, 509);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 12);
             this.label9.TabIndex = 65;
@@ -889,70 +886,6 @@
             this.label6.TabIndex = 114;
             this.label6.Text = "所属部件(*):";
             // 
-            // labelChangeReview
-            // 
-            this.labelChangeReview.AutoSize = true;
-            this.labelChangeReview.Location = new System.Drawing.Point(999, 511);
-            this.labelChangeReview.Name = "labelChangeReview";
-            this.labelChangeReview.Size = new System.Drawing.Size(41, 12);
-            this.labelChangeReview.TabIndex = 121;
-            this.labelChangeReview.Text = "label1";
-            this.labelChangeReview.Visible = false;
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.groupBox11.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox11.Location = new System.Drawing.Point(997, 523);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(110, 1);
-            this.groupBox11.TabIndex = 123;
-            this.groupBox11.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(924, 510);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 12);
-            this.label3.TabIndex = 122;
-            this.label3.Text = "变更审批人:";
-            // 
-            // labelChange
-            // 
-            this.labelChange.AutoSize = true;
-            this.labelChange.Location = new System.Drawing.Point(779, 510);
-            this.labelChange.Name = "labelChange";
-            this.labelChange.Size = new System.Drawing.Size(41, 12);
-            this.labelChange.TabIndex = 118;
-            this.labelChange.Text = "label5";
-            this.labelChange.Visible = false;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.groupBox12.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox12.Location = new System.Drawing.Point(783, 523);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(110, 1);
-            this.groupBox12.TabIndex = 120;
-            this.groupBox12.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(705, 510);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 12);
-            this.label10.TabIndex = 119;
-            this.label10.Text = "变更申请人:";
-            // 
             // panelChange
             // 
             this.panelChange.BackgroundImage = global::MainProgram.Properties.Resources.变更单据;
@@ -1029,19 +962,48 @@
             this.panelTradingDate.TabIndex = 21;
             this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
             // 
+            // labelMakeDate
+            // 
+            this.labelMakeDate.AutoSize = true;
+            this.labelMakeDate.Location = new System.Drawing.Point(296, 509);
+            this.labelMakeDate.Name = "labelMakeDate";
+            this.labelMakeDate.Size = new System.Drawing.Size(83, 12);
+            this.labelMakeDate.TabIndex = 118;
+            this.labelMakeDate.Text = "labelMakeDate";
+            this.labelMakeDate.Visible = false;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupBox11.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox11.Location = new System.Drawing.Point(294, 521);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(110, 1);
+            this.groupBox11.TabIndex = 120;
+            this.groupBox11.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(237, 508);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.TabIndex = 119;
+            this.label3.Text = "制单日期:";
+            // 
             // FormProjectMaterielOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1126, 536);
-            this.Controls.Add(this.panelChange);
-            this.Controls.Add(this.labelChangeReview);
+            this.Controls.Add(this.labelMakeDate);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.labelChange);
-            this.Controls.Add(this.groupBox12);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.panelChange);
             this.Controls.Add(this.panelDeviceName);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.panel6);
@@ -1195,13 +1157,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonChange;
         private System.Windows.Forms.ToolStripButton toolStripButtonChangeReview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.Label labelChangeReview;
+        private System.Windows.Forms.Panel panelChange;
+        private System.Windows.Forms.Label labelMakeDate;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label labelChange;
-        private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Panel panelChange;
 
     }
 }

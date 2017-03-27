@@ -48,7 +48,7 @@ namespace MainProgram.model
             }
 
             string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
-            insert += ",[MAKE_ORDER_STAFF],[DESIGN_ID]";
+            insert += ",[MAKE_ORDER_STAFF],[MAKE_ORDER_DATE],[DESIGN_ID]";
 
             if (tmpRecord.billNumber != null && tmpRecord.changeStaffName.Length > 0)
             {
@@ -64,7 +64,7 @@ namespace MainProgram.model
             
             insert += record.dataType + ",";
             insert += "'" + record.deviceMode + "',";
-            insert += "'" + record.makeDate + "',";
+            insert += "'" + record.useDate + "',";
             insert += "'" + record.billNumber + "',";
             insert += "'" + record.projectNum + "',";
             insert += "'" + record.makeNum + "',";
@@ -72,6 +72,7 @@ namespace MainProgram.model
             insert += "'" + record.note + "',";
 
             insert += record.makeOrderStaffID + ",";
+            insert += "'" + record.makeOrderDate + "',";
             insert += record.designStaffID;
 
             if (tmpRecord.billNumber != null && tmpRecord.changeStaffName.Length > 0)
@@ -202,7 +203,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
+            string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE],[MAKE_ORDER_DATE]";
             sql += ",[MAKE_ORDER_STAFF],[DESIGN_ID],[REVIEW_STAFF_ID],[REVIEW_DATE],[IS_REVIEW],[CHANGE_REVIEW_STAFF_ID],[CHANGE_STAFF_ID]  ";
             sql += "FROM [ERP].[dbo].[PROJECT_MATERIE_MANAGER] ORDER BY PKEY DESC";
 
@@ -217,7 +218,7 @@ namespace MainProgram.model
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.dataType = DbDataConvert.ToInt32(row["DATE_TYPE"]);
                     record.deviceMode = DbDataConvert.ToString(row["DEVICE_MODE"]);
-                    record.makeDate = DbDataConvert.ToDateTime(row["MAKE_DATE"]).ToString("yyyy-MM-dd");
+                    record.useDate = DbDataConvert.ToDateTime(row["MAKE_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
                     record.projectNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
                     record.makeNum = DbDataConvert.ToString(row["MAKE_NUM"]);
@@ -227,6 +228,13 @@ namespace MainProgram.model
 
                     record.makeOrderStaffID = DbDataConvert.ToInt32(row["MAKE_ORDER_STAFF"]);
                     record.makeOrderStaffName = Staff.getInctance().getStaffNameFromPkey(record.makeOrderStaffID);
+                    string makeOrderDate = DbDataConvert.ToString(row["MAKE_ORDER_DATE"]);
+
+                    if (makeOrderDate.Length > 0)
+                    {
+                        record.makeOrderDate = DbDataConvert.ToDateTime(row["MAKE_ORDER_DATE"]).ToString("yyyy-MM-dd"); 
+                    }
+
                     record.designStaffID = DbDataConvert.ToInt32(row["DESIGN_ID"]);
                     record.designStaffName = Staff.getInctance().getStaffNameFromPkey(record.designStaffID);
 
@@ -417,9 +425,9 @@ namespace MainProgram.model
         public int pkey { get; set; }
         public int dataType { get; set; }
 
-        // 设备型号、制单日期、单据编号
+        // 设备型号、使用日期、单据编号
         public string deviceMode { get; set; }
-        public string makeDate { get; set; }
+        public string useDate { get; set; }
         public string billNumber { get; set; }
 
         // 项目编号、生产编号、所属部件、摘要
@@ -431,6 +439,7 @@ namespace MainProgram.model
         // 制单人、设计人、审核人
         public int makeOrderStaffID { get; set; }
         public string makeOrderStaffName { get; set; }
+        public string makeOrderDate { get; set; }
         public int designStaffID { get; set; }
         public string designStaffName { get; set; }
         public int orderrReview { get; set; }

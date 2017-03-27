@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.1.05";
+            this.label3.Text = "当前软件版本：V2.1.06";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、xxx材料表跟踪情况中，增加材料数据自动关联关联到对应转xxx单据中\n2、修改了物料明细查询错误的问题\n3、所有单据入账或审核时详细记录数据插入数据的时间，并在上机日中做了展示";
+            this.richTextBox1.Text = "1、xxx材料表跟踪情况中，实现转库存占用、采购申请、生产领料时，多了个选择页面(可选择多条物料信息，最大12条)";
             // 
             // FormAbout
             // 

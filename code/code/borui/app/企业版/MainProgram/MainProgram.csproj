@@ -746,6 +746,12 @@
     <Compile Include="view\项目管理\业务\FormProjectOrderDetail.designer.cs">
       <DependentUpon>FormProjectOrderDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\项目管理\业务\FormTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormTransfer.designer.cs">
+      <DependentUpon>FormTransfer.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\项目管理\业务\RowMergeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1044,6 +1050,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\业务\FormProjectOrderDetail.resx">
       <DependentUpon>FormProjectOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormTransfer.resx">
+      <DependentUpon>FormTransfer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\业务\RowMergeView.resx">
       <DependentUpon>RowMergeView.cs</DependentUpon>

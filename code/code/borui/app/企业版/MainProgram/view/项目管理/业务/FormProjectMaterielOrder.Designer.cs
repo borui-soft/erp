@@ -99,7 +99,6 @@
             this.labelDeviceName = new System.Windows.Forms.Label();
             this.textBoxDeviceName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.panelChange = new System.Windows.Forms.Panel();
             this.panelDeviceName = new System.Windows.Forms.Panel();
             this.panelDeviceMode = new System.Windows.Forms.Panel();
             this.panelMakeNum = new System.Windows.Forms.Panel();
@@ -448,8 +447,7 @@
             // 
             // toolStripButtonChange
             // 
-            this.toolStripButtonChange.Enabled = false;
-            this.toolStripButtonChange.Image = global::MainProgram.Properties.Resources.Printers;
+            this.toolStripButtonChange.Image = global::MainProgram.Properties.Resources.noForbid;
             this.toolStripButtonChange.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonChange.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonChange.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -472,6 +470,7 @@
             this.toolStripButtonChangeReview.Text = "变更审批";
             this.toolStripButtonChangeReview.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonChangeReview.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonChangeReview.Visible = false;
             this.toolStripButtonChangeReview.Click += new System.EventHandler(this.toolStripButtonChangeReview_Click);
             // 
             // toolStripSeparator3
@@ -886,15 +885,6 @@
             this.label6.TabIndex = 114;
             this.label6.Text = "所属部件(*):";
             // 
-            // panelChange
-            // 
-            this.panelChange.BackgroundImage = global::MainProgram.Properties.Resources.变更单据;
-            this.panelChange.Location = new System.Drawing.Point(1049, 48);
-            this.panelChange.Name = "panelChange";
-            this.panelChange.Size = new System.Drawing.Size(77, 29);
-            this.panelChange.TabIndex = 76;
-            this.panelChange.Visible = false;
-            // 
             // panelDeviceName
             // 
             this.panelDeviceName.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -1003,7 +993,6 @@
             this.Controls.Add(this.labelMakeDate);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.panelChange);
             this.Controls.Add(this.panelDeviceName);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.panel6);
@@ -1157,7 +1146,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonChange;
         private System.Windows.Forms.ToolStripButton toolStripButtonChangeReview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.Panel panelChange;
         private System.Windows.Forms.Label labelMakeDate;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label label3;

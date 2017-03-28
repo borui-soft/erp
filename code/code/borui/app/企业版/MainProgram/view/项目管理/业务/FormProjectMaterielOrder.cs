@@ -719,28 +719,27 @@ namespace MainProgram
             }
             else if (m_ProjectInfo.isReview == "2")
             {
-                this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
-                this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
-                this.panelIsReview.Visible = true;
+                //this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
+                //this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
+                //this.panelIsReview.Visible = true;
 
-                this.save.Enabled = false;
-                this.toolStripButtonReview.Enabled = false;
-                this.dataGridViewDataList.ReadOnly = true;
-                this.dataGridViewDataCount.ReadOnly = true;
+                //this.save.Enabled = false;
+                //this.toolStripButtonReview.Enabled = false;
+                //this.dataGridViewDataList.ReadOnly = true;
+                //this.dataGridViewDataCount.ReadOnly = true;
 
-                this.panelSummary.Visible = false;
+                //this.panelSummary.Visible = false;
 
-                this.dateTimePickerTradingDate.Visible = false;
+                //this.dateTimePickerTradingDate.Visible = false;
 
-                this.textBoxSummary.Visible = false;
+                //this.textBoxSummary.Visible = false;
 
-                this.panelBusinessPeople.Visible = false;
+                //this.panelBusinessPeople.Visible = false;
 
-                // 变更按钮处于可用状态
-                this.panelIsReview.Visible = false;
-                this.panelChange.Visible = true;
-                this.toolStripButtonChange.Enabled = false;
-                this.toolStripButtonChangeReview.Enabled = true;
+                //// 变更按钮处于可用状态
+                //this.panelIsReview.Visible = false;
+                //this.toolStripButtonChange.Enabled = false;
+                //this.toolStripButtonChangeReview.Enabled = true;
             }
             else
             {
@@ -748,10 +747,10 @@ namespace MainProgram
                 this.labelReviewDate.Visible = false;
             }
 
-            if (m_ProjectInfo.changeStaffName.Length > 0 || m_ProjectInfo.changeReviewStaffName.Length > 0)
-            {
-                this.panelChange.Visible = true;
-            }
+            //if (m_ProjectInfo.changeStaffName.Length > 0 || m_ProjectInfo.changeReviewStaffName.Length > 0)
+            //{
+            //    this.panelChange.Visible = true;
+            //}
         }
 
         private void panelContractNum_Click(object sender, EventArgs e)
@@ -908,29 +907,8 @@ namespace MainProgram
 
         private void toolStripButtonChange_Click(object sender, EventArgs e)
         {
-            //this.labelDeviceMode.Visible = true;
-            //this.labelTradingDate.Visible = true;
-            //this.labelBillNumber.Visible = true;
-            //this.labelContractNum.Visible = true;
-            //this.labelMakeNum.Visible = true;
-            //this.labelDeviceName.Visible = true;
-            //this.labelSummary.Visible = true;
-            //this.labelMakeBillStaff.Visible = true;
-            //this.labelBusinessPeople.Visible = true;
-            //this.labelReviewBillStaff.Visible = true;
-            //this.labelReviewDate.Visible = true;
-
-            //this.save.Enabled = true;
-
-            this.panelChange.Visible = true;
-
-            this.toolStripButtonChange.Enabled = false;
-            this.toolStripButtonChangeReview.Enabled = true;
-            this.panelIsReview.Visible = false;
-
-            FormProject.getInctance().billChange(m_billNumber);
-
-            this.Close();
+            FormProjectMaterielChangeOrder fpmco = new FormProjectMaterielChangeOrder(m_tablesType, this.labelBillNumber.Text);
+            fpmco.ShowDialog();
         }
 
         // 变更审批按钮

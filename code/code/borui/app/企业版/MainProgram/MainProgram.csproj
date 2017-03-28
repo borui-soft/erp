@@ -734,6 +734,12 @@
     <Compile Include="view\项目管理\业务\FormProjectInfoTrackFilter.designer.cs">
       <DependentUpon>FormProjectInfoTrackFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielChangeOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielChangeOrder.designer.cs">
+      <DependentUpon>FormProjectMaterielChangeOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1044,6 +1050,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\业务\FormProjectInfoTrackFilter.resx">
       <DependentUpon>FormProjectInfoTrackFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielChangeOrder.resx">
+      <DependentUpon>FormProjectMaterielChangeOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielOrder.resx">
       <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>

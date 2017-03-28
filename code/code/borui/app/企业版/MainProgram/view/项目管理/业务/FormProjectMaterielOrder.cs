@@ -273,6 +273,9 @@ namespace MainProgram
                     {
                         MessageBoxExtend.messageOK("数据保存成功");
                     }
+                    
+                    // 自动形成库存占用
+                    AutoGenerateMaterielPro(dataList);
 
                     this.Close();
                 }
@@ -281,6 +284,37 @@ namespace MainProgram
             {
                 MessageBoxExtend.messageWarning("此单据不包含任何交易信息，单据保存失败.");
             }
+        }
+
+        private void AutoGenerateMaterielPro(ArrayList purchaseOrderDetailsRecords)
+        {
+            // 形成物料表头信息
+            MaterielProOccupiedOrderTable proOccupiedInfo = new MaterielProOccupiedOrderTable();
+            proOccupiedInfo.tradingDate = this.labelTradingDate.Text;
+            proOccupiedInfo.billNumber = this.labelBillNumber.Text;
+            proOccupiedInfo.exchangesUnit = this.labelContractNum.Text;
+            proOccupiedInfo.sumValue = "0";
+            proOccupiedInfo.sumMoney = "0";
+            proOccupiedInfo.applyStaffId = DbPublic.getInctance().getCurrentLoginUserID();
+            proOccupiedInfo.makeOrderStaff = DbPublic.getInctance().getCurrentLoginUserID();
+            MaterielProOccupiedOrder.getInctance().insert(proOccupiedInfo, false);
+            
+            // 形成自动转库存详细信息
+            ArrayList listDetails = new ArrayList();
+            for (int i = 0; i < purchaseOrderDetailsRecords.Count; i++)
+            {
+                ProjectManagerDetailsTable recordPro = (ProjectManagerDetailsTable)purchaseOrderDetailsRecords[i];
+
+                MaterielProOccupiedOrderDetailsTable record = new MaterielProOccupiedOrderDetailsTable();
+                record.billNumber = this.labelBillNumber.Text;
+                record.rowNumber = Convert.ToString(recordPro.rowNumber);
+                record.materielID = recordPro.materielID;
+                record.price = 0;
+                record.value = recordPro.value;
+                record.note = "";
+                listDetails.Add(record);
+            }
+            MaterielProOccupiedOrderDetails.getInctance().insert(listDetails);
         }
 
         private void  geTableHadeAndEndValue()
@@ -411,6 +445,10 @@ namespace MainProgram
                 {
                     save_Click(sender, e);
                     FormProject.getInctance().billReview(m_billNumber);
+
+                    // 对应的库存单据审核
+                    MaterielProOccupiedOrder.getInctance().billReview(m_billNumber, false, false);
+
                     MessageBoxExtend.messageOK("单据审核成功");
                 }
             }

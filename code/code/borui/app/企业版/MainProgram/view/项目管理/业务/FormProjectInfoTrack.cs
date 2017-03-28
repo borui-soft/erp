@@ -97,10 +97,10 @@ namespace MainProgram
             addDataGridViewColumn("预占库存总量", 100);
             addDataGridViewColumn("本项目预占数量", 100);
 
-            addDataGridViewColumn("转采购申请\n数量", 100);
-            addDataGridViewColumn("采购(订单)\n数量", 100);
-            addDataGridViewColumn("采购入库\n数量", 100);
-            addDataGridViewColumn("生产领料\n数量", 100);
+            addDataGridViewColumn("转采购申请\n数量", 80);
+            addDataGridViewColumn("采购(订单)\n数量", 80);
+            addDataGridViewColumn("采购入库\n数量", 80);
+            addDataGridViewColumn("生产领料\n数量", 80);
 
             initDataGridViewColumn();
 
@@ -541,8 +541,8 @@ namespace MainProgram
         // 转预占库存
         private void toolStripMenuItemProOccupied_Click(object sender, EventArgs e)
         {
-            FormTransfer ft = new FormTransfer(m_billNumber, m_proInfo.projectNum, 1);
-            ft.ShowDialog();
+            //FormTransfer ft = new FormTransfer(m_billNumber, m_proInfo.projectNum, 1);
+            //ft.ShowDialog();
 
             toolStripButtonRefresh_Click(null, null);
         }

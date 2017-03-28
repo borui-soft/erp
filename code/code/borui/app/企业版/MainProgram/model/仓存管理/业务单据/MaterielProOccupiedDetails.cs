@@ -144,6 +144,64 @@ namespace MainProgram.model
             }
         }
 
+        // 取消xx项目下的xx物料的库存占用xx数量
+        public void cancelMaterielPro(string projectNum, int materielID, double needCancelValue)
+        {
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
+            ArrayList billNumList = MaterielProOccupiedOrder.getInctance().getAllReviewMaterielProBillNumFromProjectNum(projectNum);
+            double tmpValue = needCancelValue;
+
+            for (int i = 0; i < billNumList.Count; i++)
+            {
+                string billNumber = billNumList[i].ToString();
+
+                foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index in m_tableDataList)
+                {
+                    if (index.Value.billNumber == billNumber && index.Value.materielID == materielID && index.Value.isCancel == "0")
+                    {
+                        if (index.Value.value - tmpValue >= 0)
+                        {
+                            updateRecordValue(index.Value.value - tmpValue, index.Value.pkey);
+                            tmpValue -= needCancelValue;
+                            break;
+                        }
+                        else
+                        {
+                            updateRecordValue(0, index.Value.pkey);
+                            tmpValue -= index.Value.value;
+                        }
+                    }
+                }
+
+                if (tmpValue <= 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        // 撤销单据
+        public void updateRecordValue(double value, int pkey)
+        {
+            string delete = "UPDATE [dbo].[WAREHOUSE_MANAGEMENT_PRO_OCCUPIED_DETAILS] SET VALUE = " + value + " WHERE PKEY = " + pkey;
+
+            try
+            {
+                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, delete);
+
+                load();
+            }
+            catch (Exception error)
+            {
+                MessageBoxExtend.messageWarning(error.Message);
+                return;
+            }
+        }
+
         // 撤销单据
         public void delProOccupied(string pkey)
         {

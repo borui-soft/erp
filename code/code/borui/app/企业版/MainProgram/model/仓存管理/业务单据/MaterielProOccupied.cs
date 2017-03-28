@@ -6,6 +6,7 @@ using System.Text;
 using TIV.Core.DatabaseAccess;
 using MainProgram.bus;
 using MainProgram.model;
+using System.Collections;
 
 
 namespace MainProgram.model
@@ -97,7 +98,7 @@ namespace MainProgram.model
             }
         }
 
-        public void billReview(string billNumber, bool isRedBill = false)
+        public void billReview(string billNumber, bool isRedBill = false, bool isDispalyMess = true)
         {
             m_isRedBill = isRedBill;
 
@@ -112,7 +113,10 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
-                MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
+                if (isDispalyMess)
+                {
+                    MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
+                }
 
                 load();
             }
@@ -196,6 +200,29 @@ namespace MainProgram.model
             }
 
             return list;
+        }
+
+        public ArrayList getAllReviewMaterielProBillNumFromProjectNum(string projectNum)
+        {
+            ArrayList tempList = new ArrayList();
+
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
+            foreach (KeyValuePair<int, MaterielProOccupiedOrderTable> index in m_tableDataList)
+            {
+                MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
+                record = index.Value;
+
+                if (index.Value.exchangesUnit == projectNum)
+                {
+                    tempList.Add(index.Value.billNumber);
+                }
+            }
+
+            return tempList;
         }
 
         public SortedDictionary<int, MaterielProOccupiedOrderTable> getAllNotReviewMaterielProOccupiedOrderInfo()

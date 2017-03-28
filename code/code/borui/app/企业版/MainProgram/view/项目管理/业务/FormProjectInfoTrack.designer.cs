@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectInfoTrack));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.billDetail = new System.Windows.Forms.ToolStripButton();
@@ -47,6 +47,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemProOccupied = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemToApply = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemToProduce = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,7 +57,6 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemMaterielOutOrderInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.projectRowMergeView = new RowMergeView();
-            this.toolStripMenuItemProOccupied = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.contextMenuStripDataGridView.SuspendLayout();
@@ -217,7 +217,17 @@
             this.toolStripSeparator6,
             this.ToolStripMenuItemMaterielOutOrderInfo});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 192);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 170);
+            // 
+            // toolStripMenuItemProOccupied
+            // 
+            this.toolStripMenuItemProOccupied.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItemProOccupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItemProOccupied.Enabled = false;
+            this.toolStripMenuItemProOccupied.Name = "toolStripMenuItemProOccupied";
+            this.toolStripMenuItemProOccupied.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItemProOccupied.Text = "转库存预占";
+            this.toolStripMenuItemProOccupied.Click += new System.EventHandler(this.toolStripMenuItemProOccupied_Click);
             // 
             // ToolStripMenuItemToApply
             // 
@@ -286,14 +296,14 @@
             // 
             this.projectRowMergeView.AllowUserToAddRows = false;
             this.projectRowMergeView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectRowMergeView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectRowMergeView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.projectRowMergeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.projectRowMergeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.projectRowMergeView.Location = new System.Drawing.Point(0, 45);
@@ -307,15 +317,6 @@
             this.projectRowMergeView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.rowMergeView1_CellClick);
             this.projectRowMergeView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.projectRowMergeView_CellMouseDown);
             this.projectRowMergeView.DoubleClick += new System.EventHandler(this.projectRowMergeView_DoubleClick);
-            // 
-            // toolStripMenuItemProOccupied
-            // 
-            this.toolStripMenuItemProOccupied.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripMenuItemProOccupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStripMenuItemProOccupied.Name = "toolStripMenuItemProOccupied";
-            this.toolStripMenuItemProOccupied.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemProOccupied.Text = "转库存预占";
-            this.toolStripMenuItemProOccupied.Click += new System.EventHandler(this.toolStripMenuItemProOccupied_Click);
             // 
             // FormProjectInfoTrack
             // 

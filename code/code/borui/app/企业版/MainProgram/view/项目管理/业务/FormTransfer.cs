@@ -205,6 +205,13 @@ namespace MainProgram
                     m_proInfoList.Add(m_proInfoList.Count, record);
                 }
             }
+
+            if (m_proInfoList.Count == 0)
+            {
+                this.button1.Enabled = false;
+            }
+
+            this.label1.Text += ", 共有[" + Convert.ToString(m_proInfoList.Count) + "]条数据";
         }
 
         private double getMaxValue(string materielID)
@@ -258,7 +265,7 @@ namespace MainProgram
         }
 
         // 确定
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonEnter_Click(object sender, EventArgs e)
         {
             m_proInfoListUser.Clear();
 

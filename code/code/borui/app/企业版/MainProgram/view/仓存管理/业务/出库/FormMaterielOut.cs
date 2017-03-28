@@ -455,10 +455,27 @@ namespace MainProgram
             {
                 save_Click(sender, e);
                 MaterielOutOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+
+                // 自动消除库存占用
+                AutoDelMateriePro(m_billNumber);
             }
             catch (Exception exp)
             {
                 MessageBoxExtend.messageError(exp.ToString());
+            }
+        }
+        
+        private void AutoDelMateriePro(string billNumber)
+        {
+            string projectNum = this.labelProjectNo.Text;
+
+            SortedDictionary<int, MaterielOutOrderDetailsTable> proInfoList = MaterielOutOrderDetails.getInctance().getMaterielOutInfoFromBillNumber(billNumber);
+
+            foreach (KeyValuePair<int, MaterielOutOrderDetailsTable> index in proInfoList)
+            {
+                MaterielOutOrderDetailsTable record = index.Value;
+
+                MaterielProOccupiedOrderDetails.getInctance().cancelMaterielPro(projectNum, record.materielID, record.value);
             }
         }
 

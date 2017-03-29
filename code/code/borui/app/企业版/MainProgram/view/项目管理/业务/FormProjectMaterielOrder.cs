@@ -907,7 +907,7 @@ namespace MainProgram
 
         private void toolStripButtonChange_Click(object sender, EventArgs e)
         {
-            FormProjectMaterielChangeOrder fpmco = new FormProjectMaterielChangeOrder(m_tablesType, this.labelBillNumber.Text);
+            FormProjectMaterielChangeOrder fpmco = new FormProjectMaterielChangeOrder(m_tablesType, this.labelBillNumber.Text, m_ProjectInfo.projectNum);
             fpmco.ShowDialog();
         }
 

@@ -237,3 +237,32 @@ ALTER TABLE [dbo].[PURCHASE_APPLY_ORDER_DETAILS] ALTER COLUMN VALUE FLOAT;
 
 --2017-3-16 项目管理表（PROJECT_MATERIE_MANAGER）增加制单日期字段
 ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ADD MAKE_ORDER_DATE [datetime] NULL;
+
+
+-- 2017-3-29 材料变更申请页面增加权限控制
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (806, '总材料表变更申请单', 8);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('新增', 'save', 806);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('审核', 'toolStripButtonReview', 806);
+
+--2017-3-29 材料变更申请表(PROJECT_MATERIE_CHANGE_MANAGER)
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PROJECT_MATERIE_CHANGE_MANAGER]') AND type in (N'U'))
+DROP TABLE [dbo].[PROJECT_MATERIE_CHANGE_MANAGER]
+CREATE TABLE [dbo].[PROJECT_MATERIE_CHANGE_MANAGER](
+	[PKEY] [int] IDENTITY(1,1) NOT NULL,
+	[DATE_TYPE] [int] NOT NULL,
+	[PROJECT_NUM] [nvarchar](30) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[SRC_BILL_NUMBER] [nvarchar](20) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[BILL_NUMBER] [nvarchar](20) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[DESIGN_ID] [int] NOT NULL,
+	[CHANGE_REASON] [nvarchar](100) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[CHANGE_MATERIE_ID_S] [nvarchar](100) COLLATE Chinese_PRC_CI_AS NULL,
+
+	[MAKE_DATE] [datetime] NOT NULL,
+	[MAKE_ORDER_STAFF] [int] NOT NULL,
+	[REVIEW_STAFF_ID] [int] NULL,
+	[REVIEW_DATE] [datetime] NULL,
+	[IS_REVIEW] [int] NULL
+) ON [PRIMARY];
+
+-- 2017-3-29 用于控制总材变更申请序时薄查看权限
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('总材变更申请序时薄', 'labelChangeApply', 804);

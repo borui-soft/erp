@@ -19,6 +19,8 @@ namespace MainProgram
     {
         private int m_staffPkey = -1;
         private string m_billNumber = "";
+        private string m_projectNum = "";
+
         private int m_tablesType;
         private readonly int BillTypeNumber = 20;
         private readonly int DateGridVeiwListDataListRowCount = 12;
@@ -31,7 +33,9 @@ namespace MainProgram
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         FormProjectMaterielTable m_ProjectInfo = new FormProjectMaterielTable();
 
-        FormProjectMaterielTable m_currentOrderInfo = new FormProjectMaterielTable();
+        FormProjectMaterielChangeTable m_currentOrderInfo = new FormProjectMaterielChangeTable();
+
+        SortedDictionary<int, ProjectManagerDetailsTable> m_purchaseOrderDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
 
         private enum DataGridColumnName
         {
@@ -50,7 +54,39 @@ namespace MainProgram
             Note            //备注
         };
 
-        public FormProjectMaterielChangeOrder(int tablesType, string billNumber)
+        public FormProjectMaterielChangeOrder(string billNumber)
+        {
+            InitializeComponent();
+
+            //注：页面因素中数据表类型(1：设备总材料表；2：电器总材料表；3：工程总材料表)
+            m_currentOrderInfo = FormProjectInfoChange.getInctance().getProjectInfoFromBillNumber(billNumber);
+            m_tablesType = m_currentOrderInfo.dataType;
+
+            if (m_tablesType == 1)
+            {
+                this.labelName.Text = "设备总材料变更申请表";
+                this.Text = "设备总材料变更申请表";
+            }
+            else if (m_tablesType == 2)
+            {
+                this.labelName.Text = "电器总材料变更申请表";
+                this.Text = "电器总材料变更申请表";
+            }
+            else if (m_tablesType == 3)
+            {
+                this.labelName.Text = "工程总材料变更申请表";
+                this.Text = "工程总材料变更申请表";
+            }
+            else
+            {
+                m_tablesType = 1;
+                this.labelName.Text = "设备总材料变更申请表";
+                this.Text = "设备总材料变更申请表";
+            }
+            m_billNumber = billNumber;
+        }
+
+        public FormProjectMaterielChangeOrder(int tablesType, string billNumber, string projectNum)
         {
             InitializeComponent();
 
@@ -72,7 +108,7 @@ namespace MainProgram
                 this.labelName.Text = "工程总材料变更申请表";
                 this.Text = "工程总材料变更申请表";
             }
-            else 
+            else
             {
                 m_tablesType = 1;
                 this.labelName.Text = "设备总材料变更申请表";
@@ -81,6 +117,8 @@ namespace MainProgram
 
             this.labelSrcOrderBillNum.Text = billNumber;
             m_currentOrderInfo.dataType = tablesType;
+
+            m_projectNum = projectNum;
         }
 
         private void FormProjectMaterielOrder_Load(object sender, EventArgs e)
@@ -101,7 +139,7 @@ namespace MainProgram
                 this.labelMakeDate.Visible = true;
                 this.labelMakeDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
-            else 
+            else
             {
                 readBillInfoToUI();
             }
@@ -141,14 +179,17 @@ namespace MainProgram
             m_dateGridVeiwListDataListChange.addDataGridViewColumn("尺寸", 80, true, true);
             m_dateGridVeiwListDataListChange.addDataGridViewColumn(" 基本\n 单位", 80, true, true);
 
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("数量(*)", 80, true, false);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("制作方式", 80, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("数量(*)", 80, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("制作方式", 80, true, true);
 
             m_dateGridVeiwListDataListChange.initDataGridViewColumn(this.dataGridViewDataListChangeOfter);
             m_dateGridVeiwListDataListChange.initDataGridViewData(DateGridVeiwListDataListRowCount);
 
             // 初始化完毕
             m_isInit = true;
+
+            // 根据单据编号，得到详细数据
+            m_purchaseOrderDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(this.labelSrcOrderBillNum.Text);
         }
 
         #region 摘要
@@ -225,9 +266,8 @@ namespace MainProgram
 
                 if (purchaseOrderIsFull(m_currentOrderInfo) && purchaseOrderDetailsIsFull(dataList))
                 {
-                    FormProject.getInctance().insert(m_currentOrderInfo, false);
+                    FormProjectInfoChange.getInctance().insert(m_currentOrderInfo, false);
                     ProjectManagerDetails.getInctance().insert(dataList);
-                    //BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
                     if (m_billNumber.Length == 0)
                     {
@@ -237,68 +277,57 @@ namespace MainProgram
                     this.Close();
                 }
             }
-            else 
+            else
             {
                 MessageBoxExtend.messageWarning("此单据不包含任何交易信息，单据保存失败.");
             }
         }
 
-        private void  geTableHadeAndEndValue()
+        private void geTableHadeAndEndValue()
         {
-            m_currentOrderInfo.note = this.labelSummary.Text;
-            m_currentOrderInfo.makeOrderDate = this.labelMakeDate.Text;
-
-            m_currentOrderInfo.makeOrderStaffID = DbPublic.getInctance().getCurrentLoginUserID();
+            m_currentOrderInfo.projectNum = m_projectNum;
+            m_currentOrderInfo.srcBillNumber = this.labelSrcOrderBillNum.Text;
 
             if (m_billNumber.Length == 0)
             {
                 m_currentOrderInfo.designStaffID = m_staffPkey;
             }
-            else 
+            else
             {
                 m_currentOrderInfo.designStaffID = m_ProjectInfo.designStaffID;
             }
+
+            m_currentOrderInfo.billNumber = this.labelBillNumber.Text;
+            m_currentOrderInfo.changeReason = this.labelSummary.Text;
+
+
+            m_currentOrderInfo.makeOrderDate = this.labelMakeDate.Text;
+            m_currentOrderInfo.makeOrderStaffID = DbPublic.getInctance().getCurrentLoginUserID();
+
+            m_currentOrderInfo.materielIDs = "";
+            for (int rowIndex = 0; rowIndex < dataGridViewDataListChangeOfter.Rows.Count; rowIndex++)
+            {
+                if (this.dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    m_currentOrderInfo.materielIDs += dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString();
+                    m_currentOrderInfo.materielIDs += "#";
+                }
+            }
         }
 
-        private bool purchaseOrderIsFull(FormProjectMaterielTable record)
+        private bool purchaseOrderIsFull(FormProjectMaterielChangeTable record)
         {
-            if (record.deviceMode == "")
+            if (record.changeReason.Length <= 0)
             {
-                MessageBoxExtend.messageWarning("设备型号信息不完整，单据保存失败");
+                MessageBoxExtend.messageWarning("变更原因不得为空，请重新输入");
                 return false;
             }
 
-            if (record.useDate.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("使用日期不完整，单据保存失败");
-                return false;
-            }
-
-            if (record.billNumber.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("单据号信息不完整，单据保存失败");
-                return false;
-            }
-
-            if (record.projectNum.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("项目编号不完整，单据保存失败");
-                return false;
-            }
-            
-            if (record.makeNum.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("生产编号不完整，单据保存失败");
-                return false;
-            }
-            
-            if (record.deviceName.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("所属部件信息不完整，单据保存失败");
-                return false;
-            }
-
-            if (record.designStaffID == -1)
+            if (this.textBoxBusinessPeople.Text.Length <= 0)
             {
                 MessageBoxExtend.messageWarning("设计人员信息不完整，单据保存失败");
                 return false;
@@ -326,7 +355,7 @@ namespace MainProgram
                     currentRowInfo.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
                     currentRowInfo.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     currentRowInfo.makeType = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value.ToString();
-                    currentRowInfo.materielNote = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
+                    currentRowInfo.materielNote = "";
 
                     list.Add(currentRowInfo);
                 }
@@ -386,17 +415,6 @@ namespace MainProgram
             PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, false);
         }
 
-        private void selectSourceOrder_Click(object sender, EventArgs e)
-        {
-            //if (m_rowIndex != -1 && m_columnIndex == (int)DataGridColumnName.MatetielNumber)
-            //{
-            //    FormBaseMateriel fbm = new FormBaseMateriel(true);
-            //    fbm.ShowDialog();
-            //    this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = Convert.ToString(fbm.getSelectRecordPkey());
-            //    this.dataGridViewDataList.CurrentCell = this.dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price];
-            //}
-        }
-
         private void calculator_Click(object sender, EventArgs e)
         {
             Process.Start("Calc");
@@ -443,7 +461,7 @@ namespace MainProgram
                 }
             }
         }
-        
+
         private void setMatetielInfoToDataGridView(string id)
         {
             //使用这个输入的值，匹配物料编号
@@ -508,73 +526,44 @@ namespace MainProgram
             }
         }
 
-        private void dataGridViewDataList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (m_isInit)
-            {
-                if (e.ColumnIndex == (int)DataGridColumnName.Value)
-                {
-                    ArrayList columns = new ArrayList();
-
-                    columns.Add((int)DataGridColumnName.Value);
-
-                    for (int columnIndex = 0; columnIndex < columns.Count; columnIndex++)
-                    {
-                        int columnNumber = (int)columns[columnIndex];
-                        double sum = 0;
-
-                        for (int rowIndex = 0; rowIndex < DateGridVeiwListDataListRowCount; rowIndex++)
-                        {
-                            if (this.dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString().Length > 0)
-                            {
-                                if (this.dataGridViewDataList.Rows[rowIndex].Cells[columnNumber].Value.ToString().Length > 0)
-                                {
-                                    sum += Convert.ToDouble(this.dataGridViewDataList.Rows[rowIndex].Cells[columnNumber].Value.ToString());
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void labelPurchaseName_TextChanged(object sender, EventArgs e)
-        {
-            //string summary = "";
-            //summary += this.dateTimePickerTradingDate.Text.ToString();
-            //summary += this.labelPurchaseName.Text;
-            //summary += "采购订单(" + this.labelPurchaseType.Text + ")";
-
-            //this.labelSummary.Text = summary;
-            //this.labelSummary.Visible = true;
-        }
-
         private void readBillInfoToUI()
         {
+            this.labelSrcOrderBillNum.Visible = true;
+            this.labelBillNumber.Visible = true;
             this.labelSummary.Visible = true;
+
             this.labelMakeBillStaff.Visible = true;
             this.labelMakeDate.Visible = true;
-
             this.labelBusinessPeople.Visible = true;
             this.labelReviewBillStaff.Visible = true;
             this.labelReviewDate.Visible = true;
-            
-            // 单据表头表尾信息
-            m_ProjectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(m_billNumber);
 
-            this.labelSummary.Text = m_ProjectInfo.note;
-            this.labelMakeBillStaff.Text = m_ProjectInfo.makeOrderStaffName;
-            this.labelMakeDate.Text = m_ProjectInfo.makeOrderDate;
-            this.labelBusinessPeople.Text = m_ProjectInfo.designStaffName;
-            this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
-            this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
+            this.labelSrcOrderBillNum.Text = m_currentOrderInfo.srcBillNumber;
+            this.labelBillNumber.Text = m_currentOrderInfo.srcBillNumber;
+            this.labelSummary.Text = m_currentOrderInfo.changeReason;
 
+            this.labelMakeBillStaff.Text = m_currentOrderInfo.makeOrderStaffName;
+            this.labelMakeDate.Text = m_currentOrderInfo.makeOrderDate;
+            this.labelBusinessPeople.Text = m_currentOrderInfo.designStaffName;
+            this.labelReviewBillStaff.Text = m_currentOrderInfo.orderrReviewName;
+            this.labelReviewDate.Text = m_currentOrderInfo.reviewDate;
 
-            // DataGridView 赋值
+            // 变更前DataGridView 赋值
+            string matetiels = m_currentOrderInfo.materielIDs;
+            matetiels = matetiels.Replace("##", "#");
+
+            string[] sArray = matetiels.Split('#');
+            int rowNum = 0;
+            foreach (string index in sArray)
+            {
+                if (index.ToString().Length > 0)
+                {
+                    setMatetielInfo(rowNum, index.ToString());
+                    rowNum++;
+                }
+            }
+
+            // 变更后DataGridView 赋值
             SortedDictionary<int, ProjectManagerDetailsTable> purchaseOrderDetails =
                 ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(m_billNumber);
 
@@ -595,7 +584,6 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
             }
 
             // 如果单据已审核，则禁用页面所有控件
@@ -610,7 +598,6 @@ namespace MainProgram
                 this.dataGridViewDataList.ReadOnly = true;
 
                 this.panelSummary.Visible = false;
-
 
                 this.textBoxSummary.Visible = false;
 
@@ -651,20 +638,7 @@ namespace MainProgram
 
         private void setPageActionEnable()
         {
-            int authID = 801;
-
-            if (m_tablesType == 1)
-            {
-                authID = 801;
-            }
-            else if (m_tablesType == 2)
-            {
-                authID = 802;
-            }
-            else if (m_tablesType == 3)
-            {
-                authID = 803;
-            }
+            int authID = 806;
 
             SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(authID);
 
@@ -686,33 +660,90 @@ namespace MainProgram
             }
         }
 
-        private void toolStripButtonChange_Click(object sender, EventArgs e)
+        private void dataGridViewDataListChangeOfter_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            //this.labelDeviceMode.Visible = true;
-            //this.labelTradingDate.Visible = true;
-            //this.labelBillNumber.Visible = true;
-            //this.labelContractNum.Visible = true;
-            //this.labelMakeNum.Visible = true;
-            //this.labelDeviceName.Visible = true;
-            //this.labelSummary.Visible = true;
-            //this.labelMakeBillStaff.Visible = true;
-            //this.labelBusinessPeople.Visible = true;
-            //this.labelReviewBillStaff.Visible = true;
-            //this.labelReviewDate.Visible = true;
+            if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
+            {
+                if (dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString().Length > 0)
+                {
+                    bool isRet = false;
+                    string mateielID = dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString();
 
-            //this.save.Enabled = true;
+                    foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_purchaseOrderDetails)
+                    {
+                        ProjectManagerDetailsTable record = new ProjectManagerDetailsTable();
+                        record = index.Value;
 
-            //this.panelChange.Visible = true;
+                        if (index.Value.materielID == Convert.ToInt32(mateielID))
+                        {
+                            isRet = true;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
 
-            //this.toolStripButtonChange.Enabled = false;
-            //this.toolStripButtonChangeReview.Enabled = true;
-            //this.panelIsReview.Visible = false;
+                            break;
+                        }
+                    }
 
-            //FormProject.getInctance().billChange(m_billNumber);
+                    if (!isRet)
+                    {
+                        MessageBoxExtend.messageWarning("物料[" + dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString() +
+                            "]不属于原始单据，请重新输入或选择");
+                        m_dateGridVeiwListDataListChange.clearDataGridViewRow(e.RowIndex);
+                    }
 
-            //this.Close();
+                }
+            }
+        }
 
+        private void dataGridViewDataListChangeOfter_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
+            {
+                //验证DataGridView是否又空的行
+                int nullRowNumber = m_dateGridVeiwListDataListChange.getExistNullRow(e.RowIndex);
 
+                if (nullRowNumber != -1)
+                {
+                    MessageBoxExtend.messageWarning("行号[" + Convert.ToString(nullRowNumber + 1) + "]数据为空，请现在空行中输入");
+                    dataGridViewDataListChangeOfter.CurrentCell = this.dataGridViewDataListChangeOfter.Rows[nullRowNumber].Cells[(int)DataGridColumnName.MatetielNumber];
+
+                    return;
+                }
+            }
+        }
+
+        private void setMatetielInfo(int rowIndex, string id)
+        {
+            // 根据单据编号，得到详细数据
+            m_purchaseOrderDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(this.labelSrcOrderBillNum.Text);
+
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_purchaseOrderDetails)
+            {
+                ProjectManagerDetailsTable record = new ProjectManagerDetailsTable();
+                record = index.Value;
+
+                if (index.Value.materielID == Convert.ToInt32(id))
+                {
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
+
+                    break;
+                }
+            }
         }
     }
 }

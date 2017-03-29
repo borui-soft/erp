@@ -45,6 +45,7 @@
             this.labelPurchasePirceHistory = new System.Windows.Forms.Label();
             this.labelInventoryHistory = new System.Windows.Forms.Label();
             this.labelPurchaseInPayment = new System.Windows.Forms.Label();
+            this.labelChangeApply = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -147,7 +148,7 @@
             this.labelInventory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelInventory.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelInventory.ForeColor = System.Drawing.Color.Black;
-            this.labelInventory.Location = new System.Drawing.Point(63, 261);
+            this.labelInventory.Location = new System.Drawing.Point(63, 286);
             this.labelInventory.Name = "labelInventory";
             this.labelInventory.Size = new System.Drawing.Size(119, 14);
             this.labelInventory.TabIndex = 20;
@@ -162,7 +163,7 @@
             this.labelPurchaseOrderExecute.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelPurchaseOrderExecute.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelPurchaseOrderExecute.ForeColor = System.Drawing.Color.Black;
-            this.labelPurchaseOrderExecute.Location = new System.Drawing.Point(63, 309);
+            this.labelPurchaseOrderExecute.Location = new System.Drawing.Point(63, 334);
             this.labelPurchaseOrderExecute.Name = "labelPurchaseOrderExecute";
             this.labelPurchaseOrderExecute.Size = new System.Drawing.Size(119, 14);
             this.labelPurchaseOrderExecute.TabIndex = 19;
@@ -177,7 +178,7 @@
             this.labelAmountCountByMateriel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelAmountCountByMateriel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelAmountCountByMateriel.ForeColor = System.Drawing.Color.Black;
-            this.labelAmountCountByMateriel.Location = new System.Drawing.Point(63, 357);
+            this.labelAmountCountByMateriel.Location = new System.Drawing.Point(63, 382);
             this.labelAmountCountByMateriel.Name = "labelAmountCountByMateriel";
             this.labelAmountCountByMateriel.Size = new System.Drawing.Size(147, 14);
             this.labelAmountCountByMateriel.TabIndex = 22;
@@ -193,7 +194,7 @@
             this.labelAmountCountBySupplier.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelAmountCountBySupplier.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelAmountCountBySupplier.ForeColor = System.Drawing.Color.Black;
-            this.labelAmountCountBySupplier.Location = new System.Drawing.Point(63, 405);
+            this.labelAmountCountBySupplier.Location = new System.Drawing.Point(63, 430);
             this.labelAmountCountBySupplier.Name = "labelAmountCountBySupplier";
             this.labelAmountCountBySupplier.Size = new System.Drawing.Size(161, 14);
             this.labelAmountCountBySupplier.TabIndex = 24;
@@ -209,7 +210,7 @@
             this.labelAmountCountByPeople.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelAmountCountByPeople.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelAmountCountByPeople.ForeColor = System.Drawing.Color.Black;
-            this.labelAmountCountByPeople.Location = new System.Drawing.Point(63, 381);
+            this.labelAmountCountByPeople.Location = new System.Drawing.Point(63, 406);
             this.labelAmountCountByPeople.Name = "labelAmountCountByPeople";
             this.labelAmountCountByPeople.Size = new System.Drawing.Size(161, 14);
             this.labelAmountCountByPeople.TabIndex = 23;
@@ -223,7 +224,7 @@
             // 
             this.pictureBox3.BackgroundImage = global::MainProgram.Properties.Resources.报表_数据统计;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Location = new System.Drawing.Point(10, 257);
+            this.pictureBox3.Location = new System.Drawing.Point(10, 282);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(38, 48);
             this.pictureBox3.TabIndex = 18;
@@ -271,7 +272,7 @@
             this.labelInventoryHistory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelInventoryHistory.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelInventoryHistory.ForeColor = System.Drawing.Color.Black;
-            this.labelInventoryHistory.Location = new System.Drawing.Point(63, 285);
+            this.labelInventoryHistory.Location = new System.Drawing.Point(63, 310);
             this.labelInventoryHistory.Name = "labelInventoryHistory";
             this.labelInventoryHistory.Size = new System.Drawing.Size(119, 14);
             this.labelInventoryHistory.TabIndex = 26;
@@ -286,7 +287,7 @@
             this.labelPurchaseInPayment.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelPurchaseInPayment.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelPurchaseInPayment.ForeColor = System.Drawing.Color.Black;
-            this.labelPurchaseInPayment.Location = new System.Drawing.Point(63, 333);
+            this.labelPurchaseInPayment.Location = new System.Drawing.Point(63, 358);
             this.labelPurchaseInPayment.Name = "labelPurchaseInPayment";
             this.labelPurchaseInPayment.Size = new System.Drawing.Size(119, 14);
             this.labelPurchaseInPayment.TabIndex = 21;
@@ -295,12 +296,28 @@
             this.labelPurchaseInPayment.MouseEnter += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
             this.labelPurchaseInPayment.MouseLeave += new System.EventHandler(this.labelPurchaseInPayment_MouseEnter);
             // 
+            // labelChangeApply
+            // 
+            this.labelChangeApply.AutoSize = true;
+            this.labelChangeApply.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelChangeApply.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelChangeApply.ForeColor = System.Drawing.Color.Black;
+            this.labelChangeApply.Location = new System.Drawing.Point(63, 236);
+            this.labelChangeApply.Name = "labelChangeApply";
+            this.labelChangeApply.Size = new System.Drawing.Size(133, 14);
+            this.labelChangeApply.TabIndex = 27;
+            this.labelChangeApply.Text = "材料变更申请序时薄";
+            this.labelChangeApply.Click += new System.EventHandler(this.labelChangeApply_Click);
+            this.labelChangeApply.MouseEnter += new System.EventHandler(this.labelChangeApply_MouseEnter);
+            this.labelChangeApply.MouseLeave += new System.EventHandler(this.labelChangeApply_MouseEnter);
+            // 
             // FormProductionReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(219, 562);
+            this.Controls.Add(this.labelChangeApply);
             this.Controls.Add(this.labelInventoryHistory);
             this.Controls.Add(this.labelPurchasePirceHistory);
             this.Controls.Add(this.labelAmountCountBySupplier);
@@ -348,6 +365,7 @@
         private System.Windows.Forms.Label labelPurchasePirceHistory;
         private System.Windows.Forms.Label labelInventoryHistory;
         private System.Windows.Forms.Label labelPurchaseInPayment;
+        private System.Windows.Forms.Label labelChangeApply;
 
     }
 }

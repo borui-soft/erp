@@ -112,7 +112,6 @@
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
-            this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
             // groupBox4
@@ -158,7 +157,6 @@
             // 
             // save
             // 
-            this.save.Enabled = false;
             this.save.Image = global::MainProgram.Properties.Resources.Save;
             this.save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -173,7 +171,6 @@
             // 
             // toolStripButtonReview
             // 
-            this.toolStripButtonReview.Enabled = false;
             this.toolStripButtonReview.Image = global::MainProgram.Properties.Resources.review;
             this.toolStripButtonReview.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonReview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -232,7 +229,6 @@
             this.selectSourceOrder.Text = "资料";
             this.selectSourceOrder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.selectSourceOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.selectSourceOrder.Click += new System.EventHandler(this.selectSourceOrder_Click);
             // 
             // calculator
             // 
@@ -409,6 +405,8 @@
             this.dataGridViewDataListChangeOfter.RowTemplate.Height = 23;
             this.dataGridViewDataListChangeOfter.Size = new System.Drawing.Size(898, 220);
             this.dataGridViewDataListChangeOfter.TabIndex = 123;
+            this.dataGridViewDataListChangeOfter.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataListChangeOfter_CellBeginEdit);
+            this.dataGridViewDataListChangeOfter.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataListChangeOfter_CellEndEdit);
             // 
             // label7
             // 

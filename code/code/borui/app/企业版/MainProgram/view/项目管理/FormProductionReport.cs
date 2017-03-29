@@ -143,6 +143,12 @@ namespace MainProgram
             fptt.ShowDialog();
         }
 
+        private void labelChangeApply_Click(object sender, EventArgs e)
+        {
+            FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.ChangeApply);
+            fpos.ShowDialog();
+        }
+
         private void labelAmountCountByMateriel_Click(object sender, EventArgs e)
         {
             //FormProjectInfoTrack fptt = new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.EngMaterielInfo);
@@ -166,6 +172,7 @@ namespace MainProgram
             FormProjectInfoTrack fptt = new FormProjectInfoTrack((int)FormProjectInfoTrack.OrderType.DevMaterielInfo);
             fptt.ShowDialog();
         }
+
 
         private void labelInventoryHistory_MouseEnter(object sender, EventArgs e)
         {
@@ -199,5 +206,11 @@ namespace MainProgram
             setPageActionEnable(804);
             setPageActionEnable(805);
         }
+
+        private void labelChangeApply_MouseEnter(object sender, EventArgs e)
+        {
+            PanelExtend.setLableControlStyle(this.labelChangeApply);
+        }
+
     }
 }

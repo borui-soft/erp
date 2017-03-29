@@ -46,7 +46,8 @@ namespace MainProgram
             // 设备总材料表
             DevMaterielInfo,
             EleMaterielInfo,
-            EngMaterielInfo
+            EngMaterielInfo,
+            ChangeApply
         };
 
         private int m_dataGridRecordCount = 0;
@@ -117,6 +118,11 @@ namespace MainProgram
             {
                 // 仓存管理-其他入库
                 this.Text = "工程总材料表序时薄";
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                // 仓存管理-其他入库
+                this.Text = "总材变更申请序时薄";
             }
 
             m_isSelectOrderNumber = isSelectOrderNumber;
@@ -265,6 +271,18 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("验收人", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("制单人", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核人", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("设计人", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("变更原因", 300);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
             }
             else
@@ -713,6 +731,34 @@ namespace MainProgram
 
                 m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
             }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                SortedDictionary<int, FormProjectMaterielChangeTable> list = new SortedDictionary<int, FormProjectMaterielChangeTable>();
+                list = FormProjectInfoChange.getInctance().getAllChangeRecord();
+
+                m_dataGridRecordCount = list.Count;
+
+                for (int index = 0; index < list.Count; index++)
+                {
+                    FormProjectMaterielChangeTable record = new FormProjectMaterielChangeTable();
+                    record = (FormProjectMaterielChangeTable)list[index];
+
+                    ArrayList temp = new ArrayList();
+
+                    temp.Add(record.pkey);
+                    temp.Add(record.srcBillNumber);
+                    temp.Add(record.designStaffName);
+                    temp.Add(record.billNumber);
+                    temp.Add(record.changeReason);
+                    temp.Add(record.makeOrderStaffName);
+                    temp.Add(record.orderrReviewName);
+                    temp.Add(record.reviewDate);
+
+                    sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
+                }
+
+                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+            }
             else if (m_orderType == OrderType.StorageInOther)
             {
                 // 仓存管理-其他入库
@@ -929,6 +975,12 @@ namespace MainProgram
                     fmoo.ShowDialog();
                     updateDataGridView();
                 }
+                else if (m_orderType == OrderType.ChangeApply)
+                {
+                    FormProjectMaterielChangeOrder fmoo = new FormProjectMaterielChangeOrder(m_billNumber);
+                    fmoo.ShowDialog();
+                    updateDataGridView();
+                }
                 else if (m_orderType == OrderType.StorageInOther)
                 {
                     FormMaterielInOtherOrder fmoo = new FormMaterielInOtherOrder(m_billNumber);
@@ -1020,6 +1072,10 @@ namespace MainProgram
             {
                 // 仓存管理-其他入库
                 MaterielInOtherOrder.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                FormProjectInfoChange.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
             {

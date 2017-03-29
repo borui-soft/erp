@@ -447,6 +447,7 @@
             // 
             // toolStripButtonChange
             // 
+            this.toolStripButtonChange.Enabled = false;
             this.toolStripButtonChange.Image = global::MainProgram.Properties.Resources.noForbid;
             this.toolStripButtonChange.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonChange.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;

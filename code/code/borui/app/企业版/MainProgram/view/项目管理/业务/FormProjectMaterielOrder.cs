@@ -338,6 +338,7 @@ namespace MainProgram
             }
             else 
             {
+                m_currentOrderInfo.dataType = m_ProjectInfo.dataType;
                 m_currentOrderInfo.designStaffID = m_ProjectInfo.designStaffID;
             }
         }

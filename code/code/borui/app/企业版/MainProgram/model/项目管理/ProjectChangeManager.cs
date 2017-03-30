@@ -78,6 +78,7 @@ namespace MainProgram.model
 
             writeOperatorLog(801, OperatorLogType.Add, record.billNumber);
         }
+
         public SortedDictionary<int, FormProjectMaterielChangeTable> getAllChangeRecord()
         {
             if (m_tableDataList.Count <= 0)
@@ -174,6 +175,60 @@ namespace MainProgram.model
                     m_tableDataList.Add(m_tableDataList.Count, record);
                 }
             }
+        }
+
+        public SortedDictionary<int, FormProjectMaterielChangeTable> getChangeListFromSrcBillNumber(string srcBillNumber)
+        {
+            SortedDictionary<int, FormProjectMaterielChangeTable> list = new SortedDictionary<int, FormProjectMaterielChangeTable>();
+
+            if (m_tableDataList.Count <= 0)
+            {
+                load();
+            }
+
+            foreach (KeyValuePair<int, FormProjectMaterielChangeTable> index in m_tableDataList)
+            {
+                if (index.Value.srcBillNumber == srcBillNumber)
+                {
+                    list.Add(list.Count, index.Value);
+                }
+            }
+
+            return list;
+        }
+
+        public SortedDictionary<int, ProjectManagerDetailsTable> getMaterielDetailsFromSrcBillNumber(string srcBillNumber)
+        {
+            SortedDictionary<int, ProjectManagerDetailsTable> materielDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
+
+            SortedDictionary<int, FormProjectMaterielChangeTable> list = new SortedDictionary<int, FormProjectMaterielChangeTable>();
+
+            if (m_tableDataList.Count <= 0)
+            {
+                load();
+            }
+
+            // 根据原始单据号，找到对应的变更单
+            foreach (KeyValuePair<int, FormProjectMaterielChangeTable> index in m_tableDataList)
+            {
+                if (index.Value.srcBillNumber == srcBillNumber)
+                {
+                    list.Add(list.Count, index.Value);
+                }
+            }
+
+            // 根据变更单据找到详细数据
+            foreach (KeyValuePair<int, FormProjectMaterielChangeTable> index in list)
+            {
+                SortedDictionary<int, ProjectManagerDetailsTable> tmp = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(index.Value.billNumber);
+
+                foreach (KeyValuePair<int, ProjectManagerDetailsTable> index2 in tmp)
+                {
+                    materielDetails[index2.Value.materielID] = index2.Value;
+                }
+            }
+
+            return materielDetails;
         }
 
         public FormProjectMaterielChangeTable getProjectInfoFromBillNumber(string billNumber)

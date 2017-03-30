@@ -25,14 +25,11 @@ namespace MainProgram
         private readonly int BillTypeNumber = 20;
         private readonly int DateGridVeiwListDataListRowCount = 12;
         private int m_rowIndex = -1, m_columnIndex = -1;
-        private bool m_isInit = false;
+        private bool m_isSaveSuccessFul = false;
 
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         BillDataGridViewExtend m_dateGridVeiwListDataListChange = new BillDataGridViewExtend();
-        DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
-        FormProjectMaterielTable m_ProjectInfo = new FormProjectMaterielTable();
-
         FormProjectMaterielChangeTable m_currentOrderInfo = new FormProjectMaterielChangeTable();
 
         SortedDictionary<int, ProjectManagerDetailsTable> m_purchaseOrderDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
@@ -185,9 +182,6 @@ namespace MainProgram
             m_dateGridVeiwListDataListChange.initDataGridViewColumn(this.dataGridViewDataListChangeOfter);
             m_dateGridVeiwListDataListChange.initDataGridViewData(DateGridVeiwListDataListRowCount);
 
-            // 初始化完毕
-            m_isInit = true;
-
             // 根据单据编号，得到详细数据
             m_purchaseOrderDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(this.labelSrcOrderBillNum.Text);
         }
@@ -195,7 +189,7 @@ namespace MainProgram
         #region 摘要
         private void panelSummary_Click(object sender, EventArgs e)
         {
-            if (m_ProjectInfo.isReview == "1")
+            if (m_currentOrderInfo.isReview == "1")
             {
                 return;
             }
@@ -274,6 +268,8 @@ namespace MainProgram
                         MessageBoxExtend.messageOK("数据保存成功");
                     }
 
+                    m_isSaveSuccessFul = true;
+
                     this.Close();
                 }
             }
@@ -294,7 +290,7 @@ namespace MainProgram
             }
             else
             {
-                m_currentOrderInfo.designStaffID = m_ProjectInfo.designStaffID;
+                m_currentOrderInfo.designStaffID = m_currentOrderInfo.designStaffID;
             }
 
             m_currentOrderInfo.billNumber = this.labelBillNumber.Text;
@@ -391,12 +387,13 @@ namespace MainProgram
                 if (m_billNumber.Length > 0)
                 {
                     save_Click(sender, e);
-                    FormProject.getInctance().billReview(m_billNumber);
 
-                    // 对应的库存单据审核
-                    MaterielProOccupiedOrder.getInctance().billReview(m_billNumber, false, false);
+                    if (m_isSaveSuccessFul)
+                    {
+                        FormProjectInfoChange.getInctance().billReview(this.labelBillNumber.Text);
+                        MessageBoxExtend.messageOK("单据审核成功");
+                    }
 
-                    MessageBoxExtend.messageOK("单据审核成功");
                 }
             }
             catch (Exception exp)
@@ -528,6 +525,8 @@ namespace MainProgram
 
         private void readBillInfoToUI()
         {
+            m_projectNum = m_currentOrderInfo.projectNum;
+
             this.labelSrcOrderBillNum.Visible = true;
             this.labelBillNumber.Visible = true;
             this.labelSummary.Visible = true;
@@ -539,12 +538,13 @@ namespace MainProgram
             this.labelReviewDate.Visible = true;
 
             this.labelSrcOrderBillNum.Text = m_currentOrderInfo.srcBillNumber;
-            this.labelBillNumber.Text = m_currentOrderInfo.srcBillNumber;
+            this.labelBillNumber.Text = m_currentOrderInfo.billNumber;
             this.labelSummary.Text = m_currentOrderInfo.changeReason;
 
             this.labelMakeBillStaff.Text = m_currentOrderInfo.makeOrderStaffName;
             this.labelMakeDate.Text = m_currentOrderInfo.makeOrderDate;
             this.labelBusinessPeople.Text = m_currentOrderInfo.designStaffName;
+            this.textBoxBusinessPeople.Text = m_currentOrderInfo.designStaffName;
             this.labelReviewBillStaff.Text = m_currentOrderInfo.orderrReviewName;
             this.labelReviewDate.Text = m_currentOrderInfo.reviewDate;
 
@@ -587,10 +587,10 @@ namespace MainProgram
             }
 
             // 如果单据已审核，则禁用页面所有控件
-            if (m_ProjectInfo.isReview == "1")
+            if (m_currentOrderInfo.isReview == "1")
             {
-                this.labelReviewBillStaff.Text = m_ProjectInfo.orderrReviewName;
-                this.labelReviewDate.Text = m_ProjectInfo.reviewDate;
+                this.labelReviewBillStaff.Text = m_currentOrderInfo.orderrReviewName;
+                this.labelReviewDate.Text = m_currentOrderInfo.reviewDate;
                 this.panelIsReview.Visible = true;
 
                 this.save.Enabled = false;

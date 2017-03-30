@@ -281,7 +281,6 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("变更原因", 300);
                 m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
             }

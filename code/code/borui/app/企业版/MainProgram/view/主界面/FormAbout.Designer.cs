@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.1.08";
+            this.label3.Text = "当前软件版本：V2.1.10";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、xxx材料表录入页面增加参数栏\r\n2、采购申请单添加品牌栏\r\n3、实现库存自动预占与取消\r\n4、初步实现材料表变更";
+            this.richTextBox1.Text = "1、xxx材料表录入页面增加参数栏\r\n2、采购申请单添加品牌栏\r\n3、实现库存自动预占与取消\r\n4、初步实现材料表变更\r\n5、实现xx材料变更流程";
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

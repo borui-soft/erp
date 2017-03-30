@@ -26,7 +26,10 @@ namespace MainProgram
             PurchaseIn,
 
             // 生产领料单
-            StorageMaterielOut
+            StorageMaterielOut,
+
+            // 变更申请
+            ChangeApply
         };
 
         private int m_dataGridRecordCount = 0;
@@ -34,6 +37,7 @@ namespace MainProgram
         private string m_billNumber = "";
         private string m_projectNum = "";
         private int m_materielID = -1;
+        private string m_srcChangeOrderBillNumber = "";
 
         private DataGridViewExtend m_dateGridViewExtend = new DataGridViewExtend();
         private FormStorageSequenceFilterValue m_filter = new FormStorageSequenceFilterValue();
@@ -59,6 +63,10 @@ namespace MainProgram
             else if (m_orderType == OrderType.StorageMaterielOut)
             {
                 this.Text = "生产领料详情";
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                this.Text = "变更申请单详情";
             }
 
             m_projectNum = projectNumber;
@@ -137,6 +145,17 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("领料人", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("制单人", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核人", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("设计人", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("变更原因", 300);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
             }
             else
@@ -361,6 +380,46 @@ namespace MainProgram
 
                 m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
             }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                //m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                //m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
+                //m_dateGridViewExtend.addDataGridViewColumn("设计人", 80);
+                //m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                //m_dateGridViewExtend.addDataGridViewColumn("变更原因", 300);
+                //m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
+                //m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
+                //m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
+
+
+                // 根据源单据号，得到订单详细单据
+                if (m_srcChangeOrderBillNumber.Length > 0)
+                {
+                    SortedDictionary<int, FormProjectMaterielChangeTable> changtList = FormProjectInfoChange.getInctance().getChangeListFromSrcBillNumber(m_srcChangeOrderBillNumber);
+                    m_dataGridRecordCount = changtList.Count;
+
+                    for (int index = 0; index < changtList.Count; index++)
+                    {
+                        FormProjectMaterielChangeTable record = new FormProjectMaterielChangeTable();
+                        record = (FormProjectMaterielChangeTable)changtList[index];
+
+                        ArrayList temp = new ArrayList();
+
+                        temp.Add(record.pkey);
+                        temp.Add(record.srcBillNumber);
+                        temp.Add(record.designStaffName);
+                        temp.Add(record.billNumber);
+                        temp.Add(record.changeReason);
+                        temp.Add(record.makeOrderStaffName);
+                        temp.Add(record.orderrReviewName);
+                        temp.Add(record.reviewDate);
+
+                        sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
+                    }
+
+                    m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+                }
+            }
         }
 
         private void billDetail_Click(object sender, EventArgs e)
@@ -481,6 +540,12 @@ namespace MainProgram
                     fmoo.ShowDialog();
                     updateDataGridView();
                 }
+                else if (m_orderType == OrderType.ChangeApply)
+                {
+                    FormProjectMaterielChangeOrder fmoo = new FormProjectMaterielChangeOrder(m_billNumber);
+                    fmoo.ShowDialog();
+                    updateDataGridView();
+                }
                 else
                 {
                     MessageBoxExtend.messageWarning("暂时不支持的序时薄类型");
@@ -501,6 +566,11 @@ namespace MainProgram
         public void setDataFilter(FormStorageSequenceFilterValue filter)
         {
             m_filter = filter;
+        }
+
+        public void setChangeBillNumber(string srcBillNumber)
+        {
+            m_srcChangeOrderBillNumber = srcBillNumber;
         }
     }
 }

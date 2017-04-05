@@ -185,16 +185,18 @@ namespace MainProgram.bus
             if (data.Count > 0)
             {
                 m_dataGridView.RowCount = data.Count;
+                ArrayList temp = new ArrayList();
+
                 for (int i = 0; i < data.Count; i++)
                 {
-                    ArrayList temp = new ArrayList();
                     temp = (ArrayList)data[i];
 
                     for (int j = 0; j < temp.Count; j++)
                     {
                         m_dataGridView.Rows[i].Cells[j].Value = temp[j];
-                        m_dataGridView.Rows[i].Height = 18;
                     }
+
+                    m_dataGridView.Rows[i].Height = 18;
                 }
 
                 if (columnFrozenCount != 0)

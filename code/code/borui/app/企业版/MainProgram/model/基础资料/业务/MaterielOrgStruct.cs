@@ -88,7 +88,7 @@ namespace MainProgram.model
             }
         }
 
-        public void insert(MaterielOrgStructTable materielOrgStruct)
+        public void insert(MaterielOrgStructTable materielOrgStruct, bool isDisplyMessage = true)
         {
             string insert = "INSERT INTO [dbo].[BASE_MATERIEL_ORG_STRUCT] ([VALUE],[PARENT_PKEY]) VALUES (";
 
@@ -99,7 +99,12 @@ namespace MainProgram.model
             try
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, insert);
-                MessageBoxExtend.messageOK("数据保存成功");
+
+                if (isDisplyMessage)
+                {
+                    MessageBoxExtend.messageOK("数据保存成功");
+                }
+
                 load();
             }
             catch (Exception error)

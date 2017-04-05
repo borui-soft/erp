@@ -89,7 +89,7 @@ namespace MainProgram.model
             }
         }
 
-        public void insert(MaterielTypeTable materielType)
+        public void insert(MaterielTypeTable materielType, bool isDispalyMessage = true)
         {
             string insert = "INSERT INTO [dbo].[BASE_MATERIEL_TYPE] ([TYPE_NAME],[GROUP_NUM],[DESC]) VALUES (";
 
@@ -101,7 +101,12 @@ namespace MainProgram.model
             try
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, insert);
-                MessageBoxExtend.messageOK("数据保存成功");
+
+                if (isDispalyMessage)
+                {
+                    MessageBoxExtend.messageOK("数据保存成功");
+                }
+
                 load();
             }
             catch (Exception error)

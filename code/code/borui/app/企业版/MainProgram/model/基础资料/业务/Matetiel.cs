@@ -31,7 +31,7 @@ namespace MainProgram.model
             return m_instance;
         }
 
-        public void insert(MaterielTable materiel)
+        public void insert(MaterielTable materiel, bool isDispalyMessage = true)
         {
             string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[PARAMETER],";
             insert += "[MAX],[MIN],[WARRANTY],[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],";
@@ -62,7 +62,10 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, insert);
 
-                MessageBoxExtend.messageOK("数据保存成功");
+                if (isDispalyMessage)
+                {
+                    MessageBoxExtend.messageOK("数据保存成功");
+                }
 
                 load();
             }

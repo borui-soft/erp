@@ -18,7 +18,7 @@ namespace MainProgram
     public partial class FormMateirelPriceManager : Form
     {
         private int m_materielRecordCount = 0;
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private int m_currentDataGridViedRecordPkey = 0;
         private bool m_isQueryHistoryPrice = true;
         private bool m_isQueryMaterielPurchasePrice = true;
@@ -227,9 +227,12 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
 
-                updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                    updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                }
             }
             else 
             {

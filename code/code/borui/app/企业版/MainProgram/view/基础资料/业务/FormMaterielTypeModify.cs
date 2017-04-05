@@ -20,7 +20,7 @@ namespace MainProgram
         private int m_materielRecordCount = 0;
 
         private bool m_isSave = false;
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private string m_materielGroupName = "";
 
         private TreeNode m_rootNode;
@@ -90,8 +90,11 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
-                m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text.ToString();
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                    m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text.ToString();
+                }
             }
             else 
             {

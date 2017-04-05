@@ -29,8 +29,8 @@ namespace MainProgram
                     //Application.Run(new FormProjectInfoTrack(FormProjectInfoTrack.OrderType.ALL));
                     //Application.Run(new FormTransfer());
                     //Application.Run(new FormProjectMaterielChangeOrder(1, "123"));
-                    Application.Run(new FormProductionReport());
-                    //Application.Run(new FormMain());
+                    //Application.Run(new FormProductionReport());
+                    Application.Run(new FormMain());
 
                     return;
                 }

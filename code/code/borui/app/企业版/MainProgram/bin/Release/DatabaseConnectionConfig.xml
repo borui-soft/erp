@@ -4,12 +4,22 @@
 	<Connection name="DB-ERP">
 		<DatabaseType>MSSQLSERVER</DatabaseType>
 		<ConnectionType>MSSQLCLIENT</ConnectionType>
-		<ServerAddress>192.168.1.103</ServerAddress>
+		<ServerAddress>127.0.0.1</ServerAddress>
 		<UserName>sa</UserName>
-		<Password>juchuanhuanbao</Password>
+		<Password>admin</Password>
 		<ConnTimeOut>2000</ConnTimeOut>
-		<ConnectionString>Provider=SQLNCLI10.1;Data Source=192.168.1.103;Initial Catalog=ERP;User Id=sa;Password=juchuanhuanbao;</ConnectionString>
+		<ConnectionString>Provider=SQLNCLI.1;Data Source=127.0.0.1;Initial Catalog=ERP;User Id=sa;Password=admin;</ConnectionString>
 		<ConnDatabase>ERP</ConnDatabase>
+	</Connection>
+	<Connection name="MASTER">
+		<DatabaseType>MSSQLSERVER</DatabaseType>
+		<ConnectionType>MSSQLCLIENT</ConnectionType>
+		<ServerAddress>127.0.0.1</ServerAddress>
+		<UserName>sa</UserName>
+		<Password>admin</Password>
+		<ConnTimeOut>2000</ConnTimeOut>
+		<ConnectionString>Provider=SQLNCLI.1;Data Source=127.0.0.1;Initial Catalog=MASTER;User Id=sa;Password=admin;</ConnectionString>
+		<ConnDatabase>MASTER</ConnDatabase>
 	</Connection>
 </DatabaseConfiguration>
 </Root>

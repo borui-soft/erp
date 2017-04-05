@@ -10,6 +10,7 @@ using System.Collections;
 using TIV.Core.DatabaseAccess;
 using MainProgram.model;
 using MainProgram.bus;
+using TIV.Core.TivLogger;
 
 namespace MainProgram
 {
@@ -19,7 +20,7 @@ namespace MainProgram
     {
         private int m_materielRecordCount = 0;
 
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private string m_materielGroupName = "";
 
         private int m_currentDataGridViedRecordPkey = 0;
@@ -40,8 +41,10 @@ namespace MainProgram
 
         private void FormBaseMateriel_Load(object sender, EventArgs e)
         {
-            // 树控件初始化
+            // 树控件初始化 
+            TivLog.Logger.Error("FormBaseMateriel_Load----1");
             refreshTreeView();
+            TivLog.Logger.Error("FormBaseMateriel_Load----2");
 
             // DataGridView控件初始化
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
@@ -65,8 +68,14 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 100);
             m_dataGridViewExtend.addDataGridViewColumn("备注", 100);
 
+            TivLog.Logger.Error("FormBaseMateriel_Load----3");
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
+
+            TivLog.Logger.Error("FormBaseMateriel_Load----4");
+
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
+
+            TivLog.Logger.Error("FormBaseMateriel_Load----5");
 
             setPageActionEnable();
 
@@ -75,13 +84,17 @@ namespace MainProgram
             ToolStripMenuItemDeleteMateriel.Enabled = this.delete.Enabled;
             ToolStripMenuItemForbidMateriel.Enabled = this.forbid.Enabled;
             ToolStripMenuItemNoForbidMateriel.Enabled = this.noForbid.Enabled;
+
+            TivLog.Logger.Error("FormBaseMateriel_Load----6");
         }
 
         private void updateDataGridView(SortedDictionary<int, MaterielTable> materielList)
         {
+            TivLog.Logger.Error("FormBaseMateriel_Load----4.1");
             m_materielRecordCount = materielList.Count;
             this.labelMaterielGroupName.Text = "[" + m_materielGroupName + "]物料共计[" + Convert.ToString(m_materielRecordCount) + "]条记录";
 
+            TivLog.Logger.Error("FormBaseMateriel_Load----4.2");
             SortedDictionary<int, ArrayList> materiels = new SortedDictionary<int, ArrayList>();
 
             for (int i = 0; i < materielList.Count; i++)
@@ -116,7 +129,9 @@ namespace MainProgram
                 materiels.Add(materiels.Count, temp);
             }
 
+            TivLog.Logger.Error("FormBaseMateriel_Load----4.3");
             m_dataGridViewExtend.initDataGridViewData(materiels, 4);
+            TivLog.Logger.Error("FormBaseMateriel_Load----4.4");
         }
 
         private void refreshTreeView()
@@ -254,6 +269,26 @@ namespace MainProgram
 
         private void close_Click(object sender, EventArgs e)
         {
+            // for test
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    addMaterielTypeTest(1);
+            //}
+
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    addMaterielTypeTest(7 + i);
+            //}
+
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //}
+
             this.Close();
         }
 
@@ -264,10 +299,12 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
-                m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text.ToString();
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
 
-                updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                    updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                }
             }
             else 
             {
@@ -476,6 +513,51 @@ namespace MainProgram
                     }
                 }
             }
+        }
+
+
+        /*
+         * 各种测试代码如下
+         * 
+         * */
+        private bool addMaterielTypeTest(int materielGroupPkey)
+        {
+            MaterielTypeTable materielType = new MaterielTypeTable();
+
+            materielType.name = "addMaterielTypeTest";
+            materielType.num = "0";
+            materielType.desc = "addMaterielTypeTest desc";
+
+            MaterielType.getInctance().insert(materielType, false);
+
+
+            // 物料组织结构
+            MaterielOrgStructTable materielOrgInfo = new MaterielOrgStructTable();
+
+            materielOrgInfo.parentPkey = MaterielOrgStruct.getInctance().getPkeyFromValue(materielGroupPkey);
+            materielOrgInfo.value = MaterielType.getInctance().getMaxPkey();
+            MaterielOrgStruct.getInctance().insert(materielOrgInfo,false);
+
+            return true;
+        }
+
+        private bool addMateriel(int materielGroupPkey)
+        {
+            MaterielTable materiel = new MaterielTable();
+
+            materiel.materielType = materielGroupPkey;
+            materiel.name = "name-" + Convert.ToString(materielGroupPkey);
+
+            materiel.num = "1";
+            materiel.nameShort = "2";
+            materiel.model = "3";
+            materiel.mnemonicCode = "4";
+            materiel.brand = "5";
+            materiel.materielParameter = "6";
+
+            Materiel.getInctance().insert(materiel, false);
+
+            return true;
         }
     }
 }

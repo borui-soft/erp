@@ -150,6 +150,10 @@ namespace MainProgram
             //分别代表数量和单价
             double materielCountdataPrice = 0, materielCountdataValue = 0;
 
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryMaterialList = AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_UNIT_LIST");
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryStorelList = AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_STORAGE_LIST");
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryAttributelList = AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_MATERIEL_ATTRIBUTE");
+
             for (int i = 0; i < materielList.Count; i++)
             {
                 MaterielTable materiel = new MaterielTable();
@@ -175,16 +179,36 @@ namespace MainProgram
                     temp.Add((double)(Math.Round(materielCountdataValue * materielCountdataPrice * 100)) / 100);
                 }
 
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitStorage));
+                if (AuxiliaryMaterialList.ContainsKey(materiel.unit))
+                {
+                    temp.Add(AuxiliaryMaterialList[materiel.unit].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materiel.storage));
+
+                if (AuxiliaryStorelList.ContainsKey(materiel.storage))
+                {
+                    temp.Add(AuxiliaryStorelList[materiel.storage].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                string materielAttributeName = "";
+                if (AuxiliaryAttributelList.ContainsKey(materiel.materielAttribute))
+                {
+                    materielAttributeName = AuxiliaryAttributelList[materiel.materielAttribute].name;
+                }
 
                 if (m_displayDataType == (int)DisplayDataType.Materiel)
                 {
-                    string materielAttributeName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute);
-
                     if (materielAttributeName.IndexOf("外购") != -1)
                     {
                         materiels.Add(materiels.Count, temp);
@@ -193,8 +217,6 @@ namespace MainProgram
                 }
                 else if (m_displayDataType == (int)DisplayDataType.Product)
                 {
-                    string materielAttributeName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute);
-
                     if (materielAttributeName.IndexOf("外购") == -1)
                     {
                         materiels.Add(materiels.Count, temp);

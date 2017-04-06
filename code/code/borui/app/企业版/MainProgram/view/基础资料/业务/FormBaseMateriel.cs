@@ -82,7 +82,6 @@ namespace MainProgram
 
             SortedDictionary<int, ArrayList> materiels = new SortedDictionary<int, ArrayList>();
 
-            ArrayList temp = new ArrayList();
 
             SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryMaterialList =
                 AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_UNIT_LIST");
@@ -92,9 +91,10 @@ namespace MainProgram
 
             for (int i = 0; i < materielList.Count; i++)
             {
-                MaterielTable materiel = (MaterielTable)materielList[i];
+                MaterielTable materiel = new MaterielTable();
+                materiel = (MaterielTable)materielList[i];
 
-                temp.Clear();
+                ArrayList temp = new ArrayList();
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.materielType);
                 temp.Add(materiel.name);

@@ -8,6 +8,7 @@ using System.Collections;
 using System.ComponentModel;
 using Excel = Microsoft.Office.Interop.Excel;
 using MainProgram.model;
+using TIV.Core.TivLogger;
 
 namespace MainProgram.bus
 {
@@ -186,7 +187,6 @@ namespace MainProgram.bus
             {
                 m_dataGridView.RowCount = data.Count;
                 ArrayList temp = new ArrayList();
-
                 for (int i = 0; i < data.Count; i++)
                 {
                     temp = (ArrayList)data[i];
@@ -195,8 +195,6 @@ namespace MainProgram.bus
                     {
                         m_dataGridView.Rows[i].Cells[j].Value = temp[j];
                     }
-
-                    m_dataGridView.Rows[i].Height = 18;
                 }
 
                 if (columnFrozenCount != 0)
@@ -348,6 +346,9 @@ namespace MainProgram.bus
             // 禁止用户用鼠标拖动DataGridView行高
             m_dataGridView.EnableHeadersVisualStyles = false;
             m_dataGridView.AllowUserToResizeRows = false;
+
+            // 行高统一为18
+            m_dataGridView.RowTemplate.Height = 18;
         }
     }
 

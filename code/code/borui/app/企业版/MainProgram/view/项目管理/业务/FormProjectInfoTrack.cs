@@ -416,6 +416,9 @@ namespace MainProgram
             // 禁止用户用鼠标拖动DataGridView行高
             this.projectRowMergeView.EnableHeadersVisualStyles = false;
             this.projectRowMergeView.AllowUserToResizeRows = false;
+
+            // 行高统一为18
+            this.projectRowMergeView.RowTemplate.Height = 18;
         }
 
         public void initDataGridViewColumn()
@@ -448,7 +451,6 @@ namespace MainProgram
                     for (int j = 0; j < temp.Count; j++)
                     {
                         this.projectRowMergeView.Rows[i].Cells[j].Value = temp[j];
-                        this.projectRowMergeView.Rows[i].Height = 18;
                     }
                 }
 

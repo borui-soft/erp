@@ -177,7 +177,7 @@ namespace MainProgram.model
                         record.desc = DbDataConvert.ToString(row[2]);
                         record.isAllowDelete = DbDataConvert.ToInt32(row[3]);
 
-                        materialList.Add(materialList.Count, record);
+                        materialList.Add(record.pkey, record);
                     }
 
                     if (m_materialList.ContainsKey(tableName))
@@ -238,6 +238,25 @@ namespace MainProgram.model
 
             return name;
         }
+
+        public SortedDictionary<int, AuxiliaryMaterialDataTable> getAuxiliaryListFromTableName(string tableName)
+        {
+            SortedDictionary<int, AuxiliaryMaterialDataTable> materialList = new SortedDictionary<int, AuxiliaryMaterialDataTable>();
+
+
+            if (tableName.Length > 0)
+            {
+                if (!m_materialList.ContainsKey(tableName))
+                {
+                    load(tableName);
+                }
+
+                materialList = m_materialList[tableName];
+            }
+
+            return materialList;
+        }
+
         public int getAuxiliaryMaterialPkeyFromName(string tableName, string name)
         {
             int pkey = 0;

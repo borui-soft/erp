@@ -42,9 +42,7 @@ namespace MainProgram
         private void FormBaseMateriel_Load(object sender, EventArgs e)
         {
             // 树控件初始化 
-            TivLog.Logger.Error("FormBaseMateriel_Load----1");
             refreshTreeView();
-            TivLog.Logger.Error("FormBaseMateriel_Load----2");
 
             // DataGridView控件初始化
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
@@ -57,26 +55,17 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("品牌", 60);
             m_dataGridViewExtend.addDataGridViewColumn("参数", 60);
             m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("物料属性", 100);
+            //m_dataGridViewExtend.addDataGridViewColumn("物料属性", 100);
             m_dataGridViewExtend.addDataGridViewColumn("计价方式", 100);
             m_dataGridViewExtend.addDataGridViewColumn("基本单位", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("采购单位", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("销售单位", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("库存单位", 100, false);
             m_dataGridViewExtend.addDataGridViewColumn("存货上限", 100);
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 100);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 100);
             m_dataGridViewExtend.addDataGridViewColumn("备注", 100);
 
-            TivLog.Logger.Error("FormBaseMateriel_Load----3");
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
 
-            TivLog.Logger.Error("FormBaseMateriel_Load----4");
-
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
-
-            TivLog.Logger.Error("FormBaseMateriel_Load----5");
-
             setPageActionEnable();
 
             ToolStripMenuItemAddMateriel.Enabled = this.add.Enabled;
@@ -84,26 +73,28 @@ namespace MainProgram
             ToolStripMenuItemDeleteMateriel.Enabled = this.delete.Enabled;
             ToolStripMenuItemForbidMateriel.Enabled = this.forbid.Enabled;
             ToolStripMenuItemNoForbidMateriel.Enabled = this.noForbid.Enabled;
-
-            TivLog.Logger.Error("FormBaseMateriel_Load----6");
         }
 
         private void updateDataGridView(SortedDictionary<int, MaterielTable> materielList)
         {
-            TivLog.Logger.Error("FormBaseMateriel_Load----4.1");
             m_materielRecordCount = materielList.Count;
             this.labelMaterielGroupName.Text = "[" + m_materielGroupName + "]物料共计[" + Convert.ToString(m_materielRecordCount) + "]条记录";
 
-            TivLog.Logger.Error("FormBaseMateriel_Load----4.2");
             SortedDictionary<int, ArrayList> materiels = new SortedDictionary<int, ArrayList>();
+
+            ArrayList temp = new ArrayList();
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryMaterialList =
+                AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_UNIT_LIST");
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryStorelList =
+                AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_STORAGE_LIST");
 
             for (int i = 0; i < materielList.Count; i++)
             {
-                MaterielTable materiel = new MaterielTable();
-                materiel = (MaterielTable)materielList[i];
+                MaterielTable materiel = (MaterielTable)materielList[i];
 
-                ArrayList temp = new ArrayList();
-
+                temp.Clear();
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.materielType);
                 temp.Add(materiel.name);
@@ -114,14 +105,25 @@ namespace MainProgram
                 temp.Add(materiel.brand);
                 temp.Add(materiel.materielParameter);
 
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materiel.storage));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_VALUATION_TYPE_LIST", materiel.valuation));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unit));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitSale));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitStorage));
+                if (AuxiliaryStorelList.ContainsKey(materiel.storage))
+                {
+                    temp.Add(AuxiliaryStorelList[materiel.storage].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
 
+                temp.Add("移动加权平均");
+
+                if (AuxiliaryMaterialList.ContainsKey(materiel.unit))
+                {
+                    temp.Add(AuxiliaryMaterialList[materiel.unit].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
@@ -129,9 +131,7 @@ namespace MainProgram
                 materiels.Add(materiels.Count, temp);
             }
 
-            TivLog.Logger.Error("FormBaseMateriel_Load----4.3");
             m_dataGridViewExtend.initDataGridViewData(materiels, 4);
-            TivLog.Logger.Error("FormBaseMateriel_Load----4.4");
         }
 
         private void refreshTreeView()

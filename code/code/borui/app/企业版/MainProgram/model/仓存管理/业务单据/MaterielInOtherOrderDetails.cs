@@ -23,6 +23,11 @@ namespace MainProgram.model
             load();
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         static public MaterielInOtherOrderDetails getInctance()
         {
             if (m_instance == null)

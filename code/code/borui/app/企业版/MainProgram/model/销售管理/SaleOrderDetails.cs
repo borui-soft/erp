@@ -33,6 +33,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         public void insert(ArrayList purchaseOrderDetailsRecords)
         {
             if(purchaseOrderDetailsRecords.Count <= 0)

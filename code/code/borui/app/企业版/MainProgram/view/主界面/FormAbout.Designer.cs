@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.2.11";
+            this.label3.Text = "当前软件版本：V2.2.13";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "优化软件性能, 主要涉及物料页面、库存页面、项目跟踪页面";
+            this.richTextBox1.Text = "1、优化软件性能, 主要涉及物料页面、库存页面、项目跟踪页面\r\n2、xx材料表跟踪情况页面修改物料对应实际库存显示错误的问题\r\n3、各页面刷新按钮按钮功能完善";
             // Fo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

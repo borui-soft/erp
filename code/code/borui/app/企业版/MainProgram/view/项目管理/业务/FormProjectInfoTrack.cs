@@ -86,7 +86,7 @@ namespace MainProgram
             addDataGridViewColumn("设备型号", 100);
             addDataGridViewColumn("所属部件", 100);
 
-            addDataGridViewColumn("ID", 60, false);
+            addDataGridViewColumn("ID", 30);
             addDataGridViewColumn("物料名称", 100);
             addDataGridViewColumn("物料编码", 60);
             addDataGridViewColumn("型号", 60);
@@ -107,7 +107,7 @@ namespace MainProgram
             this.projectRowMergeView.ColumnHeadersHeight = 40;
             this.projectRowMergeView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.projectRowMergeView.MergeColumnNames.Add("单据编号");
-            this.projectRowMergeView.AddSpanHeader(4, 5, "物料需求");
+            this.projectRowMergeView.AddSpanHeader(3, 6, "物料需求");
             this.projectRowMergeView.AddSpanHeader(9, 3, "库存情况");
 
             updateDataGridView();
@@ -159,7 +159,7 @@ namespace MainProgram
                     }
 
                     // 得到实际库存
-                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.pkey);
+                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
                     temp.Add(MaterielCountdata.value);
 
                     // 库存预占情况,包含总预占量和本项目预占量
@@ -226,7 +226,7 @@ namespace MainProgram
                     temp.Add(tmp.value);
 
                     // 得到实际库存
-                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.pkey);
+                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
                     temp.Add(MaterielCountdata.value);
 
                     // 库存预占情况,包含总预占量和本项目预占量

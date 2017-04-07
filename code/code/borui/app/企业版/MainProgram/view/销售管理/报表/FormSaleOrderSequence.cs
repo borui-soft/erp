@@ -889,5 +889,63 @@ namespace MainProgram
         {
             m_filter = filter;
         }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            // 刷新按钮逻辑
+            if (m_orderType == OrderType.SaleQuotation)
+            {
+                // 销售管理-销售报价单序时簿
+                SaleQuotationOrder.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleOrder)
+            {
+                // 销售管理-销售订单序时簿
+                SaleOrder.getInctance().refreshRecord();
+                SaleOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleOut)
+            {
+                // 销售管理-销售出库单序时簿
+                SaleOutOrder.getInctance().refreshRecord();
+                SaleOutOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleInvoice)
+            {
+                // 销售管理-销售发票序时簿(暂时为空就可以)
+            }
+            else if (m_orderType == OrderType.SaleOrderExcute)
+            {
+                // 销售管理-销售订单执行情况
+                SaleOrder.getInctance().refreshRecord();
+                SaleOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleOutOrderExcute)
+            {
+                // 销售管理-销售出库单收款情况
+                SaleOutOrder.getInctance().refreshRecord();
+                SaleOutOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.StorageMaterielOut)
+            {
+                // 仓存管理-生产领料
+                MaterielOutOrder.getInctance().refreshRecord();
+                MaterielOutOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.StorageOutCheck)
+            {
+                // 仓存管理-盘亏亏损
+                MaterielOutEarningsOrder.getInctance().refreshRecord();
+                MaterielOutEarningsOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.StorageOutOther)
+            {
+                // 仓存管理-其他出库
+                MaterielOutOtherOrder.getInctance().refreshRecord();
+                MaterielOutOtherOrderDetails.getInctance().refreshRecord();
+            }
+
+            updateDataGridView();
+        }
     }
 }

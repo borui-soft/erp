@@ -32,6 +32,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         public void insert(MaterielOutOtherOrderTable record, bool isDisplayMessageBox = true)
         {
             MaterielOutOtherOrderTable oldRecord = new MaterielOutOtherOrderTable();

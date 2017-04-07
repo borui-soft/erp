@@ -1041,10 +1041,12 @@ namespace MainProgram
             if (m_orderType == OrderType.PurchaseOrder)
             {
                 PurchaseOrder.getInctance().refreshRecord();
+                PurchaseOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.PurchaseIn)
             {
                 PurchaseInOrder.getInctance().refreshRecord();
+                PurchaseInOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.PurchaseInvoice)
             {
@@ -1052,34 +1054,41 @@ namespace MainProgram
             else if (m_orderType == OrderType.PurchaseOrderExcute)
             {
                 PurchaseOrder.getInctance().refreshRecord();
+                PurchaseOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.PurchaseInOrderExcute)
             {
                 PurchaseInOrder.getInctance().refreshRecord();
+                PurchaseInOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.StorageProductIn)
             {
                 // 仓存管理-产品入库
                 MaterielInOrder.getInctance().refreshRecord();
+                MaterielInOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.StorageInCheck)
             {
                 // 仓存管理-盘盈入库
                 MaterielInEarningsOrder.getInctance().refreshRecord();
+                MaterielInEarningsOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.StorageInOther)
             {
                 // 仓存管理-其他入库
                 MaterielInOtherOrder.getInctance().refreshRecord();
+                MaterielInOtherOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.ChangeApply)
             {
                 FormProjectInfoChange.getInctance().refreshRecord();
+                ProjectManagerDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
             {
                 // 仓存管理-其他入库
                 FormProject.getInctance().refreshRecord();
+                ProjectManagerDetails.getInctance().refreshRecord();
             }
 
             updateDataGridView();

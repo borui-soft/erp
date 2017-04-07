@@ -34,7 +34,7 @@ namespace MainProgram.model
             return m_instance;
         }
 
-        public void refrensRecord()
+        public void refreshRecord()
         {
             load();
         }

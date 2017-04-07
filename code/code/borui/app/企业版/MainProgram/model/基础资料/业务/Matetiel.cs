@@ -186,7 +186,7 @@ namespace MainProgram.model
             return m_noForbidMaterielList;
         }
 
-        public void refrensRecord()
+        public void refreshRecord()
         {
             load();
         }

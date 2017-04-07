@@ -30,6 +30,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         private void load()
         {
             SortedDictionary<int, MaterielTypeTable> materielGroupList = new SortedDictionary<int, MaterielTypeTable>();

@@ -31,6 +31,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         public void insert(SaleOrderTable record, bool isDisplayMessageBox = true)
         {
             string insert = "INSERT INTO [dbo].[SALE_ORDER]([CUSTOMER_ID],[TRADING_DATE],[BILL_NUMBER],[SALE_TYPE],";

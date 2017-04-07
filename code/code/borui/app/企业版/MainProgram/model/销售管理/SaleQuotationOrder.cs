@@ -29,6 +29,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         private void load()
         {
             string sql = "SELECT [PKEY],[CUSTOMER_NAME],[DATE] ,[BILL_NUMBER],[CONTENT],[NOTE],[SALEMAN_NAME],";

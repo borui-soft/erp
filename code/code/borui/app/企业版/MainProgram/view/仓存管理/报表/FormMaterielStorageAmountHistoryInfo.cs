@@ -84,7 +84,7 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
             m_dataGridViewExtend.addDataGridViewColumn("物料编码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
@@ -427,7 +427,7 @@ namespace MainProgram
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
             refreshTreeView();
-            Materiel.getInctance().refrensRecord();
+            Materiel.getInctance().refreshRecord();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 

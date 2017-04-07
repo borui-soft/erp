@@ -34,10 +34,9 @@ namespace MainProgram.model
             return m_instance;
         }
 
-        public void refrensRecord()
+        public void refreshRecord()
         {
             load();
-            m_materielProlist.Clear();
         }
 
         public void insert(ArrayList orderDetailsRecords)

@@ -22,6 +22,11 @@ namespace MainProgram.model
             load();
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         static public MaterielOutOrder getInctance()
         {
             if (m_instance == null)

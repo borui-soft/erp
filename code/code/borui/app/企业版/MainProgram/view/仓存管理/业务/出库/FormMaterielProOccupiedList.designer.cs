@@ -42,6 +42,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewList = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewList)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +59,8 @@
             this.toolStripSeparator3,
             this.printDisplay,
             this.print,
+            this.toolStripSeparator1,
+            this.toolStripButtonRefresh,
             this.toolStripSeparator4,
             this.close,
             this.toolStripSeparator5});
@@ -166,9 +170,9 @@
             // 
             // dataGridViewList
             // 
-            this.dataGridViewList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewList.Location = new System.Drawing.Point(0, 48);
             this.dataGridViewList.Name = "dataGridViewList";
@@ -178,6 +182,25 @@
             this.dataGridViewList.TabIndex = 3;
             this.dataGridViewList.Click += new System.EventHandler(this.dataGridViewBilConfigList_Click);
             this.dataGridViewList.DoubleClick += new System.EventHandler(this.dataGridViewMaterielList_DoubleClick);
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.Image = global::MainProgram.Properties.Resources.review;
+            this.toolStripButtonRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(36, 42);
+            this.toolStripButtonRefresh.Text = "刷新";
+            this.toolStripButtonRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonRefresh.ToolTipText = "刷新";
+            this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
             // 
             // FormMaterielProOccupiedList
             // 
@@ -213,5 +236,7 @@
         private System.Windows.Forms.ToolStripButton billDelProOccupied;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
     }
 }

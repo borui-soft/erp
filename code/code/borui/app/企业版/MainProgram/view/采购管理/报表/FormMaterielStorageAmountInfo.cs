@@ -87,7 +87,7 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 170);
             m_dataGridViewExtend.addDataGridViewColumn("物料编号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("型号", 60);
@@ -430,12 +430,15 @@ namespace MainProgram
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            MaterielProOccupiedOrder.getInctance().refrensRecord();
-            MaterielProOccupiedOrderDetails.getInctance().refrensRecord();
+            MaterielProOccupiedOrder.getInctance().refreshRecord();
+            MaterielProOccupiedOrderDetails.getInctance().refreshRecord();
             getMaterielProOccupiedList();
 
+            MaterielType.getInctance().refreshRecord();
+            MaterielOrgStruct.getInctance().refreshRecord();
+
             refreshTreeView();
-            Materiel.getInctance().refrensRecord();
+            Materiel.getInctance().refreshRecord();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 

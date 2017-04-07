@@ -275,5 +275,13 @@ namespace MainProgram
 
             updateDataGridView();
         }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            MaterielProOccupiedOrder.getInctance().refreshRecord();
+            MaterielProOccupiedOrderDetails.getInctance().refreshRecord();
+
+            updateDataGridView();
+        }
     }
 }

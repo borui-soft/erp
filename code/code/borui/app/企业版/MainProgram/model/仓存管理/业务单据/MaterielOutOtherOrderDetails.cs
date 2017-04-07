@@ -33,6 +33,11 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         public void insert(ArrayList orderDetailsRecords)
         {
             if (orderDetailsRecords.Count <= 0)

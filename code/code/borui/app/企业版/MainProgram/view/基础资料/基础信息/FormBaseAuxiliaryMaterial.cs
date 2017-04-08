@@ -73,19 +73,16 @@ namespace MainProgram
 
             SortedDictionary<int, ArrayList> customers = new SortedDictionary<int, ArrayList>();
 
-            for (int i = 0; i < customerList.Count; i++)
-            {
-                AuxiliaryMaterialDataTable record = new AuxiliaryMaterialDataTable();
-                record = (AuxiliaryMaterialDataTable)customerList[i];
-
+            foreach (KeyValuePair<int, AuxiliaryMaterialDataTable> index2 in customerList)
+           {
                 ArrayList temp = new ArrayList();
 
-                temp.Add(record.pkey);
-                temp.Add(record.name);
-                temp.Add(record.desc);
+                temp.Add(index2.Value.pkey);
+                temp.Add(index2.Value.name);
+                temp.Add(index2.Value.desc);
 
-                customers.Add(i, temp);
-            }
+                customers.Add(customers.Count, temp);
+           }
 
             m_dataGridViewExtend.initDataGridViewData(customers);
         }

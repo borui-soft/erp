@@ -395,7 +395,7 @@ namespace MainProgram
             record.paymentDate = this.labelPaymentDate.Text;
             record.exchangesUnit = this.labelSummary.Text;
 
-            record.projectNum = this.labelContractNum.Text;
+            record.xxMaterielTableNum = this.labelContractNum.Text;
             record.srcOrderNum = this.labelSourceOrderNumber.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
@@ -808,7 +808,7 @@ namespace MainProgram
             this.labelPaymentDate.Text = m_purchaseOrder.paymentDate;
             this.labelSummary.Text = m_purchaseOrder.exchangesUnit;
 
-            this.labelContractNum.Text = m_purchaseOrder.projectNum;
+            this.labelContractNum.Text = m_purchaseOrder.xxMaterielTableNum;
             this.labelSourceOrderNumber.Text = m_purchaseOrder.srcOrderNum;
 
             m_staffPkey = m_purchaseOrder.businessPeopleId;

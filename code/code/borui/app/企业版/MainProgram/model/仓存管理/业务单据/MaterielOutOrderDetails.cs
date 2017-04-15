@@ -288,10 +288,10 @@ namespace MainProgram.model
             return value;
         }
 
-        public double getMaterielCountInfoFromProject(string projectNum, int materielID)
+        public double getMaterielCountInfoFromProject(string srcOrderNum, int materielID)
         {
             SortedDictionary<int, MaterielOutOrderTable> materielOutOrderList = new SortedDictionary<int, MaterielOutOrderTable>();
-            materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(projectNum);
+            materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(srcOrderNum);
 
             double materielOutOrderValueCount = 0;
             for (int indexOrderList = 0; indexOrderList < materielOutOrderList.Count; indexOrderList++)

@@ -35,14 +35,14 @@ namespace MainProgram
         private int m_dataGridRecordCount = 0;
         private OrderType m_orderType;
         private string m_billNumber = "";
-        private string m_projectNum = "";
+        private string m_xxMaterielTableNum = "";
         private int m_materielID = -1;
         private string m_srcChangeOrderBillNumber = "";
 
         private DataGridViewExtend m_dateGridViewExtend = new DataGridViewExtend();
         private FormStorageSequenceFilterValue m_filter = new FormStorageSequenceFilterValue();
 
-        public FormProjectOrderDetail(OrderType orderType, string projectNumber, int materielID)
+        public FormProjectOrderDetail(OrderType orderType, string srcBillNumber, int materielID)
         {
             InitializeComponent();
 
@@ -69,7 +69,7 @@ namespace MainProgram
                 this.Text = "变更申请单详情";
             }
 
-            m_projectNum = projectNumber;
+            m_xxMaterielTableNum = srcBillNumber;
             m_materielID = materielID;
         }
 
@@ -80,8 +80,8 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("申请人", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 200);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 200);
                 m_dateGridViewExtend.addDataGridViewColumn("期望到货日期", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("总金额", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("制单员", 100);
@@ -94,8 +94,8 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 200);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 200);
                 m_dateGridViewExtend.addDataGridViewColumn("约定到货日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -113,9 +113,9 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 200);
                 m_dateGridViewExtend.addDataGridViewColumn("交易类型", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 200);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -137,8 +137,8 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("领料部门", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("日期", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 200);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 200);
                 m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("数量", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("金额", 80);
@@ -176,7 +176,7 @@ namespace MainProgram
                 SortedDictionary<int, PurchaseApplyOrderTable> list = new SortedDictionary<int, PurchaseApplyOrderTable>();
 
                 SortedDictionary<int, PurchaseApplyOrderTable> listOrderList = new SortedDictionary<int, PurchaseApplyOrderTable>();
-                listOrderList = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectNum);
+                listOrderList = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_xxMaterielTableNum);
 
                 for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
                 {
@@ -202,7 +202,7 @@ namespace MainProgram
                     temp.Add(record.applyName);
                     temp.Add(record.tradingDate);
                     temp.Add(record.billNumber);
-                    temp.Add(record.proNum);
+                    temp.Add(record.srcOrderNum);
                     temp.Add(record.paymentDate);
                     temp.Add(record.totalMoney);
                     temp.Add(record.makeOrderStaffName);
@@ -229,7 +229,7 @@ namespace MainProgram
                 SortedDictionary<int, PurchaseOrderTable> list = new SortedDictionary<int, PurchaseOrderTable>();
 
                 SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
-                listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectNum);
+                listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_xxMaterielTableNum);
 
                 for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
                 {
@@ -255,7 +255,7 @@ namespace MainProgram
                     temp.Add(record.supplierName);
                     temp.Add(record.tradingDate);
                     temp.Add(record.billNumber);
-                    temp.Add(record.projectNum);
+                    temp.Add(record.xxMaterielTableNum);
                     temp.Add(record.deliveryDate);
                     temp.Add(record.paymentDate);
                     temp.Add(record.sumMoney);
@@ -287,7 +287,7 @@ namespace MainProgram
                 SortedDictionary<int, PurchaseInOrderTable> list = new SortedDictionary<int, PurchaseInOrderTable>();
 
                 SortedDictionary<int, PurchaseInOrderTable> listOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
-                listOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectNum);
+                listOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_xxMaterielTableNum);
 
                 for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
                 {
@@ -314,7 +314,7 @@ namespace MainProgram
                     temp.Add(record.tradingDate);
                     temp.Add(record.billNumber);
                     temp.Add(record.purchaseType);
-                    temp.Add(record.contractNum);
+                    temp.Add(record.srcOrderNum);
                     temp.Add(record.paymentDate);
                     temp.Add(record.sourceBillNumber);
                     temp.Add(record.sumMoney);
@@ -340,7 +340,7 @@ namespace MainProgram
                 SortedDictionary<int, MaterielOutOrderTable> list = new SortedDictionary<int, MaterielOutOrderTable>();
 
                 SortedDictionary<int, MaterielOutOrderTable> listOrderList = new SortedDictionary<int, MaterielOutOrderTable>();
-                listOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_projectNum);
+                listOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_xxMaterielTableNum);
 
                 for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
                 {
@@ -366,7 +366,7 @@ namespace MainProgram
                     temp.Add(record.departmentName);
                     temp.Add(record.tradingDate);
                     temp.Add(record.billNumber);
-                    temp.Add(record.projectNo);
+                    temp.Add(record.srcOrderNum);
                     temp.Add(record.makeNo);
                     temp.Add(record.sumValue);
                     temp.Add(record.sumMoney);
@@ -498,7 +498,7 @@ namespace MainProgram
                             {
                                 dataGridViewList.Rows[i].Selected = true;
                                 m_billNumber = dataGridViewList.Rows[i].Cells[3].Value.ToString();
-                                m_projectNum = dataGridViewList.Rows[i].Cells[4].Value.ToString();
+                                m_xxMaterielTableNum = dataGridViewList.Rows[i].Cells[4].Value.ToString();
                                 checkAccountBillDetaile();
                                 return;
                             }
@@ -560,7 +560,7 @@ namespace MainProgram
 
         public string getSelectOrderProjectNum()
         {
-            return m_projectNum;
+            return m_xxMaterielTableNum;
         }
 
         public void setDataFilter(FormStorageSequenceFilterValue filter)

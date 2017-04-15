@@ -292,7 +292,7 @@ namespace MainProgram
             MaterielProOccupiedOrderTable proOccupiedInfo = new MaterielProOccupiedOrderTable();
             proOccupiedInfo.tradingDate = this.labelTradingDate.Text;
             proOccupiedInfo.billNumber = this.labelBillNumber.Text;
-            proOccupiedInfo.exchangesUnit = this.labelContractNum.Text;
+            proOccupiedInfo.srcOrderNum = this.labelContractNum.Text;
             proOccupiedInfo.sumValue = "0";
             proOccupiedInfo.sumMoney = "0";
             proOccupiedInfo.applyStaffId = DbPublic.getInctance().getCurrentLoginUserID();
@@ -351,6 +351,12 @@ namespace MainProgram
                 return false;
             }
 
+            if (record.deviceMode.Length > 50)
+            {
+                MessageBoxExtend.messageWarning("设备型号信息最大长度为50字符,目前输入的设备新号信息太长，请重新输入");
+                return false;
+            }
+
             if (record.useDate.Length == 0)
             {
                 MessageBoxExtend.messageWarning("使用日期不完整，单据保存失败");
@@ -368,13 +374,25 @@ namespace MainProgram
                 MessageBoxExtend.messageWarning("项目编号不完整，单据保存失败");
                 return false;
             }
-            
+
+            if (record.projectNum.Length > 30)
+            {
+                MessageBoxExtend.messageWarning("项目编号信息最大长度为30字符,目前输入的项目编号信息太长，请重新输入");
+                return false;
+            }
+
             if (record.makeNum.Length == 0)
             {
                 MessageBoxExtend.messageWarning("生产编号不完整，单据保存失败");
                 return false;
             }
-            
+
+            if (record.makeNum.Length > 30)
+            {
+                MessageBoxExtend.messageWarning("生产编号信息最大长度为30字符,目前输入的生产编号信息太长，请重新输入");
+                return false;
+            }
+
             if (record.deviceName.Length == 0)
             {
                 MessageBoxExtend.messageWarning("所属部件信息不完整，单据保存失败");

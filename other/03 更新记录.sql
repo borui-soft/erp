@@ -266,3 +266,6 @@ CREATE TABLE [dbo].[PROJECT_MATERIE_CHANGE_MANAGER](
 
 -- 2017-3-29 用于控制总材变更申请序时薄查看权限
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('总材变更申请序时薄', 'labelChangeApply', 804);
+
+-- 2017-4-15 xx总材料表的设备型号字段扩展为最长长度为50字节
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ALTER COLUMN DEVICE_MODE [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,

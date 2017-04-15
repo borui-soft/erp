@@ -528,7 +528,7 @@ namespace MainProgram
             record.exchangesUnit = this.labelSummary.Text;
             record.sourceBillType = this.labelSourceOrderType.Text;
             record.sourceBillNumber = this.labelSourceOrderNumber.Text;
-            record.contractNum = this.labelContractNum.Text;
+            record.srcOrderNum = this.labelContractNum.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
@@ -592,6 +592,12 @@ namespace MainProgram
             if (record.businessPeopleId == -1)
             {
                 MessageBoxExtend.messageWarning("采购员信息不完整，单据保存失败");
+                return false;
+            }
+
+            if (record.srcOrderNum.Length > 60)
+            {
+                MessageBoxExtend.messageWarning("项目编号信息最大长度为60字符,目前输入的项目编号信息太长，请重新输入");
                 return false;
             }
 
@@ -992,7 +998,7 @@ namespace MainProgram
             this.labelPurchaseName.Text = m_purchaseInOrder.supplierName;
             this.labelTradingDate.Text = m_purchaseInOrder.tradingDate;
             this.labelBillNumber.Text = m_purchaseInOrder.billNumber;
-            this.labelContractNum.Text = m_purchaseInOrder.contractNum;
+            this.labelContractNum.Text = m_purchaseInOrder.srcOrderNum;
             this.labelPurchaseType.Text = m_purchaseInOrder.purchaseType;
             this.labelPaymentDate.Text = m_purchaseInOrder.paymentDate;
             this.labelSummary.Text = m_purchaseInOrder.exchangesUnit;
@@ -1005,7 +1011,7 @@ namespace MainProgram
             this.labelSourceOrderNumber.Text = m_purchaseInOrder.sourceBillNumber;
             this.labelSave.Text = m_purchaseInOrder.staffSaveName;
             this.labelVerify.Text = m_purchaseInOrder.staffCheckName;
-            this.labelContractNum.Text = m_purchaseInOrder.contractNum;
+            this.labelContractNum.Text = m_purchaseInOrder.srcOrderNum;
             
 
             // DataGridView 赋值

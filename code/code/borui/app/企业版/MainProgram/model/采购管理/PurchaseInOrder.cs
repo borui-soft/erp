@@ -61,7 +61,7 @@ namespace MainProgram.model
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
 
-            insert += "'" + record.contractNum + "',";
+            insert += "'" + record.srcOrderNum + "',";
 
             insert += "'" + record.purchaseType + "',";
             insert += "'" + record.paymentDate + "',";
@@ -320,7 +320,7 @@ namespace MainProgram.model
                 PurchaseInOrderTable record = new PurchaseInOrderTable();
                 record = index.Value;
 
-                if (index.Value.contractNum == projectNum)
+                if (index.Value.srcOrderNum == projectNum)
                 {
                     list.Add(list.Count, index.Value);
                 }
@@ -420,7 +420,7 @@ namespace MainProgram.model
                     record.supplierName = Supplier.getInctance().getSupplierNameFromPkey(record.supplierId);
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
-                    record.contractNum = DbDataConvert.ToString(row["CONTRACT_NUM"]);
+                    record.srcOrderNum = DbDataConvert.ToString(row["CONTRACT_NUM"]);
                     record.purchaseType = DbDataConvert.ToString(row["PURCHASE_TYPE"]);
                     record.paymentDate = DbDataConvert.ToDateTime(row["PAYMENT_DATE"]).ToString("yyyy-MM-dd");
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
@@ -677,8 +677,8 @@ namespace MainProgram.model
         public string inLedgerDate { get; set; }
         public int isInLedger { get; set; }
 
-        // 项目合同编号
-        public string contractNum { get; set; }
+        // 总材料表单据编号
+        public string srcOrderNum { get; set; }
         
     }
 }

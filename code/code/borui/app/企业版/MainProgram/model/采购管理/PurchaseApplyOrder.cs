@@ -45,7 +45,7 @@ namespace MainProgram.model
             insert += record.applyId + ",";
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
-            insert += "'" + record.proNum + "',";
+            insert += "'" + record.srcOrderNum + "',";
             insert += "'" + record.paymentDate + "',";
             insert += "'" + record.exchangesUnit + "',";
             insert += "'" + record.sumValue + "',";
@@ -142,7 +142,7 @@ namespace MainProgram.model
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
 
-                    record.proNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
+                    record.srcOrderNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
                     record.paymentDate = DbDataConvert.ToDateTime(row["PAYMENT_DATE"]).ToString("yyyy-MM-dd");
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
 
@@ -240,7 +240,7 @@ namespace MainProgram.model
                 PurchaseApplyOrderTable record = new PurchaseApplyOrderTable();
                 record = index.Value;
 
-                if (index.Value.proNum == projectNum)
+                if (index.Value.srcOrderNum == projectNum)
                 {
                     list.Add(list.Count, index.Value);
                 }
@@ -276,8 +276,8 @@ namespace MainProgram.model
         public string tradingDate { get; set; }
         public string billNumber { get; set; }
 
-        // 项目编号、期望交货日志和摘要
-        public string proNum { get; set; }
+        // 总材料单编号、期望交货日志和摘要
+        public string srcOrderNum { get; set; }
         public string paymentDate { get; set; }
         public string exchangesUnit { get; set; }
 

@@ -324,7 +324,7 @@ namespace MainProgram
             record.tradingDate = this.labelTradingDate.Text;
             record.billNumber = this.labelBillNumber.Text;
 
-            record.proNum = this.labelProject.Text;
+            record.srcOrderNum = this.labelProject.Text;
             record.paymentDate = this.labelDeliveryDate.Text;
             record.exchangesUnit = this.labelSummary.Text;
 
@@ -363,6 +363,12 @@ namespace MainProgram
             if (record.billNumber.Length == 0)
             {
                 MessageBoxExtend.messageWarning("单据号信息不完整，单据保存失败");
+                return false;
+            }
+
+            if (record.srcOrderNum.Length > 60)
+            {
+                MessageBoxExtend.messageWarning("项目编号信息最大长度为60字符,目前输入的项目编号信息太长，请重新输入");
                 return false;
             }
 
@@ -707,7 +713,7 @@ namespace MainProgram
             this.labelTradingDate.Text = m_purchaseOrder.tradingDate;
             this.labelBillNumber.Text = m_purchaseOrder.billNumber;
             this.labelDeliveryDate.Text = m_purchaseOrder.paymentDate;
-            this.labelProject.Text = m_purchaseOrder.proNum;
+            this.labelProject.Text = m_purchaseOrder.srcOrderNum;
             this.labelSummary.Text = m_purchaseOrder.exchangesUnit;
             this.labelMakeBillStaff.Text = m_purchaseOrder.makeOrderStaffName;
 

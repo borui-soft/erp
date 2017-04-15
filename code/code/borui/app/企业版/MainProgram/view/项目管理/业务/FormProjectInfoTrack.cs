@@ -164,16 +164,16 @@ namespace MainProgram
 
                     // 库存预占情况,包含总预占量和本项目预占量
                     temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
-                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, m_proInfo.projectNum));
+                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, record.billNumber));
                     
 
                     // 转采购申请单数量
-                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(m_proInfo.projectNum, tmp.materielID);
+                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, tmp.materielID);
                     temp.Add(appylyCount);
 
                     // 采购订单数量
                     SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
-                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfo.projectNum);
+                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
 
                     double orderCount = 0;
                     for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
@@ -187,7 +187,7 @@ namespace MainProgram
 
                     // 采购入库数量
                     SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
-                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfo.projectNum);
+                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
 
                     double purchaseInOrderValueCount = 0;
                     for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
@@ -200,7 +200,7 @@ namespace MainProgram
                     temp.Add(purchaseInOrderValueCount);
 
                     // 生产领料数量
-                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(m_proInfo.projectNum, tmp.materielID);
+                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, tmp.materielID);
                     temp.Add(materielOutOrderValueCount);
 
                     projectInfoList.Add(projectInfoList.Count, temp);
@@ -231,16 +231,16 @@ namespace MainProgram
 
                     // 库存预占情况,包含总预占量和本项目预占量
                     temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
-                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, m_proInfo.projectNum));
+                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, record.billNumber));
 
 
                     // 转采购申请单数量
-                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(m_proInfo.projectNum, tmp.materielID);
+                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, tmp.materielID);
                     temp.Add(appylyCount);
 
                     // 采购订单数量
                     SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
-                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfo.projectNum);
+                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
 
                     double orderCount = 0;
                     for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
@@ -254,7 +254,7 @@ namespace MainProgram
 
                     // 采购入库数量
                     SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
-                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(m_proInfo.projectNum);
+                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
 
                     double purchaseInOrderValueCount = 0;
                     for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
@@ -267,7 +267,7 @@ namespace MainProgram
                     temp.Add(purchaseInOrderValueCount);
 
                     // 生产领料数量
-                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(m_proInfo.projectNum, tmp.materielID);
+                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, tmp.materielID);
                     temp.Add(materielOutOrderValueCount);
 
                     projectInfoList.Add(projectInfoList.Count, temp);
@@ -598,25 +598,25 @@ namespace MainProgram
 
         private void ToolStripMenuItemPurchaseApplyOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseApplyOrder, m_proInfo.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseApplyOrder, m_billNumber, m_materielPKey);
             fpod.ShowDialog();
         }
 
         private void ToolStripMenuItemPurchaseOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseOrder, m_proInfo.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseOrder, m_billNumber, m_materielPKey);
             fpod.ShowDialog();
         }
 
         private void toolStripMenuItemPurchaseInOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseIn, m_proInfo.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.PurchaseIn, m_billNumber, m_materielPKey);
             fpod.ShowDialog();
         }
 
         private void ToolStripMenuItemMaterielOutOrderInfo_Click(object sender, EventArgs e)
         {
-            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.StorageMaterielOut, m_proInfo.projectNum, m_materielPKey);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.StorageMaterielOut, m_billNumber, m_materielPKey);
             fpod.ShowDialog();
         }
 

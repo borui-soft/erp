@@ -54,7 +54,7 @@ namespace MainProgram.model
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
 
-            insert += "'" + record.projectNo + "',";
+            insert += "'" + record.srcOrderNum + "',";
             insert += "'" + record.makeNo + "',";
 
             insert += "'" + record.exchangesUnit + "',";
@@ -246,7 +246,7 @@ namespace MainProgram.model
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
 
-                    record.projectNo = DbDataConvert.ToString(row["PROJECT_NO"]);
+                    record.srcOrderNum = DbDataConvert.ToString(row["PROJECT_NO"]);
                     record.makeNo = DbDataConvert.ToString(row["MAKE_NO"]);
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
 
@@ -287,7 +287,7 @@ namespace MainProgram.model
             return m_tableDataList;
         }
 
-        public SortedDictionary<int, MaterielOutOrderTable> getAllPurchaseOrderInfoFromProjectNum(string projectNum)
+        public SortedDictionary<int, MaterielOutOrderTable> getAllPurchaseOrderInfoFromProjectNum(string srcOrderNum)
         {
             SortedDictionary<int, MaterielOutOrderTable> list = new SortedDictionary<int, MaterielOutOrderTable>();
 
@@ -296,7 +296,7 @@ namespace MainProgram.model
                 MaterielOutOrderTable record = new MaterielOutOrderTable();
                 record = index.Value;
 
-                if (index.Value.projectNo == projectNum)
+                if (index.Value.srcOrderNum == srcOrderNum)
                 {
                     list.Add(list.Count, index.Value);
                 }
@@ -405,8 +405,8 @@ namespace MainProgram.model
         public string tradingDate { get; set; }
         public string billNumber { get; set; }
 
-        // 2017-1-15 新增项目编号和生产编码
-        public string projectNo { get; set; }
+        // 2017-1-15 新增总材料表编号和生产编码
+        public string srcOrderNum { get; set; }
         public string makeNo { get; set; }
 
         public string exchangesUnit { get; set; }

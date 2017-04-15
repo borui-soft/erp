@@ -254,7 +254,7 @@
             this.panel1.Controls.Add(this.labelPurchaseName);
             this.panel1.Controls.Add(this.panelPurchaseName);
             this.panel1.Controls.Add(this.textBoxPurchaseName);
-            this.panel1.Location = new System.Drawing.Point(96, 85);
+            this.panel1.Location = new System.Drawing.Point(115, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 21);
             this.panel1.TabIndex = 17;
@@ -296,7 +296,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(96, 106);
+            this.groupBox3.Location = new System.Drawing.Point(115, 106);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(165, 1);
             this.groupBox3.TabIndex = 16;
@@ -511,7 +511,7 @@
             this.panel11.Controls.Add(this.panelPurchaseType);
             this.panel11.Controls.Add(this.labelPurchaseType);
             this.panel11.Controls.Add(this.comboBoxPurchaseType);
-            this.panel11.Location = new System.Drawing.Point(97, 123);
+            this.panel11.Location = new System.Drawing.Point(116, 123);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(165, 21);
             this.panel11.TabIndex = 39;
@@ -553,7 +553,7 @@
             // 
             this.groupBox11.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox11.Controls.Add(this.groupBox12);
-            this.groupBox11.Location = new System.Drawing.Point(96, 144);
+            this.groupBox11.Location = new System.Drawing.Point(115, 144);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(165, 1);
             this.groupBox11.TabIndex = 38;
@@ -1317,15 +1317,15 @@
             this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.Location = new System.Drawing.Point(18, 167);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 12);
+            this.label11.Size = new System.Drawing.Size(95, 12);
             this.label11.TabIndex = 96;
-            this.label11.Text = "项目编号:";
+            this.label11.Text = "总材料表单据号:";
             // 
             // groupBox22
             // 
             this.groupBox22.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox22.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox22.Location = new System.Drawing.Point(97, 179);
+            this.groupBox22.Location = new System.Drawing.Point(113, 182);
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.Size = new System.Drawing.Size(165, 1);
             this.groupBox22.TabIndex = 99;
@@ -1336,7 +1336,7 @@
             this.panelContractNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelContractNum.Controls.Add(this.labelContractNum);
             this.panelContractNum.Controls.Add(this.textBoxContractNum);
-            this.panelContractNum.Location = new System.Drawing.Point(97, 159);
+            this.panelContractNum.Location = new System.Drawing.Point(116, 162);
             this.panelContractNum.Name = "panelContractNum";
             this.panelContractNum.Size = new System.Drawing.Size(168, 21);
             this.panelContractNum.TabIndex = 98;

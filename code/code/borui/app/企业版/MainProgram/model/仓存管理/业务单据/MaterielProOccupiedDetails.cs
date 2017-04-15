@@ -285,7 +285,7 @@ namespace MainProgram.model
                 record = (MaterielProOccupiedOrderTable)list[index];
 
                 if (projectNum.Length == 0 ||
-                    (projectNum.Length > 0 && record.exchangesUnit == projectNum))
+                    (projectNum.Length > 0 && record.srcOrderNum == projectNum))
                 {
                     SortedDictionary<int, MaterielProOccupiedOrderDetailsTable> listDetails =
                         MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedInfoFromBillNumber(record.billNumber);

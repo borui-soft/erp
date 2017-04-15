@@ -317,7 +317,7 @@ namespace MainProgram
                         temp.Add(record.supplierName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.projectNum);
+                        temp.Add(record.xxMaterielTableNum);
                         temp.Add(record.deliveryDate);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sumMoney);
@@ -365,7 +365,7 @@ namespace MainProgram
                         temp.Add(record.applyName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.proNum);
+                        temp.Add(record.srcOrderNum);
                         temp.Add(record.paymentDate);
                         temp.Add(record.totalMoney);
                         temp.Add(record.makeOrderStaffName);
@@ -467,7 +467,7 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.purchaseType);
-                        temp.Add(record.contractNum);
+                        temp.Add(record.srcOrderNum);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sourceBillNumber);
                         temp.Add(record.sumMoney);

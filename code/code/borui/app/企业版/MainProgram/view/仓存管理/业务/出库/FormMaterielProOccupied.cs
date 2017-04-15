@@ -253,7 +253,7 @@ namespace MainProgram
 
             record.tradingDate = this.labelTradingDate.Text;
             record.billNumber = this.labelBillNumber.Text;
-            record.exchangesUnit = this.labelSummary.Text;
+            record.srcOrderNum = this.labelSummary.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
@@ -308,7 +308,7 @@ namespace MainProgram
                 return false;
             }
 
-            if (record.exchangesUnit.Length == 0)
+            if (record.srcOrderNum.Length == 0)
             {
                 MessageBoxExtend.messageWarning("用途信息不能为空，单据保存失败");
                 return false;
@@ -587,7 +587,7 @@ namespace MainProgram
             this.labelBillNumber.Text = m_materieOutOrder.billNumber;
             this.labelMakeBillStaff.Text = m_materieOutOrder.makeOrderStaffName;
             this.labelSave.Text = m_materieOutOrder.applyStaffName;
-            this.labelSummary.Text = m_materieOutOrder.exchangesUnit;
+            this.labelSummary.Text = m_materieOutOrder.srcOrderNum;
 
             // DataGridView 赋值
             writeBillDetailsInfoFromBillNumber(m_billNumber);

@@ -91,7 +91,7 @@
             // 
             this.labelBillNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelBillNumber.AutoSize = true;
-            this.labelBillNumber.Location = new System.Drawing.Point(457, 92);
+            this.labelBillNumber.Location = new System.Drawing.Point(522, 92);
             this.labelBillNumber.Name = "labelBillNumber";
             this.labelBillNumber.Size = new System.Drawing.Size(95, 12);
             this.labelBillNumber.TabIndex = 24;
@@ -103,7 +103,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(372, 93);
+            this.label7.Location = new System.Drawing.Point(437, 93);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 22;
@@ -113,7 +113,7 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox5.Location = new System.Drawing.Point(458, 105);
+            this.groupBox5.Location = new System.Drawing.Point(523, 105);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(165, 1);
             this.groupBox5.TabIndex = 23;
@@ -124,7 +124,7 @@
             this.panelTradingDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelTradingDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelTradingDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelTradingDate.Location = new System.Drawing.Point(247, 86);
+            this.panelTradingDate.Location = new System.Drawing.Point(286, 86);
             this.panelTradingDate.Name = "panelTradingDate";
             this.panelTradingDate.Size = new System.Drawing.Size(21, 21);
             this.panelTradingDate.TabIndex = 21;
@@ -134,7 +134,7 @@
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox2.Location = new System.Drawing.Point(105, 106);
+            this.groupBox2.Location = new System.Drawing.Point(144, 106);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(163, 1);
             this.groupBox2.TabIndex = 20;
@@ -155,7 +155,7 @@
             this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel3.Controls.Add(this.labelTradingDate);
             this.panel3.Controls.Add(this.dateTimePickerTradingDate);
-            this.panel3.Location = new System.Drawing.Point(105, 85);
+            this.panel3.Location = new System.Drawing.Point(144, 85);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(165, 21);
             this.panel3.TabIndex = 19;
@@ -176,7 +176,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(17, 93);
+            this.label4.Location = new System.Drawing.Point(19, 93);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 7;
@@ -195,8 +195,8 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 164);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
@@ -236,9 +236,9 @@
             // 
             this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(98, 144);
+            this.groupBox9.Location = new System.Drawing.Point(145, 144);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(908, 1);
+            this.groupBox9.Size = new System.Drawing.Size(861, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
             // 
@@ -388,8 +388,8 @@
             // 
             // dataGridViewDataCount
             // 
-            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 420);
             this.dataGridViewDataCount.Name = "dataGridViewDataCount";
@@ -575,9 +575,9 @@
             // 
             this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(99, 123);
+            this.textBoxSummary.Location = new System.Drawing.Point(143, 123);
             this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(906, 21);
+            this.textBoxSummary.Size = new System.Drawing.Size(862, 21);
             this.textBoxSummary.TabIndex = 43;
             this.textBoxSummary.Visible = false;
             this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
@@ -590,16 +590,16 @@
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(18, 128);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.Size = new System.Drawing.Size(119, 12);
             this.label3.TabIndex = 103;
-            this.label3.Text = "项目编号(*):";
+            this.label3.Text = "总材料表单据号:(*):";
             // 
             // panelSummary
             // 
             this.panelSummary.Controls.Add(this.labelSummary);
-            this.panelSummary.Location = new System.Drawing.Point(105, 122);
+            this.panelSummary.Location = new System.Drawing.Point(143, 122);
             this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(901, 22);
+            this.panelSummary.Size = new System.Drawing.Size(863, 22);
             this.panelSummary.TabIndex = 104;
             this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
             // 

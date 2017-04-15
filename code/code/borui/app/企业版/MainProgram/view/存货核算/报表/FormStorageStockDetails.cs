@@ -175,7 +175,7 @@ namespace MainProgram
                     if (record.thingsType == "生产领料")
                     {
                         MaterielOutOrderTable materieOutOrder = MaterielOutOrder.getInctance().getMaterielOutOrderInfoFromBillNumber(record.billNumber);
-                        projectNo = materieOutOrder.projectNo;
+                        projectNo = materieOutOrder.srcOrderNum;
                         makeNo = materieOutOrder.makeNo;
                     }
                     else if (record.thingsType == "其他出库")

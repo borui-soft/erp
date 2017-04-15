@@ -54,7 +54,7 @@ namespace MainProgram.model
 
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
-            insert += "'" + record.exchangesUnit + "',";
+            insert += "'" + record.srcOrderNum + "',";
             insert += "'" + record.sumValue + "',";
             insert += "'" + record.sumMoney + "',";
 
@@ -146,7 +146,7 @@ namespace MainProgram.model
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.tradingDate = DbDataConvert.ToDateTime(row["TRADING_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
-                    record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
+                    record.srcOrderNum = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
 
                     record.sumValue = DbDataConvert.ToString(row["SUM_VALUE"]);
                     record.sumMoney = DbDataConvert.ToString(row["SUM_MONEY"]);
@@ -216,7 +216,7 @@ namespace MainProgram.model
                 MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
                 record = index.Value;
 
-                if (index.Value.exchangesUnit == projectNum)
+                if (index.Value.srcOrderNum == projectNum)
                 {
                     tempList.Add(index.Value.billNumber);
                 }
@@ -305,7 +305,7 @@ namespace MainProgram.model
         public int pkey { get; set; }
         public string tradingDate { get; set; }
         public string billNumber { get; set; }
-        public string exchangesUnit { get; set; }
+        public string srcOrderNum { get; set; }
 
         // 金额信息
         public string sumValue { get; set; }

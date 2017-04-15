@@ -211,7 +211,7 @@
             this.panel1.Controls.Add(this.labelPurchaseName);
             this.panel1.Controls.Add(this.panelPurchaseName);
             this.panel1.Controls.Add(this.textBoxPApplyName);
-            this.panel1.Location = new System.Drawing.Point(96, 85);
+            this.panel1.Location = new System.Drawing.Point(115, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 21);
             this.panel1.TabIndex = 17;
@@ -242,7 +242,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(96, 106);
+            this.groupBox3.Location = new System.Drawing.Point(115, 106);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(165, 1);
             this.groupBox3.TabIndex = 16;
@@ -325,9 +325,9 @@
             // 
             this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(99, 179);
+            this.groupBox9.Location = new System.Drawing.Point(115, 179);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(595, 1);
+            this.groupBox9.Size = new System.Drawing.Size(579, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
             // 
@@ -347,9 +347,9 @@
             this.panel10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel10.Controls.Add(this.labelSummary);
             this.panel10.Controls.Add(this.textBoxSummary);
-            this.panel10.Location = new System.Drawing.Point(97, 159);
+            this.panel10.Location = new System.Drawing.Point(115, 159);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(600, 21);
+            this.panel10.Size = new System.Drawing.Size(582, 21);
             this.panel10.TabIndex = 40;
             this.panel10.Click += new System.EventHandler(this.panelSummary_Click);
             // 
@@ -367,9 +367,9 @@
             // 
             this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(2, 0);
+            this.textBoxSummary.Location = new System.Drawing.Point(1, 0);
             this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(597, 21);
+            this.textBoxSummary.Size = new System.Drawing.Size(598, 21);
             this.textBoxSummary.TabIndex = 43;
             this.textBoxSummary.Visible = false;
             this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
@@ -681,7 +681,7 @@
             this.panelProjectNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelProjectNum.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelProjectNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelProjectNum.Location = new System.Drawing.Point(257, 125);
+            this.panelProjectNum.Location = new System.Drawing.Point(276, 125);
             this.panelProjectNum.Name = "panelProjectNum";
             this.panelProjectNum.Size = new System.Drawing.Size(21, 21);
             this.panelProjectNum.TabIndex = 79;
@@ -691,7 +691,7 @@
             // 
             this.groupBox10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox10.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox10.Location = new System.Drawing.Point(97, 146);
+            this.groupBox10.Location = new System.Drawing.Point(116, 146);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(178, 1);
             this.groupBox10.TabIndex = 78;
@@ -702,7 +702,7 @@
             this.panelProject.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelProject.Controls.Add(this.labelProject);
             this.panelProject.Controls.Add(this.textBoxProject);
-            this.panelProject.Location = new System.Drawing.Point(96, 126);
+            this.panelProject.Location = new System.Drawing.Point(115, 126);
             this.panelProject.Name = "panelProject";
             this.panelProject.Size = new System.Drawing.Size(180, 21);
             this.panelProject.TabIndex = 77;
@@ -738,9 +738,9 @@
             this.label5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(18, 131);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 12);
+            this.label5.Size = new System.Drawing.Size(95, 12);
             this.label5.TabIndex = 76;
-            this.label5.Text = "项目编号:";
+            this.label5.Text = "总材料表单据号:";
             // 
             // FormPurchaseApply
             // 

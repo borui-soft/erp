@@ -184,20 +184,20 @@ namespace MainProgram
 
                 if (m_dataType == 1)
                 {
-                    proValue = MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, m_projectNum);
+                    proValue = MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, tmp.billNumber);
                 }
                 else if (m_dataType == 2)
                 {
-                    proValue = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(m_projectNum, tmp.materielID);
+                    proValue = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(tmp.billNumber, tmp.materielID);
                 }
                 else if (m_dataType == 3)
                 {
-                    proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(m_projectNum, tmp.materielID);
+                    proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(tmp.billNumber, tmp.materielID);
                 }
 
                 if (tmp.value - proValue > 0)
                 {
-                    record.Add(m_projectNum);
+                    record.Add(tmp.billNumber);
                     record.Add(tmp.materielID);
                     record.Add(tmp.value);
                     record.Add(proValue);

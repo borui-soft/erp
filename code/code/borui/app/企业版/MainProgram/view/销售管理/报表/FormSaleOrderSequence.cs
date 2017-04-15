@@ -494,7 +494,7 @@ namespace MainProgram
                         temp.Add(record.departmentName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.projectNo);
+                        temp.Add(record.srcOrderNum);
                         temp.Add(record.makeNo);
                         temp.Add(record.sumValue);
                         temp.Add(record.sumMoney);

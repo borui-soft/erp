@@ -231,7 +231,7 @@
             this.panel1.Controls.Add(this.labelSaleName);
             this.panel1.Controls.Add(this.panelDepartmentName);
             this.panel1.Controls.Add(this.textBoxDepartmentName);
-            this.panel1.Location = new System.Drawing.Point(96, 85);
+            this.panel1.Location = new System.Drawing.Point(115, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 21);
             this.panel1.TabIndex = 17;
@@ -262,7 +262,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(96, 106);
+            this.groupBox3.Location = new System.Drawing.Point(115, 106);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(165, 1);
             this.groupBox3.TabIndex = 16;
@@ -856,7 +856,7 @@
             // 
             this.textBoxProjectNo.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxProjectNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxProjectNo.Location = new System.Drawing.Point(96, 122);
+            this.textBoxProjectNo.Location = new System.Drawing.Point(116, 122);
             this.textBoxProjectNo.Name = "textBoxProjectNo";
             this.textBoxProjectNo.Size = new System.Drawing.Size(164, 21);
             this.textBoxProjectNo.TabIndex = 106;
@@ -867,7 +867,7 @@
             // panelProject
             // 
             this.panelProject.Controls.Add(this.labelProjectNo);
-            this.panelProject.Location = new System.Drawing.Point(95, 121);
+            this.panelProject.Location = new System.Drawing.Point(115, 121);
             this.panelProject.Name = "panelProject";
             this.panelProject.Size = new System.Drawing.Size(166, 22);
             this.panelProject.TabIndex = 108;
@@ -890,15 +890,15 @@
             this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(18, 127);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 12);
+            this.label6.Size = new System.Drawing.Size(95, 12);
             this.label6.TabIndex = 107;
-            this.label6.Text = "项目编号:";
+            this.label6.Text = "总材料表单据号:";
             // 
             // groupBox7
             // 
             this.groupBox7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox7.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox7.Location = new System.Drawing.Point(95, 143);
+            this.groupBox7.Location = new System.Drawing.Point(115, 143);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(166, 1);
             this.groupBox7.TabIndex = 105;

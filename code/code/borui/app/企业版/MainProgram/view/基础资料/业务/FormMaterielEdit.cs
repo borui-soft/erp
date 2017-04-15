@@ -161,7 +161,7 @@ namespace MainProgram
                 textBoxWarranty.Text = Convert.ToString(m_materiel.warramty);
                 comboBoxMaterielAttribut.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(MATERIEL_ATTRIBUTE_TABLE_NAME, m_materiel.materielAttribute);
                 comboBoxValuationType.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(VALUATION_TYPE_LIST_TABLE_NAME, m_materiel.valuation);
-                comboBoxStorage.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(VALUATION_TYPE_LIST_TABLE_NAME, m_materiel.storage);
+                comboBoxStorage.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(STORAGE_LIST_TABLE_NAME, m_materiel.storage);
                 comboBoxUnit.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(UNIT_LIST_TABLE_NAME, m_materiel.unit);
                 comboBoxUnitPurchase.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(UNIT_LIST_TABLE_NAME, m_materiel.unitPurchase);
                 comboBoxUnitSale.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(UNIT_LIST_TABLE_NAME, m_materiel.unitSale);

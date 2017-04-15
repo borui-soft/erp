@@ -50,7 +50,7 @@ namespace MainProgram.model
             insert += "'" + record.deliveryDate + "',";
             insert += "'" + record.paymentDate + "',";
 
-            insert += "'" + record.projectNum + "',";
+            insert += "'" + record.xxMaterielTableNum + "',";
             insert += "'" + record.srcOrderNum + "',";
 
             insert += "'" + record.exchangesUnit + "',";
@@ -171,7 +171,7 @@ namespace MainProgram.model
                     record.purchaseType = DbDataConvert.ToString(row["PURCHASE_TYPE"]);
                     record.deliveryDate = DbDataConvert.ToDateTime(row["DELIVERY_DATE"]).ToString("yyyy-MM-dd");
                     record.paymentDate = DbDataConvert.ToDateTime(row["PAYMENT_DATE"]).ToString("yyyy-MM-dd");
-                    record.projectNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
+                    record.xxMaterielTableNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
                     record.srcOrderNum = DbDataConvert.ToString(row["SRC_ORDER_NUM"]);
                     record.exchangesUnit = DbDataConvert.ToString(row["EXCHANGES_UNIT"]);
 
@@ -213,7 +213,7 @@ namespace MainProgram.model
                 PurchaseOrderTable record = new PurchaseOrderTable();
                 record = index.Value;
 
-                if (index.Value.projectNum == projectNum)
+                if (index.Value.xxMaterielTableNum == projectNum)
                 {
                     list.Add(list.Count, index.Value);
                 }
@@ -332,7 +332,7 @@ namespace MainProgram.model
         public string actualValue { get; set; }
 
         // 增加项目编号和原始项目编号
-        public string projectNum { get; set; }
+        public string xxMaterielTableNum { get; set; }
         public string srcOrderNum { get; set; }
     }
 }

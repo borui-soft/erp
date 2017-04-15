@@ -341,7 +341,7 @@ namespace MainProgram
             record.billNumber = this.labelBillNumber.Text;
             record.exchangesUnit = this.labelSummary.Text;
 
-            record.projectNo = this.labelProjectNo.Text;
+            record.srcOrderNum = this.labelProjectNo.Text;
             record.makeNo = this.labelMakeNo.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
@@ -714,7 +714,7 @@ namespace MainProgram
             this.labelVerify.Text = m_materieOutOrder.materielOutStaffName;
             this.labelSummary.Text = m_materieOutOrder.exchangesUnit;
 
-            this.labelProjectNo.Text = m_materieOutOrder.projectNo;
+            this.labelProjectNo.Text = m_materieOutOrder.srcOrderNum;
             this.labelMakeNo.Text = m_materieOutOrder.makeNo;
 
             // DataGridView 赋值

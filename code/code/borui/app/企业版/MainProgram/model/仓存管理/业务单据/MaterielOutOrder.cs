@@ -105,8 +105,9 @@ namespace MainProgram.model
             }
         }
 
-        public void billReview(string billNumber, bool isRedBill = false)
+        public bool billReview(string billNumber, bool isRedBill = false)
         {
+            bool isRet = false;
             m_isRedBill = isRedBill;
 
             writeOperatorLog(304, OperatorLogType.Review, billNumber + "开始");
@@ -127,15 +128,21 @@ namespace MainProgram.model
                     MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
 
                     load();
+                    isRet = true;
                 }
                 catch (Exception error)
                 {
                     MessageBoxExtend.messageWarning(error.Message);
-                    return;
+                    isRet = false;
                 }
             }
 
-            writeOperatorLog(304, OperatorLogType.Review, billNumber + "结束");
+            if (isRet)
+            { 
+                writeOperatorLog(304, OperatorLogType.Review, billNumber + "结束"); 
+            }
+
+            return isRet;
         }
 
         private bool updateMaterielData(string billNumber)

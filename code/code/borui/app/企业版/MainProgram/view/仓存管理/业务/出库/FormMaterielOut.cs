@@ -454,10 +454,13 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                MaterielOutOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+                bool isRet = MaterielOutOrder.getInctance().billReview(m_billNumber, m_isRedBill);
 
                 // 自动消除库存占用
-                AutoDelMateriePro(m_billNumber);
+                if (isRet)
+                {
+                    AutoDelMateriePro(m_billNumber);
+                }
             }
             catch (Exception exp)
             {

@@ -129,26 +129,26 @@
             // menuModifyPassword
             // 
             this.menuModifyPassword.Name = "menuModifyPassword";
-            this.menuModifyPassword.Size = new System.Drawing.Size(118, 22);
+            this.menuModifyPassword.Size = new System.Drawing.Size(152, 22);
             this.menuModifyPassword.Text = "修改密码";
             this.menuModifyPassword.Click += new System.EventHandler(this.menuModifyPassword_Click);
             // 
             // menuSystemLogin
             // 
             this.menuSystemLogin.Name = "menuSystemLogin";
-            this.menuSystemLogin.Size = new System.Drawing.Size(118, 22);
+            this.menuSystemLogin.Size = new System.Drawing.Size(152, 22);
             this.menuSystemLogin.Text = "重新登录";
             this.menuSystemLogin.Click += new System.EventHandler(this.menuSystemLogin_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(115, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(149, 6);
             // 
             // menuSystemExit
             // 
             this.menuSystemExit.Name = "menuSystemExit";
-            this.menuSystemExit.Size = new System.Drawing.Size(118, 22);
+            this.menuSystemExit.Size = new System.Drawing.Size(152, 22);
             this.menuSystemExit.Text = "退出";
             this.menuSystemExit.Click += new System.EventHandler(this.menuSystemExit_Click);
             // 
@@ -176,94 +176,94 @@
             // menuBillPurchase
             // 
             this.menuBillPurchase.Name = "menuBillPurchase";
-            this.menuBillPurchase.Size = new System.Drawing.Size(130, 22);
+            this.menuBillPurchase.Size = new System.Drawing.Size(152, 22);
             this.menuBillPurchase.Text = "采购订单";
             this.menuBillPurchase.Click += new System.EventHandler(this.menuBillPurchase_Click);
             // 
             // menuBillPurchaseIn
             // 
             this.menuBillPurchaseIn.Name = "menuBillPurchaseIn";
-            this.menuBillPurchaseIn.Size = new System.Drawing.Size(130, 22);
+            this.menuBillPurchaseIn.Size = new System.Drawing.Size(152, 22);
             this.menuBillPurchaseIn.Text = "采购入库单";
             this.menuBillPurchaseIn.Click += new System.EventHandler(this.menuBillPurchaseIn_Click);
             // 
             // menuBillProductIn
             // 
             this.menuBillProductIn.Name = "menuBillProductIn";
-            this.menuBillProductIn.Size = new System.Drawing.Size(130, 22);
+            this.menuBillProductIn.Size = new System.Drawing.Size(152, 22);
             this.menuBillProductIn.Text = "产品入库单";
             this.menuBillProductIn.Click += new System.EventHandler(this.menuBillProductIn_Click);
             // 
             // menuBillEarningsIn
             // 
             this.menuBillEarningsIn.Name = "menuBillEarningsIn";
-            this.menuBillEarningsIn.Size = new System.Drawing.Size(130, 22);
+            this.menuBillEarningsIn.Size = new System.Drawing.Size(152, 22);
             this.menuBillEarningsIn.Text = "盘盈入库单";
             this.menuBillEarningsIn.Click += new System.EventHandler(this.menuBillEarningsIn_Click);
             // 
             // menuBillOtherIn
             // 
             this.menuBillOtherIn.Name = "menuBillOtherIn";
-            this.menuBillOtherIn.Size = new System.Drawing.Size(130, 22);
+            this.menuBillOtherIn.Size = new System.Drawing.Size(152, 22);
             this.menuBillOtherIn.Text = "其他入库单";
             this.menuBillOtherIn.Click += new System.EventHandler(this.menuBillOtherIn_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(149, 6);
             // 
             // menuBillSale
             // 
             this.menuBillSale.Name = "menuBillSale";
-            this.menuBillSale.Size = new System.Drawing.Size(130, 22);
+            this.menuBillSale.Size = new System.Drawing.Size(152, 22);
             this.menuBillSale.Text = "销售订单";
             this.menuBillSale.Click += new System.EventHandler(this.menuBillSale_Click);
             // 
             // menuBillSaleOut
             // 
             this.menuBillSaleOut.Name = "menuBillSaleOut";
-            this.menuBillSaleOut.Size = new System.Drawing.Size(130, 22);
+            this.menuBillSaleOut.Size = new System.Drawing.Size(152, 22);
             this.menuBillSaleOut.Text = "销售出库单";
             this.menuBillSaleOut.Click += new System.EventHandler(this.menuBillSaleOut_Click);
             // 
             // menuBillMaterielOut
             // 
             this.menuBillMaterielOut.Name = "menuBillMaterielOut";
-            this.menuBillMaterielOut.Size = new System.Drawing.Size(130, 22);
+            this.menuBillMaterielOut.Size = new System.Drawing.Size(152, 22);
             this.menuBillMaterielOut.Text = "生产领料单";
             this.menuBillMaterielOut.Click += new System.EventHandler(this.menuBillMaterielOut_Click);
             // 
             // menuBillEarningsOut
             // 
             this.menuBillEarningsOut.Name = "menuBillEarningsOut";
-            this.menuBillEarningsOut.Size = new System.Drawing.Size(130, 22);
+            this.menuBillEarningsOut.Size = new System.Drawing.Size(152, 22);
             this.menuBillEarningsOut.Text = "盘亏毁损单";
             this.menuBillEarningsOut.Click += new System.EventHandler(this.menuBillEarningsOut_Click);
             // 
             // menuBillOtherOut
             // 
             this.menuBillOtherOut.Name = "menuBillOtherOut";
-            this.menuBillOtherOut.Size = new System.Drawing.Size(130, 22);
+            this.menuBillOtherOut.Size = new System.Drawing.Size(152, 22);
             this.menuBillOtherOut.Text = "其他出库单";
             this.menuBillOtherOut.Click += new System.EventHandler(this.menuBillOtherOut_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
             // 
             // menuBillReceive
             // 
             this.menuBillReceive.Name = "menuBillReceive";
-            this.menuBillReceive.Size = new System.Drawing.Size(130, 22);
+            this.menuBillReceive.Size = new System.Drawing.Size(152, 22);
             this.menuBillReceive.Text = "收款单";
             this.menuBillReceive.Click += new System.EventHandler(this.menuBillReceive_Click);
             // 
             // menuBillPayment
             // 
             this.menuBillPayment.Name = "menuBillPayment";
-            this.menuBillPayment.Size = new System.Drawing.Size(130, 22);
+            this.menuBillPayment.Size = new System.Drawing.Size(152, 22);
             this.menuBillPayment.Text = "付款单";
             this.menuBillPayment.Click += new System.EventHandler(this.menuBillPayment_Click);
             // 
@@ -279,6 +279,7 @@
             this.toolStripSeparator2,
             this.menuSquenceReceive,
             this.menuSquencePayment});
+            this.menuSquence.Enabled = false;
             this.menuSquence.Name = "menuSquence";
             this.menuSquence.Size = new System.Drawing.Size(71, 20);
             this.menuSquence.Text = "序时簿(Q)";
@@ -366,92 +367,92 @@
             // menuBaseInfoSystemInfo
             // 
             this.menuBaseInfoSystemInfo.Name = "menuBaseInfoSystemInfo";
-            this.menuBaseInfoSystemInfo.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoSystemInfo.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoSystemInfo.Text = "系统参数";
             this.menuBaseInfoSystemInfo.Click += new System.EventHandler(this.menuBaseInfoSystemInfo_Click);
             // 
             // menuBaseInfoUserManager
             // 
             this.menuBaseInfoUserManager.Name = "menuBaseInfoUserManager";
-            this.menuBaseInfoUserManager.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoUserManager.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoUserManager.Text = "用户管理";
             this.menuBaseInfoUserManager.Click += new System.EventHandler(this.menuBaseInfoUserManager_Click);
             // 
             // menuBaseInfoFuzhu
             // 
             this.menuBaseInfoFuzhu.Name = "menuBaseInfoFuzhu";
-            this.menuBaseInfoFuzhu.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoFuzhu.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoFuzhu.Text = "辅助资料";
             this.menuBaseInfoFuzhu.Click += new System.EventHandler(this.menuBaseInfoFuzhu_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(149, 6);
             // 
             // menuBaseInfoSupplier
             // 
             this.menuBaseInfoSupplier.Name = "menuBaseInfoSupplier";
-            this.menuBaseInfoSupplier.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoSupplier.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoSupplier.Text = "供应商资料";
             this.menuBaseInfoSupplier.Click += new System.EventHandler(this.menuBaseInfoSupplier_Click);
             // 
             // menuBaseInfoCustomer
             // 
             this.menuBaseInfoCustomer.Name = "menuBaseInfoCustomer";
-            this.menuBaseInfoCustomer.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoCustomer.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoCustomer.Text = "客户资料";
             this.menuBaseInfoCustomer.Click += new System.EventHandler(this.menuBaseInfoCustomer_Click);
             // 
             // menuBaseInfoMareriel
             // 
             this.menuBaseInfoMareriel.Name = "menuBaseInfoMareriel";
-            this.menuBaseInfoMareriel.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoMareriel.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoMareriel.Text = "物料";
             this.menuBaseInfoMareriel.Click += new System.EventHandler(this.menuBaseInfoMareriel_Click);
             // 
             // menuBaseInfoBillSet
             // 
             this.menuBaseInfoBillSet.Name = "menuBaseInfoBillSet";
-            this.menuBaseInfoBillSet.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoBillSet.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoBillSet.Text = "单据设置";
             this.menuBaseInfoBillSet.Click += new System.EventHandler(this.menuBaseInfoBillSet_Click);
             // 
             // menuBaseInfoSettlmentWay
             // 
             this.menuBaseInfoSettlmentWay.Name = "menuBaseInfoSettlmentWay";
-            this.menuBaseInfoSettlmentWay.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoSettlmentWay.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoSettlmentWay.Text = "结算方式";
             this.menuBaseInfoSettlmentWay.Click += new System.EventHandler(this.menuBaseInfoSettlmentWay_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(149, 6);
             // 
             // menuBaseInfoDbBack
             // 
             this.menuBaseInfoDbBack.Name = "menuBaseInfoDbBack";
-            this.menuBaseInfoDbBack.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoDbBack.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoDbBack.Text = "数据库备份";
             this.menuBaseInfoDbBack.Click += new System.EventHandler(this.menuBaseInfoDbBack_Click);
             // 
             // menuBaseInfoDbRoolBack
             // 
             this.menuBaseInfoDbRoolBack.Name = "menuBaseInfoDbRoolBack";
-            this.menuBaseInfoDbRoolBack.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoDbRoolBack.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoDbRoolBack.Text = "数据库恢复";
             this.menuBaseInfoDbRoolBack.Click += new System.EventHandler(this.menuBaseInfoDbRoolBack_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(149, 6);
             // 
             // menuBaseInfoOperLog
             // 
             this.menuBaseInfoOperLog.Name = "menuBaseInfoOperLog";
-            this.menuBaseInfoOperLog.Size = new System.Drawing.Size(130, 22);
+            this.menuBaseInfoOperLog.Size = new System.Drawing.Size(152, 22);
             this.menuBaseInfoOperLog.Text = "上机日志";
             this.menuBaseInfoOperLog.Click += new System.EventHandler(this.menuBaseInfoOperLog_Click);
             // 
@@ -470,33 +471,33 @@
             // menuHelpDocument
             // 
             this.menuHelpDocument.Name = "menuHelpDocument";
-            this.menuHelpDocument.Size = new System.Drawing.Size(152, 22);
+            this.menuHelpDocument.Size = new System.Drawing.Size(118, 22);
             this.menuHelpDocument.Text = "帮助手册";
             this.menuHelpDocument.Click += new System.EventHandler(this.menuHelpDocument_Click);
             // 
             // menuHelpQuestion
             // 
             this.menuHelpQuestion.Name = "menuHelpQuestion";
-            this.menuHelpQuestion.Size = new System.Drawing.Size(152, 22);
+            this.menuHelpQuestion.Size = new System.Drawing.Size(118, 22);
             this.menuHelpQuestion.Text = "问题反馈";
             this.menuHelpQuestion.Click += new System.EventHandler(this.menuHelpQuestion_Click);
             // 
             // menuHelpRegister
             // 
             this.menuHelpRegister.Name = "menuHelpRegister";
-            this.menuHelpRegister.Size = new System.Drawing.Size(152, 22);
+            this.menuHelpRegister.Size = new System.Drawing.Size(118, 22);
             this.menuHelpRegister.Text = "正版注册";
             this.menuHelpRegister.Click += new System.EventHandler(this.menuHelpRegister_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(115, 6);
             // 
             // menuHelpAbout
             // 
             this.menuHelpAbout.Name = "menuHelpAbout";
-            this.menuHelpAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuHelpAbout.Size = new System.Drawing.Size(118, 22);
             this.menuHelpAbout.Text = "关于";
             this.menuHelpAbout.Click += new System.EventHandler(this.menuHelpAbout_Click);
             // 
@@ -519,8 +520,8 @@
             // 
             // panelFunctionZone
             // 
-            this.panelFunctionZone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelFunctionZone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panelFunctionZone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panelFunctionZone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelFunctionZone.Location = new System.Drawing.Point(0, 83);
@@ -530,9 +531,9 @@
             // 
             // panelFunction
             // 
-            this.panelFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelFunction.BackColor = System.Drawing.Color.White;
             this.panelFunction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelFunction.Location = new System.Drawing.Point(201, 83);
@@ -542,8 +543,8 @@
             // 
             // panelReport
             // 
-            this.panelReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelReport.BackColor = System.Drawing.Color.White;
             this.panelReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelReport.Location = new System.Drawing.Point(961, 84);
@@ -553,8 +554,8 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox.Location = new System.Drawing.Point(958, 83);
@@ -566,8 +567,8 @@
             // 
             // panelTitle
             // 
-            this.panelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTitle.BackColor = System.Drawing.SystemColors.GrayText;
             this.panelTitle.BackgroundImage = global::MainProgram.Properties.Resources.TitleZonebackgroundImage1;
             this.panelTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;

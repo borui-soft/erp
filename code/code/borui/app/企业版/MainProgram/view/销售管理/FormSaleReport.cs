@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MainProgram.bus;
+using MainProgram.model;
 
 namespace MainProgram
 {
@@ -172,6 +173,35 @@ namespace MainProgram
         private void labelInventoryHistory_MouseEnter(object sender, EventArgs e)
         {
             PanelExtend.setLableControlStyle(this.labelInventoryHistory);
+        }
+
+        private void FormSaleReport_Load(object sender, EventArgs e)
+        {
+            setPageActionEnable(250);
+            setPageActionEnable(251);
+            setPageActionEnable(252);
+        }
+
+        private void setPageActionEnable(int authID)
+        {
+            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(authID);
+
+            foreach (KeyValuePair<int, ActionTable> index in list)
+            {
+                object activeObject = this.GetType().GetField(index.Value.uiActionName,
+                    System.Reflection.BindingFlags.NonPublic |
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.IgnoreCase).GetValue(this);
+
+                bool isEnable = AccessAuthorization.getInctance().isAccessAuthorization(index.Value.pkey,
+                    Convert.ToString(DbPublic.getInctance().getCurrentLoginUserID()));
+
+                if (activeObject != null)
+                {
+                    UserInterfaceActonState.setUserInterfaceActonState(activeObject,
+                        ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
+                }
+            }
         }
     }
 }

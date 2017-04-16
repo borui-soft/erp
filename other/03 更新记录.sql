@@ -269,3 +269,77 @@ insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) value
 
 -- 2017-4-15 xx总材料表的设备型号字段扩展为最长长度为50字节
 ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ALTER COLUMN DEVICE_MODE [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL;
+
+-- 2017-4-16 完善存货核算模块报表区域权限控制
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('期初成本调整', 'labelCost', 402);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('物料出入库核算', 'labelMaterielInOutCount', 402);
+
+-- 2017-4-16 采购模块报表区域权限控制
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (150, '采购基础资料', 1);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (151, '采购类序时薄', 1);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (152, '采购报表(统计)', 1);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('物料', 'labelMateriel', 150);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('供应商', 'labelSupplier', 150);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购价格参照表', 'labelPurchasePirce', 150);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('供应商历史价格查询', 'labelPurchasePirceHistory', 150);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购申请单序时薄', 'labelPurchaseApplyOrder', 151);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购订单序时薄', 'labelPurchaseOrder', 151);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购入库序时薄', 'labelPurchaseIn', 151);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购发票序时薄', 'labelPurchaseInvoice', 151);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存表(物料)', 'labelInventory', 152);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('历史库存表(物料)', 'labelInventoryHistory', 152);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购订单执行情况', 'labelPurchaseOrderExecute', 152);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购入库付款情况', 'labelPurchaseInPayment', 152);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购金额统计(按物料)', 'labelAmountCountByMateriel', 152);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购金额统计(按采购员)', 'labelAmountCountByPeople', 152);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('采购金额统计(按供应商)', 'labelAmountCountBySupplier', 152);
+
+
+-- 2017-4-16 销售模块报表区域权限控制
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (250, '销售基础资料', 2);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (251, '销售类序时薄', 2);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (252, '销售报表(统计)', 2);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('物料', 'labelMateriel', 250);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('客户', 'labelCustom', 250);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售价格参照表', 'labelSaleBasePrice', 250);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售报价序时薄', 'SalePrice', 251);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售订单序时薄', 'labelSaleOrder', 251);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售出库序时薄', 'labelSaleOut', 251);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售发票序时薄', 'labelSaleInvoice', 251);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存表(商品)', 'labelInventory', 252);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('历史库存表(商品)', 'labelInventoryHistory', 252);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售订单执行情况', 'labelSaleOrderExecute', 252);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售回款情况', 'labelSaleIn', 252);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售额统计(按商品)', 'labelSaleCountByProducts', 252);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售额统计(按业务员)', 'labelSaleCountByPeople', 252);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('销售额统计(按客户)', 'labelSaleCountByCustom', 252);
+
+
+-- 2017-4-16 仓存模块报表区域权限控制
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (350, '仓存基础资料', 3);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (351, '出入库序时薄', 3);
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (352, '仓存报表(统计)', 3);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('物料', 'labelMateriel', 350);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('入库类单据序时薄', 'labelOrderIn', 351);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('出库类单据序时薄', 'labelOrderOut', 351);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存预占单序时薄', 'labelOrderMaterielProOccupied', 351);
+
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存表', 'labelInventory', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('历史库存表', 'labelInventoryHistory', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('物料出入库明细', 'labelOrderInventory', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('产品入库汇总表', 'labelMaterielCount', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('生产领料汇总表', 'labelMaterielDetails', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('安全库存预警分析', 'labelInventoryAlarm', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('超储/短缺库存分析', 'labelInventoryAnalysis', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存账龄分析表', 'labelInventoryAge', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存呆滞料分析表', 'labelInventoryPassAge', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('保质期预警分析', 'labelInventoryLife', 352);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('超出保质期统计表', 'labelProductionOut', 352);

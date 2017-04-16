@@ -332,6 +332,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "FormPurchaseReport";
             this.Text = "采购管理报表";
+            this.Load += new System.EventHandler(this.FormPurchaseReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

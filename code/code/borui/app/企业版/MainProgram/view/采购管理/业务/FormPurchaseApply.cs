@@ -275,6 +275,9 @@ namespace MainProgram
             this.labelProject.Visible = false;
             this.textBoxProject.Visible = true;
             this.textBoxProject.Text = this.labelProject.Text;
+            this.textBoxProject.Text = this.textBoxProject.Text.Replace("-", "_");
+            this.textBoxProject.Text = this.textBoxProject.Text.Replace("-", "_");
+            this.textBoxProject.Text = this.textBoxProject.Text.Replace("—", "_");
             this.textBoxProject.Focus();
         }
 
@@ -283,6 +286,9 @@ namespace MainProgram
             this.textBoxProject.Visible = false;
             this.panelProjectNum.Visible = true;
             this.labelProject.Text = this.textBoxProject.Text.ToString();
+            this.textBoxProject.Text = this.textBoxProject.Text.Replace("-", "_");
+            this.textBoxProject.Text = this.textBoxProject.Text.Replace("-", "_");
+            this.textBoxProject.Text = this.textBoxProject.Text.Replace("—", "_");
             this.labelProject.Visible = this.textBoxProject.Text.Length > 0;
         }
         #endregion

@@ -375,6 +375,11 @@ namespace MainProgram
 
         private void rowMergeView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
             projectRowMergeView.Rows[e.RowIndex].Selected = true;
 
             m_billNumber = projectRowMergeView.Rows[e.RowIndex].Cells[0].Value.ToString();

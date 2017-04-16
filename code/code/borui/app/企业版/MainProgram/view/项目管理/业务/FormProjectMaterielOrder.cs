@@ -292,7 +292,7 @@ namespace MainProgram
             MaterielProOccupiedOrderTable proOccupiedInfo = new MaterielProOccupiedOrderTable();
             proOccupiedInfo.tradingDate = this.labelTradingDate.Text;
             proOccupiedInfo.billNumber = this.labelBillNumber.Text;
-            proOccupiedInfo.srcOrderNum = this.labelContractNum.Text;
+            proOccupiedInfo.srcOrderNum = this.labelBillNumber.Text;
             proOccupiedInfo.sumValue = "0";
             proOccupiedInfo.sumMoney = "0";
             proOccupiedInfo.applyStaffId = DbPublic.getInctance().getCurrentLoginUserID();

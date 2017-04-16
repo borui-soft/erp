@@ -906,6 +906,11 @@ namespace MainProgram
             this.textBoxContractNum.Visible = true;
 
             this.textBoxContractNum.Text = this.labelContractNum.Text;
+
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("—", "_");
+
             this.textBoxContractNum.Focus();
         }
 
@@ -920,6 +925,11 @@ namespace MainProgram
             this.textBoxContractNum.Visible = true;
 
             this.textBoxContractNum.Text = this.labelContractNum.Text;
+
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("—", "_");
+
             this.textBoxContractNum.Focus();
         }
 
@@ -927,6 +937,11 @@ namespace MainProgram
         {
             this.textBoxContractNum.Visible = false;
             this.labelContractNum.Text = this.textBoxContractNum.Text.ToString();
+
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("—", "_");
+
             this.labelContractNum.Visible = this.textBoxContractNum.Text.Length > 0;
         }
 

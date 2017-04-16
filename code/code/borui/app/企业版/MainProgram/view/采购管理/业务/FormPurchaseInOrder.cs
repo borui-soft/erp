@@ -1165,6 +1165,10 @@ namespace MainProgram
             this.textBoxContractNum.Visible = false;
             this.labelContractNum.Text = this.textBoxContractNum.Text.ToString();
             this.labelContractNum.Visible = this.textBoxContractNum.Text.Length > 0;
+
+            this.labelContractNum.Text = this.labelContractNum.Text.Replace("-", "_");
+            this.labelContractNum.Text = this.labelContractNum.Text.Replace("-", "_");
+            this.labelContractNum.Text = this.labelContractNum.Text.Replace("—", "_");
         }
     }
 }

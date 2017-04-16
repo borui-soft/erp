@@ -136,7 +136,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("约定到货日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -155,7 +155,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("申请人", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("期望到货日期", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("总金额", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("制单员", 100);
@@ -185,7 +185,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易类型", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);

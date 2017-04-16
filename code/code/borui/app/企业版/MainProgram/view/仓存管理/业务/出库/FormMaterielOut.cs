@@ -838,6 +838,11 @@ namespace MainProgram
             this.textBoxProjectNo.Visible = false;
             this.labelProjectNo.Visible = true;
             this.labelProjectNo.Text = this.textBoxProjectNo.Text;
+
+            this.labelProjectNo.Text = this.labelProjectNo.Text.Replace("-", "_");
+            this.labelProjectNo.Text = this.labelProjectNo.Text.Replace("-", "_");
+            this.labelProjectNo.Text = this.labelProjectNo.Text.Replace("—", "_");
+
             this.textBoxProjectNo.Text = "";
         }
 

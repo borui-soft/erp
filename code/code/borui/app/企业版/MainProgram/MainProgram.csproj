@@ -189,6 +189,12 @@
     <Compile Include="view\主界面\FormModifyPassword.designer.cs">
       <DependentUpon>FormModifyPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\主界面\FormOrderPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormOrderPrint.designer.cs">
+      <DependentUpon>FormOrderPrint.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\主界面\FormRegister.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -775,6 +781,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\主界面\FormModifyPassword.resx">
       <DependentUpon>FormModifyPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FormOrderPrint.resx">
+      <DependentUpon>FormOrderPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\主界面\FormRegister.resx">
       <DependentUpon>FormRegister.cs</DependentUpon>

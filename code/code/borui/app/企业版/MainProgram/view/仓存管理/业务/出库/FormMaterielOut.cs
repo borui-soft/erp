@@ -485,9 +485,15 @@ namespace MainProgram
         private void printDisplay_Click(object sender, EventArgs e)
         {
             // PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
-
-            FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, this.labelBillNumber.Text, this.dataGridViewDataList);
-            fop.ShowDialog();
+            if (m_billNumber.Length > 0)
+            {
+                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, m_billNumber, this.dataGridViewDataList);
+                fop.ShowDialog();
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("请先保存数据再打印");
+            }
         }
 
         private void print_Click(object sender, EventArgs e)

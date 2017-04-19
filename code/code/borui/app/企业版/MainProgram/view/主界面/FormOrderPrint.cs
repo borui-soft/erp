@@ -32,7 +32,7 @@ namespace MainProgram
         public FormOrderPrint(int orderType, string billNubmber, DataGridView dataGridView)
         {
             InitializeComponent();
-
+            m_excelIsOpen = false;
             m_orderType = orderType;
             m_billNubmber = billNubmber;
             m_dataGridView = dataGridView;
@@ -40,12 +40,15 @@ namespace MainProgram
             m_tempFilePath = Directory.GetCurrentDirectory() + "\\tdmb\\" + DbPublic.getInctance().getOrderNameFromType(orderType) + ".xlsx";
         }
 
+        ~ FormOrderPrint()
+        {
+        }
+
         private void FormOrderPrint_Load(object sender, EventArgs e)
         {
+            radioButton2007_Click(null, null);
             displayPrintDevInfo();
 
-            this.radioButton2007.Checked = true;
-            this.radioButton2003.Checked = false;
 
             if (!File.Exists(m_tempFilePath))
             {
@@ -56,6 +59,10 @@ namespace MainProgram
             {
                 toolStripButtonReExport_Click(null, null);
             }
+
+            this.radioButton2007.Checked = true;
+            this.radioButton2003.Checked = false;
+            this.radioButton2007.Checked = true;
         }
 
         #region toolBar功能实现
@@ -65,7 +72,12 @@ namespace MainProgram
             string exportExcelName = generateExportFileName();
 
             // 把模板文件移动到导出文件的目录，如果目标文件已经存在，则直接覆盖
-            File.Copy(m_tempFilePath, exportExcelName, true);
+            if (File.Exists(exportExcelName))
+            {
+                File.Delete(exportExcelName);
+            }
+
+            File.Copy(m_tempFilePath, exportExcelName);
 
             m_excelIsOpen = openExcelFile(exportExcelName);
 
@@ -114,6 +126,7 @@ namespace MainProgram
                 proc.StartInfo.CreateNoWindow = false;
                 proc.Start();
                 proc.WaitForExit();
+                proc.Kill();
             }
             catch (Exception ex)
             {
@@ -146,23 +159,31 @@ namespace MainProgram
 
         private void displayPrintDevInfo()
         {
-
-            this.labelStatus.Text = "就绪";
-
             PrintDocument prtdoc = new PrintDocument();
 
             this.labelPrintDevName.Text = prtdoc.PrinterSettings.PrinterName;//获取默认的打印机名
 
-            this.labelPageSize.Text = Convert.ToString(prtdoc.PrinterSettings.DefaultPageSettings.PaperSize.Width) + " * ";
-            this.labelPageSize.Text += Convert.ToString(prtdoc.PrinterSettings.DefaultPageSettings.PaperSize.Height);
-
-            if (prtdoc.PrinterSettings.DefaultPageSettings.Landscape)
+            if (this.labelPrintDevName.Text.IndexOf("未设置默认") >= 0)
             {
-                this.labelPage.Text = "横向";
+                this.labelStatus.Text = "未就绪";
+                this.labelPageSize.Text = "0";
+                this.labelPageSize.Text = "0";
+                this.labelPage.Text = "未知";
             }
             else
             {
-                this.labelPage.Text = "纵向";
+                this.labelStatus.Text = "就绪";
+                this.labelPageSize.Text = Convert.ToString(prtdoc.PrinterSettings.DefaultPageSettings.PaperSize.Width) + " * ";
+                this.labelPageSize.Text += Convert.ToString(prtdoc.PrinterSettings.DefaultPageSettings.PaperSize.Height);
+
+                if (prtdoc.PrinterSettings.DefaultPageSettings.Landscape)
+                {
+                    this.labelPage.Text = "横向";
+                }
+                else
+                {
+                    this.labelPage.Text = "纵向";
+                }
             }
         }
 
@@ -197,48 +218,30 @@ namespace MainProgram
 
             try
             {
-                try
+                if (m_orderType == 14)
                 {
-                    if (m_orderType == 14)
-                    {
-                        // 领料单
-                        exportMaterielOutData();
-                    }
-                    
-                    m_excelWorkbook.Save();
-
-                    isRet = true;
+                    // 领料单
+                    exportMaterielOutData();
                 }
-                catch (Exception error)
+                else if (m_orderType == 2)
                 {
-                    MessageBoxExtend.messageWarning(error.Message);
-                    return isRet;
+                    // 采购入库单
+                    exportPurchaseInData();
                 }
-                finally
-                {
-                    //关闭Excel应用    
-                    if (m_excelWorkbook != null)
-                    {
-                        m_excelWorkbook.Close();
-                    }
 
-                    if (m_excelApp.Workbooks != null)
-                    {
-                        m_excelApp.Workbooks.Close();
-                    }
+                m_excelWorkbook.Save();
 
-                    if (m_excelApp != null)
-                    {
-                        m_excelApp.Quit();
-                    }
-
-                    m_excelWorkbook = null;
-                    m_excelApp = null;
-                }
+                isRet = true;
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                MessageBoxExtend.messageError(ex.Message);
+                MessageBoxExtend.messageWarning(error.Message);
+                release();
+            }
+
+            finally
+            {
+                release();
             }
 
             return isRet;
@@ -261,25 +264,7 @@ namespace MainProgram
             catch (Exception error)
             {
                 MessageBoxExtend.messageWarning("输出导出出错:" + error.Message);
-
-                //关闭Excel应用    
-                if (m_excelWorkbook != null)
-                {
-                    m_excelWorkbook.Close();
-                }
-
-                if (m_excelApp.Workbooks != null)
-                {
-                    m_excelApp.Workbooks.Close();
-                }
-
-                if (m_excelApp != null)
-                {
-                    m_excelApp.Quit();
-                }
-
-                m_excelWorkbook = null;
-                m_excelApp = null;
+                release();
             }
 
             return isRet;
@@ -303,7 +288,7 @@ namespace MainProgram
             MaterielOutOrderTable table = new MaterielOutOrderTable();
             table = MaterielOutOrder.getInctance().getMaterielOutOrderInfoFromBillNumber(m_billNubmber);
 
-            string projectNum = FormProject.getInctance().getProjectNumFromBillNumber(m_billNubmber);
+            string projectNum = FormProject.getInctance().getProjectNumFromBillNumber(table.srcOrderNum);
 
             stringReplace(table.departmentName, "[1]");
             stringReplace(table.billNumber, "[2]");
@@ -316,14 +301,7 @@ namespace MainProgram
             double sum = 0.0;
             for (int row = 0; row < m_dataGridView.RowCount; row++)
             {
-                m_excelApp.Cells[row + 6, 2] = m_dataGridView.Rows[row].Cells[2].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 3] = m_dataGridView.Rows[row].Cells[3].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 4] = m_dataGridView.Rows[row].Cells[2].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 5] = m_dataGridView.Rows[row].Cells[5].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[6].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
-
-                if(m_dataGridView.Rows[row].Cells[2].Value.ToString().Length == 0 && m_dataGridView.Rows[row].Cells[5].Value.ToString().Length == 0)
+                if (m_dataGridView.Rows[row].Cells[1].Value.ToString().Length == 0 && m_dataGridView.Rows[row].Cells[2].Value.ToString().Length == 0)
                 {
                     break;
                 }
@@ -331,10 +309,118 @@ namespace MainProgram
                 {
                     sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[5].Value.ToString());
                 }
+
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[1].Value.ToString());
+                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
+                m_excelApp.Cells[row + 6, 2] = record.name;
+                m_excelApp.Cells[row + 6, 3] = record.model;
+                m_excelApp.Cells[row + 6, 4] = record.brand;
+                m_excelApp.Cells[row + 6, 5] = m_dataGridView.Rows[row].Cells[4].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[5].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
             }
 
             stringReplace(Convert.ToString(sum), "[8]");
         }
+
+        private void exportPurchaseInData()
+        {
+            PurchaseInOrderTable table = new PurchaseInOrderTable();
+            table = PurchaseInOrder.getInctance().getPurchaseInfoFromBillNumber(m_billNubmber);
+
+            string projectNum = FormProject.getInctance().getProjectNumFromBillNumber(table.srcOrderNum);
+
+            stringReplace(table.supplierName, "[1]");
+            stringReplace(table.billNumber, "[2]");
+            stringReplace(table.srcOrderNum, "[3]");
+            stringReplace(projectNum, "[4]");
+            stringReplace(table.makeOrderStaffName, "[9]");
+
+            double sum1 = 0.0, sum2 = 0.0, sum3 = 0.0, sum4 = 0.0;
+
+            for (int row = 0; row < m_dataGridView.RowCount; row++)
+            {
+                if (m_dataGridView.Rows[row].Cells[1].Value.ToString().Length == 0 && m_dataGridView.Rows[row].Cells[2].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    if (m_dataGridView.Rows[row].Cells[9].Value.ToString().Length > 0)
+                    {
+                        sum1 += Convert.ToDouble(m_dataGridView.Rows[row].Cells[9].Value.ToString());
+                    }
+
+                    if (m_dataGridView.Rows[row].Cells[10].Value.ToString().Length > 0)
+                    {
+                        sum2 += Convert.ToDouble(m_dataGridView.Rows[row].Cells[10].Value.ToString());
+                    }
+
+                    if (m_dataGridView.Rows[row].Cells[11].Value.ToString().Length > 0)
+                    {
+                        sum3 += Convert.ToDouble(m_dataGridView.Rows[row].Cells[11].Value.ToString());
+                    }
+
+                    if (m_dataGridView.Rows[row].Cells[13].Value.ToString().Length > 0)
+                    {
+                        sum4 += Convert.ToDouble(m_dataGridView.Rows[row].Cells[13].Value.ToString());
+                    }
+                }
+
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[1].Value.ToString());
+                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
+                m_excelApp.Cells[row + 6, 2] = m_dataGridView.Rows[row].Cells[2].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 3] = m_dataGridView.Rows[row].Cells[3].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 4] = record.model;
+                m_excelApp.Cells[row + 6, 5] = record.brand;
+                m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[7].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[9].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 9] = m_dataGridView.Rows[row].Cells[10].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[12].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 11] = m_dataGridView.Rows[row].Cells[13].Value.ToString().Trim();
+            }
+
+            stringReplace(Convert.ToString(sum1), "[5]");
+            stringReplace(Convert.ToString(sum2), "[6]");
+            stringReplace(Convert.ToString(sum3), "[7]");
+            stringReplace(Convert.ToString(sum4), "[8]");
+        }
+
+        private void release()
+        {
+            //关闭Excel应用    
+            if (m_excelWorkbook != null)
+            {
+                m_excelWorkbook.Close();
+            }
+
+            if (m_excelApp.Workbooks != null)
+            {
+                m_excelApp.Workbooks.Close();
+            }
+
+            if (m_excelApp != null)
+            {
+                m_excelApp.Quit();
+            }
+
+            m_excelWorkbook = null;
+            m_excelApp = null;
+        }
         #endregion
+
+        private void radioButton2003_Click(object sender, EventArgs e)
+        {
+            this.radioButton2003.Checked = true;
+            this.radioButton2007.Checked = false;
+        }
+
+        private void radioButton2007_Click(object sender, EventArgs e)
+        {
+            this.radioButton2003.Checked = false;
+            this.radioButton2007.Checked = true;
+
+        }
     }
 }

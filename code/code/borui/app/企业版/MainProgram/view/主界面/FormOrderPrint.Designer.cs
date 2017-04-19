@@ -36,7 +36,6 @@
             this.toolStripButtonPageSet = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.printDisplay = new System.Windows.Forms.ToolStripButton();
-            this.print = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.close = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,9 +69,8 @@
             this.open,
             this.toolStripSeparator1,
             this.toolStripButtonPageSet,
-            this.toolStripButton1,
             this.printDisplay,
-            this.print,
+            this.toolStripButton1,
             this.toolStripSeparator2,
             this.close});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -116,7 +114,7 @@
             // 
             // toolStripButtonPageSet
             // 
-            this.toolStripButtonPageSet.Image = global::MainProgram.Properties.Resources.Printers;
+            this.toolStripButtonPageSet.Image = global::MainProgram.Properties.Resources.search;
             this.toolStripButtonPageSet.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonPageSet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonPageSet.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -134,8 +132,8 @@
             this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(72, 42);
-            this.toolStripButton1.Text = "打印机设置";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 42);
+            this.toolStripButton1.Text = "打印";
             this.toolStripButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButtonPrintDevSet_Click);
@@ -152,20 +150,6 @@
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.printDisplay.Click += new System.EventHandler(this.printReview_Click);
-            // 
-            // print
-            // 
-            this.print.Enabled = false;
-            this.print.Image = global::MainProgram.Properties.Resources.Printers2;
-            this.print.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.print.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.print.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.print.Name = "print";
-            this.print.Size = new System.Drawing.Size(36, 42);
-            this.print.Text = "打印";
-            this.print.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.print.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.print.Click += new System.EventHandler(this.print_Click);
             // 
             // toolStripSeparator2
             // 
@@ -305,26 +289,28 @@
             // 
             // radioButton2007
             // 
+            this.radioButton2007.AutoCheck = false;
             this.radioButton2007.AutoSize = true;
             this.radioButton2007.Checked = true;
             this.radioButton2007.Location = new System.Drawing.Point(21, 44);
             this.radioButton2007.Name = "radioButton2007";
             this.radioButton2007.Size = new System.Drawing.Size(125, 16);
             this.radioButton2007.TabIndex = 1;
-            this.radioButton2007.TabStop = true;
             this.radioButton2007.Text = "office 2007及以上";
             this.radioButton2007.UseVisualStyleBackColor = true;
+            this.radioButton2007.Click += new System.EventHandler(this.radioButton2007_Click);
             // 
             // radioButton2003
             // 
+            this.radioButton2003.AutoCheck = false;
             this.radioButton2003.AutoSize = true;
             this.radioButton2003.Location = new System.Drawing.Point(21, 21);
             this.radioButton2003.Name = "radioButton2003";
             this.radioButton2003.Size = new System.Drawing.Size(89, 16);
             this.radioButton2003.TabIndex = 0;
-            this.radioButton2003.TabStop = true;
             this.radioButton2003.Text = "office 2003";
             this.radioButton2003.UseVisualStyleBackColor = true;
+            this.radioButton2003.Click += new System.EventHandler(this.radioButton2003_Click);
             // 
             // label7
             // 
@@ -386,7 +372,6 @@
         private System.Windows.Forms.ToolStripButton open;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton printDisplay;
-        private System.Windows.Forms.ToolStripButton print;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton close;
         private System.Windows.Forms.Label label1;

@@ -445,10 +445,7 @@ namespace MainProgram
 
         private void printDisplay_Click(object sender, EventArgs e)
         {
-            // PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
-
-            FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, this.labelBillNumber.Text);
-            fop.ShowDialog();
+            PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
         }
 
         private void print_Click(object sender, EventArgs e)

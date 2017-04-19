@@ -77,7 +77,7 @@
             this.close});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(438, 45);
+            this.toolStrip1.Size = new System.Drawing.Size(572, 45);
             this.toolStrip1.TabIndex = 53;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -93,7 +93,7 @@
             this.toolStripButtonTry.Text = "重新导出";
             this.toolStripButtonTry.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonTry.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButtonTry.Click += new System.EventHandler(this.toolStripButtonTry_Click);
+            this.toolStripButtonTry.Click += new System.EventHandler(this.toolStripButtonReExport_Click);
             // 
             // open
             // 
@@ -107,7 +107,7 @@
             this.open.Text = "打开文件";
             this.open.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.open.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.open.Click += new System.EventHandler(this.save_Click);
+            this.open.Click += new System.EventHandler(this.openFile_Click);
             // 
             // toolStripSeparator1
             // 
@@ -125,7 +125,7 @@
             this.toolStripButtonPageSet.Text = "页面设置";
             this.toolStripButtonPageSet.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonPageSet.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButtonPageSet.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.toolStripButtonPageSet.Click += new System.EventHandler(this.toolStripButtonPateSet_Click);
             // 
             // toolStripButton1
             // 
@@ -138,7 +138,7 @@
             this.toolStripButton1.Text = "打印机设置";
             this.toolStripButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButtonPrintDevSet_Click);
             // 
             // printDisplay
             // 
@@ -151,7 +151,7 @@
             this.printDisplay.Text = "打印预览";
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
+            this.printDisplay.Click += new System.EventHandler(this.printReview_Click);
             // 
             // print
             // 
@@ -275,7 +275,7 @@
             // 
             this.groupBox1.Location = new System.Drawing.Point(12, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(178, 135);
+            this.groupBox1.Size = new System.Drawing.Size(262, 135);
             this.groupBox1.TabIndex = 62;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "打印机状态";
@@ -285,12 +285,12 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.labelExportStatus);
-            this.groupBox2.Location = new System.Drawing.Point(229, 53);
+            this.groupBox2.Location = new System.Drawing.Point(296, 53);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(178, 135);
+            this.groupBox2.Size = new System.Drawing.Size(264, 135);
             this.groupBox2.TabIndex = 63;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "打印机状态";
+            this.groupBox2.Text = "数据导出";
             // 
             // groupBox3
             // 
@@ -348,7 +348,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 200);
+            this.ClientSize = new System.Drawing.Size(572, 209);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.labelPage);
             this.Controls.Add(this.labelPageSize);

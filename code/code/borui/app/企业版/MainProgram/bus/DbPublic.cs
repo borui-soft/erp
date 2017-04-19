@@ -133,5 +133,79 @@ namespace MainProgram.bus
         {
             return m_softwareKey;
         }
+
+        public string getOrderNameFromType(int orderType)
+        {
+            string orderName = "";
+
+            if (orderType == 1)
+            {
+                orderName = "采购订单模板";
+            }
+            else if (orderType == 2)
+            {
+                orderName = "采购入库单模板";
+            }
+            else if (orderType == 3)
+            {
+                // 不存在
+            }
+            else if (orderType == 4)
+            {
+                // 销售订单
+            }
+            else if (orderType == 5)
+            {
+                orderName = "销售订单模板";
+            }
+            else if (orderType == 6)
+            {
+                orderName = "销售出库单模板";
+            }
+            else if (orderType == 8)
+            {
+                orderName = "产品入库单模板";
+            }
+            else if (orderType == 9)
+            {
+                orderName = "盘盈入库单模板";
+            }
+            else if (orderType == 10)
+            {
+                orderName = "其他入库单模板";
+            }
+
+            else if (orderType == 14)
+            {
+                orderName = "领料单模板";
+            }
+            else if (orderType == 15)
+            {
+                orderName = "盘亏毁损单模板";
+            }
+            else if (orderType == 16)
+            {
+                orderName = "其他出库单模板";
+            }
+            else if (orderType == 17)
+            {
+                orderName = "库存预占单模板";
+            }
+
+            else if (orderType == 18)
+            {
+                orderName = "采购申请单模板";
+            }
+            else if (orderType == 19)
+            {
+                orderName = "总材料表模板";
+            }
+            else if (orderType == 20)
+            {
+                orderName = "材料表变更模板";
+            }
+
+            return orderName;
+        }
     }
 }

@@ -401,6 +401,22 @@ namespace MainProgram.model
             return record;
         }
 
+        public string getProjectNumFromBillNumber(string billNumber)
+        {
+            FormProjectMaterielTable record = new FormProjectMaterielTable();
+
+            foreach (KeyValuePair<int, FormProjectMaterielTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber)
+                {
+                    record = index.Value;
+                    break;
+                }
+            }
+
+            return record.projectNum;
+        }
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

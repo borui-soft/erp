@@ -321,12 +321,12 @@ namespace MainProgram
         {
             m_currentOrderInfo.deviceMode = this.labelDeviceMode.Text;
 
-            m_currentOrderInfo.useDate = this.labelTradingDate.Text;
+            // m_currentOrderInfo.useDate = this.labelTradingDate.Text;
             m_currentOrderInfo.billNumber = this.labelBillNumber.Text;
 
             m_currentOrderInfo.projectNum = this.labelContractNum.Text;
             m_currentOrderInfo.makeNum = this.labelMakeNum.Text;
-            m_currentOrderInfo.deviceName = this.labelDeviceName.Text;
+            // m_currentOrderInfo.deviceName = this.labelDeviceName.Text;
             m_currentOrderInfo.note = this.labelSummary.Text;
             m_currentOrderInfo.makeOrderDate = this.labelMakeDate.Text;
 
@@ -357,11 +357,11 @@ namespace MainProgram
                 return false;
             }
 
-            if (record.useDate.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("使用日期不完整，单据保存失败");
-                return false;
-            }
+            //if (record.useDate.Length == 0)
+            //{
+            //    MessageBoxExtend.messageWarning("使用日期不完整，单据保存失败");
+            //    return false;
+            //}
 
             if (record.billNumber.Length == 0)
             {
@@ -393,11 +393,11 @@ namespace MainProgram
                 return false;
             }
 
-            if (record.deviceName.Length == 0)
-            {
-                MessageBoxExtend.messageWarning("所属部件信息不完整，单据保存失败");
-                return false;
-            }
+            //if (record.deviceName.Length == 0)
+            //{
+            //    MessageBoxExtend.messageWarning("所属部件信息不完整，单据保存失败");
+            //    return false;
+            //}
 
             if (record.designStaffID == -1)
             {
@@ -676,11 +676,11 @@ namespace MainProgram
             m_ProjectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(m_billNumber);
 
             this.labelDeviceMode.Text = m_ProjectInfo.deviceMode;
-            this.labelTradingDate.Text = m_ProjectInfo.useDate;
+            //this.labelTradingDate.Text = m_ProjectInfo.useDate;
             this.labelBillNumber.Text = m_ProjectInfo.billNumber;
             this.labelContractNum.Text = m_ProjectInfo.projectNum;
             this.labelMakeNum.Text = m_ProjectInfo.makeNum;
-            this.labelDeviceName.Text = m_ProjectInfo.deviceName;
+            //this.labelDeviceName.Text = m_ProjectInfo.deviceName;
             this.labelSummary.Text = m_ProjectInfo.note;
             this.labelMakeBillStaff.Text = m_ProjectInfo.makeOrderStaffName;
             this.labelMakeDate.Text = m_ProjectInfo.makeOrderDate;

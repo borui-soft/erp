@@ -84,7 +84,7 @@ namespace MainProgram
         {
             addDataGridViewColumn("单据编号", 135);
             addDataGridViewColumn("设备型号", 100);
-            addDataGridViewColumn("所属部件", 100);
+            //addDataGridViewColumn("所属部件", 100);
 
             addDataGridViewColumn("ID", 30);
             addDataGridViewColumn("物料名称", 100);
@@ -139,7 +139,7 @@ namespace MainProgram
 
                     temp.Add(record.billNumber);
                     temp.Add(record.deviceMode);
-                    temp.Add(record.deviceName);
+                    //temp.Add(record.deviceName);
 
                     temp.Add(tmp.materielID);
                     temp.Add(tmp.materielName);
@@ -216,7 +216,7 @@ namespace MainProgram
 
                     temp.Add(record.billNumber);
                     temp.Add(record.deviceMode);
-                    temp.Add(record.deviceName);
+                    //temp.Add(record.deviceName);
 
                     temp.Add(tmp.materielID);
                     temp.Add(tmp.materielName);

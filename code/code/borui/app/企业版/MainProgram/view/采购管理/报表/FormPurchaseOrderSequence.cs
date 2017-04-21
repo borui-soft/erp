@@ -171,7 +171,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("所属部件", 100);
+                // m_dateGridViewExtend.addDataGridViewColumn("所属部件", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("设计", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
@@ -414,17 +414,17 @@ namespace MainProgram
                     FormProjectMaterielTable record = new FormProjectMaterielTable();
                     record = (FormProjectMaterielTable)list[index];
 
-                    if (m_filter.startDate == null || (record.useDate.CompareTo(m_filter.startDate) >= 0 && record.useDate.CompareTo(m_filter.endDate) <= 0))
+                    if (m_filter.startDate == null || (record.makeOrderDate.CompareTo(m_filter.startDate) >= 0 && record.makeOrderDate.CompareTo(m_filter.endDate) <= 0))
                     {
                         ArrayList temp = new ArrayList();
 
                         temp.Add(record.pkey);
                         temp.Add(record.deviceMode);
-                        temp.Add(record.useDate);
+                        temp.Add(record.makeOrderDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.projectNum);
                         temp.Add(record.makeNum);
-                        temp.Add(record.deviceName);
+                        //temp.Add(record.deviceName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.designStaffName);
 

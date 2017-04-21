@@ -47,7 +47,7 @@ namespace MainProgram.model
                 delete(record.billNumber);
             }
 
-            string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE]";
+            string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[NOTE]";
             insert += ",[MAKE_ORDER_STAFF],[MAKE_ORDER_DATE],[DESIGN_ID]";
 
             if (tmpRecord.billNumber != null && tmpRecord.changeStaffName.Length > 0)
@@ -64,11 +64,9 @@ namespace MainProgram.model
             
             insert += record.dataType + ",";
             insert += "'" + record.deviceMode + "',";
-            insert += "'" + record.useDate + "',";
             insert += "'" + record.billNumber + "',";
             insert += "'" + record.projectNum + "',";
             insert += "'" + record.makeNum + "',";
-            insert += "'" + record.deviceName + "',";
             insert += "'" + record.note + "',";
 
             insert += record.makeOrderStaffID + ",";
@@ -203,7 +201,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[MAKE_DATE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[DEVICE_NAME],[NOTE],[MAKE_ORDER_DATE]";
+            string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[NOTE],[MAKE_ORDER_DATE]";
             sql += ",[MAKE_ORDER_STAFF],[DESIGN_ID],[REVIEW_STAFF_ID],[REVIEW_DATE],[IS_REVIEW],[CHANGE_REVIEW_STAFF_ID],[CHANGE_STAFF_ID]  ";
             sql += "FROM [ERP].[dbo].[PROJECT_MATERIE_MANAGER] ORDER BY PKEY DESC";
 
@@ -218,11 +216,9 @@ namespace MainProgram.model
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.dataType = DbDataConvert.ToInt32(row["DATE_TYPE"]);
                     record.deviceMode = DbDataConvert.ToString(row["DEVICE_MODE"]);
-                    record.useDate = DbDataConvert.ToDateTime(row["MAKE_DATE"]).ToString("yyyy-MM-dd");
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
                     record.projectNum = DbDataConvert.ToString(row["PROJECT_NUM"]);
                     record.makeNum = DbDataConvert.ToString(row["MAKE_NUM"]);
-                    record.deviceName = DbDataConvert.ToString(row["DEVICE_NAME"]);
                     record.note = DbDataConvert.ToString(row["NOTE"]);
 
 
@@ -443,13 +439,11 @@ namespace MainProgram.model
 
         // 设备型号、使用日期、单据编号
         public string deviceMode { get; set; }
-        public string useDate { get; set; }
         public string billNumber { get; set; }
 
         // 项目编号、生产编号、所属部件、摘要
         public string projectNum { get; set; }
         public string makeNum { get; set; }
-        public string deviceName { get; set; }
         public string note { get; set; }
 
         // 制单人、设计人、审核人

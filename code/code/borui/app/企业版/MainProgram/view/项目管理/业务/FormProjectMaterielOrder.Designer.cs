@@ -125,7 +125,7 @@
             // 
             this.labelBillNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelBillNumber.AutoSize = true;
-            this.labelBillNumber.Location = new System.Drawing.Point(938, 89);
+            this.labelBillNumber.Location = new System.Drawing.Point(531, 89);
             this.labelBillNumber.Name = "labelBillNumber";
             this.labelBillNumber.Size = new System.Drawing.Size(95, 12);
             this.labelBillNumber.TabIndex = 24;
@@ -137,7 +137,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(854, 91);
+            this.label7.Location = new System.Drawing.Point(447, 91);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 22;
@@ -147,7 +147,7 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox5.Location = new System.Drawing.Point(940, 104);
+            this.groupBox5.Location = new System.Drawing.Point(533, 104);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(165, 1);
             this.groupBox5.TabIndex = 23;
@@ -157,11 +157,12 @@
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox2.Location = new System.Drawing.Point(534, 106);
+            this.groupBox2.Location = new System.Drawing.Point(939, 102);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(163, 1);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Visible = false;
             // 
             // labelTradingDate
             // 
@@ -179,10 +180,11 @@
             this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel3.Controls.Add(this.labelTradingDate);
             this.panel3.Controls.Add(this.dateTimePickerTradingDate);
-            this.panel3.Location = new System.Drawing.Point(534, 86);
+            this.panel3.Location = new System.Drawing.Point(939, 82);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(165, 21);
             this.panel3.TabIndex = 19;
+            this.panel3.Visible = false;
             this.panel3.Click += new System.EventHandler(this.panelDateTime_Click);
             // 
             // dateTimePickerTradingDate
@@ -200,11 +202,12 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(446, 92);
+            this.label4.Location = new System.Drawing.Point(851, 88);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 7;
             this.label4.Text = "使用日期(*):";
+            this.label4.Visible = false;
             // 
             // labelName
             // 
@@ -840,6 +843,7 @@
             this.groupBox10.Size = new System.Drawing.Size(149, 1);
             this.groupBox10.TabIndex = 116;
             this.groupBox10.TabStop = false;
+            this.groupBox10.Visible = false;
             // 
             // panel6
             // 
@@ -850,6 +854,7 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(166, 21);
             this.panel6.TabIndex = 115;
+            this.panel6.Visible = false;
             this.panel6.Click += new System.EventHandler(this.panelDeviceName_Click);
             this.panel6.Leave += new System.EventHandler(this.panelDeviceName_Leave);
             // 
@@ -885,6 +890,7 @@
             this.label6.Size = new System.Drawing.Size(77, 12);
             this.label6.TabIndex = 114;
             this.label6.Text = "所属部件(*):";
+            this.label6.Visible = false;
             // 
             // panelDeviceName
             // 
@@ -895,6 +901,7 @@
             this.panelDeviceName.Name = "panelDeviceName";
             this.panelDeviceName.Size = new System.Drawing.Size(21, 21);
             this.panelDeviceName.TabIndex = 117;
+            this.panelDeviceName.Visible = false;
             this.panelDeviceName.Click += new System.EventHandler(this.panelDeviceName_Click);
             this.panelDeviceName.Leave += new System.EventHandler(this.panelDeviceName_Leave);
             // 
@@ -947,10 +954,11 @@
             this.panelTradingDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelTradingDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelTradingDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelTradingDate.Location = new System.Drawing.Point(676, 86);
+            this.panelTradingDate.Location = new System.Drawing.Point(1081, 82);
             this.panelTradingDate.Name = "panelTradingDate";
             this.panelTradingDate.Size = new System.Drawing.Size(21, 21);
             this.panelTradingDate.TabIndex = 21;
+            this.panelTradingDate.Visible = false;
             this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
             // 
             // labelMakeDate

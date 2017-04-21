@@ -343,3 +343,9 @@ insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) value
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('库存呆滞料分析表', 'labelInventoryPassAge', 352);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('保质期预警分析', 'labelInventoryLife', 352);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('超出保质期统计表', 'labelProductionOut', 352);
+
+
+
+-- 2017-4-21 总材料表表头部分，删除使用日期和所属部件信息
+alter table PROJECT_MATERIE_MANAGER drop column MAKE_DATE;
+alter table PROJECT_MATERIE_MANAGER drop column DEVICE_NAME; 

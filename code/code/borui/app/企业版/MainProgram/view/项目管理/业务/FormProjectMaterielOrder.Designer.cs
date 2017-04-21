@@ -255,7 +255,7 @@
             this.panel7.Controls.Add(this.textBoxBusinessPeople);
             this.panel7.Location = new System.Drawing.Point(98, 166);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(165, 21);
+            this.panel7.Size = new System.Drawing.Size(170, 21);
             this.panel7.TabIndex = 29;
             // 
             // labelBusinessPeople
@@ -273,7 +273,7 @@
             // 
             this.panelBusinessPeople.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelBusinessPeople.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelBusinessPeople.Location = new System.Drawing.Point(143, 1);
+            this.panelBusinessPeople.Location = new System.Drawing.Point(148, 1);
             this.panelBusinessPeople.Name = "panelBusinessPeople";
             this.panelBusinessPeople.Size = new System.Drawing.Size(21, 21);
             this.panelBusinessPeople.TabIndex = 18;
@@ -299,7 +299,7 @@
             this.textBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox2.Location = new System.Drawing.Point(96, 166);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(165, 21);
+            this.textBox2.Size = new System.Drawing.Size(170, 21);
             this.textBox2.TabIndex = 6;
             this.textBox2.Visible = false;
             // 
@@ -310,7 +310,7 @@
             this.groupBox7.Controls.Add(this.groupBox8);
             this.groupBox7.Location = new System.Drawing.Point(96, 187);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(145, 1);
+            this.groupBox7.Size = new System.Drawing.Size(150, 1);
             this.groupBox7.TabIndex = 28;
             this.groupBox7.TabStop = false;
             // 
@@ -464,17 +464,15 @@
             // 
             // toolStripButtonChangeReview
             // 
-            this.toolStripButtonChangeReview.Enabled = false;
-            this.toolStripButtonChangeReview.Image = global::MainProgram.Properties.Resources.noForbid;
+            this.toolStripButtonChangeReview.Image = global::MainProgram.Properties.Resources.Preview_16_;
             this.toolStripButtonChangeReview.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonChangeReview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonChangeReview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonChangeReview.Name = "toolStripButtonChangeReview";
-            this.toolStripButtonChangeReview.Size = new System.Drawing.Size(60, 42);
-            this.toolStripButtonChangeReview.Text = "变更审批";
+            this.toolStripButtonChangeReview.Size = new System.Drawing.Size(72, 42);
+            this.toolStripButtonChangeReview.Text = "变更单详情";
             this.toolStripButtonChangeReview.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonChangeReview.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButtonChangeReview.Visible = false;
             this.toolStripButtonChangeReview.Click += new System.EventHandler(this.toolStripButtonChangeReview_Click);
             // 
             // toolStripSeparator3

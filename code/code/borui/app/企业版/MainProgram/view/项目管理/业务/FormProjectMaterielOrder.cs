@@ -933,12 +933,10 @@ namespace MainProgram
         // 变更审批按钮
         private void toolStripButtonChangeReview_Click(object sender, EventArgs e)
         {
-            FormProject.getInctance().billChangeReview(m_billNumber);
+            FormProjectOrderDetail fpod = new FormProjectOrderDetail(FormProjectOrderDetail.OrderType.ChangeApply, m_ProjectInfo.projectNum, 0);
+            fpod.setChangeBillNumber(this.labelBillNumber.Text);
 
-            this.toolStripButtonChange.Enabled = false;
-            this.toolStripButtonChangeReview.Enabled = false;
-
-            this.Close();
+            fpod.ShowDialog();
         }
     }
 }

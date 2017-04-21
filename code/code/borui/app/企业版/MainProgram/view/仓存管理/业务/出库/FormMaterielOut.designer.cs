@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMaterielOutOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
@@ -107,6 +108,8 @@
             this.labelMakeNo = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -120,6 +123,7 @@
             this.panelSummary.SuspendLayout();
             this.panelProject.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -304,8 +308,8 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 164);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
@@ -316,6 +320,7 @@
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -531,8 +536,8 @@
             // 
             // dataGridViewDataCount
             // 
-            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 420);
             this.dataGridViewDataCount.Name = "dataGridViewDataCount";
@@ -956,6 +961,20 @@
             this.groupBox8.TabIndex = 109;
             this.groupBox8.TabStop = false;
             // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCheckDetailed});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 26);
+            // 
+            // ToolStripMenuItemCheckDetailed
+            // 
+            this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(148, 22);
+            this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
+            this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
+            // 
             // FormMaterielOutOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1037,6 +1056,7 @@
             this.panelProject.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1121,6 +1141,8 @@
         private System.Windows.Forms.Label labelMakeNo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
 
     }
 }

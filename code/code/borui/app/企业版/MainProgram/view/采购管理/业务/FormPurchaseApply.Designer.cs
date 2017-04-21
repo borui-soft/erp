@@ -28,17 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPurchaseApply));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.panelTradingDate = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelTradingDate = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dateTimePickerTradingDate = new System.Windows.Forms.DateTimePicker();
-            this.panelPurchaseName = new System.Windows.Forms.Panel();
             this.labelPurchaseName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxPApplyName = new System.Windows.Forms.TextBox();
@@ -51,22 +50,14 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.panelSummary = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
             this.textBoxSummary = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.save = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonReview = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.printDisplay = new System.Windows.Forms.ToolStripButton();
-            this.print = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.selectSourceOrder = new System.Windows.Forms.ToolStripButton();
-            this.calculator = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.close = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewDataCount = new System.Windows.Forms.DataGridView();
             this.labelMakeBillStaff = new System.Windows.Forms.Label();
@@ -77,18 +68,30 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.panelDeliveryDate = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
             this.labelDeliveryDate = new System.Windows.Forms.Label();
             this.dateTimePickerDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
-            this.panelIsReview = new System.Windows.Forms.Panel();
-            this.panelProjectNum = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.panelProject = new System.Windows.Forms.Panel();
             this.labelProject = new System.Windows.Forms.Label();
             this.textBoxProject = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelProjectNum = new System.Windows.Forms.Panel();
+            this.panelIsReview = new System.Windows.Forms.Panel();
+            this.panelSummary = new System.Windows.Forms.Panel();
+            this.panelDeliveryDate = new System.Windows.Forms.Panel();
+            this.save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonReview = new System.Windows.Forms.ToolStripButton();
+            this.printDisplay = new System.Windows.Forms.ToolStripButton();
+            this.print = new System.Windows.Forms.ToolStripButton();
+            this.selectSourceOrder = new System.Windows.Forms.ToolStripButton();
+            this.calculator = new System.Windows.Forms.ToolStripButton();
+            this.close = new System.Windows.Forms.ToolStripButton();
+            this.panelTradingDate = new System.Windows.Forms.Panel();
+            this.panelPurchaseName = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -98,6 +101,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataCount)).BeginInit();
             this.panel14.SuspendLayout();
             this.panelProject.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -131,17 +135,6 @@
             this.groupBox5.Size = new System.Drawing.Size(165, 1);
             this.groupBox5.TabIndex = 23;
             this.groupBox5.TabStop = false;
-            // 
-            // panelTradingDate
-            // 
-            this.panelTradingDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelTradingDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelTradingDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelTradingDate.Location = new System.Drawing.Point(676, 86);
-            this.panelTradingDate.Name = "panelTradingDate";
-            this.panelTradingDate.Size = new System.Drawing.Size(21, 21);
-            this.panelTradingDate.TabIndex = 21;
-            this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
             // 
             // groupBox2
             // 
@@ -183,17 +176,6 @@
             this.dateTimePickerTradingDate.TabIndex = 12;
             this.dateTimePickerTradingDate.Visible = false;
             this.dateTimePickerTradingDate.Leave += new System.EventHandler(this.dateTimePicker1_Leave);
-            // 
-            // panelPurchaseName
-            // 
-            this.panelPurchaseName.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelPurchaseName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelPurchaseName.Location = new System.Drawing.Point(143, 1);
-            this.panelPurchaseName.Name = "panelPurchaseName";
-            this.panelPurchaseName.Size = new System.Drawing.Size(21, 21);
-            this.panelPurchaseName.TabIndex = 18;
-            this.panelPurchaseName.Click += new System.EventHandler(this.panelPurchaseName_Click);
-            this.panelPurchaseName.DoubleClick += new System.EventHandler(this.panelPurchaseName_DoubleClick);
             // 
             // labelPurchaseName
             // 
@@ -284,8 +266,8 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 203);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
@@ -296,6 +278,7 @@
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -330,17 +313,6 @@
             this.groupBox9.Size = new System.Drawing.Size(579, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
-            // 
-            // panelSummary
-            // 
-            this.panelSummary.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelSummary.Location = new System.Drawing.Point(678, 158);
-            this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(21, 21);
-            this.panelSummary.TabIndex = 42;
-            this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
             // 
             // panel10
             // 
@@ -408,111 +380,20 @@
             this.toolStrip1.TabIndex = 52;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // save
-            // 
-            this.save.Image = global::MainProgram.Properties.Resources.Save;
-            this.save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(36, 42);
-            this.save.Text = "保存";
-            this.save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.save.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // toolStripButtonReview
-            // 
-            this.toolStripButtonReview.Image = global::MainProgram.Properties.Resources.review;
-            this.toolStripButtonReview.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolStripButtonReview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonReview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonReview.Name = "toolStripButtonReview";
-            this.toolStripButtonReview.Size = new System.Drawing.Size(36, 42);
-            this.toolStripButtonReview.Text = "审核";
-            this.toolStripButtonReview.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButtonReview.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButtonReview.Click += new System.EventHandler(this.toolStripButtonReview_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
-            // 
-            // printDisplay
-            // 
-            this.printDisplay.Image = global::MainProgram.Properties.Resources.Printers;
-            this.printDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.printDisplay.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printDisplay.Name = "printDisplay";
-            this.printDisplay.Size = new System.Drawing.Size(60, 42);
-            this.printDisplay.Text = "打印预览";
-            this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
-            // 
-            // print
-            // 
-            this.print.Image = global::MainProgram.Properties.Resources.Printers2;
-            this.print.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.print.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.print.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.print.Name = "print";
-            this.print.Size = new System.Drawing.Size(36, 42);
-            this.print.Text = "打印";
-            this.print.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.print.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.print.Click += new System.EventHandler(this.print_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 45);
             // 
-            // selectSourceOrder
-            // 
-            this.selectSourceOrder.Image = global::MainProgram.Properties.Resources.资料;
-            this.selectSourceOrder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.selectSourceOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.selectSourceOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.selectSourceOrder.Name = "selectSourceOrder";
-            this.selectSourceOrder.Size = new System.Drawing.Size(36, 42);
-            this.selectSourceOrder.Text = "资料";
-            this.selectSourceOrder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.selectSourceOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.selectSourceOrder.Click += new System.EventHandler(this.selectSourceOrder_Click);
-            // 
-            // calculator
-            // 
-            this.calculator.Image = global::MainProgram.Properties.Resources.calc;
-            this.calculator.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.calculator.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.calculator.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.calculator.Name = "calculator";
-            this.calculator.Size = new System.Drawing.Size(48, 42);
-            this.calculator.Text = "计算器";
-            this.calculator.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.calculator.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.calculator.Click += new System.EventHandler(this.calculator_Click);
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 45);
-            // 
-            // close
-            // 
-            this.close.Image = global::MainProgram.Properties.Resources.close;
-            this.close.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.close.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.close.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.close.Name = "close";
-            this.close.Size = new System.Drawing.Size(36, 42);
-            this.close.Text = "关闭";
-            this.close.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.close.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.close.Click += new System.EventHandler(this.close_Click);
             // 
             // toolStripSeparator5
             // 
@@ -613,17 +494,6 @@
             this.groupBox14.TabIndex = 73;
             this.groupBox14.TabStop = false;
             // 
-            // panelDeliveryDate
-            // 
-            this.panelDeliveryDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelDeliveryDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelDeliveryDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelDeliveryDate.Location = new System.Drawing.Point(680, 122);
-            this.panelDeliveryDate.Name = "panelDeliveryDate";
-            this.panelDeliveryDate.Size = new System.Drawing.Size(21, 21);
-            this.panelDeliveryDate.TabIndex = 74;
-            this.panelDeliveryDate.Click += new System.EventHandler(this.panelDeliveryDate_Click);
-            // 
             // panel14
             // 
             this.panel14.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -666,26 +536,6 @@
             this.label14.Size = new System.Drawing.Size(83, 12);
             this.label14.TabIndex = 71;
             this.label14.Text = "期望交货日期:";
-            // 
-            // panelIsReview
-            // 
-            this.panelIsReview.BackgroundImage = global::MainProgram.Properties.Resources.已审核;
-            this.panelIsReview.Location = new System.Drawing.Point(1062, 13);
-            this.panelIsReview.Name = "panelIsReview";
-            this.panelIsReview.Size = new System.Drawing.Size(61, 33);
-            this.panelIsReview.TabIndex = 75;
-            this.panelIsReview.Visible = false;
-            // 
-            // panelProjectNum
-            // 
-            this.panelProjectNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panelProjectNum.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
-            this.panelProjectNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelProjectNum.Location = new System.Drawing.Point(276, 125);
-            this.panelProjectNum.Name = "panelProjectNum";
-            this.panelProjectNum.Size = new System.Drawing.Size(21, 21);
-            this.panelProjectNum.TabIndex = 79;
-            this.panelProjectNum.Click += new System.EventHandler(this.panelProjectNum_Click);
             // 
             // groupBox10
             // 
@@ -741,6 +591,175 @@
             this.label5.Size = new System.Drawing.Size(95, 12);
             this.label5.TabIndex = 76;
             this.label5.Text = "总材料表单据号:";
+            // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCheckDetailed});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 26);
+            // 
+            // ToolStripMenuItemCheckDetailed
+            // 
+            this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(148, 22);
+            this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
+            this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
+            // 
+            // panelProjectNum
+            // 
+            this.panelProjectNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelProjectNum.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelProjectNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelProjectNum.Location = new System.Drawing.Point(276, 125);
+            this.panelProjectNum.Name = "panelProjectNum";
+            this.panelProjectNum.Size = new System.Drawing.Size(21, 21);
+            this.panelProjectNum.TabIndex = 79;
+            this.panelProjectNum.Click += new System.EventHandler(this.panelProjectNum_Click);
+            // 
+            // panelIsReview
+            // 
+            this.panelIsReview.BackgroundImage = global::MainProgram.Properties.Resources.已审核;
+            this.panelIsReview.Location = new System.Drawing.Point(1062, 13);
+            this.panelIsReview.Name = "panelIsReview";
+            this.panelIsReview.Size = new System.Drawing.Size(61, 33);
+            this.panelIsReview.TabIndex = 75;
+            this.panelIsReview.Visible = false;
+            // 
+            // panelSummary
+            // 
+            this.panelSummary.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelSummary.Location = new System.Drawing.Point(678, 158);
+            this.panelSummary.Name = "panelSummary";
+            this.panelSummary.Size = new System.Drawing.Size(21, 21);
+            this.panelSummary.TabIndex = 42;
+            this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
+            // 
+            // panelDeliveryDate
+            // 
+            this.panelDeliveryDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelDeliveryDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelDeliveryDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelDeliveryDate.Location = new System.Drawing.Point(680, 122);
+            this.panelDeliveryDate.Name = "panelDeliveryDate";
+            this.panelDeliveryDate.Size = new System.Drawing.Size(21, 21);
+            this.panelDeliveryDate.TabIndex = 74;
+            this.panelDeliveryDate.Click += new System.EventHandler(this.panelDeliveryDate_Click);
+            // 
+            // save
+            // 
+            this.save.Image = global::MainProgram.Properties.Resources.Save;
+            this.save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(36, 42);
+            this.save.Text = "保存";
+            this.save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.save.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.save.Click += new System.EventHandler(this.save_Click);
+            // 
+            // toolStripButtonReview
+            // 
+            this.toolStripButtonReview.Image = global::MainProgram.Properties.Resources.review;
+            this.toolStripButtonReview.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonReview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonReview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonReview.Name = "toolStripButtonReview";
+            this.toolStripButtonReview.Size = new System.Drawing.Size(36, 42);
+            this.toolStripButtonReview.Text = "审核";
+            this.toolStripButtonReview.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonReview.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonReview.Click += new System.EventHandler(this.toolStripButtonReview_Click);
+            // 
+            // printDisplay
+            // 
+            this.printDisplay.Image = global::MainProgram.Properties.Resources.Printers;
+            this.printDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.printDisplay.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printDisplay.Name = "printDisplay";
+            this.printDisplay.Size = new System.Drawing.Size(60, 42);
+            this.printDisplay.Text = "打印预览";
+            this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
+            // 
+            // print
+            // 
+            this.print.Image = global::MainProgram.Properties.Resources.Printers2;
+            this.print.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.print.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.print.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.print.Name = "print";
+            this.print.Size = new System.Drawing.Size(36, 42);
+            this.print.Text = "打印";
+            this.print.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.print.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.print.Click += new System.EventHandler(this.print_Click);
+            // 
+            // selectSourceOrder
+            // 
+            this.selectSourceOrder.Image = global::MainProgram.Properties.Resources.资料;
+            this.selectSourceOrder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.selectSourceOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.selectSourceOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.selectSourceOrder.Name = "selectSourceOrder";
+            this.selectSourceOrder.Size = new System.Drawing.Size(36, 42);
+            this.selectSourceOrder.Text = "资料";
+            this.selectSourceOrder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.selectSourceOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.selectSourceOrder.Click += new System.EventHandler(this.selectSourceOrder_Click);
+            // 
+            // calculator
+            // 
+            this.calculator.Image = global::MainProgram.Properties.Resources.calc;
+            this.calculator.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.calculator.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.calculator.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.calculator.Name = "calculator";
+            this.calculator.Size = new System.Drawing.Size(48, 42);
+            this.calculator.Text = "计算器";
+            this.calculator.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.calculator.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.calculator.Click += new System.EventHandler(this.calculator_Click);
+            // 
+            // close
+            // 
+            this.close.Image = global::MainProgram.Properties.Resources.close;
+            this.close.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.close.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.close.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.close.Name = "close";
+            this.close.Size = new System.Drawing.Size(36, 42);
+            this.close.Text = "关闭";
+            this.close.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.close.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.close.Click += new System.EventHandler(this.close_Click);
+            // 
+            // panelTradingDate
+            // 
+            this.panelTradingDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelTradingDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelTradingDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelTradingDate.Location = new System.Drawing.Point(676, 86);
+            this.panelTradingDate.Name = "panelTradingDate";
+            this.panelTradingDate.Size = new System.Drawing.Size(21, 21);
+            this.panelTradingDate.TabIndex = 21;
+            this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
+            // 
+            // panelPurchaseName
+            // 
+            this.panelPurchaseName.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelPurchaseName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelPurchaseName.Location = new System.Drawing.Point(143, 1);
+            this.panelPurchaseName.Name = "panelPurchaseName";
+            this.panelPurchaseName.Size = new System.Drawing.Size(21, 21);
+            this.panelPurchaseName.TabIndex = 18;
+            this.panelPurchaseName.Click += new System.EventHandler(this.panelPurchaseName_Click);
+            this.panelPurchaseName.DoubleClick += new System.EventHandler(this.panelPurchaseName_DoubleClick);
             // 
             // FormPurchaseApply
             // 
@@ -807,6 +826,7 @@
             this.panel14.PerformLayout();
             this.panelProject.ResumeLayout(false);
             this.panelProject.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -873,6 +893,8 @@
         private System.Windows.Forms.Label labelProject;
         private System.Windows.Forms.TextBox textBoxProject;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
 
     }
 }

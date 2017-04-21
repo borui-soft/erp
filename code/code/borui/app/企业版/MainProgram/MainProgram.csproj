@@ -579,6 +579,12 @@
     <Compile Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.designer.cs">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\采购管理\业务\FormMaterielDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormMaterielDetailed.designer.cs">
+      <DependentUpon>FormMaterielDetailed.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\项目管理\FormProduction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -976,6 +982,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.resx">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\业务\FormMaterielDetailed.resx">
+      <DependentUpon>FormMaterielDetailed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\项目管理\FormProduction.resx">
       <DependentUpon>FormProduction.cs</DependentUpon>

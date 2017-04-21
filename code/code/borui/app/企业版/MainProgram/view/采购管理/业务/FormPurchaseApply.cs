@@ -860,5 +860,38 @@ namespace MainProgram
             }
             return value;
         }
+
+        private void ToolStripMenuItemCheckDetailed_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                int materielID = Convert.ToInt32(dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString());
+
+                if (this.labelProject.Text.Length <= 0)
+                {
+                    if (!MessageBoxExtend.messageQuestion("材料表编号为空, 可能无法显示出材料表中的相关数据, 是否继续查看?"))
+                    {
+                        return;
+                    }
+                }
+
+                FormMaterielDetailed fmd = new FormMaterielDetailed(materielID, this.labelProject.Text);
+                fmd.ShowDialog();
+            }
+            else 
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
+
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            {
+                m_rowIndex = e.RowIndex;
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
     }
 }

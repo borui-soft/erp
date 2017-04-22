@@ -271,7 +271,7 @@ namespace MainProgram.bus
                         displayColumnsCount = 1;
                         for (int col = 0; col < m_dataGridView.ColumnCount; col++)
                         {
-                            if (m_dataGridView.Rows[row].Cells[col].Visible)
+                            if (m_dataGridView.Rows[row].Cells[col].Visible && m_dataGridView.Rows[row].Cells[col].Value != null)
                             {
                                 excelApp.Cells[row + 2, displayColumnsCount] = m_dataGridView.Rows[row].Cells[col].Value.ToString().Trim();
                                 displayColumnsCount++;

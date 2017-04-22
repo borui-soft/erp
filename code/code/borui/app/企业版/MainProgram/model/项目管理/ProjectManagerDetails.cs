@@ -58,10 +58,21 @@ namespace MainProgram.model
                             delete(record.billNumber);
                         }
 
-                        string insert = "INSERT INTO [dbo].[PROJECT_MATERIE_MANAGER_DETAILS]([ROW_NUMBER],[BILL_NUMBER],[MATERIEL_ID],[VALUE],[MAKE_TYPE],[MATERIEL_NOTE])VALUES(";
+                        string insert = "INSERT INTO [dbo].[PROJECT_MATERIE_MANAGER_DETAILS]([ROW_NUMBER],[BILL_NUMBER],";
+                        insert += " [NUM],[SEQUENCE],[USE_DATE],[DEVICE_NAME],[SIZE],[CL],";
+                        insert += " [MATERIEL_ID],[VALUE],[MAKE_TYPE],[MATERIEL_NOTE])VALUES(";
 
                         insert += record.rowNumber + ",";
                         insert += "'" + record.billNumber + "',";
+
+                        // 插入序号、序列号、使用日期、所属部件信息
+                        insert += "'" + record.no + "',";
+                        insert += "'" + record.sequence + "',";
+                        insert += "'" + record.useDate + "',";
+                        insert += "'" + record.deviceName + "',";
+                        insert += "'" + record.materielSize + "',";
+                        insert += "'" + record.cl + "',";
+
                         insert += record.materielID + ",";
                         insert += record.value + ",";
                         insert += "'" + record.makeType + "',";
@@ -106,7 +117,8 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[BILL_NUMBER],[ROW_NUMBER],[MATERIEL_ID],[VALUE],[MAKE_TYPE],[MATERIEL_NOTE] FROM [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ORDER BY PKEY";
+            string sql = "SELECT [PKEY],[BILL_NUMBER],[ROW_NUMBER],[MATERIEL_ID],[VALUE],[MAKE_TYPE],[MATERIEL_NOTE],";
+            sql += "[NUM], [SEQUENCE], [USE_DATE], [DEVICE_NAME], [CL], [SIZE] FROM [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ORDER BY PKEY";
 
             m_tableDataList.Clear();
 
@@ -128,14 +140,22 @@ namespace MainProgram.model
                     record.materielName = materiel.name;
                     record.materielModel = materiel.model;
                     record.materielParameter = materiel.materielParameter;
-                    record.materielSize = "";
-                    record.num = materiel.num;
+
+                    //record.num = materiel.num;
                     record.materielUnit = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase);
 
 
                     record.value = DbDataConvert.ToDouble(row["VALUE"]);
                     record.makeType = DbDataConvert.ToString(row["MAKE_TYPE"]);
                     record.materielNote = DbDataConvert.ToString(row["MATERIEL_NOTE"]);
+
+                    // 读取序号、序列号、使用日期、所属部件,材料，尺寸
+                    record.no = DbDataConvert.ToString(row["NUM"]);
+                    record.sequence = DbDataConvert.ToString(row["SEQUENCE"]);
+                    record.useDate = DbDataConvert.ToString(row["USE_DATE"]);
+                    record.deviceName = DbDataConvert.ToString(row["DEVICE_NAME"]); 
+                    record.materielSize = DbDataConvert.ToString(row["SIZE"]); 
+                    record.cl = DbDataConvert.ToString(row["CL"]); 
 
                     m_tableDataList.Add(m_tableDataList.Count, record);
                 }
@@ -196,7 +216,7 @@ namespace MainProgram.model
         public int pkey { get; set; }
         public string billNumber { get; set; }
 
-        // 物料详细信息
+        // 物料详细信息,行号，物料ID，物料编号
         public int rowNumber { get; set; }
         public int materielID { get; set; }
         public string num { get; set; }
@@ -211,5 +231,12 @@ namespace MainProgram.model
         public double value { get; set; }
         public string makeType { get; set; }
         public string materielNote { get; set; }
+
+        // 使用日期，所属部件，序号，序列号
+        public string useDate { get; set; }
+        public string deviceName { get; set; }
+        public string no { get; set; }
+        public string sequence { get; set; }
+        public string cl { get; set; }
     }
 }

@@ -349,3 +349,17 @@ insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) value
 -- 2017-4-21 总材料表表头部分，删除使用日期和所属部件信息
 alter table PROJECT_MATERIE_MANAGER drop column MAKE_DATE;
 alter table PROJECT_MATERIE_MANAGER drop column DEVICE_NAME; 
+
+
+
+-- 2017-4-22 总材料表详情表,增加序号、序列号、使用日期、所属部件
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ADD NUM [nvarchar](10);
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ADD SEQUENCE [nvarchar](10);
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ADD USE_DATE [nvarchar](15);
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ADD DEVICE_NAME [nvarchar](60);
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ADD CL [nvarchar](60);
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER_DETAILS] ADD SIZE [nvarchar](60);
+
+-- 2017-4-21 总材料表表头部分，增加项目名称和部分名称信息
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ADD PROJECT_NAME [nvarchar](100);
+ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ADD SUB_NAME [nvarchar](60);

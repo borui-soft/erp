@@ -47,7 +47,7 @@ namespace MainProgram.model
                 delete(record.billNumber);
             }
 
-            string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[NOTE]";
+            string insert = "INSERT INTO [ERP].[dbo].[PROJECT_MATERIE_MANAGER]([DATE_TYPE],[DEVICE_MODE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[NOTE],[PROJECT_NAME],[SUB_NAME]";
             insert += ",[MAKE_ORDER_STAFF],[MAKE_ORDER_DATE],[DESIGN_ID]";
 
             if (tmpRecord.billNumber != null && tmpRecord.changeStaffName.Length > 0)
@@ -68,6 +68,8 @@ namespace MainProgram.model
             insert += "'" + record.projectNum + "',";
             insert += "'" + record.makeNum + "',";
             insert += "'" + record.note + "',";
+            insert += "'" + record.projectName + "',";
+            insert += "'" + record.subName + "',";
 
             insert += record.makeOrderStaffID + ",";
             insert += "'" + record.makeOrderDate + "',";
@@ -201,7 +203,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[NOTE],[MAKE_ORDER_DATE]";
+            string sql = "SELECT [PKEY],[DATE_TYPE],[DEVICE_MODE],[BILL_NUMBER],[PROJECT_NUM],[MAKE_NUM],[NOTE],[MAKE_ORDER_DATE],[PROJECT_NAME],[SUB_NAME]";
             sql += ",[MAKE_ORDER_STAFF],[DESIGN_ID],[REVIEW_STAFF_ID],[REVIEW_DATE],[IS_REVIEW],[CHANGE_REVIEW_STAFF_ID],[CHANGE_STAFF_ID]  ";
             sql += "FROM [ERP].[dbo].[PROJECT_MATERIE_MANAGER] ORDER BY PKEY DESC";
 
@@ -221,6 +223,8 @@ namespace MainProgram.model
                     record.makeNum = DbDataConvert.ToString(row["MAKE_NUM"]);
                     record.note = DbDataConvert.ToString(row["NOTE"]);
 
+                    record.projectName = DbDataConvert.ToString(row["PROJECT_NAME"]);
+                    record.subName = DbDataConvert.ToString(row["SUB_NAME"]);
 
                     record.makeOrderStaffID = DbDataConvert.ToInt32(row["MAKE_ORDER_STAFF"]);
                     record.makeOrderStaffName = Staff.getInctance().getStaffNameFromPkey(record.makeOrderStaffID);
@@ -462,5 +466,10 @@ namespace MainProgram.model
         public string changeStaffName { get; set; }
         public int changeReviewStaffID { get; set; }
         public string changeReviewStaffName { get; set; }
+
+        // 2017-4-22 增加项目名称和部分名称信息
+        public string projectName { get; set; }
+        public string subName { get; set; }
+
     }
 }

@@ -417,6 +417,24 @@ namespace MainProgram.model
             return record.projectNum;
         }
 
+        public int getOrderTypeFromBillNumber(string billNumber)
+        {
+            FormProjectMaterielTable record = new FormProjectMaterielTable();
+
+            foreach (KeyValuePair<int, FormProjectMaterielTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber)
+                {
+                    record = index.Value;
+                    break;
+                }
+            }
+
+            return record.dataType;
+        }
+
+        
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

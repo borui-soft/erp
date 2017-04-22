@@ -59,6 +59,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelxxMaterielTableNum = new System.Windows.Forms.Label();
+            this.labelProName = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -86,7 +88,7 @@
             this.groupBox1.Controls.Add(this.labelCount);
             this.groupBox1.Location = new System.Drawing.Point(279, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(133, 78);
+            this.groupBox1.Size = new System.Drawing.Size(133, 68);
             this.groupBox1.TabIndex = 62;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "库存情况";
@@ -95,7 +97,7 @@
             // 
             this.labelProCount.AutoSize = true;
             this.labelProCount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelProCount.Location = new System.Drawing.Point(90, 46);
+            this.labelProCount.Location = new System.Drawing.Point(90, 43);
             this.labelProCount.Name = "labelProCount";
             this.labelProCount.Size = new System.Drawing.Size(29, 12);
             this.labelProCount.TabIndex = 72;
@@ -113,7 +115,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 46);
+            this.label9.Location = new System.Drawing.Point(16, 43);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 12);
             this.label9.TabIndex = 71;
@@ -137,7 +139,7 @@
             this.groupBox2.Controls.Add(this.labelMaterielID);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(250, 75);
+            this.groupBox2.Size = new System.Drawing.Size(250, 68);
             this.groupBox2.TabIndex = 63;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "物料基本信息";
@@ -146,7 +148,7 @@
             // 
             this.labelMaterielName.AutoSize = true;
             this.labelMaterielName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelMaterielName.Location = new System.Drawing.Point(90, 46);
+            this.labelMaterielName.Location = new System.Drawing.Point(90, 43);
             this.labelMaterielName.Name = "labelMaterielName";
             this.labelMaterielName.Size = new System.Drawing.Size(29, 12);
             this.labelMaterielName.TabIndex = 68;
@@ -155,7 +157,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 46);
+            this.label5.Location = new System.Drawing.Point(16, 43);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 67;
@@ -184,6 +186,10 @@
             // 
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Controls.Add(this.labelUseDate);
+            this.groupBox3.Controls.Add(this.labelProName);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label1Value);
+            this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.labelProjectNum);
             this.groupBox3.Controls.Add(this.labelSquence);
@@ -192,15 +198,13 @@
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.labelSub);
             this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.label1Value);
             this.groupBox3.Controls.Add(this.labelDevMode);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.labelxxMaterielTableNum);
-            this.groupBox3.Location = new System.Drawing.Point(12, 100);
+            this.groupBox3.Location = new System.Drawing.Point(12, 94);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(400, 127);
+            this.groupBox3.Size = new System.Drawing.Size(400, 151);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "总材料表数据";
@@ -208,7 +212,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(246, 78);
+            this.label22.Location = new System.Drawing.Point(246, 126);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(65, 12);
             this.label22.TabIndex = 83;
@@ -218,7 +222,7 @@
             // 
             this.labelUseDate.AutoSize = true;
             this.labelUseDate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelUseDate.Location = new System.Drawing.Point(320, 77);
+            this.labelUseDate.Location = new System.Drawing.Point(320, 125);
             this.labelUseDate.Name = "labelUseDate";
             this.labelUseDate.Size = new System.Drawing.Size(29, 12);
             this.labelUseDate.TabIndex = 84;
@@ -227,7 +231,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(246, 26);
+            this.label20.Location = new System.Drawing.Point(16, 51);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(65, 12);
             this.label20.TabIndex = 81;
@@ -237,7 +241,7 @@
             // 
             this.labelProjectNum.AutoSize = true;
             this.labelProjectNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelProjectNum.Location = new System.Drawing.Point(320, 25);
+            this.labelProjectNum.Location = new System.Drawing.Point(90, 51);
             this.labelProjectNum.Name = "labelProjectNum";
             this.labelProjectNum.Size = new System.Drawing.Size(29, 12);
             this.labelProjectNum.TabIndex = 82;
@@ -247,7 +251,7 @@
             // 
             this.labelSquence.AutoSize = true;
             this.labelSquence.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelSquence.Location = new System.Drawing.Point(320, 105);
+            this.labelSquence.Location = new System.Drawing.Point(320, 101);
             this.labelSquence.Name = "labelSquence";
             this.labelSquence.Size = new System.Drawing.Size(29, 12);
             this.labelSquence.TabIndex = 80;
@@ -256,7 +260,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(246, 105);
+            this.label17.Location = new System.Drawing.Point(246, 101);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(53, 12);
             this.label17.TabIndex = 79;
@@ -266,7 +270,7 @@
             // 
             this.labelNum.AutoSize = true;
             this.labelNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelNum.Location = new System.Drawing.Point(90, 105);
+            this.labelNum.Location = new System.Drawing.Point(90, 101);
             this.labelNum.Name = "labelNum";
             this.labelNum.Size = new System.Drawing.Size(29, 12);
             this.labelNum.TabIndex = 78;
@@ -275,7 +279,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(16, 105);
+            this.label19.Location = new System.Drawing.Point(16, 101);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 12);
             this.label19.TabIndex = 77;
@@ -285,7 +289,7 @@
             // 
             this.labelSub.AutoSize = true;
             this.labelSub.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelSub.Location = new System.Drawing.Point(320, 54);
+            this.labelSub.Location = new System.Drawing.Point(320, 76);
             this.labelSub.Name = "labelSub";
             this.labelSub.Size = new System.Drawing.Size(29, 12);
             this.labelSub.TabIndex = 76;
@@ -294,16 +298,16 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(246, 54);
+            this.label15.Location = new System.Drawing.Point(246, 76);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 12);
             this.label15.TabIndex = 75;
-            this.label15.Text = "所属部件：";
+            this.label15.Text = "部分名称：";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 79);
+            this.label12.Location = new System.Drawing.Point(16, 126);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 12);
             this.label12.TabIndex = 73;
@@ -313,7 +317,7 @@
             // 
             this.label1Value.AutoSize = true;
             this.label1Value.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1Value.Location = new System.Drawing.Point(90, 78);
+            this.label1Value.Location = new System.Drawing.Point(90, 126);
             this.label1Value.Name = "label1Value";
             this.label1Value.Size = new System.Drawing.Size(29, 12);
             this.label1Value.TabIndex = 74;
@@ -323,7 +327,7 @@
             // 
             this.labelDevMode.AutoSize = true;
             this.labelDevMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelDevMode.Location = new System.Drawing.Point(90, 54);
+            this.labelDevMode.Location = new System.Drawing.Point(90, 76);
             this.labelDevMode.Name = "labelDevMode";
             this.labelDevMode.Size = new System.Drawing.Size(29, 12);
             this.labelDevMode.TabIndex = 72;
@@ -341,7 +345,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 54);
+            this.label3.Location = new System.Drawing.Point(16, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 71;
@@ -357,11 +361,30 @@
             this.labelxxMaterielTableNum.TabIndex = 70;
             this.labelxxMaterielTableNum.Text = "失败";
             // 
+            // labelProName
+            // 
+            this.labelProName.AutoSize = true;
+            this.labelProName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelProName.Location = new System.Drawing.Point(320, 51);
+            this.labelProName.Name = "labelProName";
+            this.labelProName.Size = new System.Drawing.Size(29, 12);
+            this.labelProName.TabIndex = 86;
+            this.labelProName.Text = "失败";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(246, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 85;
+            this.label4.Text = "项目名称：";
+            // 
             // FormMaterielDetailed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 238);
+            this.ClientSize = new System.Drawing.Size(428, 257);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -416,6 +439,8 @@
         private System.Windows.Forms.Label labelUseDate;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label labelProjectNum;
+        private System.Windows.Forms.Label labelProName;
+        private System.Windows.Forms.Label label4;
 
 
 

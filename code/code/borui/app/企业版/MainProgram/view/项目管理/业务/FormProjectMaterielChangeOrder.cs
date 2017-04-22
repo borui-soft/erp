@@ -38,16 +38,23 @@ namespace MainProgram
         {
             RowNum,         //行号
             MatetielNumber, //物料编码
+
+            Num,             //序号
+            Sequence,        //序列号
+
+            DeviceName,     //所属部件
             Brand,          //品牌
             MatetielName,   //物料名称
 
             Model,          //规格型号
-            Parameter,      //参数
             Size,           //尺寸
+            CL,             //材料
+            Parameter,      //参数
             Unit,           //单位
 
             Value,          //数量
             MakeType,       //制造类型
+            UseDate,        //使用日期
             Note            //备注
         };
 
@@ -135,6 +142,12 @@ namespace MainProgram
                 // 制单日期初始化
                 this.labelMakeDate.Visible = true;
                 this.labelMakeDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
+                FormProjectMaterielTable tmp = FormProject.getInctance().getProjectInfoFromBillNumber(this.labelSrcOrderBillNum.Text);
+                this.labelProjectName.Text = tmp.projectName;
+                this.labelProjectNo.Text = tmp.projectNum;
+                this.labelMakeNo.Text = tmp.makeNum;
+                this.labelDevMode.Text = tmp.deviceMode;
             }
             else
             {
@@ -148,38 +161,70 @@ namespace MainProgram
         private void dataGridViewInit()
         {
             // 变更前单据初始化
-            m_dateGridVeiwListDataList.addDataGridViewColumn("行号", 55, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\\编码(*)", 100, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("行号", 40, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\\编码(*)", 70, true, false);
 
-            m_dateGridVeiwListDataList.addDataGridViewColumn("品牌", 80, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称(*)", 151, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn(" 规格\n 型号", 90, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("参数", 80, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("尺寸", 80, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn(" 基本\n 单位", 80, true, true);
+            if (m_tablesType == 1)
+            {
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序号(*)", 40, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序列号(*)", 50, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("所属部件(*)", 95, true, true);
+            }
+            else
+            {
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序号(*)", 40, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序列号(*)", 50, false, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("所属部件(*)", 145, true, true);
+            }
 
-            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 80, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("制作方式", 80, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("品牌", 40, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称(*)", 85, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn(" 规格\n 型号", 50, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("尺寸", 40, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("材料", 40, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("参数", 40, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn(" 基本\n 单位", 50, true, true);
 
-            m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 50, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("制作方式", 70, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("使用日期(*)", 70, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("备注", 50, true, true);
+
+            m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataListChangeOfter);
             m_dateGridVeiwListDataList.initDataGridViewData(DateGridVeiwListDataListRowCount);
 
 
             // 变更后单据初始化
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("行号", 55, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("物料ID\\编码(*)", 100, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("行号", 40, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("物料ID\\编码(*)", 70, true, false);
 
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("品牌", 80, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("物料名称(*)", 151, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn(" 规格\n 型号", 90, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("参数", 80, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("尺寸", 80, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn(" 基本\n 单位", 80, true, true);
+            if (m_tablesType == 1)
+            {
+                m_dateGridVeiwListDataListChange.addDataGridViewColumn("序号(*)", 40, true, false);
+                m_dateGridVeiwListDataListChange.addDataGridViewColumn("序列号(*)", 50, true, false);
+                m_dateGridVeiwListDataListChange.addDataGridViewColumn("所属部件(*)", 95, true, false);
+            }
+            else
+            {
+                m_dateGridVeiwListDataListChange.addDataGridViewColumn("序号(*)", 40, true, false);
+                m_dateGridVeiwListDataListChange.addDataGridViewColumn("序列号(*)", 50, false, false);
+                m_dateGridVeiwListDataListChange.addDataGridViewColumn("所属部件(*)", 145, true, false);
+            }
 
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("数量(*)", 80, true, true);
-            m_dateGridVeiwListDataListChange.addDataGridViewColumn("制作方式", 80, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("品牌", 40, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("物料名称(*)", 85, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn(" 规格\n 型号", 50, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("尺寸", 40, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("材料", 40, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("参数", 40, true, true);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn(" 基本\n 单位", 50, true, true);
 
-            m_dateGridVeiwListDataListChange.initDataGridViewColumn(this.dataGridViewDataListChangeOfter);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("数量(*)", 50, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("制作方式", 70, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("使用日期(*)", 70, true, false);
+            m_dateGridVeiwListDataListChange.addDataGridViewColumn("变更原因", 100, true, false);
+
+            m_dateGridVeiwListDataListChange.initDataGridViewColumn(this.dataGridViewDataList);
             m_dateGridVeiwListDataListChange.initDataGridViewData(DateGridVeiwListDataListRowCount);
 
             // 根据单据编号，得到详细数据
@@ -262,6 +307,7 @@ namespace MainProgram
                 {
                     FormProjectInfoChange.getInctance().insert(m_currentOrderInfo, false);
                     ProjectManagerDetails.getInctance().insert(dataList);
+                    BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelMakeDate.Text, this.labelBillNumber.Text.ToString());
 
                     if (m_billNumber.Length == 0)
                     {
@@ -317,11 +363,11 @@ namespace MainProgram
 
         private bool purchaseOrderIsFull(FormProjectMaterielChangeTable record)
         {
-            if (record.changeReason.Length <= 0)
-            {
-                MessageBoxExtend.messageWarning("变更原因不得为空，请重新输入");
-                return false;
-            }
+            //if (record.changeReason.Length <= 0)
+            //{
+            //    MessageBoxExtend.messageWarning("变更原因不得为空，请重新输入");
+            //    return false;
+            //}
 
             if (this.textBoxBusinessPeople.Text.Length <= 0)
             {
@@ -348,10 +394,18 @@ namespace MainProgram
 
                     currentRowInfo.billNumber = this.labelBillNumber.Text;
                     currentRowInfo.rowNumber = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString());
+
+                    currentRowInfo.no = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value.ToString();
+                    currentRowInfo.sequence = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value.ToString();
+                    currentRowInfo.useDate = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value.ToString();
+                    currentRowInfo.deviceName = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value.ToString();
+                    currentRowInfo.materielSize = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value.ToString();
+                    currentRowInfo.cl = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value.ToString();
+
                     currentRowInfo.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
                     currentRowInfo.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     currentRowInfo.makeType = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value.ToString();
-                    currentRowInfo.materielNote = "";
+                    currentRowInfo.materielNote = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
 
                     list.Add(currentRowInfo);
                 }
@@ -368,6 +422,34 @@ namespace MainProgram
             {
                 ProjectManagerDetailsTable record = new ProjectManagerDetailsTable();
                 record = (ProjectManagerDetailsTable)list[rowIndex];
+
+                if (record.no.Length == 0)
+                {
+                    MessageBoxExtend.messageWarning("第[" + record.rowNumber + "]信息中物料序号不能为空");
+                    isRet = false;
+                    break;
+                }
+
+                if (m_tablesType == 1 && record.sequence.Length == 0)
+                {
+                    MessageBoxExtend.messageWarning("第[" + record.rowNumber + "]信息中物料序列号不能为空");
+                    isRet = false;
+                    break;
+                }
+
+                if (record.useDate.Length == 0)
+                {
+                    MessageBoxExtend.messageWarning("第[" + record.rowNumber + "]信息中物料使用日期不能为空");
+                    isRet = false;
+                    break;
+                }
+
+                if (record.deviceName.Length == 0)
+                {
+                    MessageBoxExtend.messageWarning("第[" + record.rowNumber + "]信息中物料所属部件不能为空");
+                    isRet = false;
+                    break;
+                }
 
                 if (record.value == 0)
                 {
@@ -501,6 +583,7 @@ namespace MainProgram
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
                 AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitPurchase);
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         private void dataGridViewDataList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -512,7 +595,13 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (m_columnIndex != (int)DataGridColumnName.MakeType && m_columnIndex != (int)DataGridColumnName.Note && m_columnIndex != (int)DataGridColumnName.MatetielNumber)
+            if (m_columnIndex != (int)DataGridColumnName.MakeType &&
+                m_columnIndex != (int)DataGridColumnName.Note &&
+                m_columnIndex != (int)DataGridColumnName.CL &&
+                m_columnIndex != (int)DataGridColumnName.Size &&
+                m_columnIndex != (int)DataGridColumnName.UseDate &&
+                m_columnIndex != (int)DataGridColumnName.DeviceName && 
+                m_columnIndex != (int)DataGridColumnName.MatetielNumber)
             {
                 e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
                     this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
@@ -539,6 +628,13 @@ namespace MainProgram
 
             this.labelSrcOrderBillNum.Text = m_currentOrderInfo.srcBillNumber;
             this.labelBillNumber.Text = m_currentOrderInfo.billNumber;
+
+            FormProjectMaterielTable tmp = FormProject.getInctance().getProjectInfoFromBillNumber(m_currentOrderInfo.srcBillNumber);
+            this.labelProjectName.Text = tmp.projectName;
+            this.labelProjectNo.Text = tmp.projectNum;
+            this.labelMakeNo.Text = tmp.makeNum;
+            this.labelDevMode.Text = tmp.deviceMode;
+
             this.labelSummary.Text = m_currentOrderInfo.changeReason;
 
             this.labelMakeBillStaff.Text = m_currentOrderInfo.makeOrderStaffName;
@@ -584,6 +680,14 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
+
+
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value = record.no;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value = record.sequence;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = record.useDate;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value = record.deviceName;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value = record.cl;
             }
 
             // 如果单据已审核，则禁用页面所有控件
@@ -677,15 +781,25 @@ namespace MainProgram
                         if (index.Value.materielID == Convert.ToInt32(mateielID))
                         {
                             isRet = true;
+
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
+
+
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Num].Value = record.no;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Sequence].Value = record.sequence;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.UseDate].Value = record.useDate;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.DeviceName].Value = record.deviceName;
+                            dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.CL].Value = record.cl;
 
                             break;
                         }
@@ -734,12 +848,20 @@ namespace MainProgram
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
+
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value = record.no;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value = record.sequence;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = record.useDate;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value = record.deviceName;
+                    dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value = record.cl;
 
                     break;
                 }

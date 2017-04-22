@@ -68,7 +68,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBoxSummary = new System.Windows.Forms.TextBox();
             this.labelSummary = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -81,6 +80,19 @@
             this.labelSrcOrderBillNum = new System.Windows.Forms.Label();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.源项目编号 = new System.Windows.Forms.Label();
+            this.textBoxSummary = new System.Windows.Forms.TextBox();
+            this.labelProjectName = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelProjectNo = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelMakeNo = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.labelDevMode = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataListChangeOfter)).BeginInit();
@@ -472,23 +484,12 @@
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.Location = new System.Drawing.Point(17, 127);
+            this.label18.Location = new System.Drawing.Point(535, 44);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(77, 12);
             this.label18.TabIndex = 37;
             this.label18.Text = "变更原因(*):";
-            // 
-            // textBoxSummary
-            // 
-            this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(0, 0);
-            this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(785, 21);
-            this.textBoxSummary.TabIndex = 43;
-            this.textBoxSummary.Visible = false;
-            this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
-            this.textBoxSummary.Leave += new System.EventHandler(this.textBoxSummary_Leave);
+            this.label18.Visible = false;
             // 
             // labelSummary
             // 
@@ -504,20 +505,22 @@
             // 
             this.panel10.Controls.Add(this.labelSummary);
             this.panel10.Controls.Add(this.textBoxSummary);
-            this.panel10.Location = new System.Drawing.Point(103, 121);
+            this.panel10.Location = new System.Drawing.Point(618, 36);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(785, 21);
+            this.panel10.Size = new System.Drawing.Size(184, 21);
             this.panel10.TabIndex = 40;
+            this.panel10.Visible = false;
             this.panel10.Click += new System.EventHandler(this.panelSummary_Click);
             // 
             // groupBox9
             // 
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(105, 142);
+            this.groupBox9.Location = new System.Drawing.Point(620, 57);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(780, 1);
+            this.groupBox9.Size = new System.Drawing.Size(179, 1);
             this.groupBox9.TabIndex = 41;
             this.groupBox9.TabStop = false;
+            this.groupBox9.Visible = false;
             // 
             // textBox2
             // 
@@ -578,10 +581,11 @@
             // 
             this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelSummary.Location = new System.Drawing.Point(893, 121);
+            this.panelSummary.Location = new System.Drawing.Point(805, 36);
             this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(21, 21);
+            this.panelSummary.Size = new System.Drawing.Size(23, 21);
             this.panelSummary.TabIndex = 42;
+            this.panelSummary.Visible = false;
             this.panelSummary.Click += new System.EventHandler(this.panelSummary_Click);
             // 
             // labelSrcOrderBillNum
@@ -589,7 +593,7 @@
             this.labelSrcOrderBillNum.AutoSize = true;
             this.labelSrcOrderBillNum.BackColor = System.Drawing.Color.Transparent;
             this.labelSrcOrderBillNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelSrcOrderBillNum.Location = new System.Drawing.Point(107, 92);
+            this.labelSrcOrderBillNum.Location = new System.Drawing.Point(124, 90);
             this.labelSrcOrderBillNum.Name = "labelSrcOrderBillNum";
             this.labelSrcOrderBillNum.Size = new System.Drawing.Size(35, 12);
             this.labelSrcOrderBillNum.TabIndex = 121;
@@ -598,7 +602,7 @@
             // groupBox22
             // 
             this.groupBox22.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox22.Location = new System.Drawing.Point(103, 107);
+            this.groupBox22.Location = new System.Drawing.Point(120, 105);
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.Size = new System.Drawing.Size(149, 1);
             this.groupBox22.TabIndex = 102;
@@ -611,9 +615,145 @@
             this.源项目编号.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.源项目编号.Location = new System.Drawing.Point(17, 90);
             this.源项目编号.Name = "源项目编号";
-            this.源项目编号.Size = new System.Drawing.Size(89, 12);
+            this.源项目编号.Size = new System.Drawing.Size(101, 12);
             this.源项目编号.TabIndex = 100;
-            this.源项目编号.Text = "源单据编号(*):";
+            this.源项目编号.Text = "总材料表编号(*):";
+            // 
+            // textBoxSummary
+            // 
+            this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxSummary.Location = new System.Drawing.Point(0, 0);
+            this.textBoxSummary.Name = "textBoxSummary";
+            this.textBoxSummary.Size = new System.Drawing.Size(185, 21);
+            this.textBoxSummary.TabIndex = 43;
+            this.textBoxSummary.Visible = false;
+            this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
+            this.textBoxSummary.Leave += new System.EventHandler(this.textBoxSummary_Leave);
+            // 
+            // labelProjectName
+            // 
+            this.labelProjectName.AutoSize = true;
+            this.labelProjectName.BackColor = System.Drawing.Color.Transparent;
+            this.labelProjectName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelProjectName.Location = new System.Drawing.Point(124, 121);
+            this.labelProjectName.Name = "labelProjectName";
+            this.labelProjectName.Size = new System.Drawing.Size(41, 12);
+            this.labelProjectName.TabIndex = 127;
+            this.labelProjectName.Text = "      ";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox1.Location = new System.Drawing.Point(120, 136);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(149, 1);
+            this.groupBox1.TabIndex = 126;
+            this.groupBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(17, 121);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 125;
+            this.label4.Text = "项目名称(*):";
+            // 
+            // labelProjectNo
+            // 
+            this.labelProjectNo.AutoSize = true;
+            this.labelProjectNo.BackColor = System.Drawing.Color.Transparent;
+            this.labelProjectNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelProjectNo.Location = new System.Drawing.Point(421, 121);
+            this.labelProjectNo.Name = "labelProjectNo";
+            this.labelProjectNo.Size = new System.Drawing.Size(23, 12);
+            this.labelProjectNo.TabIndex = 130;
+            this.labelProjectNo.Text = "   ";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox2.Location = new System.Drawing.Point(417, 136);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(149, 1);
+            this.groupBox2.TabIndex = 129;
+            this.groupBox2.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(334, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 12);
+            this.label6.TabIndex = 128;
+            this.label6.Text = "项目编号(*):";
+            // 
+            // labelMakeNo
+            // 
+            this.labelMakeNo.AutoSize = true;
+            this.labelMakeNo.BackColor = System.Drawing.Color.Transparent;
+            this.labelMakeNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelMakeNo.Location = new System.Drawing.Point(751, 121);
+            this.labelMakeNo.Name = "labelMakeNo";
+            this.labelMakeNo.Size = new System.Drawing.Size(11, 12);
+            this.labelMakeNo.TabIndex = 133;
+            this.labelMakeNo.Text = " ";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox3.Location = new System.Drawing.Point(747, 136);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(165, 1);
+            this.groupBox3.TabIndex = 132;
+            this.groupBox3.TabStop = false;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.BackColor = System.Drawing.Color.Transparent;
+            this.label66.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label66.Location = new System.Drawing.Point(661, 121);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(77, 12);
+            this.label66.TabIndex = 131;
+            this.label66.Text = "生产编号(*):";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.BackColor = System.Drawing.Color.Transparent;
+            this.label67.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label67.Location = new System.Drawing.Point(661, 153);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(77, 12);
+            this.label67.TabIndex = 134;
+            this.label67.Text = "设备型号(*):";
+            // 
+            // labelDevMode
+            // 
+            this.labelDevMode.AutoSize = true;
+            this.labelDevMode.BackColor = System.Drawing.Color.Transparent;
+            this.labelDevMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelDevMode.Location = new System.Drawing.Point(751, 153);
+            this.labelDevMode.Name = "labelDevMode";
+            this.labelDevMode.Size = new System.Drawing.Size(11, 12);
+            this.labelDevMode.TabIndex = 136;
+            this.labelDevMode.Text = " ";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox10.Location = new System.Drawing.Point(747, 168);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(165, 1);
+            this.groupBox10.TabIndex = 135;
+            this.groupBox10.TabStop = false;
             // 
             // FormProjectMaterielChangeOrder
             // 
@@ -621,6 +761,18 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(934, 710);
+            this.Controls.Add(this.labelDevMode);
+            this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.label67);
+            this.Controls.Add(this.labelMakeNo);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.label66);
+            this.Controls.Add(this.labelProjectNo);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.labelProjectName);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewDataListChangeOfter);
             this.Controls.Add(this.label100);
@@ -660,7 +812,7 @@
             this.MinimizeBox = false;
             this.Name = "FormProjectMaterielChangeOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "总材料变更申请表";
+            this.Text = "项目名称";
             this.Load += new System.EventHandler(this.FormProjectMaterielOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -715,7 +867,6 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBoxSummary;
         private System.Windows.Forms.Label labelSummary;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.GroupBox groupBox9;
@@ -728,6 +879,19 @@
         private System.Windows.Forms.Label labelSrcOrderBillNum;
         private System.Windows.Forms.GroupBox groupBox22;
         private System.Windows.Forms.Label 源项目编号;
+        private System.Windows.Forms.TextBox textBoxSummary;
+        private System.Windows.Forms.Label labelProjectName;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelProjectNo;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelMakeNo;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label labelDevMode;
+        private System.Windows.Forms.GroupBox groupBox10;
 
     }
 }

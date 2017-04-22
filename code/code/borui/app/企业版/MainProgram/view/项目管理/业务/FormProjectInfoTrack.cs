@@ -84,7 +84,7 @@ namespace MainProgram
         {
             addDataGridViewColumn("单据编号", 135);
             addDataGridViewColumn("设备型号", 100);
-            //addDataGridViewColumn("所属部件", 100);
+            addDataGridViewColumn("部分名称", 100);
 
             addDataGridViewColumn("ID", 30);
             addDataGridViewColumn("物料名称", 100);
@@ -139,7 +139,7 @@ namespace MainProgram
 
                     temp.Add(record.billNumber);
                     temp.Add(record.deviceMode);
-                    //temp.Add(record.deviceName);
+                    temp.Add(record.subName);
 
                     temp.Add(tmp.materielID);
                     temp.Add(tmp.materielName);
@@ -216,7 +216,7 @@ namespace MainProgram
 
                     temp.Add(record.billNumber);
                     temp.Add(record.deviceMode);
-                    //temp.Add(record.deviceName);
+                    temp.Add(record.subName);
 
                     temp.Add(tmp.materielID);
                     temp.Add(tmp.materielName);
@@ -354,7 +354,9 @@ namespace MainProgram
 
         private void checkAccountBillDetaile()
         {
-            FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(m_orderType, m_billNumber);
+            int orderType = FormProject.getInctance().getOrderTypeFromBillNumber(m_billNumber);
+
+            FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(orderType, m_billNumber);
             fpmo.ShowDialog();
         }
 
@@ -628,8 +630,8 @@ namespace MainProgram
         // 转预占库存
         private void toolStripMenuItemProOccupied_Click(object sender, EventArgs e)
         {
-            //FormTransfer ft = new FormTransfer(m_billNumber, m_proInfo.projectNum, 1);
-            //ft.ShowDialog();
+            FormTransfer ft = new FormTransfer(m_billNumber, m_proInfo.projectNum, 1);
+            ft.ShowDialog();
 
             toolStripButtonRefresh_Click(null, null);
         }

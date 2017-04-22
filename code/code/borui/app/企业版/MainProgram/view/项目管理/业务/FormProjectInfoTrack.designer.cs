@@ -221,15 +221,14 @@
             this.toolStripSeparator8,
             this.ToolStripMenuItemMaterielOutOrderInfo});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 220);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 198);
             // 
             // toolStripMenuItemProOccupied
             // 
             this.toolStripMenuItemProOccupied.BackColor = System.Drawing.Color.Transparent;
             this.toolStripMenuItemProOccupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStripMenuItemProOccupied.Enabled = false;
             this.toolStripMenuItemProOccupied.Name = "toolStripMenuItemProOccupied";
-            this.toolStripMenuItemProOccupied.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemProOccupied.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItemProOccupied.Text = "转库存预占";
             this.toolStripMenuItemProOccupied.Click += new System.EventHandler(this.toolStripMenuItemProOccupied_Click);
             // 
@@ -238,7 +237,7 @@
             this.ToolStripMenuItemToApply.BackColor = System.Drawing.Color.Transparent;
             this.ToolStripMenuItemToApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemToApply.Name = "ToolStripMenuItemToApply";
-            this.ToolStripMenuItemToApply.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemToApply.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemToApply.Text = "转采购申请";
             this.ToolStripMenuItemToApply.Click += new System.EventHandler(this.ToolStripMenuItemToApply_Click);
             // 
@@ -247,33 +246,33 @@
             this.toolStripMenuItemToProduce.BackColor = System.Drawing.Color.Transparent;
             this.toolStripMenuItemToProduce.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStripMenuItemToProduce.Name = "toolStripMenuItemToProduce";
-            this.toolStripMenuItemToProduce.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemToProduce.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItemToProduce.Text = "转生产领料";
             this.toolStripMenuItemToProduce.Click += new System.EventHandler(this.toolStripMenuItemToProduce_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(145, 6);
             // 
             // ToolStripMenuItemChangeApplyOrderInfo
             // 
             this.ToolStripMenuItemChangeApplyOrderInfo.Name = "ToolStripMenuItemChangeApplyOrderInfo";
-            this.ToolStripMenuItemChangeApplyOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemChangeApplyOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemChangeApplyOrderInfo.Text = "变更申请详情";
             this.ToolStripMenuItemChangeApplyOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemChangeApplyOrderInfo_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
             // 
             // ToolStripMenuItemPurchaseApplyOrderInfo
             // 
             this.ToolStripMenuItemPurchaseApplyOrderInfo.BackColor = System.Drawing.Color.Transparent;
             this.ToolStripMenuItemPurchaseApplyOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemPurchaseApplyOrderInfo.Name = "ToolStripMenuItemPurchaseApplyOrderInfo";
-            this.ToolStripMenuItemPurchaseApplyOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemPurchaseApplyOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemPurchaseApplyOrderInfo.Text = "采购申请详情";
             this.ToolStripMenuItemPurchaseApplyOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemPurchaseApplyOrderInfo_Click);
             // 
@@ -282,7 +281,7 @@
             this.ToolStripMenuItemPurchaseOrderInfo.BackColor = System.Drawing.Color.Transparent;
             this.ToolStripMenuItemPurchaseOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemPurchaseOrderInfo.Name = "ToolStripMenuItemPurchaseOrderInfo";
-            this.ToolStripMenuItemPurchaseOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemPurchaseOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemPurchaseOrderInfo.Text = "采购订单详情";
             this.ToolStripMenuItemPurchaseOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemPurchaseOrderInfo_Click);
             // 
@@ -291,20 +290,20 @@
             this.toolStripMenuItemPurchaseInOrderInfo.BackColor = System.Drawing.Color.Transparent;
             this.toolStripMenuItemPurchaseInOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStripMenuItemPurchaseInOrderInfo.Name = "toolStripMenuItemPurchaseInOrderInfo";
-            this.toolStripMenuItemPurchaseInOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemPurchaseInOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItemPurchaseInOrderInfo.Text = "采购入库详情";
             this.toolStripMenuItemPurchaseInOrderInfo.Click += new System.EventHandler(this.toolStripMenuItemPurchaseInOrderInfo_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
             // 
             // ToolStripMenuItemMaterielOutOrderInfo
             // 
             this.ToolStripMenuItemMaterielOutOrderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemMaterielOutOrderInfo.Name = "ToolStripMenuItemMaterielOutOrderInfo";
-            this.ToolStripMenuItemMaterielOutOrderInfo.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemMaterielOutOrderInfo.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemMaterielOutOrderInfo.Text = "生产领料详情";
             this.ToolStripMenuItemMaterielOutOrderInfo.Click += new System.EventHandler(this.ToolStripMenuItemMaterielOutOrderInfo_Click);
             // 

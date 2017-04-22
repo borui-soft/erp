@@ -46,6 +46,7 @@ namespace MainProgram
 
                 FormProjectMaterielTable projectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(m_xxMaterielTablebillNubmber);
                 this.labelProjectNum.Text = projectInfo.projectNum;
+                this.labelProName.Text = projectInfo.projectName;
                 this.labelDevMode.Text = projectInfo.deviceMode;
 
                 SortedDictionary<int, ProjectManagerDetailsTable> list = 
@@ -56,11 +57,13 @@ namespace MainProgram
                 {
                     if (index.Value.materielID == m_materielID)
                     {
-                        this.labelSub.Text = "     ";
+                        this.labelSub.Text = index.Value.deviceName;
+
+                        this.labelNum.Text = index.Value.no;
+                        this.labelSquence.Text = index.Value.sequence;
+
                         this.label1Value.Text = Convert.ToString(index.Value.value);
-                        this.labelUseDate.Text = "     ";
-                        this.labelNum.Text = "     ";
-                        this.labelSquence.Text = "     ";
+                        this.labelUseDate.Text = index.Value.useDate;
 
                         break;
                     }
@@ -70,12 +73,14 @@ namespace MainProgram
             {
                 this.labelxxMaterielTableNum.Text = "     ";
                 this.labelProjectNum.Text = "     ";
+                this.labelProName.Text = "     ";
                 this.labelDevMode.Text = "     ";
                 this.labelSub.Text = "     ";
                 this.label1Value.Text = "     ";
                 this.labelUseDate.Text = "     ";
                 this.labelNum.Text = "     ";
                 this.labelSquence.Text = "     ";
+                this.labelUseDate.Text = "     ";
             }
         }
     }

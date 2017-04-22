@@ -279,7 +279,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("设计人", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
-                m_dateGridViewExtend.addDataGridViewColumn("变更原因", 300);
+                m_dateGridViewExtend.addDataGridViewColumn("变更设计人", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
@@ -748,7 +748,7 @@ namespace MainProgram
                     temp.Add(record.srcBillNumber);
                     temp.Add(record.designStaffName);
                     temp.Add(record.billNumber);
-                    temp.Add(record.changeReason);
+                    temp.Add(record.designStaffName);
                     temp.Add(record.makeOrderStaffName);
                     temp.Add(record.orderrReviewName);
                     temp.Add(record.reviewDate);

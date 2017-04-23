@@ -24,18 +24,20 @@ namespace MainProgram
         string m_tempFilePath = "";
         bool m_excelIsOpen = false;
         DataGridView m_dataGridView = new DataGridView();
+        DataGridView m_dataGridViewOfter = new DataGridView();
 
         Excel.Application m_excelApp = null;
         Excel.Workbook m_excelWorkbook = null;
         Excel.Worksheet m_excelSheet = null;
 
-        public FormOrderPrint(int orderType, string billNubmber, DataGridView dataGridView)
+        public FormOrderPrint(int orderType, string billNubmber, DataGridView dataGridView, DataGridView dataGridView2 = null)
         {
             InitializeComponent();
             m_excelIsOpen = false;
             m_orderType = orderType;
             m_billNubmber = billNubmber;
             m_dataGridView = dataGridView;
+            m_dataGridViewOfter = dataGridView2;
 
             m_tempFilePath = Directory.GetCurrentDirectory() + "\\tdmb\\" + DbPublic.getInctance().getOrderNameFromType(orderType) + ".xlsx";
         }
@@ -265,7 +267,11 @@ namespace MainProgram
                     // 总材料表模板
                     exportProjectInfoData();
                 }
-
+                else if (m_orderType == 20)
+                {
+                    //材料表变更模板
+                    exportProjectInfoChangeData();
+                }
                 m_excelWorkbook.Save();
 
                 isRet = true;
@@ -688,6 +694,88 @@ namespace MainProgram
             }
 
             stringReplace(Convert.ToString(sum), "[9]");
+        }
+
+        private void exportProjectInfoChangeData()
+        {
+            int startRowIndex1 = 8;
+            int startRowIndex2 = 22;
+
+            // 总材料表套打
+            FormProjectMaterielChangeTable projectInfoChange = FormProjectInfoChange.getInctance().getProjectInfoFromBillNumber(m_billNubmber);
+            FormProjectMaterielTable projectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(projectInfoChange.srcBillNumber);
+
+            int dataType = FormProject.getInctance().getOrderTypeFromBillNumber(projectInfoChange.srcBillNumber);
+            string type = "设备";
+
+            if (dataType == 1)
+            {
+                type = "设备";
+            }
+            else if (dataType == 2)
+            {
+                type = "电器";
+            }
+            else if (dataType == 3)
+            {
+                type = "工程";
+            }
+
+            stringReplace(type, "[1]");
+            stringReplace(projectInfo.billNumber, "[2]");
+            stringReplace(projectInfoChange.billNumber, "[3]");
+            stringReplace(projectInfo.projectName, "[4]");
+            stringReplace(projectInfo.projectNum, "[5]");
+            stringReplace(projectInfo.makeNum, "[6]");
+            stringReplace(projectInfo.deviceMode, "[7]");
+            stringReplace(projectInfoChange.makeOrderDate, "[8]");
+            stringReplace(projectInfoChange.makeOrderStaffName, "[9]");
+
+            // 变更后数据
+            for (int row2 = 0; row2 < m_dataGridView.RowCount; row2++)
+            {
+                if (m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+
+                m_excelApp.Cells[row2 + startRowIndex2, 1] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Num].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 2] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Sequence].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 3] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 4] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.CL].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 5] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 6] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Size].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 7] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 8] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 9] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Brand].Value.ToString().Trim();
+                m_excelApp.Cells[row2 + startRowIndex2, 10] = m_dataGridView.Rows[row2].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Note].Value.ToString().Trim();
+            }
+
+            // 变更前数据
+
+            if (m_dataGridViewOfter == null)
+            {
+                return;
+            }
+
+            for (int row = 0; row < m_dataGridViewOfter.RowCount; row++)
+            {
+                if (m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+
+                m_excelApp.Cells[row + startRowIndex1, 1] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Num].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 2] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Sequence].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 3] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 4] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.CL].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 5] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 6] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Size].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 7] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 8] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 9] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Brand].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex1, 10] = m_dataGridViewOfter.Rows[row].Cells[(int)FormProjectMaterielChangeOrder.DataGridColumnName.Note].Value.ToString().Trim();
+            }
         }
 
         private void release()

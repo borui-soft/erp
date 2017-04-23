@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.3.2";
+            this.label3.Text = "当前软件版本：V2.4.0";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、实现采购入库单、生成领料单单据套打功能";
+            this.richTextBox1.Text = "1、调整总材料表界面信息\r\n2、实现所有页面数据套打功能";
             // Fo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

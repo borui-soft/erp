@@ -70,6 +70,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.labelSummary = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.textBoxSummary = new System.Windows.Forms.TextBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBoxBusinessPeople = new System.Windows.Forms.TextBox();
@@ -80,7 +81,6 @@
             this.labelSrcOrderBillNum = new System.Windows.Forms.Label();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.源项目编号 = new System.Windows.Forms.Label();
-            this.textBoxSummary = new System.Windows.Forms.TextBox();
             this.labelProjectName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -207,7 +207,7 @@
             this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printDisplay.Name = "printDisplay";
             this.printDisplay.Size = new System.Drawing.Size(60, 42);
-            this.printDisplay.Text = "打印预览";
+            this.printDisplay.Text = "单据套打";
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
@@ -512,6 +512,18 @@
             this.panel10.Visible = false;
             this.panel10.Click += new System.EventHandler(this.panelSummary_Click);
             // 
+            // textBoxSummary
+            // 
+            this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxSummary.Location = new System.Drawing.Point(0, 0);
+            this.textBoxSummary.Name = "textBoxSummary";
+            this.textBoxSummary.Size = new System.Drawing.Size(185, 21);
+            this.textBoxSummary.TabIndex = 43;
+            this.textBoxSummary.Visible = false;
+            this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
+            this.textBoxSummary.Leave += new System.EventHandler(this.textBoxSummary_Leave);
+            // 
             // groupBox9
             // 
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
@@ -618,18 +630,6 @@
             this.源项目编号.Size = new System.Drawing.Size(101, 12);
             this.源项目编号.TabIndex = 100;
             this.源项目编号.Text = "总材料表编号(*):";
-            // 
-            // textBoxSummary
-            // 
-            this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(0, 0);
-            this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(185, 21);
-            this.textBoxSummary.TabIndex = 43;
-            this.textBoxSummary.Visible = false;
-            this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
-            this.textBoxSummary.Leave += new System.EventHandler(this.textBoxSummary_Leave);
             // 
             // labelProjectName
             // 

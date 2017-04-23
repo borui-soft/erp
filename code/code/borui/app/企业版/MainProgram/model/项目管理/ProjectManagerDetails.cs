@@ -192,6 +192,28 @@ namespace MainProgram.model
             return list;
         }
 
+
+        public ProjectManagerDetailsTable getMaterielInfoFromBillNumber(string billNumber, int materielID)
+        {
+            ProjectManagerDetailsTable value = new ProjectManagerDetailsTable();
+
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
+                {
+                    value = index.Value;
+                    break;
+                }
+            }
+
+            return value;
+        }
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

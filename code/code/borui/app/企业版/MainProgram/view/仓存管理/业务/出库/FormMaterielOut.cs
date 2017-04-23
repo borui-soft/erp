@@ -34,7 +34,7 @@ namespace MainProgram
         // 根据项目跟踪状况，直接形成转领料单
         public SortedDictionary<int, ArrayList> m_proInfoList = new SortedDictionary<int, ArrayList>();
 
-        private enum DataGridColumnName
+        public enum DataGridColumnName
         {
             RowNum,
             MatetielNumber,

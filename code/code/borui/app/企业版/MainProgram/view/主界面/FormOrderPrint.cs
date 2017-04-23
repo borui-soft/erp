@@ -74,10 +74,17 @@ namespace MainProgram
             // 把模板文件移动到导出文件的目录，如果目标文件已经存在，则直接覆盖
             if (File.Exists(exportExcelName))
             {
+                if ((File.GetAttributes(exportExcelName) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                {
+                    // 如果是将文件的属性设置为Normal
+                    File.SetAttributes(exportExcelName, FileAttributes.Normal);
+                }
+
                 File.Delete(exportExcelName);
             }
 
             File.Copy(m_tempFilePath, exportExcelName);
+            File.SetAttributes(exportExcelName, FileAttributes.Normal);
 
             m_excelIsOpen = openExcelFile(exportExcelName);
 
@@ -255,7 +262,7 @@ namespace MainProgram
             {
                 m_excelApp = new Microsoft.Office.Interop.Excel.Application();
                 m_excelWorkbook = m_excelApp.Workbooks.Open(fileName);
-                m_excelSheet = (Excel.Worksheet)m_excelWorkbook.Sheets["采购入库单"];
+                m_excelSheet = (Excel.Worksheet)m_excelWorkbook.Sheets["单据模板"];
 
                 m_excelApp.Visible = false;
 
@@ -285,39 +292,50 @@ namespace MainProgram
         #region 单据详细情况导出
         private void exportMaterielOutData()
         {
+            // 生产领料单数据导出
             MaterielOutOrderTable table = new MaterielOutOrderTable();
             table = MaterielOutOrder.getInctance().getMaterielOutOrderInfoFromBillNumber(m_billNubmber);
 
-            string projectNum = FormProject.getInctance().getProjectNumFromBillNumber(table.srcOrderNum);
+            FormProjectMaterielTable projectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(table.srcOrderNum);
 
-            stringReplace(table.departmentName, "[1]");
+            stringReplace(projectInfo.projectName, "[1]");
             stringReplace(table.billNumber, "[2]");
             stringReplace(table.srcOrderNum, "[3]");
             stringReplace(table.makeNo, "[4]");
             stringReplace(table.exchangesUnit, "[5]");
-            stringReplace(projectNum, "[6]");
+            stringReplace(projectInfo.projectNum, "[6]");
             stringReplace(table.makeOrderStaffName, "[7]");
+            stringReplace(projectInfo.deviceMode, "[9]");
+            stringReplace(projectInfo.subName, "[10]");
 
             double sum = 0.0;
             for (int row = 0; row < m_dataGridView.RowCount; row++)
             {
-                if (m_dataGridView.Rows[row].Cells[1].Value.ToString().Length == 0 && m_dataGridView.Rows[row].Cells[2].Value.ToString().Length == 0)
+                if (m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
                 {
                     break;
                 }
-                else
-                {
-                    sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[5].Value.ToString());
-                }
 
-                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[1].Value.ToString());
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.MatetielNumber].Value.ToString());
                 MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
-                m_excelApp.Cells[row + 6, 2] = record.name;
-                m_excelApp.Cells[row + 6, 3] = record.model;
-                m_excelApp.Cells[row + 6, 4] = record.brand;
-                m_excelApp.Cells[row + 6, 5] = m_dataGridView.Rows[row].Cells[4].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[5].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
+
+                ProjectManagerDetailsTable tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromBillNumber(table.srcOrderNum, materielID);
+
+                m_excelApp.Cells[row + 6, 1] = tmp.no;
+                m_excelApp.Cells[row + 6, 2] = tmp.sequence;
+                m_excelApp.Cells[row + 6, 3] = record.brand;
+                m_excelApp.Cells[row + 6, 4] = record.name;
+                m_excelApp.Cells[row + 6, 5] = record.model;
+
+                m_excelApp.Cells[row + 6, 6] = tmp.cl;
+                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+
+                m_excelApp.Cells[row + 6, 8] = tmp.value;
+                m_excelApp.Cells[row + 6, 9] = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", record.storage);
+                m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Note].Value.ToString().Trim();
+
+                sum += tmp.value;
+
             }
 
             stringReplace(Convert.ToString(sum), "[8]");
@@ -325,16 +343,20 @@ namespace MainProgram
 
         private void exportPurchaseInData()
         {
+            // 采购入库单数据导出
             PurchaseInOrderTable table = new PurchaseInOrderTable();
             table = PurchaseInOrder.getInctance().getPurchaseInfoFromBillNumber(m_billNubmber);
 
-            string projectNum = FormProject.getInctance().getProjectNumFromBillNumber(table.srcOrderNum);
+            FormProjectMaterielTable projectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(table.srcOrderNum);
 
             stringReplace(table.supplierName, "[1]");
             stringReplace(table.billNumber, "[2]");
             stringReplace(table.srcOrderNum, "[3]");
-            stringReplace(projectNum, "[4]");
+            stringReplace(projectInfo.projectNum, "[4]");
             stringReplace(table.makeOrderStaffName, "[9]");
+            stringReplace(projectInfo.projectName, "[10]");
+            stringReplace(" ", "[11]");
+            stringReplace(table.exchangesUnit, "[12]");
 
             double sum1 = 0.0, sum2 = 0.0, sum3 = 0.0, sum4 = 0.0;
 
@@ -369,10 +391,11 @@ namespace MainProgram
 
                 int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[1].Value.ToString());
                 MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
-                m_excelApp.Cells[row + 6, 2] = m_dataGridView.Rows[row].Cells[2].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 3] = m_dataGridView.Rows[row].Cells[3].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 4] = record.model;
-                m_excelApp.Cells[row + 6, 5] = record.brand;
+                m_excelApp.Cells[row + 6, 1] = m_dataGridView.Rows[row].Cells[1].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 2] = record.brand;
+                m_excelApp.Cells[row + 6, 3] = m_dataGridView.Rows[row].Cells[2].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 4] = m_dataGridView.Rows[row].Cells[3].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 5] = record.model;
                 m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[7].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[9].Value.ToString().Trim();

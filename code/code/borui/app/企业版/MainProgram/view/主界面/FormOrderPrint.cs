@@ -260,6 +260,11 @@ namespace MainProgram
                     // 其他出库单模板
                     exportOtherOutData();
                 }
+                else if (m_orderType == 19)
+                {
+                    // 总材料表模板
+                    exportProjectInfoData();
+                }
 
                 m_excelWorkbook.Save();
 
@@ -622,6 +627,67 @@ namespace MainProgram
             }
 
             stringReplace(Convert.ToString(sum), "[4]");
+        }
+
+        private void exportProjectInfoData()
+        {
+            int startRowIndex = 6;
+            // 总材料表套打
+            FormProjectMaterielTable projectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(m_billNubmber);
+
+            int dataType = FormProject.getInctance().getOrderTypeFromBillNumber(m_billNubmber);
+            string type = "设备";
+
+            if (dataType == 1)
+            {
+                type = "设备";
+            }
+            else if (dataType == 2)
+            {
+                type = "电器";
+            }
+            else if (dataType == 3)
+            {
+                type = "工程";
+            }
+
+            stringReplace(type, "[1]");
+            stringReplace(projectInfo.billNumber, "[2]");
+            stringReplace(projectInfo.deviceMode, "[3]");
+            stringReplace(projectInfo.subName, "[4]");
+            stringReplace(projectInfo.projectName, "[5]");
+            stringReplace(projectInfo.projectNum, "[6]");
+            stringReplace(projectInfo.makeNum, "[7]");
+            stringReplace(projectInfo.note, "[8]");
+            stringReplace(projectInfo.makeOrderStaffName, "[10]");
+
+            double sum = 0.0;
+            for (int row = 0; row < m_dataGridView.RowCount; row++)
+            {
+                if (m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0 || row > 40)
+                {
+                    break;
+                }
+
+                m_excelApp.Cells[row + startRowIndex, 1] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Num].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 2] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Sequence].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.DeviceName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Brand].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Size].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.CL].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 9] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Parameter].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 10] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 11] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 12] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.MakeType].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 13] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.UseDate].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 14] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Note].Value.ToString().Trim();
+
+                sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Value].Value.ToString().Trim());
+            }
+
+            stringReplace(Convert.ToString(sum), "[9]");
         }
 
         private void release()

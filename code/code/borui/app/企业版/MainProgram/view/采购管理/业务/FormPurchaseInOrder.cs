@@ -70,6 +70,7 @@ namespace MainProgram
 
             // 源单类型初始化
             this.labelSourceOrderType.Visible = true;
+            this.comboBoxSourceOrderType.Items.Add("采购申请单");
             this.comboBoxSourceOrderType.Items.Add("采购订单");
             this.comboBoxSourceOrderType.Items.Add("采购发票");
             this.comboBoxSourceOrderType.SelectedIndex = 0;
@@ -328,15 +329,41 @@ namespace MainProgram
             {
                 if (comboBoxSourceOrderType.SelectedIndex == 0)
                 {
+                    FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseApplyOrder, true);
+                    fpos.ShowDialog();
+
+                    string sourceBillNumber = fpos.getSelectOrderNumber();
+
+                    // 自动填充总源单据号
+                    this.textBoxSourceOrderNumber.Text = sourceBillNumber;
+                    this.textBoxSourceOrderNumber.Visible = true;
+                    
+                    // 自动填充DataGridView区域
+                    writeBillDetailsInfoFromBillNumber(sourceBillNumber);
+
+                    // 自动填写总材料表编号
+                    this.labelContractNum.Visible = true;
+                    PurchaseApplyOrderTable tmp = PurchaseApplyOrder.getInctance().getPurchaseInfoFromBillNumber(sourceBillNumber);
+                    this.labelContractNum.Text = tmp.srcOrderNum;
+                }
+                else if (comboBoxSourceOrderType.SelectedIndex == 1)
+                {
                     FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseOrder, true);
                     fpos.ShowDialog();
 
                     string sourceBillNumber = fpos.getSelectOrderNumber();
 
+                    // 自动填充总源单据号
                     this.textBoxSourceOrderNumber.Text = sourceBillNumber;
                     this.textBoxSourceOrderNumber.Visible = true;
 
+                    // 自动填充DataGridView区域
                     writeBillDetailsInfoFromBillNumber(sourceBillNumber);
+
+                    // 自动填写总材料表编号
+                    this.labelContractNum.Visible = true;
+                    PurchaseOrderTable tmp = PurchaseOrder.getInctance().getPurchaseInfoFromBillNumber(sourceBillNumber);
+                    this.labelContractNum.Text = tmp.srcOrderNum;
                 }
             }
         }
@@ -1107,29 +1134,57 @@ namespace MainProgram
 
         private void writeBillDetailsInfoFromBillNumber(string billNumber)
         {
-
-            // DataGridView 赋值
-            SortedDictionary<int, PurchaseOrderDetailsTable> purchaseOrderDetails =
-                PurchaseOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
-
-            foreach (KeyValuePair<int, PurchaseOrderDetailsTable> index in purchaseOrderDetails)
+            if (comboBoxSourceOrderType.SelectedIndex == 0)
             {
-                PurchaseOrderDetailsTable record = new PurchaseOrderDetailsTable();
-                record = index.Value;
+                // DataGridView 赋值
+                SortedDictionary<int, PurchaseApplyOrderDetailsTable> purchaseOrderDetails =
+                    PurchaseApplyOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
 
-                int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+                foreach (KeyValuePair<int, PurchaseApplyOrderDetailsTable> index in purchaseOrderDetails)
+                {
+                    PurchaseApplyOrderDetailsTable record = new PurchaseApplyOrderDetailsTable();
+                    record = index.Value;
 
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = record.transportationCost;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                    int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = "0";
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                }
+            }
+            else if (comboBoxSourceOrderType.SelectedIndex == 1)
+            {
+                // DataGridView 赋值
+                SortedDictionary<int, PurchaseOrderDetailsTable> purchaseOrderDetails =
+                    PurchaseOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
+
+                foreach (KeyValuePair<int, PurchaseOrderDetailsTable> index in purchaseOrderDetails)
+                {
+                    PurchaseOrderDetailsTable record = new PurchaseOrderDetailsTable();
+                    record = index.Value;
+
+                    int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = record.transportationCost;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                }
             }
         }
 

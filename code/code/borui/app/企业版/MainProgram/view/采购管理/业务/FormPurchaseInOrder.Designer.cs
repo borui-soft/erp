@@ -1327,7 +1327,7 @@
             this.groupBox22.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox22.Location = new System.Drawing.Point(113, 182);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(165, 1);
+            this.groupBox22.Size = new System.Drawing.Size(170, 1);
             this.groupBox22.TabIndex = 99;
             this.groupBox22.TabStop = false;
             // 

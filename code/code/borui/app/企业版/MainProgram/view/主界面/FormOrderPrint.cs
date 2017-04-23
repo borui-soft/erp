@@ -235,7 +235,12 @@ namespace MainProgram
                     // 采购入库单
                     exportPurchaseInData();
                 }
-
+                else if (m_orderType == 18)
+                {
+                    // 采购申请单
+                    exportPurchaseApplyData();
+                }
+                
                 m_excelWorkbook.Save();
 
                 isRet = true;
@@ -408,6 +413,48 @@ namespace MainProgram
             stringReplace(Convert.ToString(sum2), "[6]");
             stringReplace(Convert.ToString(sum3), "[7]");
             stringReplace(Convert.ToString(sum4), "[8]");
+        }
+
+        private void exportPurchaseApplyData()
+        {
+            int startRowIndex = 4;
+            // 采购入库单数据导出
+            PurchaseApplyOrderTable table = new PurchaseApplyOrderTable();
+            table = PurchaseApplyOrder.getInctance().getPurchaseInfoFromBillNumber(m_billNubmber);
+
+            FormProjectMaterielTable projectInfo = FormProject.getInctance().getProjectInfoFromBillNumber(table.srcOrderNum);
+
+            stringReplace(table.billNumber, "[1]");
+            stringReplace(table.srcOrderNum, "[2]");
+            stringReplace(table.exchangesUnit, "[3]");
+
+            double sum = 0.0;
+            for (int row = 0; row < m_dataGridView.RowCount; row++)
+            {
+                if (m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielNumber].Value.ToString());
+                ProjectManagerDetailsTable tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromBillNumber(table.srcOrderNum, materielID);
+
+                m_excelApp.Cells[row + startRowIndex, 2] = projectInfo.projectName;
+                m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Brand].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 4] = "";
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 7] = tmp.cl;
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 9] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 10] = tmp.useDate;
+                m_excelApp.Cells[row + startRowIndex, 11] = "";
+                m_excelApp.Cells[row + startRowIndex, 12] = "";
+
+                sum += tmp.value;
+            }
+
+            stringReplace(Convert.ToString(sum), "[4]");
         }
 
         private void release()

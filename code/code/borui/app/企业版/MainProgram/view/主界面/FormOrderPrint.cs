@@ -240,7 +240,11 @@ namespace MainProgram
                     // 采购申请单
                     exportPurchaseApplyData();
                 }
-                
+                else if (m_orderType == 9)
+                {
+                    // 盘盈入库单
+                    exportEarningsOrderData();
+                }
                 m_excelWorkbook.Save();
 
                 isRet = true;
@@ -452,6 +456,43 @@ namespace MainProgram
                 m_excelApp.Cells[row + startRowIndex, 12] = "";
 
                 sum += tmp.value;
+            }
+
+            stringReplace(Convert.ToString(sum), "[4]");
+        }
+
+        private void exportEarningsOrderData()
+        {
+            int startRowIndex = 6;
+            // 采购入库单数据导出
+            MaterielInEarningsOrderTable table = new MaterielInEarningsOrderTable();
+            table = MaterielInEarningsOrder.getInctance().getMaterielInEarningsOrderInfoFromBillNumber(m_billNubmber);
+
+            stringReplace(table.billNumber, "[1]");
+            stringReplace("", "[2]");
+            stringReplace(table.makeOrderStaffName, "[3]");
+
+            double sum = 0.0;
+            for (int row = 0; row < m_dataGridView.RowCount; row++)
+            {
+                if (m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.MatetielNumber].Value.ToString().Trim());
+                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
+
+                m_excelApp.Cells[row + startRowIndex, 2] = materielID;
+                m_excelApp.Cells[row + startRowIndex, 3] = record.brand;
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Note].Value.ToString().Trim();
+
+                sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }
 
             stringReplace(Convert.ToString(sum), "[4]");

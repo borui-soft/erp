@@ -386,7 +386,7 @@
             this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printDisplay.Name = "printDisplay";
             this.printDisplay.Size = new System.Drawing.Size(60, 42);
-            this.printDisplay.Text = "打印预览";
+            this.printDisplay.Text = "单据套打";
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);

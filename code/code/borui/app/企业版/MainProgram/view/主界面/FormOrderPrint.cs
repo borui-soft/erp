@@ -245,6 +245,17 @@ namespace MainProgram
                     // 盘盈入库单
                     exportEarningsOrderData();
                 }
+                else if (m_orderType == 10)
+                {
+                    //其他入库单模板
+                    exportOtherInData();
+                }
+                else if (m_orderType == 15)
+                {
+                    //盘亏毁损单模板
+                    exportEarningsOutData();
+                }
+
                 m_excelWorkbook.Save();
 
                 isRet = true;
@@ -493,6 +504,79 @@ namespace MainProgram
                 m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Note].Value.ToString().Trim();
 
                 sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielInEarningsOrder.DataGridColumnName.Value].Value.ToString().Trim());
+            }
+
+            stringReplace(Convert.ToString(sum), "[4]");
+        }
+
+        private void exportOtherInData()
+        {
+            int startRowIndex = 6;
+            // 采购入库单数据导出
+            MaterielInOtherOrderTable table = new MaterielInOtherOrderTable();
+            table = MaterielInOtherOrder.getInctance().getMaterielInOtherOrderInfoFromBillNumber(m_billNubmber);
+
+            stringReplace(table.billNumber, "[1]");
+            stringReplace(table.exchangesUnit, "[2]");
+            stringReplace(table.makeOrderStaffName, "[3]");
+
+            double sum = 0.0;
+            for (int row = 0; row < m_dataGridView.RowCount; row++)
+            {
+                if (m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.MatetielNumber].Value.ToString().Trim());
+                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
+
+                m_excelApp.Cells[row + startRowIndex, 2] = materielID;
+                m_excelApp.Cells[row + startRowIndex, 3] = record.brand;
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Note].Value.ToString().Trim();
+
+                sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Value].Value.ToString().Trim());
+            }
+
+            stringReplace(Convert.ToString(sum), "[4]");
+        }
+
+        private void exportEarningsOutData()
+        {
+            int startRowIndex = 6;
+            // 采购入库单数据导出
+            MaterielOutEarningsOrderTable table = new MaterielOutEarningsOrderTable();
+            table = MaterielOutEarningsOrder.getInctance().getMaterielOutEarningsOrderInfoFromBillNumber(m_billNubmber);
+
+            stringReplace(table.billNumber, "[1]");
+            stringReplace("", "[2]");
+            stringReplace(table.makeOrderStaffName, "[3]");
+
+            double sum = 0.0;
+            for (int row = 0; row < m_dataGridView.RowCount; row++)
+            {
+                if (m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                {
+                    break;
+                }
+
+                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.MatetielNumber].Value.ToString().Trim());
+                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
+
+                m_excelApp.Cells[row + startRowIndex, 2] = materielID;
+                m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 5] = record.brand;
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.Note].Value.ToString().Trim();
+
+                sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielOutEarningsOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }
 
             stringReplace(Convert.ToString(sum), "[4]");

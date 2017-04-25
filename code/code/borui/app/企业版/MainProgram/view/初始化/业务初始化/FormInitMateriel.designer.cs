@@ -45,6 +45,8 @@
             this.dataGridViewMaterielList = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBoxSerach = new System.Windows.Forms.TextBox();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterielList)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +61,7 @@
             this.toolStripSeparator1,
             this.import,
             this.export,
+            this.toolStripButtonRefresh,
             this.toolStripSeparator3,
             this.printDisplay,
             this.print,
@@ -213,11 +216,39 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // textBoxSerach
+            // 
+            this.textBoxSerach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.textBoxSerach.Location = new System.Drawing.Point(457, 22);
+            this.textBoxSerach.Name = "textBoxSerach";
+            this.textBoxSerach.Size = new System.Drawing.Size(298, 21);
+            this.textBoxSerach.TabIndex = 19;
+            this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
+            this.textBoxSerach.Click += new System.EventHandler(this.textBoxSerach_Click);
+            this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_MouseClick);
+            this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_DoubleClick);
+            this.textBoxSerach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSerach_KeyDown);
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.Image = global::MainProgram.Properties.Resources.review;
+            this.toolStripButtonRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(36, 42);
+            this.toolStripButtonRefresh.Text = "刷新";
+            this.toolStripButtonRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
+            // 
             // FormInitMateriel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 421);
+            this.Controls.Add(this.textBoxSerach);
             this.Controls.Add(this.dataGridViewMaterielList);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -229,6 +260,7 @@
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterielList)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -250,5 +282,7 @@
         private System.Windows.Forms.ToolStripButton delete;
         private System.Windows.Forms.ToolStripButton import;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBoxSerach;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
     }
 }

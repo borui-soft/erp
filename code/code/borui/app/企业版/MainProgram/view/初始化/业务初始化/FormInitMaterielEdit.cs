@@ -16,6 +16,7 @@ namespace MainProgram
         private bool m_isAddToInitMaterielList = false;
         private bool m_isEditMaterielData = false;
         private int m_materielPkey = 0;
+        private bool m_isCheckSucceful = false;
         private int m_storageStockTablePkey = 0;
         private string m_materielName = "";
 
@@ -39,12 +40,29 @@ namespace MainProgram
 
                 InitMaterielTable materielStock = InitMateriel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
                 m_materielPkey = materielStock.materielID;
-                MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_materielPkey);
-                this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
-                this.textBoxValue.Text = Convert.ToString(materielStock.value);
-                this.textBoxPrice.Text = Convert.ToString(materielStock.price);
+                if (m_materielPkey > 0)
+                {
+                    m_isCheckSucceful = true;
 
-                m_materielName = materiel.name;
+                    MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_materielPkey);
+                    this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
+                    this.textBoxValue.Text = Convert.ToString(materielStock.value);
+                    this.textBoxPrice.Text = Convert.ToString(materielStock.price);
+
+                    m_materielName = materiel.name;
+                }
+                else 
+                {
+                    m_isCheckSucceful = false;
+                    m_materielPkey = m_storageStockTablePkey;
+
+                    MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
+                    this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
+                    this.textBoxValue.Text = "0";
+                    this.textBoxPrice.Text = "0";
+
+                    m_materielName = materiel.name;
+                }
             }
         }
 
@@ -112,17 +130,20 @@ namespace MainProgram
                     }
                     else
                     {
-                        InitMateriel.getInctance().update(m_storageStockTablePkey, record);
+                        if (m_isCheckSucceful)
+                        {
+                            InitMateriel.getInctance().update(m_storageStockTablePkey, record);
+                        }
+                        else 
+                        {
+                            InitMateriel.getInctance().insert(record);
+                        }
                     }
 
                     m_isAddToInitMaterielList = true;
                     this.Close();
                 }
-
             }
-
-
-
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

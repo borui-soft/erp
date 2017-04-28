@@ -38,30 +38,27 @@ namespace MainProgram
                 this.textBoxValue.Enabled = false;
                 this.buttonEnter.Enabled = false;
 
-                InitMaterielTable materielStock = InitMateriel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
-                m_materielPkey = materielStock.materielID;
-                if (m_materielPkey > 0)
+                MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
+                this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
+                m_materielName = materiel.name;
+                m_materielPkey = m_storageStockTablePkey;
+
+                if (InitMateriel.getInctance().checkMaterielIsExist(m_storageStockTablePkey))
                 {
                     m_isCheckSucceful = true;
 
-                    MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_materielPkey);
-                    this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
+                    InitMaterielTable materielStock = InitMateriel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
+                    m_materielPkey = materielStock.materielID;
+
                     this.textBoxValue.Text = Convert.ToString(materielStock.value);
                     this.textBoxPrice.Text = Convert.ToString(materielStock.price);
-
-                    m_materielName = materiel.name;
                 }
                 else 
                 {
                     m_isCheckSucceful = false;
-                    m_materielPkey = m_storageStockTablePkey;
 
-                    MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
-                    this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
                     this.textBoxValue.Text = "0";
                     this.textBoxPrice.Text = "0";
-
-                    m_materielName = materiel.name;
                 }
             }
         }

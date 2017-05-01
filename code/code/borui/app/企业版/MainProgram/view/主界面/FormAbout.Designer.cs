@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.4.2";
+            this.label3.Text = "当前软件版本：V2.4.5";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、期初成本调整页面添加搜索框\r\n2、期初成本调整页面可调整价格和数量均为0的物料单价";
+            this.richTextBox1.Text = "1、完善期初成本调整页面可调整价格和数量均为0的物料单价的功能实现\r\n2、优化单据编号的产生规则为：5位随机数+年月日+xxxxx，共20位";
             // Fo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

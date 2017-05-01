@@ -274,6 +274,7 @@ namespace MainProgram
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
+            InitMateriel.getInctance().refreshRecord();
             Materiel.getInctance().refreshRecord();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }

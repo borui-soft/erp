@@ -205,6 +205,11 @@ namespace MainProgram.model
 
         public InitMaterielTable getMaterielInfoFromPkey(int pkey)
         {
+            if (m_materielStockList.Count == 0)
+            {
+                load();
+            }
+
             InitMaterielTable materielRecord = new InitMaterielTable();
 
             foreach (KeyValuePair<int, InitMaterielTable> index in m_materielStockList)
@@ -222,8 +227,18 @@ namespace MainProgram.model
             return materielRecord;
         }
 
+        public void refreshRecord()
+        {
+            load();
+        }
+
         public InitMaterielTable getMaterielInfoFromMaterielID(int materielID)
         {
+            if (m_materielStockList.Count == 0)
+            {
+                load();
+            }
+
             InitMaterielTable materielRecord = new InitMaterielTable();
 
             foreach (KeyValuePair<int, InitMaterielTable> index in m_materielStockList)
@@ -244,6 +259,11 @@ namespace MainProgram.model
         public bool checkMaterielIsExist(int materielID)
         {
             bool isRet = false;
+
+            if (m_materielStockList.Count == 0)
+            {
+                load();
+            }
 
             foreach (KeyValuePair<int, InitMaterielTable> index in m_materielStockList)
             {

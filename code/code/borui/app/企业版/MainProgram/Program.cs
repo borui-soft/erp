@@ -30,7 +30,7 @@ namespace MainProgram
                     //Application.Run(new FormTransfer());
                     //Application.Run(new FormProjectMaterielChangeOrder(1, "123"));
                     //Application.Run(new FormProductionReport());
-                    Application.Run(new FormInitMateriel());
+                    Application.Run(new FormMain());
 
                     return;
                 }

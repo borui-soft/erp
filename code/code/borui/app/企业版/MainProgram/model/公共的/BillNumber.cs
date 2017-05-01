@@ -33,6 +33,85 @@ namespace MainProgram.model
         
         public string getNewBillNumber(int billTypeNumber, string date)
         {
+            if (checkIsQuit())
+            {
+                MessageBoxExtend.messageWarning("系统目前为非注册(正版)软件，单据现已超过200张，无法再继续使用。\n请联系软件供应商，索取正版序列号。");
+                CurrentLoginUser.getInctance().delete();
+
+                Process.GetCurrentProcess().Kill();
+            }
+
+            string newBillNumber = "";
+
+            //newBillNumber = getNewBillNumberFunction1(billTypeNumber);
+            //newBillNumber = getNewBillNumberFunction2(billTypeNumber);
+            newBillNumber = getNewBillNumberFunction3(billTypeNumber);
+            
+            return newBillNumber;
+        }
+
+        // 序列号 第一种计算法方法：根据用户配置的单据号的格式
+        private string getNewBillNumberFunction1(int billTypeNumber)
+        {
+            string newBillNumber = "";
+
+            try
+            {
+                // 查询BASE_BILL_CONFIG表，根据单据类型得到单据的前缀
+
+                string front = "";
+                int isUsrRules = 0, isUseSysdate = 0, num = 0;
+
+                string query = "SELECT FRONT, IS_USE_RULES, IS_USE_SYSDATE, NUM FROM BASE_BILL_CONFIG WHERE BILL_TYPE = " + billTypeNumber;
+
+                using (DataTable dataTable1 = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, query))
+                {
+                    if (dataTable1.Rows.Count > 0)
+                    {
+                        front = DbDataConvert.ToString(dataTable1.Rows[0][0]);
+                        isUsrRules = DbDataConvert.ToInt32(dataTable1.Rows[0][1]);
+                        isUseSysdate = DbDataConvert.ToInt32(dataTable1.Rows[0][2]);
+                        num = DbDataConvert.ToInt32(dataTable1.Rows[0][3]);
+
+                        if (isUsrRules == 1)
+                        {
+                            newBillNumber = front;
+
+                            string sNewBillNumber = Convert.ToString(getMaxBillNumber(billTypeNumber, DateTime.Now.ToString("yyyyMMdd")));
+
+                            if (isUseSysdate == 1)
+                            {
+                                newBillNumber += "-" + DateTime.Now.ToString("yyyyMMdd");
+                            }
+                            else
+                            {
+                                newBillNumber += "-" + DateTime.Now.ToString("ddssfff");
+                            }
+
+                            newBillNumber += "-";
+
+                            for (int i = 0; i < num - sNewBillNumber.Length; i++)
+                            {
+                                newBillNumber += "0";
+                            }
+
+                            newBillNumber += sNewBillNumber;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return newBillNumber;
+        }
+
+        // 序列号 第二种计算法方法：单据编号单纯的单纯的又单据类型和yyyyMMddHHmmssfff这样格式的时间组成
+        private string getNewBillNumberFunction2(int billTypeNumber)
+        {
             string newBillNumber = "";
 
             if (billTypeNumber < 10)
@@ -42,66 +121,86 @@ namespace MainProgram.model
 
             newBillNumber += Convert.ToString(billTypeNumber) + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
 
-            if (checkIsQuit())
+            return newBillNumber;
+        }
+
+        private string getNewBillNumberFunction3(int billTypeNumber)
+        {
+            string newBillNumber = "";
+
+            newBillNumber = DateTime.Now.ToString("ssfff");                                                 // 长度5位
+            newBillNumber += "_";                                                                           // 长度1位
+            newBillNumber += DateTime.Now.ToString("yyyyMMdd");                                             // 长度8位
+            newBillNumber += "_";                                                                           // 长度1位
+
+            // 计算下本年度累计单据张数
+            DateTime dt = DateTime.Now;  //当前时间
+            DateTime startYear = new DateTime(dt.Year, 1, 1);  //本年年初
+
+            string quety = "SELECT COUNT(*) FROM BILL_NUMBER WHERE TRADING_DATE >= '" + startYear.ToString("yyyy-MM-dd") + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, quety))
             {
-                MessageBoxExtend.messageWarning("系统目前为非注册(正版)软件，单据现已超过200张，无法再继续使用。\n请联系软件供应商，索取正版序列号。");
-                CurrentLoginUser.getInctance().delete();
+                int recordCount = DbDataConvert.ToInt32(dataTable.Rows[0][0]);
+                recordCount += 1;
 
-                Process.GetCurrentProcess().Kill();
+                if (recordCount > 99999)
+                {
+                    recordCount = recordCount % 99999;
+                }
+
+                string tmpRecordCount = Convert.ToString(recordCount);
+
+                for (int i = 0; i < 5 - tmpRecordCount.Length; i++)
+                {
+                    newBillNumber += "0";
+                }
+
+                newBillNumber += Convert.ToString(recordCount);
             }
-            //else
-            //{
-            //    try
-            //    {
-            //        // 查询BASE_BILL_CONFIG表，根据单据类型得到单据的前缀
 
-            //        string front = "";
-            //        int isUsrRules = 0, isUseSysdate = 0, num = 0;
+            return newBillNumber;
+        }
 
-            //        string query = "SELECT FRONT, IS_USE_RULES, IS_USE_SYSDATE, NUM FROM BASE_BILL_CONFIG WHERE BILL_TYPE = " + billTypeNumber;
+        private string getNewBillNumberFunction4(int billTypeNumber)
+        {
+            string newBillNumber = "";
 
-            //        using (DataTable dataTable1 = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, query))
-            //        {
-            //            if (dataTable1.Rows.Count > 0)
-            //            {
-            //                front = DbDataConvert.ToString(dataTable1.Rows[0][0]);
-            //                isUsrRules = DbDataConvert.ToInt32(dataTable1.Rows[0][1]);
-            //                isUseSysdate = DbDataConvert.ToInt32(dataTable1.Rows[0][2]);
-            //                num = DbDataConvert.ToInt32(dataTable1.Rows[0][3]);
+            if (billTypeNumber < 10)
+            {
+                newBillNumber += "0";
+            }
 
-            //                if (isUsrRules == 1)
-            //                {
-            //                    newBillNumber = front;
+            newBillNumber += Convert.ToString(billTypeNumber) + DateTime.Now.ToString("fff");               // 长度5位
+            newBillNumber += "_";                                                                           // 长度1位
+            newBillNumber += DateTime.Now.ToString("yyyyMMdd");                                             // 长度8位
+            newBillNumber += "_";                                                                           // 长度1位
 
-            //                    string sNewBillNumber = Convert.ToString(getMaxBillNumber(billTypeNumber, date));
+            // 计算下本年度累计单据张数
+            DateTime dt = DateTime.Now;  //当前时间
+            DateTime startYear = new DateTime(dt.Year, 1, 1);  //本年年初
 
-            //                    if (isUseSysdate == 1)
-            //                    {
-            //                        newBillNumber += "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            //                    }
-            //                    else
-            //                    {
-            //                        newBillNumber += "-" + DateTime.Now.ToString("ddssfff") + DateTime.Now.ToString("ddssfff");
-            //                    }
+            string quety = "SELECT COUNT(*) FROM BILL_NUMBER WHERE TRADING_DATE >= '" + startYear.ToString("yyyy-MM-dd") + "'";
 
-            //                    //newBillNumber += "-";
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, quety))
+            {
+                int recordCount = DbDataConvert.ToInt32(dataTable.Rows[0][0]);
+                recordCount += 1;
 
-            //                    //for (int i = 0; i < num - sNewBillNumber.Length; i++)
-            //                    //{
-            //                    //    newBillNumber += "0";
-            //                    //}
+                if (recordCount > 99999)
+                {
+                    recordCount = recordCount % 99999;
+                }
 
-            //                    //newBillNumber += sNewBillNumber;
-            //                }
-            //            }
-            //        }
+                string tmpRecordCount = Convert.ToString(recordCount);
 
-            //    }
-            //    catch (Exception)
-            //    {
+                for (int i = 0; i < 5 - tmpRecordCount.Length; i++)
+                {
+                    newBillNumber += "0";
+                }
 
-            //    }
-            //}
+                newBillNumber += Convert.ToString(recordCount);
+            }
 
             return newBillNumber;
         }

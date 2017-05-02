@@ -192,6 +192,25 @@ namespace MainProgram.model
             return list;
         }
 
+        public double getPurchaseRequestValueFromBillNumber(string billNumber, int materielID)
+        {
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
+            double value = 0.0;
+
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
+                {
+                    value += index.Value.value;
+                }
+            }
+
+            return value;
+        }
 
         public ProjectManagerDetailsTable getMaterielInfoFromBillNumber(string billNumber, int materielID)
         {

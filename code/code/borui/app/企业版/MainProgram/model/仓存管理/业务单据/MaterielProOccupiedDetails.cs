@@ -181,6 +181,8 @@ namespace MainProgram.model
                     break;
                 }
             }
+
+            load();
         }
 
         // 撤销单据
@@ -191,8 +193,6 @@ namespace MainProgram.model
             try
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, delete);
-
-                load();
             }
             catch (Exception error)
             {

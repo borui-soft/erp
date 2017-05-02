@@ -173,7 +173,7 @@ namespace MainProgram.model
             {
                 if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
                 {
-                    value = index.Value.value;
+                    value += index.Value.value;
                 }
             }
 

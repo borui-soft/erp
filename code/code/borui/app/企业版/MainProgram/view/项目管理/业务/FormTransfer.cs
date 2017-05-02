@@ -38,8 +38,13 @@ namespace MainProgram
             MatetielName,
             Model,
             Parameter,
-
             RequestValue,
+
+            // 代表实际库存，项目预占库存
+            Value,
+            ProjectProValue,
+
+
             TransferValue,
             OtherValue,
             Select
@@ -70,12 +75,17 @@ namespace MainProgram
         {
             // 物料资料初始化
             m_dateGridVeiwListDataList.addDataGridViewColumn("NO.", 25, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\n编码", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 200, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\n编码", 50, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 120, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("参数", 60, true, true);
 
-            m_dateGridVeiwListDataList.addDataGridViewColumn("项目需求量", 95, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("项目需求量", 70, true, true);
+
+            m_dateGridVeiwListDataList.addDataGridViewColumn("实际库存", 70, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("项目预占数量", 80, true, true);
+
+
             m_dateGridVeiwListDataList.addDataGridViewColumn("已转数量", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("待转数量", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn(" ", 25, true, true);
@@ -161,6 +171,9 @@ namespace MainProgram
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.TransferValue].Value = Convert.ToDouble(record[3]);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.OtherValue].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
 
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[4]);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.ProjectProValue].Value = Convert.ToDouble(record[5]);
+
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Select] =  new DataGridViewCheckBoxCell();
             }
         }
@@ -201,6 +214,13 @@ namespace MainProgram
                     record.Add(tmp.materielID);
                     record.Add(tmp.value);
                     record.Add(proValue);
+
+                    // 得到实际库存
+                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
+                    record.Add(MaterielCountdata.value);
+
+                    // 库存预占情况,本项目预占量
+                    record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, tmp.billNumber));
 
                     m_proInfoList.Add(m_proInfoList.Count, record);
                 }

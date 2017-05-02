@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectMaterielChangeOrder));
             this.labelName = new System.Windows.Forms.Label();
-            this.dataGridViewDataList = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDataListChange = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -93,7 +93,7 @@
             this.label67 = new System.Windows.Forms.Label();
             this.labelDevMode = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataListChange)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataListChangeOfter)).BeginInit();
             this.groupBox7.SuspendLayout();
@@ -114,17 +114,17 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDataList.Location = new System.Drawing.Point(19, 446);
-            this.dataGridViewDataList.Name = "dataGridViewDataList";
+            this.dataGridViewDataListChange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDataListChange.Location = new System.Drawing.Point(19, 446);
+            this.dataGridViewDataListChange.Name = "dataGridViewDataList";
             dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewDataList.RowTemplate.Height = 23;
-            this.dataGridViewDataList.Size = new System.Drawing.Size(898, 220);
-            this.dataGridViewDataList.TabIndex = 25;
-            this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
-            this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
-            this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
+            this.dataGridViewDataListChange.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewDataListChange.RowTemplate.Height = 23;
+            this.dataGridViewDataListChange.Size = new System.Drawing.Size(898, 220);
+            this.dataGridViewDataListChange.TabIndex = 25;
+            this.dataGridViewDataListChange.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
+            this.dataGridViewDataListChange.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataListChange.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
             // groupBox4
             // 
@@ -801,7 +801,7 @@
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.dataGridViewDataList);
+            this.Controls.Add(this.dataGridViewDataListChange);
             this.Controls.Add(this.labelBillNumber);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label7);
@@ -814,7 +814,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "项目名称";
             this.Load += new System.EventHandler(this.FormProjectMaterielOrder_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataListChange)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataListChangeOfter)).EndInit();
@@ -831,7 +831,7 @@
         #endregion
 
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.DataGridView dataGridViewDataList;
+        private System.Windows.Forms.DataGridView dataGridViewDataListChange;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ToolStrip toolStrip1;

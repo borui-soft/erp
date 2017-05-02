@@ -155,7 +155,10 @@ namespace MainProgram
                     }
                     else
                     {
-                        temp.Add(tmp.value);
+                        // temp.Add(tmp.value);
+                        temp.Add(ProjectManagerDetails.getInctance().getPurchaseRequestValueFromBillNumber(record.billNumber, tmp.materielID));
+
+                        if()
                     }
 
                     // 得到实际库存

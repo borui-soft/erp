@@ -224,7 +224,7 @@ namespace MainProgram
             m_dateGridVeiwListDataListChange.addDataGridViewColumn("使用日期(*)", 70, true, false);
             m_dateGridVeiwListDataListChange.addDataGridViewColumn("变更原因", 100, true, false);
 
-            m_dateGridVeiwListDataListChange.initDataGridViewColumn(this.dataGridViewDataList);
+            m_dateGridVeiwListDataListChange.initDataGridViewColumn(this.dataGridViewDataListChange);
             m_dateGridVeiwListDataListChange.initDataGridViewData(DateGridVeiwListDataListRowCount);
 
             // 根据单据编号，得到详细数据
@@ -355,7 +355,7 @@ namespace MainProgram
                 }
                 else
                 {
-                    m_currentOrderInfo.materielIDs += dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString();
+                    m_currentOrderInfo.materielIDs += dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString();
                     m_currentOrderInfo.materielIDs += "#";
                 }
             }
@@ -384,7 +384,7 @@ namespace MainProgram
 
             for (int rowIndex = 0; rowIndex < DateGridVeiwListDataListRowCount; rowIndex++)
             {
-                if (this.dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
+                if (this.dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
                 {
                     break;
                 }
@@ -393,19 +393,19 @@ namespace MainProgram
                     ProjectManagerDetailsTable currentRowInfo = new ProjectManagerDetailsTable();
 
                     currentRowInfo.billNumber = this.labelBillNumber.Text;
-                    currentRowInfo.rowNumber = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString());
+                    currentRowInfo.rowNumber = Convert.ToInt32(dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString());
 
-                    currentRowInfo.no = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value.ToString();
-                    currentRowInfo.sequence = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value.ToString();
-                    currentRowInfo.useDate = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value.ToString();
-                    currentRowInfo.deviceName = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value.ToString();
-                    currentRowInfo.materielSize = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value.ToString();
-                    currentRowInfo.cl = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value.ToString();
+                    currentRowInfo.no = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value.ToString();
+                    currentRowInfo.sequence = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value.ToString();
+                    currentRowInfo.useDate = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value.ToString();
+                    currentRowInfo.deviceName = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value.ToString();
+                    currentRowInfo.materielSize = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value.ToString();
+                    currentRowInfo.cl = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value.ToString();
 
-                    currentRowInfo.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
-                    currentRowInfo.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
-                    currentRowInfo.makeType = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value.ToString();
-                    currentRowInfo.materielNote = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
+                    currentRowInfo.materielID = Convert.ToInt32(dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
+                    currentRowInfo.value = Convert.ToDouble(dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
+                    currentRowInfo.makeType = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value.ToString();
+                    currentRowInfo.materielNote = dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
 
                     list.Add(currentRowInfo);
                 }
@@ -489,7 +489,7 @@ namespace MainProgram
             // PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
             if (m_billNumber.Length > 0)
             {
-                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, m_billNumber, this.dataGridViewDataList, this.dataGridViewDataListChangeOfter);
+                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, m_billNumber, this.dataGridViewDataListChange, this.dataGridViewDataListChangeOfter);
                 fop.ShowDialog();
             }
             else
@@ -518,12 +518,12 @@ namespace MainProgram
             if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
             {
                 //验证DataGridView是否又空的行
-                int nullRowNumber = m_dateGridVeiwListDataList.getExistNullRow(e.RowIndex);
+                int nullRowNumber = m_dateGridVeiwListDataListChange.getExistNullRow(e.RowIndex);
 
                 if (nullRowNumber != -1)
                 {
                     MessageBoxExtend.messageWarning("行号[" + Convert.ToString(nullRowNumber + 1) + "]数据为空，请现在空行中输入");
-                    dataGridViewDataList.CurrentCell = this.dataGridViewDataList.Rows[nullRowNumber].Cells[(int)DataGridColumnName.MatetielNumber];
+                    dataGridViewDataListChange.CurrentCell = this.dataGridViewDataListChange.Rows[nullRowNumber].Cells[(int)DataGridColumnName.MatetielNumber];
 
                     m_rowIndex = nullRowNumber;
                     m_columnIndex = e.ColumnIndex;
@@ -543,9 +543,9 @@ namespace MainProgram
                 /* 如果是物料编码列，需要判断该物料编码是否存在
                  * 如果存在读取相应的值填充DataGridView中对应的其他列，如果不存在该物料编码，则清空该行
                  * */
-                if (dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString().Length > 0)
+                if (dataGridViewDataListChange.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString().Length > 0)
                 {
-                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+                    setMatetielInfoToDataGridView(dataGridViewDataListChange.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
                 }
             }
         }
@@ -566,7 +566,7 @@ namespace MainProgram
 
                     if (pkey != record.pkey || record.pkey == 0)
                     {
-                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                        MessageBoxExtend.messageWarning("[" + dataGridViewDataListChange.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                             "]不存在，请重新输入或选择");
                         m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
 
@@ -575,7 +575,7 @@ namespace MainProgram
                 }
                 catch
                 {
-                    MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                    MessageBoxExtend.messageWarning("[" + dataGridViewDataListChange.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                         "]不存在，请重新输入或选择");
                     m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
 
@@ -583,16 +583,16 @@ namespace MainProgram
                 }
             }
 
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Size].Value = "";
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Size].Value = "";
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
                 AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitPurchase);
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = DateTime.Now.ToString("yyyy-MM-dd");
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
+            dataGridViewDataListChange.Rows[m_rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         private void dataGridViewDataList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -613,7 +613,7 @@ namespace MainProgram
                 m_columnIndex != (int)DataGridColumnName.MatetielNumber)
             {
                 e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
-                    this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+                    this.dataGridViewDataListChange.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
             }
             else
             {
@@ -679,24 +679,24 @@ namespace MainProgram
 
                 int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
 
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
 
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Size].Value = record.materielSize;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnit;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeType].Value = record.makeType;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.materielNote;
 
 
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value = record.no;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value = record.sequence;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = record.useDate;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value = record.deviceName;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value = record.cl;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value = record.no;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value = record.sequence;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.UseDate].Value = record.useDate;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.DeviceName].Value = record.deviceName;
+                dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.CL].Value = record.cl;
             }
 
             // 如果单据已审核，则禁用页面所有控件
@@ -708,7 +708,7 @@ namespace MainProgram
 
                 this.save.Enabled = false;
                 this.toolStripButtonReview.Enabled = false;
-                this.dataGridViewDataList.ReadOnly = true;
+                this.dataGridViewDataListChange.ReadOnly = true;
 
                 this.panelSummary.Visible = false;
 
@@ -818,7 +818,7 @@ namespace MainProgram
                     {
                         MessageBoxExtend.messageWarning("物料[" + dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString() +
                             "]不属于原始单据，请重新输入或选择");
-                        m_dateGridVeiwListDataListChange.clearDataGridViewRow(e.RowIndex);
+                        m_dateGridVeiwListDataList.clearDataGridViewRow(e.RowIndex);
                     }
 
                 }
@@ -830,7 +830,7 @@ namespace MainProgram
             if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
             {
                 //验证DataGridView是否又空的行
-                int nullRowNumber = m_dateGridVeiwListDataListChange.getExistNullRow(e.RowIndex);
+                int nullRowNumber = m_dateGridVeiwListDataList.getExistNullRow(e.RowIndex);
 
                 if (nullRowNumber != -1)
                 {

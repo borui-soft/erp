@@ -53,12 +53,13 @@ namespace MainProgram.model
                             delete(record.billNumber);
                         }
 
-                        string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER]";
+                        string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER], [XX_TABLE_ROW_NUM]";
                         insert += ",[PRICE],[VALUE],[NOTE])VALUES(";
 
                         insert += "'" + record.rowNumber + "',";
                         insert += record.materielID + ",";
                         insert += "'" + record.billNumber + "',";
+                        insert += "'" + record.xxMatetielTableRowNum + "',";
                         insert += record.price + ",";
                         insert += record.value + ",";
                         insert += "'" + record.note + "'";
@@ -105,7 +106,7 @@ namespace MainProgram.model
         {
             m_tableDataList.Clear();
 
-            string querySQL = "SELECT A1.[PKEY],A1.[ROW_NUMBER],A1.[MATERIEL_ID], A1.[BILL_NUMBER],A1.[PRICE],A1.[VALUE],A1.[NOTE] ";
+            string querySQL = "SELECT A1.[PKEY],A1.[ROW_NUMBER],A1.[MATERIEL_ID], A1.[BILL_NUMBER],A1.[PRICE],A1.[VALUE],A1.[NOTE], A1.[XX_TABLE_ROW_NUM] ";
             querySQL += " FROM [WAREHOUSE_MANAGEMENT_OUT_DETAILS] A1, WAREHOUSE_MANAGEMENT_OUT A2";
             querySQL += " WHERE A1.BILL_NUMBER = A2.BILL_NUMBER";
             querySQL += " ORDER BY A1.[PKEY]";
@@ -119,6 +120,7 @@ namespace MainProgram.model
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.rowNumber = DbDataConvert.ToString(row["ROW_NUMBER"]);
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
+                    record.xxMatetielTableRowNum = DbDataConvert.ToString(row["XX_TABLE_ROW_NUM"]);
 
                     record.materielID = DbDataConvert.ToInt32(row["MATERIEL_ID"]);
 
@@ -272,7 +274,7 @@ namespace MainProgram.model
             return dataList;
         }
 
-        public double getPurchaseValueFromBillNumber(string billNumber, int materielID)
+        public double getPurchaseValueFromMaterielID(string billNumber, int materielID)
         {
             double value = 0;
             SortedDictionary<int, MaterielOutOrderDetailsTable> list = new SortedDictionary<int, MaterielOutOrderDetailsTable>();
@@ -281,14 +283,32 @@ namespace MainProgram.model
             {
                 if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
                 {
-                    value += index.Value.value;
+                    value = index.Value.value;
+                    break;
                 }
             }
 
             return value;
         }
 
-        public double getMaterielCountInfoFromProject(string srcOrderNum, int materielID)
+        public double getPurchaseValueFromBillNumber(string billNumber, int rowNumber)
+        {
+            double value = 0;
+            SortedDictionary<int, MaterielOutOrderDetailsTable> list = new SortedDictionary<int, MaterielOutOrderDetailsTable>();
+
+            foreach (KeyValuePair<int, MaterielOutOrderDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.xxMatetielTableRowNum == Convert.ToString(rowNumber))
+                {
+                    value = index.Value.value;
+                    break;
+                }
+            }
+
+            return value;
+        }
+
+        public double getMaterielCountInfoFromProject(string srcOrderNum, int rowNumber)
         {
             SortedDictionary<int, MaterielOutOrderTable> materielOutOrderList = new SortedDictionary<int, MaterielOutOrderTable>();
             materielOutOrderList = MaterielOutOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(srcOrderNum);
@@ -299,7 +319,7 @@ namespace MainProgram.model
                 MaterielOutOrderTable recordOrder = new MaterielOutOrderTable();
                 recordOrder = (MaterielOutOrderTable)materielOutOrderList[indexOrderList];
 
-                materielOutOrderValueCount += MaterielOutOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, materielID);
+                materielOutOrderValueCount += getPurchaseValueFromBillNumber(recordOrder.billNumber, rowNumber);
             }
 
             return materielOutOrderValueCount;
@@ -322,5 +342,7 @@ namespace MainProgram.model
         public double value { get; set; }
         public double sumMoney { get; set; }
         public string note { get; set; }
+
+        public string xxMatetielTableRowNum;
     }
 }

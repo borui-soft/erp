@@ -53,7 +53,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.4.5";
+            this.label3.Text = "当前软件版本：V2.5.0";
             // 
             // pictureBox1
             // 
@@ -79,7 +79,11 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、完善期初成本调整页面可调整价格和数量均为0的物料单价的功能实现\r\n2、优化单据编号的产生规则为：5位随机数+年月日+xxxxx，共20位";
+            this.richTextBox1.Text = "1、支持材料表及其他单据，在同一单据录入多条相同物料ID的功能\r\n";
+            this.richTextBox1.Text += "2、材料表关联其他单据时加入了行号元素进行精确关联\r\n";
+            this.richTextBox1.Text += "3、解决材料变更单，无法实现变更的问题\r\n";
+            this.richTextBox1.Text += "4、材料中转页面，增加实际库存和项目预占库存";
+
             // Fo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

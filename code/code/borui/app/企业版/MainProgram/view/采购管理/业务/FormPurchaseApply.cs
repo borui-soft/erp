@@ -45,7 +45,8 @@ namespace MainProgram
             Value,
             Turnover,
             OtherCost,
-            SumTurnover
+            SumTurnover,
+            xxMatetielTableRowNum
         };
 
         public FormPurchaseApply(string billNumber = "", SortedDictionary<int, ArrayList> proInfoList = null)
@@ -112,6 +113,7 @@ namespace MainProgram
             m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 80, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("其他费用", 80, true, false);
             m_dateGridVeiwListDataList.addDataGridViewColumn("总金额", 100, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("SXX", 50, false, false);
 
             m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
             m_dateGridVeiwListDataList.initDataGridViewData(DateGridVeiwListDataListRowCount);
@@ -396,6 +398,9 @@ namespace MainProgram
                     PurchaseApplyOrderDetailsTable record = new PurchaseApplyOrderDetailsTable();
 
                     record.rowNumber = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString();
+
+                    record.xxMatetielTableRowNum = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value.ToString();
+
                     record.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
                     record.price = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
                     record.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
@@ -754,6 +759,7 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = record.xxMatetielTableRowNum;
             }
 
             // 如果单据已审核，则禁用页面所有控件
@@ -846,7 +852,7 @@ namespace MainProgram
 
                 setMatetielInfoToDataGridView(Convert.ToString(record[1]), index);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
-
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = Convert.ToString(record[6]);
                 setTurnoverInfoDataGridView(index);
             }
         }

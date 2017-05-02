@@ -155,10 +155,7 @@ namespace MainProgram
                     }
                     else
                     {
-                        // temp.Add(tmp.value);
-                        temp.Add(ProjectManagerDetails.getInctance().getPurchaseRequestValueFromBillNumber(record.billNumber, tmp.materielID));
-
-                        if()
+                        temp.Add(tmp.value);
                     }
 
                     // 得到实际库存
@@ -171,7 +168,7 @@ namespace MainProgram
                     
 
                     // 转采购申请单数量
-                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, tmp.materielID);
+                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, tmp.rowNumber);
                     temp.Add(appylyCount);
 
                     // 采购订单数量
@@ -203,12 +200,13 @@ namespace MainProgram
                     temp.Add(purchaseInOrderValueCount);
 
                     // 生产领料数量
-                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, tmp.materielID);
+                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, tmp.rowNumber);
                     temp.Add(materielOutOrderValueCount);
 
                     projectInfoList.Add(projectInfoList.Count, temp);
                 }
 
+                /* 暂时不在显示变更后数据
                 // 如果changeMaterielList.count大于0 则代表有
                 foreach (KeyValuePair<int, ProjectManagerDetailsTable> index3 in changeMaterielList)
                 {
@@ -238,7 +236,7 @@ namespace MainProgram
 
 
                     // 转采购申请单数量
-                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, tmp.materielID);
+                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, tmp.rowNumber);
                     temp.Add(appylyCount);
 
                     // 采购订单数量
@@ -270,12 +268,12 @@ namespace MainProgram
                     temp.Add(purchaseInOrderValueCount);
 
                     // 生产领料数量
-                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, tmp.materielID);
+                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, tmp.rowNumber);
                     temp.Add(materielOutOrderValueCount);
 
                     projectInfoList.Add(projectInfoList.Count, temp);
                 }
-
+*/
             }
 
             initDataGridViewData(projectInfoList, 3);

@@ -201,11 +201,11 @@ namespace MainProgram
                 }
                 else if (m_dataType == 2)
                 {
-                    proValue = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(tmp.billNumber, tmp.materielID);
+                    proValue = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(tmp.billNumber, tmp.rowNumber);
                 }
                 else if (m_dataType == 3)
                 {
-                    proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(tmp.billNumber, tmp.materielID);
+                    proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(tmp.billNumber, tmp.rowNumber);
                 }
 
                 if (tmp.value - proValue > 0)
@@ -221,6 +221,7 @@ namespace MainProgram
 
                     // 库存预占情况,本项目预占量
                     record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, tmp.billNumber));
+                    record.Add(tmp.rowNumber);
 
                     m_proInfoList.Add(m_proInfoList.Count, record);
                 }

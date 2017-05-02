@@ -44,7 +44,8 @@ namespace MainProgram
             Value,
             Price,
             Turnover,
-            Note
+            Note,
+            xxMatetielTableRowNum
         };
 
         public FormMaterielOutOrder(string billNumber = "", SortedDictionary<int, ArrayList> proInfoList = null)
@@ -108,6 +109,7 @@ namespace MainProgram
             m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 100, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 100, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("备注", 203, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("SID", 50, false, false);
 
             m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
             m_dateGridVeiwListDataList.initDataGridViewData(DateGridVeiwListDataListRowCount);
@@ -387,6 +389,7 @@ namespace MainProgram
 
                     record.billNumber = this.labelBillNumber.Text;
                     record.rowNumber = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString();
+                    record.xxMatetielTableRowNum = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value.ToString();
                     record.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
                     record.price = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
                     record.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
@@ -786,6 +789,7 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.note;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = record.xxMatetielTableRowNum;
             }
         }
 
@@ -908,6 +912,7 @@ namespace MainProgram
 
                 setMatetielInfoToDataGridView(Convert.ToString(record[1]), index);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = Convert.ToString(record[6]);
 
                 setTurnoverInfoDataGridView(index);
             }

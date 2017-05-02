@@ -53,12 +53,15 @@ namespace MainProgram.model
                             delete(record.billNumber);
                         }
 
-                        string insert = "INSERT INTO [dbo].[PURCHASE_APPLY_ORDER_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER]";
+                        string insert = "INSERT INTO [dbo].[PURCHASE_APPLY_ORDER_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER], [XX_TABLE_ROW_NUM]";
                         insert += ",[PRICE],[VALUE],[OTHER_COST])VALUES(";
 
                         insert += "'" + record.rowNumber + "',";
                         insert += record.materielID + ",";
                         insert += "'" + record.billNumber + "',";
+
+                        insert += "'" + record.xxMatetielTableRowNum + "',";
+
                         insert += record.price + ",";
                         insert += record.value + ",";
                         insert += record.otherCost;
@@ -124,7 +127,7 @@ namespace MainProgram.model
 
         private void load()
         {
-            string sql = "SELECT [PKEY],[ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER],[PRICE],[VALUE]";
+            string sql = "SELECT [PKEY],[ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER],[XX_TABLE_ROW_NUM], [PRICE],[VALUE]";
             sql += ",[OTHER_COST] FROM [dbo].[PURCHASE_APPLY_ORDER_DETAILS] ORDER BY PKEY";
 
             m_tableDataList.Clear();
@@ -138,6 +141,8 @@ namespace MainProgram.model
                     record.pkey = DbDataConvert.ToInt32(row["PKEY"]);
                     record.rowNumber = DbDataConvert.ToString(row["ROW_NUMBER"]);
                     record.billNumber = DbDataConvert.ToString(row["BILL_NUMBER"]);
+
+                    record.xxMatetielTableRowNum = DbDataConvert.ToString(row["XX_TABLE_ROW_NUM"]);
 
                     record.materielID = DbDataConvert.ToInt32(row["MATERIEL_ID"]);
 
@@ -185,7 +190,7 @@ namespace MainProgram.model
             return list;
         }
 
-        public double getPurchaseValueFromBillNumber(string billNumber, int materielID)
+        public double getPurchaseValueFromMaterielID(string billNumber, int materielID)
         {
             double value = 0;
             SortedDictionary<int, PurchaseApplyOrderDetailsTable> list = new SortedDictionary<int, PurchaseApplyOrderDetailsTable>();
@@ -194,14 +199,33 @@ namespace MainProgram.model
             {
                 if (index.Value.billNumber == billNumber && index.Value.materielID == materielID)
                 {
-                    value += index.Value.value;
+                    value = index.Value.value;
+                    break;
                 }
             }
 
             return value;
         }
 
-        public double getPurchaseValueFromProjectNumber(string projectNum, int materielID)
+        public double getPurchaseValueFromBillNumber(string billNumber, int rowNumber)
+        {
+            double value = 0;
+
+            SortedDictionary<int, PurchaseApplyOrderDetailsTable> list = new SortedDictionary<int, PurchaseApplyOrderDetailsTable>();
+
+            foreach (KeyValuePair<int, PurchaseApplyOrderDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.xxMatetielTableRowNum == Convert.ToString(rowNumber))
+                {
+                    value = index.Value.value;
+                    break;
+                }
+            }
+
+            return value;
+        }
+
+        public double getPurchaseValueFromProjectNumber(string projectNum, int rowNumber)
         {
             double appylyCount = 0.0;
 
@@ -213,7 +237,7 @@ namespace MainProgram.model
                 PurchaseApplyOrderTable recordlistApply = new PurchaseApplyOrderTable();
                 recordlistApply = (PurchaseApplyOrderTable)listApplyList[indexApplyList];
 
-                appylyCount += PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordlistApply.billNumber, materielID);
+                appylyCount += PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordlistApply.billNumber, rowNumber);
             }
 
             return appylyCount;
@@ -256,5 +280,7 @@ namespace MainProgram.model
         public double sumMoney { get; set; }
         public double otherCost { get; set; }
         public double totalMoney { get; set; }
+
+        public string xxMatetielTableRowNum;
     }
 }

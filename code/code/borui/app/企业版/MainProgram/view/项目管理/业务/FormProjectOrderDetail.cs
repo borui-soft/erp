@@ -183,7 +183,7 @@ namespace MainProgram
                     PurchaseApplyOrderTable recordOrder = new PurchaseApplyOrderTable();
                     recordOrder = (PurchaseApplyOrderTable)listOrderList[indexOrderList];
 
-                    if (PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, m_materielID) > 0)
+                    if (PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromMaterielID(recordOrder.billNumber, m_materielID) > 0)
                     {
                         list.Add(list.Count, recordOrder);
                     }
@@ -347,7 +347,7 @@ namespace MainProgram
                     MaterielOutOrderTable recordOrder = new MaterielOutOrderTable();
                     recordOrder = (MaterielOutOrderTable)listOrderList[indexOrderList];
 
-                    if (MaterielOutOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, m_materielID) > 0)
+                    if (MaterielOutOrderDetails.getInctance().getPurchaseValueFromMaterielID(recordOrder.billNumber, m_materielID) > 0)
                     {
                         list.Add(list.Count, recordOrder);
                     }

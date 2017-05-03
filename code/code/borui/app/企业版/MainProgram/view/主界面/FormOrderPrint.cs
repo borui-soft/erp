@@ -355,7 +355,18 @@ namespace MainProgram
                 int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.MatetielNumber].Value.ToString());
                 MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
 
-                ProjectManagerDetailsTable tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromBillNumber(table.srcOrderNum, materielID);
+                ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+
+                string xxMatetielTableRowNum = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.xxMatetielTableRowNum].Value.ToString();
+
+                if (xxMatetielTableRowNum.Length > 0)
+                {
+                    tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromRowNum(table.srcOrderNum, materielID);
+                }
+                else 
+                {
+                    tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromBillNumber(table.srcOrderNum, materielID);
+                }
 
                 m_excelApp.Cells[row + 6, 1] = tmp.no;
                 m_excelApp.Cells[row + 6, 2] = tmp.sequence;
@@ -472,8 +483,8 @@ namespace MainProgram
 
                 m_excelApp.Cells[row + startRowIndex, 2] = projectInfo.projectName;
                 m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Brand].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 4] = "";
-                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 5] = "";
                 m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Model].Value.ToString().Trim();
                 m_excelApp.Cells[row + startRowIndex, 7] = tmp.cl;
                 m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Unit].Value.ToString().Trim();

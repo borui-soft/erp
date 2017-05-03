@@ -45,15 +45,7 @@
             this.labelQuestion.Size = new System.Drawing.Size(131, 12);
             this.labelQuestion.TabIndex = 6;
             this.labelQuestion.Text = "欢迎您使用博锐ERP软件";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 101);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 12);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.0";
+
             // 
             // pictureBox1
             // 
@@ -72,6 +64,17 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 17;
             this.label1.Text = "版本更新说明";
+
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(131, 12);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "当前软件版本：V2.5.1";
+
             // 
             // richTextBox1
             // 
@@ -79,10 +82,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、支持材料表及其他单据，在同一单据录入多条相同物料ID的功能\r\n";
-            this.richTextBox1.Text += "2、材料表关联其他单据时加入了行号元素进行精确关联\r\n";
-            this.richTextBox1.Text += "3、解决材料变更单，无法实现变更的问题\r\n";
-            this.richTextBox1.Text += "4、材料中转页面，增加实际库存和项目预占库存";
+            this.richTextBox1.Text = "1、采购申请单套打, 物料名称打印由之前的合同名称调整到公司名称列\r\n";
+            this.richTextBox1.Text += "2、领料单套打, 解决同一领料单中出现相同物料ID时，序号和序列号打印导出错误的问题\r\n";
+
 
             // Fo
             // 

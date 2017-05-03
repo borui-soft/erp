@@ -233,6 +233,27 @@ namespace MainProgram.model
             return value;
         }
 
+        public ProjectManagerDetailsTable getMaterielInfoFromRowNum(string billNumber, int rowMum)
+        {
+            ProjectManagerDetailsTable value = new ProjectManagerDetailsTable();
+
+            if (m_tableDataList.Count == 0)
+            {
+                load();
+            }
+
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber && index.Value.rowNumber == rowMum)
+                {
+                    value = index.Value;
+                    break;
+                }
+            }
+
+            return value;
+        }
+
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;

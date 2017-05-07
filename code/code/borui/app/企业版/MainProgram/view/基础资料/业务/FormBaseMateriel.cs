@@ -48,7 +48,10 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dataGridViewExtend.addDataGridViewColumn("物料组", 200, false);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
-            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 100);
+            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 80);
+
+            m_dataGridViewExtend.addDataGridViewColumn("分组名称", 120);
+
             m_dataGridViewExtend.addDataGridViewColumn("物料简称", 100);
             m_dataGridViewExtend.addDataGridViewColumn("助记码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 100);
@@ -99,6 +102,9 @@ namespace MainProgram
                 temp.Add(materiel.materielType);
                 temp.Add(materiel.name);
                 temp.Add(materiel.num);
+
+                temp.Add(MaterielType.getInctance().getMaterielTypeNameFromPkey(materiel.materielType));
+
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.mnemonicCode);
                 temp.Add(materiel.model);

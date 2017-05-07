@@ -123,7 +123,7 @@ namespace MainProgram.model
 
         public string getMaterielTypeNameFromPkey(int pkey)
         {
-            string materielTypeName = "未知分类名称";
+            string materielTypeName = "未知分类";
 
             if (m_MaterielTypeList.ContainsKey(pkey))
             {

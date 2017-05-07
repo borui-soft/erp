@@ -187,6 +187,7 @@
             // 
             // dateTimePickerTradingDate
             // 
+            this.dateTimePickerTradingDate.ImeMode = System.Windows.Forms.ImeMode.Hangul;
             this.dateTimePickerTradingDate.Location = new System.Drawing.Point(-3, 0);
             this.dateTimePickerTradingDate.Name = "dateTimePickerTradingDate";
             this.dateTimePickerTradingDate.Size = new System.Drawing.Size(149, 21);
@@ -369,6 +370,7 @@
             // 
             this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxSummary.ImeMode = System.Windows.Forms.ImeMode.Hangul;
             this.textBoxSummary.Location = new System.Drawing.Point(0, 0);
             this.textBoxSummary.Name = "textBoxSummary";
             this.textBoxSummary.Size = new System.Drawing.Size(1005, 21);
@@ -699,6 +701,7 @@
             // 
             this.textBoxContractNum.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxContractNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxContractNum.ImeMode = System.Windows.Forms.ImeMode.Hangul;
             this.textBoxContractNum.Location = new System.Drawing.Point(0, -1);
             this.textBoxContractNum.Name = "textBoxContractNum";
             this.textBoxContractNum.Size = new System.Drawing.Size(149, 21);
@@ -754,6 +757,7 @@
             // 
             this.textBoxMakeNum.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxMakeNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxMakeNum.ImeMode = System.Windows.Forms.ImeMode.Hangul;
             this.textBoxMakeNum.Location = new System.Drawing.Point(0, 0);
             this.textBoxMakeNum.Name = "textBoxMakeNum";
             this.textBoxMakeNum.Size = new System.Drawing.Size(152, 21);
@@ -809,6 +813,7 @@
             // 
             this.textBoxDeviceMode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxDeviceMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxDeviceMode.ImeMode = System.Windows.Forms.ImeMode.Hangul;
             this.textBoxDeviceMode.Location = new System.Drawing.Point(0, 0);
             this.textBoxDeviceMode.Name = "textBoxDeviceMode";
             this.textBoxDeviceMode.Size = new System.Drawing.Size(152, 21);
@@ -864,6 +869,7 @@
             // 
             this.textBoxDeviceName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxDeviceName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxDeviceName.ImeMode = System.Windows.Forms.ImeMode.Hangul;
             this.textBoxDeviceName.Location = new System.Drawing.Point(0, 0);
             this.textBoxDeviceName.Name = "textBoxDeviceName";
             this.textBoxDeviceName.Size = new System.Drawing.Size(152, 21);

@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.1";
+            this.label3.Text = "当前软件版本：V2.5.5";
 
             // 
             // richTextBox1
@@ -82,8 +82,10 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、采购申请单套打, 物料名称打印由之前的合同名称调整到公司名称列\r\n";
-            this.richTextBox1.Text += "2、领料单套打, 解决同一领料单中出现相同物料ID时，序号和序列号打印导出错误的问题\r\n";
+            this.richTextBox1.Text = "1、重新修改了单据号产生规则，把某些类单据归为一类，按归类后类型产生单据号\r\n";
+            this.richTextBox1.Text += "2、物料显示页面和库存表页面，增加了物料分组栏\r\n";
+            this.richTextBox1.Text += "3、物料显示页面和材料表录入页面中的某些控件，增加默认是半角输入的控制\r\n";
+            this.richTextBox1.Text += "4、所有页面的搜索框，搜索功能不在区分大小写";
 
 
             // Fo

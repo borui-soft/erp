@@ -369,7 +369,14 @@ namespace MainProgram.model
                 MaterielTable materiel = new MaterielTable();
                 materiel = index.Value;
 
-                if (materiel.name.IndexOf(serachTerm) >= 0 || materiel.mnemonicCode.IndexOf(serachTerm) >= 0 || materiel.num == serachTerm)
+                string materielNameLower = materiel.name.ToLower();
+                string materielCodeLower = materiel.mnemonicCode.ToLower();
+                string materielNumLower = materiel.num.ToLower();
+                string serachTermLower = serachTerm.ToLower();
+
+                if (materielNameLower.IndexOf(serachTermLower) >= 0 || 
+                    materielCodeLower.IndexOf(serachTermLower) >= 0 ||
+                    materielNumLower == serachTermLower)
                 {
                     materielList.Add(materielList.Count, materiel);
                 }

@@ -45,7 +45,7 @@ namespace MainProgram.model
 
             //newBillNumber = getNewBillNumberFunction1(billTypeNumber);
             //newBillNumber = getNewBillNumberFunction2(billTypeNumber);
-            newBillNumber = getNewBillNumberFunction3(billTypeNumber);
+            newBillNumber = getNewBillNumberFunction5(billTypeNumber);
             
             return newBillNumber;
         }
@@ -181,6 +181,107 @@ namespace MainProgram.model
             DateTime startYear = new DateTime(dt.Year, 1, 1);  //本年年初
 
             string quety = "SELECT COUNT(*) FROM BILL_NUMBER WHERE TRADING_DATE >= '" + startYear.ToString("yyyy-MM-dd") + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, quety))
+            {
+                int recordCount = DbDataConvert.ToInt32(dataTable.Rows[0][0]);
+                recordCount += 1;
+
+                if (recordCount > 99999)
+                {
+                    recordCount = recordCount % 99999;
+                }
+
+                string tmpRecordCount = Convert.ToString(recordCount);
+
+                for (int i = 0; i < 5 - tmpRecordCount.Length; i++)
+                {
+                    newBillNumber += "0";
+                }
+
+                newBillNumber += Convert.ToString(recordCount);
+            }
+
+            return newBillNumber;
+        }
+
+        private string getNewBillNumberFunction5(int billTypeNumber)
+        {
+            /*
+             *  目前系统中，单据号规则分别如下 2017/05/07
+             *  采购申请单：0
+             *  采购订单：1
+             *  采购入库单：2
+
+             *  销售询价：4
+             *  销售订单：5
+             *  销售出库：6
+
+             *  产品入库：8
+             *  盘盈入库：9
+             *  其他入库：10
+
+             *  领料单：14
+             *  盘亏亏损：15
+             *  其他出库：16
+
+             *  库存预占：17
+
+             *  期初成本调整单据：20
+
+             *  xx材料表：51、52、53
+             *  xx材料变更表：54
+
+             *  付款单：61
+             *  收款单：62
+            */
+
+
+            string newBillNumber = "";
+
+            newBillNumber = DateTime.Now.ToString("ssfff");                                                 // 长度5位
+            newBillNumber += "_";                                                                           // 长度1位
+            newBillNumber += DateTime.Now.ToString("yyyyMMdd");                                             // 长度8位
+            newBillNumber += "_";                                                                           // 长度1位
+
+            // 计算下本年度累计单据张数
+            DateTime dt = DateTime.Now;  //当前时间
+            DateTime startYear = new DateTime(dt.Year, 1, 1);  //本年年初
+
+            string quety = "SELECT COUNT(*) FROM BILL_NUMBER WHERE TRADING_DATE >= '" + startYear.ToString("yyyy-MM-dd") + "' AND BILL_TYPE_NUMBER IN(";
+
+            
+            /*
+             *  单据号按如下规则进行分类汇总
+             *  采购入库、其他入库
+             *  生产领料和其他出库
+             *  盘盈和盘亏
+             *  采购申请单和采购订单
+             *  其他的各自分为依赖
+            */
+            string orderType = "";
+            if(billTypeNumber == 2 || billTypeNumber == 10)
+            {
+                orderType = "2, 10";
+            }
+            else if(billTypeNumber == 14 || billTypeNumber == 16)
+            {
+                orderType = "14, 16";
+            }
+            else if(billTypeNumber == 9 || billTypeNumber == 15)
+            {
+                orderType = "9, 15";
+            }
+            else if(billTypeNumber == 0 || billTypeNumber == 1)
+            {
+                orderType = "0, 1";
+            }
+            else
+            {
+                orderType = Convert.ToString(billTypeNumber);
+            }
+
+            quety += orderType + ")";
 
             using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, quety))
             {

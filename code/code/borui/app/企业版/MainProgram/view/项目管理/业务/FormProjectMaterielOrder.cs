@@ -20,7 +20,7 @@ namespace MainProgram
         private int m_staffPkey = -1;
         private string m_billNumber = "";
         private int m_tablesType;
-        private readonly int BillTypeNumber = 19;
+        private readonly int BillTypeNumber = 50;
         private readonly int DateGridVeiwListDataListRowCount = 100;
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
@@ -97,7 +97,7 @@ namespace MainProgram
             if (m_billNumber.Length == 0)
             {
                 // 单据号
-                this.labelBillNumber.Text = BillNumber.getInctance().getNewBillNumber(BillTypeNumber, DateTime.Now.ToString("yyyy-MM-dd"));
+                this.labelBillNumber.Text = BillNumber.getInctance().getNewBillNumber(BillTypeNumber + m_tablesType, DateTime.Now.ToString("yyyy-MM-dd"));
 
                 // 制单人初始化
                 this.labelMakeBillStaff.Visible = true;
@@ -280,7 +280,7 @@ namespace MainProgram
                 {
                     FormProject.getInctance().insert(m_currentOrderInfo, false);
                     ProjectManagerDetails.getInctance().insert(dataList);
-                    BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
+                    BillNumber.getInctance().inserBillNumber(BillTypeNumber + m_tablesType, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
                     if (m_billNumber.Length == 0)
                     {
@@ -531,7 +531,7 @@ namespace MainProgram
             // PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
             if (m_billNumber.Length > 0)
             {
-                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, m_billNumber, this.dataGridViewDataList);
+                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber + m_tablesType, m_billNumber, this.dataGridViewDataList);
                 fop.ShowDialog();
             }
             else

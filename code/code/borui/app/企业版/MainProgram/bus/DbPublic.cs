@@ -137,8 +137,12 @@ namespace MainProgram.bus
         public string getOrderNameFromType(int orderType)
         {
             string orderName = "";
-
-            if (orderType == 1)
+            
+            if (orderType == 0)
+            {
+                orderName = "采购申请单模板";
+            }
+            else if (orderType == 1)
             {
                 orderName = "采购订单模板";
             }
@@ -174,7 +178,6 @@ namespace MainProgram.bus
             {
                 orderName = "其他入库单模板";
             }
-
             else if (orderType == 14)
             {
                 orderName = "领料单模板";
@@ -191,16 +194,11 @@ namespace MainProgram.bus
             {
                 orderName = "库存预占单模板";
             }
-
-            else if (orderType == 18)
-            {
-                orderName = "采购申请单模板";
-            }
-            else if (orderType == 19)
+            else if (orderType == 51 || orderType == 52 || orderType == 53)
             {
                 orderName = "总材料表模板";
             }
-            else if (orderType == 20)
+            else if (orderType == 54)
             {
                 orderName = "材料表变更模板";
             }

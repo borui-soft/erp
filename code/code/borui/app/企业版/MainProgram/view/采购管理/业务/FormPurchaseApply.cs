@@ -19,7 +19,7 @@ namespace MainProgram
     {
         private int m_applyStaffPkey = -1;
         private string m_billNumber = "";
-        private readonly int BillTypeNumber = 18;
+        private readonly int BillTypeNumber = 0;
         private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;

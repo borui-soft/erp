@@ -14,7 +14,7 @@ namespace MainProgram
 {
     public partial class FormReceivableOrder : Form
     {
-        private int PAYMENT_ORDER_BILL_NUMBER = 18;
+        private int PAYMENT_ORDER_BILL_NUMBER = 62;
         private string PAYMENT_ORDER_BILL_NAME = "收款单";
         private string m_billNumber = "";
         private bool m_isBankBill = false;

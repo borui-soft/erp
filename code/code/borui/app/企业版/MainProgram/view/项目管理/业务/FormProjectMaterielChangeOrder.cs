@@ -22,7 +22,7 @@ namespace MainProgram
         private string m_projectNum = "";
 
         private int m_tablesType;
-        private readonly int BillTypeNumber = 20;
+        private readonly int BillTypeNumber = 54;
         private readonly int DateGridVeiwListDataListRowCount = 12;
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isSaveSuccessFul = false;

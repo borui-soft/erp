@@ -237,7 +237,7 @@ namespace MainProgram
                     // 采购入库单
                     exportPurchaseInData();
                 }
-                else if (m_orderType == 18)
+                else if (m_orderType == 0)
                 {
                     // 采购申请单
                     exportPurchaseApplyData();
@@ -262,12 +262,12 @@ namespace MainProgram
                     // 其他出库单模板
                     exportOtherOutData();
                 }
-                else if (m_orderType == 19)
+                else if (m_orderType == 51 || m_orderType == 52 || m_orderType == 53)
                 {
                     // 总材料表模板
                     exportProjectInfoData();
                 }
-                else if (m_orderType == 20)
+                else if (m_orderType == 54)
                 {
                     //材料表变更模板
                     exportProjectInfoChangeData();

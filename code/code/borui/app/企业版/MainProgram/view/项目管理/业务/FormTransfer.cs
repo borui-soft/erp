@@ -182,6 +182,9 @@ namespace MainProgram
         {
             m_proInfoList.Clear();
 
+            // 得到单据变更情况
+            SortedDictionary<int, ProjectManagerDetailsTable> changeMaterielList = FormProjectInfoChange.getInctance().getMaterielDetailsFromSrcBillNumber(m_billNumber);
+
             // 根据单据,得到单据详细信息
             SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
             listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(m_billNumber);
@@ -193,6 +196,10 @@ namespace MainProgram
                 ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
                 tmp = (ProjectManagerDetailsTable)listDetails[index];
 
+                // 单据需要的数量
+                double requestValue = tmp.value;
+
+                // 已转数量
                 double proValue = 0.0;
 
                 if (m_dataType == 1)
@@ -201,18 +208,28 @@ namespace MainProgram
                 }
                 else if (m_dataType == 2)
                 {
-                    proValue = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(tmp.billNumber, tmp.rowNumber);
+                    proValue = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(tmp.billNumber,
+                        PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
                 }
                 else if (m_dataType == 3)
                 {
-                    proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(tmp.billNumber, tmp.rowNumber);
+                    proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(tmp.billNumber,
+                        PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
                 }
 
-                if (tmp.value - proValue > 0)
+                // 如果此物料在变更单中出现过，则使用变更但中的数量
+                int sign = PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no);
+                if (changeMaterielList.ContainsKey(sign))
+                {
+                    requestValue = changeMaterielList[sign].value;
+                    changeMaterielList.Remove(sign);
+                }
+
+                if (requestValue - proValue > 0)
                 {
                     record.Add(tmp.billNumber);
                     record.Add(tmp.materielID);
-                    record.Add(tmp.value);
+                    record.Add(requestValue);
                     record.Add(proValue);
 
                     // 得到实际库存
@@ -221,9 +238,63 @@ namespace MainProgram
 
                     // 库存预占情况,本项目预占量
                     record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, tmp.billNumber));
-                    record.Add(tmp.rowNumber);
+
+                    // 使用行号+序列号+序号的和作为一行数据的唯一标识
+                    record.Add(PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
 
                     m_proInfoList.Add(m_proInfoList.Count, record);
+                }
+            }
+
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index3 in changeMaterielList)
+            {
+                ArrayList record1 = new ArrayList();
+
+                ProjectManagerDetailsTable tmp1 = new ProjectManagerDetailsTable();
+                tmp1 = index3.Value;
+
+                // 单据需要的数量
+                double requestValue1 = tmp1.value;
+
+                // 已转数量
+                double proValue1 = 0.0;
+
+                if (m_dataType == 1)
+                {
+                    proValue1 = MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp1.materielID, 
+                        FormProjectInfoChange.getInctance().getxxMaterielNumberFromBillNumber(tmp1.billNumber));
+                }
+                else if (m_dataType == 2)
+                {
+                    proValue1 = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(
+                        FormProjectInfoChange.getInctance().getxxMaterielNumberFromBillNumber(tmp1.billNumber),
+                        PublicFuction.getXXMateaielOrderSign(tmp1.rowNumber, tmp1.sequence, tmp1.no));
+                }
+                else if (m_dataType == 3)
+                {
+                    proValue1 = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(
+                        FormProjectInfoChange.getInctance().getxxMaterielNumberFromBillNumber(tmp1.billNumber),
+                        PublicFuction.getXXMateaielOrderSign(tmp1.rowNumber, tmp1.sequence, tmp1.no));
+                }
+
+                if (requestValue1 - proValue1 > 0)
+                {
+                    record1.Add(tmp1.billNumber);
+                    record1.Add(tmp1.materielID);
+                    record1.Add(tmp1.value);
+                    record1.Add(proValue1);
+
+                    // 得到实际库存
+                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp1.materielID);
+                    record1.Add(MaterielCountdata.value);
+
+                    // 库存预占情况,本项目预占量
+                    record1.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp1.materielID, tmp1.billNumber));
+
+                    // 使用行号+序列号+序号的和作为一行数据的唯一标识
+                    record1.Add(PublicFuction.getXXMateaielOrderSign(tmp1.rowNumber, tmp1.sequence, tmp1.no));
+
+                    m_proInfoList.Add(m_proInfoList.Count, record1);
                 }
             }
 

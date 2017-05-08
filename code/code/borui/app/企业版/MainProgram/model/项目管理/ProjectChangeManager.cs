@@ -224,7 +224,8 @@ namespace MainProgram.model
 
                 foreach (KeyValuePair<int, ProjectManagerDetailsTable> index2 in tmp)
                 {
-                    materielDetails[index2.Value.materielID] = index2.Value;
+                    int sign = PublicFuction.getXXMateaielOrderSign(index2.Value.rowNumber, index2.Value.sequence, index2.Value.no);
+                    materielDetails[sign] = index2.Value;
                 }
             }
 
@@ -245,6 +246,21 @@ namespace MainProgram.model
             }
 
             return record;
+        }
+
+        public string getxxMaterielNumberFromBillNumber(string billNumber)
+        {
+            string srcNumber = "";
+            foreach (KeyValuePair<int, FormProjectMaterielChangeTable> index in m_tableDataList)
+            {
+                if (index.Value.billNumber == billNumber)
+                {
+                    srcNumber = index.Value.srcBillNumber;
+                    break;
+                }
+            }
+
+            return srcNumber;
         }
 
         public bool checkBillIsExist(string billNumber)

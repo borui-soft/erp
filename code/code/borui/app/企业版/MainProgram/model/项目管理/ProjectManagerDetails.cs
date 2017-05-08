@@ -244,7 +244,8 @@ namespace MainProgram.model
 
             foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_tableDataList)
             {
-                if (index.Value.billNumber == billNumber && index.Value.rowNumber == rowMum)
+                if (index.Value.billNumber == billNumber &&
+                    PublicFuction.getXXMateaielOrderSign(index.Value.rowNumber, index.Value.sequence, index.Value.no) == rowMum)
                 {
                     value = index.Value;
                     break;

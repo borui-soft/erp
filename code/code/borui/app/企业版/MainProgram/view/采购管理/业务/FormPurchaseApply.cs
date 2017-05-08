@@ -517,11 +517,11 @@ namespace MainProgram
             {
                 // 当value被改变后，
                 if (Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value.ToString()) >
-                    getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString()))
+                    getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value.ToString()))
                 {
-                    MessageBoxExtend.messageWarning("物料数量以超过允许的最大值" + getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString()) +
+                    MessageBoxExtend.messageWarning("物料数量以超过允许的最大值" + getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value.ToString()) +
                         ", 已强制修改为默认最大值");
-                    dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
+                    dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value.ToString());
                 }
             }
 
@@ -857,7 +857,7 @@ namespace MainProgram
             }
         }
 
-        private double getMaxValue(string materielID)
+        private double getMaxValue(string xxMatetielTableRowNum)
         {
             double value = 0.0;
 
@@ -867,7 +867,7 @@ namespace MainProgram
 
                 record = m_proInfoList[index];
 
-                if (record[1].ToString() == materielID)
+                if (Convert.ToString(record[6]) == xxMatetielTableRowNum)
                 {
                     value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
                     break;

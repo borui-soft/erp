@@ -4,6 +4,7 @@ using System.Text;
 using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Data;
+using System.Text.RegularExpressions;
 using TIV.Core.DatabaseAccess;
 using TIV.Core.TivLogger;
 using MainProgram.model;
@@ -11,6 +12,33 @@ using MainProgram.model;
 namespace MainProgram.bus
 {
     using DatabaseAccessFactoryInstance = TIV.Core.BaseCoreLib.Singleton<DatabaseFactory>;
+
+    class PublicFuction
+    {
+        public static bool IsNumeric(string value)
+        {
+            return Regex.IsMatch(value, @"^[+-]?/d*[.]?/d*$");
+        }
+
+        // 计算个特殊标识，用于关联xxx材料表中的行与领料表及采购申请中的行
+        public static int getXXMateaielOrderSign(int rowNumber, string sequence, string no)
+        {
+            int sign = rowNumber;
+            int sign2 = 1;
+
+            if (sequence.Length > 0)
+            {
+                sign2 += Convert.ToInt32(sequence);
+            }
+
+            if (no.Length > 0)
+            {
+                sign2 += Convert.ToInt32(no);
+            }
+
+            return (rowNumber + rowNumber + rowNumber + 99) * sign2;
+        }
+    }
 
     class DbPublic
     {

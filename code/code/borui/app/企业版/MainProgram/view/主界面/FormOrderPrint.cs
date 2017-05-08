@@ -361,7 +361,7 @@ namespace MainProgram
 
                 if (xxMatetielTableRowNum.Length > 0)
                 {
-                    tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromRowNum(table.srcOrderNum, materielID);
+                    tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromRowNum(table.srcOrderNum, Convert.ToInt32(xxMatetielTableRowNum));
                 }
                 else 
                 {
@@ -377,7 +377,7 @@ namespace MainProgram
                 m_excelApp.Cells[row + 6, 6] = tmp.cl;
                 m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Unit].Value.ToString().Trim();
 
-                m_excelApp.Cells[row + 6, 8] = tmp.value;
+                m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Value].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 9] = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", record.storage);
                 m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Note].Value.ToString().Trim();
 

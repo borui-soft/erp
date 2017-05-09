@@ -230,6 +230,14 @@ namespace MainProgram.bus
             {
                 orderName = "材料表变更模板";
             }
+            else if (orderType == 8)
+            {
+                orderName = "产品入库单模板";
+            }
+            else if (orderType == 6)
+            {
+                orderName = "销售出库单模板";
+            }
 
             return orderName;
         }

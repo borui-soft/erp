@@ -122,7 +122,7 @@ namespace MainProgram
             //使用这个输入的值，匹配物料编号
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id != record.num || record.pkey == 0)
+            if (id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
                 try
                 {

@@ -31,7 +31,7 @@ namespace MainProgram
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         MaterielInOrderTable m_materieInOrder = new MaterielInOrderTable();
 
-        private enum DataGridColumnName
+        public enum DataGridColumnName
         {
             RowNum,
             MatetielNumber,
@@ -518,7 +518,7 @@ namespace MainProgram
             double pkey = 0;
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id != record.num || record.pkey == 0)
+            if (id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
                 try
                 {

@@ -262,7 +262,10 @@ namespace MainProgram.model
                 MaterielTable record = new MaterielTable();
                 record = index.Value;
 
-                if (record.num == num)
+                string materielNumLower = record.num.ToLower();
+                string serachNumLower = num.ToLower();
+
+                if (materielNumLower == serachNumLower)
                 {
                     materiel = record;
                     break;

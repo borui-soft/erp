@@ -806,12 +806,13 @@ namespace MainProgram
             int startRowIndex = 6;
 
             // 产品入库单数据导出
-            SaleOutOrderTable table = new SaleOutOrderTable();
-            table = SaleOutOrder.getInctance().getSaleInfoFromBillNumber(m_billNubmber);
+            MaterielInOrderTable table = new MaterielInOrderTable();
+            table = MaterielInOrder.getInctance().getMaterielInOrderInfoFromBillNumber(m_billNubmber);
 
             stringReplace(table.billNumber, "[1]");
             stringReplace(table.exchangesUnit, "[2]");
-            stringReplace(table.makeOrderStaffName, "[3]");
+            stringReplace(table.tradingDate, "[3]");
+            stringReplace(table.makeOrderStaffName, "[5]");
 
             double sum = 0.0;
             for (int row = 0; row < m_dataGridView.RowCount; row++)
@@ -821,17 +822,11 @@ namespace MainProgram
                     break;
                 }
 
-                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.MatetielNumber].Value.ToString().Trim());
-                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
-
-                m_excelApp.Cells[row + startRowIndex, 2] = materielID;
-                m_excelApp.Cells[row + startRowIndex, 3] = record.brand;
-                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Model].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Unit].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Value].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 9] = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", record.storage);
-                m_excelApp.Cells[row + startRowIndex, 10] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Note].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 2] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Note].Value.ToString().Trim();
 
                 sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }
@@ -848,7 +843,8 @@ namespace MainProgram
 
             stringReplace(table.billNumber, "[1]");
             stringReplace(table.exchangesUnit, "[2]");
-            stringReplace(table.makeOrderStaffName, "[3]");
+            stringReplace(table.tradingDate, "[3]");
+            stringReplace(table.makeOrderStaffName, "[5]");
 
             double sum = 0.0;
             for (int row = 0; row < m_dataGridView.RowCount; row++)
@@ -858,17 +854,10 @@ namespace MainProgram
                     break;
                 }
 
-                int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.MatetielNumber].Value.ToString().Trim());
-                MaterielTable record = Materiel.getInctance().getMaterielInfoFromPkey(materielID);
-
-                m_excelApp.Cells[row + startRowIndex, 2] = materielID;
-                m_excelApp.Cells[row + startRowIndex, 3] = record.brand;
-                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Model].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Unit].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Value].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 9] = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", record.storage);
-                // m_excelApp.Cells[row + startRowIndex, 10] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Note].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 2] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Value].Value.ToString().Trim();
 
                 sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }

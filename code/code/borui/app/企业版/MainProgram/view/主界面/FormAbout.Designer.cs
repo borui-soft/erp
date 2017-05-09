@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.8";
+            this.label3.Text = "当前软件版本：V2.5.10";
 
             // 
             // richTextBox1
@@ -82,9 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、使用一种全新的规则关联了材料表和领料表中的具体数据\r\n";
-            this.richTextBox1.Text += "2、解决领料单序号和序列号、数量等信息套打时无法成功导出的问题\r\n";
-            this.richTextBox1.Text += "3、解决材料表变更表无法实现数据跟踪且无法自动转为采购申请和领料单据的问题\r\n";
+            this.richTextBox1.Text = "1、所有单据录入时，通过输入的物料编码关联数据时，不在区分物料编码中大小写字符\r\n";
+            this.richTextBox1.Text += "2、实现产品入库单和销售出库单的套打功能\r\n";
 
             // Fo
             // 

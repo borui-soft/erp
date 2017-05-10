@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
+using System.Net;
+using System.IO;
 using MainProgram.bus;
 using MainProgram.model;
 
@@ -58,6 +61,41 @@ namespace MainProgram
             statusBarText += "                              ";
             statusBarText += "用户：" + DbPublic.getInctance().getCurrentLoginUserName();
             this.toolStripStatusLabel.Text = statusBarText;
+
+            // 2017-5-10 开启一个新的现成，完成数据库备份
+            Thread databaseBackTread = new Thread(new ThreadStart(ThreadFuction));
+            databaseBackTread.Start();
+        }
+
+        public static void ThreadFuction()
+        {
+            DbBackupRecordTable record = new DbBackupRecordTable();
+
+            // 当前用户为manager，且当天第一次登录时，自动做一下数据备份
+            if (DbPublic.getInctance().getCurrentLoginUserName().ToLower() == "manager" &&
+                DbBackupRecord.getInctance().isBackTheDay())
+            {
+                record.name = DbPublic.getInctance().getCurrentLoginUserName();
+                record.hostName = Dns.GetHostName();
+                record.backType = 0;
+                record.reason = "数据库自动备份";
+                record.note = DbPublic.getInctance().getCurrentLoginUserName() + "于" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                record.note += "在" + record.hostName + "电脑上进行数据库备份";
+
+                string dbFileBackPath = Directory.GetCurrentDirectory() + "\\back\\";
+
+                if (!Directory.Exists(dbFileBackPath))
+                {
+                    Directory.CreateDirectory(dbFileBackPath);
+                }
+
+                record.savePath1 = dbFileBackPath;
+
+                if (DbBackupRecord.getInctance().databaseBack(record.savePath1, false))
+                {
+                    DbBackupRecord.getInctance().insert(record);
+                }
+            }
         }
 
         private void LoadFunctionZone()

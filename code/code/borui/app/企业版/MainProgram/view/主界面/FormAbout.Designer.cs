@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.10";
+            this.label3.Text = "当前软件版本：V2.5.12";
 
             // 
             // richTextBox1
@@ -82,8 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、所有单据录入时，通过输入的物料编码关联数据时，不在区分物料编码中大小写字符\r\n";
-            this.richTextBox1.Text += "2、实现产品入库单和销售出库单的套打功能\r\n";
+            this.richTextBox1.Text = "1、所有单据录入时，解决输出物料ID后无法关联具体物料的问题\r\n";
+            this.richTextBox1.Text += "2、实现数据库自动备份，备份策略为：当登录用户为manager，且当天第一次登录时，自动执行一次数据备份\r\n";
 
             // Fo
             // 

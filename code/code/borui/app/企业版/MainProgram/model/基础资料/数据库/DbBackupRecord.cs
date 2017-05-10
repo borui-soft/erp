@@ -68,7 +68,7 @@ namespace MainProgram.model
             return m_dbBackupList;
         }
 
-        public bool databaseBack(string filePath)
+        public bool databaseBack(string filePath, bool isDispaly = true)
         {
             // BACKUP DATABASE [ERP] TO  DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Backup\ERP.bak' WITH NOFORMAT, INIT,  NAME = N'ERP-完整 数据库 备份', SKIP, NOREWIND, NOUNLOAD,  STATS = 10
             string sql = "BACKUP DATABASE [ERP] TO  DISK = N\'";
@@ -80,7 +80,10 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, sql);
 
-                MessageBoxExtend.messageOK("数据备份成功");
+                if (isDispaly)
+                {
+                    MessageBoxExtend.messageOK("数据备份成功");
+                }
 
                 load();
             }
@@ -151,6 +154,25 @@ namespace MainProgram.model
                 MessageBoxExtend.messageWarning(error.Message);
                 return;
             }
+        }
+
+        public bool isBackTheDay()
+        {
+            bool isRet = false;
+
+            string sql = "SELECT COUNT(*) FROM BASE_DB_BACKUP_RECORD where backup_time >= '" + DateTime.Now.ToString("yyyyMMdd") + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                int recordCount = DbDataConvert.ToInt32(dataTable.Rows[0][0]);
+                
+                if (recordCount == 0)
+                {
+                    isRet = true;
+                }
+            }
+
+            return isRet;
         }
     }
 

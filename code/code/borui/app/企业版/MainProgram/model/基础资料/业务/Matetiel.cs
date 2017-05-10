@@ -256,6 +256,7 @@ namespace MainProgram.model
             }
 
             MaterielTable materiel = new MaterielTable();
+            materiel = null;
 
             foreach (KeyValuePair<int, MaterielTable> index in m_noForbidMaterielList)
             {

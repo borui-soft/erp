@@ -476,7 +476,7 @@ namespace MainProgram
             double pkey = 0;
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id.ToLower() != record.num.ToLower() || record.pkey == 0)
+            if (record == null || id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
                 try
                 {

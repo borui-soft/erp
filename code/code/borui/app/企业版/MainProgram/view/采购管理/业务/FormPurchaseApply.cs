@@ -835,17 +835,21 @@ namespace MainProgram
                     this.labelMakeBillStaff.Visible = true;
                     this.labelMakeBillStaff.Text = DbPublic.getInctance().getCurrentLoginUserName();
 
+                    this.panelDeliveryDate.Visible = true;
+                    this.labelDeliveryDate.Visible = true;
+                    this.dateTimePickerDeliveryDate.Visible = false;
+                    this.labelDeliveryDate.Text = this.dateTimePickerDeliveryDate.Value.ToString("yyyy-MM-dd");
 
+                    // xx总材料表编号初始化
                     this.labelProject.Visible = true;
                     this.labelProject.Text = record[0].ToString();
                     this.panelProjectNum.Visible = false;
                     this.textBoxProject.Visible = false;
                     this.textBoxProject.ReadOnly = true;
 
-                    this.panelDeliveryDate.Visible = true;
-                    this.labelDeliveryDate.Visible = true;
-                    this.dateTimePickerDeliveryDate.Visible = false;
-                    this.labelDeliveryDate.Text = this.dateTimePickerDeliveryDate.Value.ToString("yyyy-MM-dd");
+                    // 生产编号初始化
+                    FormProjectMaterielTable proInfo = FormProject.getInctance().getProjectInfoFromBillNumber(record[0].ToString());
+                    this.labelProject.Text += "(" + proInfo.makeNum + ")";
 
                     m_purchaseOrder.isReview = "1";
                 }

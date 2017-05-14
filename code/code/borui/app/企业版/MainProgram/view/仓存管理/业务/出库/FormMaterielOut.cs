@@ -900,12 +900,22 @@ namespace MainProgram
                     this.labelMakeBillStaff.Visible = true;
                     this.labelMakeBillStaff.Text = DbPublic.getInctance().getCurrentLoginUserName();
 
+                    // 项目编号初始
                     this.textBoxProjectNo.Visible = false;
                     this.textBoxProjectNo.ReadOnly = true;
 
                     this.labelProjectNo.Visible = true;
                     this.labelProjectNo.Text = record[0].ToString();
                     this.labelProjectNo.Visible = true;
+
+                    // 生产编号初始化
+                    FormProjectMaterielTable proInfo = FormProject.getInctance().getProjectInfoFromBillNumber(record[0].ToString());
+                    this.textBoxMakeNo.Visible = false;
+                    this.textBoxMakeNo.ReadOnly = true;
+
+                    this.labelMakeNo.Visible = true;
+                    this.labelMakeNo.Text = proInfo.makeNum;
+                    this.labelMakeNo.Visible = true;
 
                     m_materieOutOrder.isReview = "1";
                 }

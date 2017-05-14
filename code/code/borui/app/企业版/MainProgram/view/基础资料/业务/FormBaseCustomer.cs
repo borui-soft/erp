@@ -377,8 +377,8 @@ namespace MainProgram
                 dataGridViewCustomerList.Rows[e.RowIndex].Selected = true;
                 m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewCustomerList.Rows[e.RowIndex].Cells[0].Value.ToString());
                 m_currentDataGridViedRecordCompanyName = dataGridViewCustomerList.Rows[e.RowIndex].Cells[2].Value.ToString();
-
-                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+                
+                contextMenuStripCustomerGroup.Show(MousePosition.X, MousePosition.Y);
             }
         }
 
@@ -405,6 +405,30 @@ namespace MainProgram
                 {
                     UserInterfaceActonState.setUserInterfaceActonState(activeObject,
                         ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
+                }
+            }
+        }
+
+        private void toolStripMenuItemChange_Click(object sender, EventArgs e)
+        {
+            FormMaterielTypeModify fmtm = new FormMaterielTypeModify(2);
+            fmtm.ShowDialog();
+
+            if (fmtm.getIsSave())
+            {
+                int pkey = fmtm.getSelectRecordPkey();
+                string typeName = fmtm.getSelectTypeName();
+
+                if (m_currentDataGridViedRecordCompanyName.Length > 0)
+                {
+                    if (MessageBoxExtend.messageQuestion("确定调整客户[" + m_currentDataGridViedRecordCompanyName + "]至[" + typeName + "]分组吗?"))
+                    {
+                        if (Customer.getInctance().modifyMaterielType(pkey, m_currentDataGridViedRecordPkey))
+                        {
+                            MessageBoxExtend.messageOK("客户分组调整成功");
+                            updateDataGridView(getCurrentNodeAllChildNodesCustomer());
+                        }
+                    }
                 }
             }
         }

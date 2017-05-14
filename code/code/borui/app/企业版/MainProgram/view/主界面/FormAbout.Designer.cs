@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.12";
+            this.label3.Text = "当前软件版本：V2.5.15";
 
             // 
             // richTextBox1
@@ -82,8 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、所有单据录入时，解决输出物料ID后无法关联具体物料的问题\r\n";
-            this.richTextBox1.Text += "2、实现数据库自动备份，备份策略为：当登录用户为manager，且当天第一次登录时，自动执行一次数据备份\r\n";
+            this.richTextBox1.Text = "1、增加功能，从材料跟踪情况页面中转领料单和采购申请单时，自动填写生产编号\r\n";
+            this.richTextBox1.Text += "2、基础资料模块：供应商和客户资料页面，增加调整分组功能\r\n";
 
             // Fo
             // 

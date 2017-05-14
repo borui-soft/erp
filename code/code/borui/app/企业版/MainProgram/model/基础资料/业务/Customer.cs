@@ -81,6 +81,28 @@ namespace MainProgram.model
             }
         }
 
+        public bool modifyMaterielType(int m_materielGroupPkey, int pkey)
+        {
+            string update = "UPDATE [dbo].[BASE_CUSTOMER_LIST] SET [SUPPLIER_TYPE] = ";
+
+            update += Convert.ToString(m_materielGroupPkey);
+            update += " WHERE PKEY = " + Convert.ToString(pkey);
+
+            try
+            {
+                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
+
+                load();
+            }
+            catch (Exception error)
+            {
+                MessageBoxExtend.messageWarning(error.Message);
+                return false;
+            }
+
+            return true;
+        }
+
         public void update(int pkey, CustomerTable customer)
         {
             string update = "UPDATE [dbo].[BASE_CUSTOMER_LIST] SET ";

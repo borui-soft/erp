@@ -979,5 +979,22 @@ namespace MainProgram
                 contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
             }
         }
+
+        private void ToolStripMenuItemDelRow_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                string rowNum = dataGridViewDataList.Rows[m_rowIndex].Cells[0].Value.ToString();
+
+                if (MessageBoxExtend.messageQuestion("确认删除第" + rowNum + "行的数据吗？"))
+                {
+                    m_dateGridVeiwListDataList.delDataGridVewRow(Convert.ToInt32(rowNum), DateGridVeiwListDataListRowCount);
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
     }
 }

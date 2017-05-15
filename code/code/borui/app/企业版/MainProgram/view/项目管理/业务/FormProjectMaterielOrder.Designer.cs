@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectMaterielOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -108,6 +109,10 @@
             this.labelMakeDate = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).BeginInit();
             this.panel7.SuspendLayout();
@@ -119,6 +124,7 @@
             this.panel2.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -225,13 +231,14 @@
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 203);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewDataList.RowTemplate.Height = 23;
             this.dataGridViewDataList.Size = new System.Drawing.Size(1102, 265);
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -989,6 +996,34 @@
             this.label3.TabIndex = 119;
             this.label3.Text = "制单日期:";
             // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCheckDetailed,
+            this.toolStripSeparator6,
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 76);
+            // 
+            // ToolStripMenuItemCheckDetailed
+            // 
+            this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
+            this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(145, 6);
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
             // FormProjectMaterielOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1069,6 +1104,7 @@
             this.panel8.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1154,6 +1190,10 @@
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox dateTimePickerTradingDate;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
 
     }
 }

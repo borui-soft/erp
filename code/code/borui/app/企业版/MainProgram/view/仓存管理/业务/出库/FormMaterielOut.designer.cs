@@ -110,6 +110,8 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -964,16 +966,30 @@
             // contextMenuStripDataGridView
             // 
             this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemCheckDetailed});
+            this.ToolStripMenuItemCheckDetailed,
+            this.toolStripSeparator1,
+            this.ToolStripMenuItemDelRow});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 26);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 76);
             // 
             // ToolStripMenuItemCheckDetailed
             // 
             this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
-            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(148, 22);
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
             this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
             // 
             // FormMaterielOutOrder
             // 
@@ -1143,6 +1159,8 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
 
     }
 }

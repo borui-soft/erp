@@ -694,7 +694,7 @@
             // 
             this.panelRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRed.BackgroundImage = global::MainProgram.Properties.Resources.红字;
-            this.panelRed.Location = new System.Drawing.Point(901, -44);
+            this.panelRed.Location = new System.Drawing.Point(901, 6);
             this.panelRed.Name = "panelRed";
             this.panelRed.Size = new System.Drawing.Size(62, 33);
             this.panelRed.TabIndex = 102;

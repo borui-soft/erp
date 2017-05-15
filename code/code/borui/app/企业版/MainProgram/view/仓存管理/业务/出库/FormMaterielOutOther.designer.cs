@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMaterielOutOtherOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
@@ -100,6 +101,8 @@
             this.labelProjectNo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataList)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -111,6 +114,7 @@
             this.panelSummary.SuspendLayout();
             this.panelMakeNo.SuspendLayout();
             this.panelProject.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -873,6 +877,20 @@
             this.groupBox7.TabIndex = 113;
             this.groupBox7.TabStop = false;
             // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 48);
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
             // FormMaterielOutOtherOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -948,6 +966,7 @@
             this.panelMakeNo.PerformLayout();
             this.panelProject.ResumeLayout(false);
             this.panelProject.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1025,6 +1044,8 @@
         private System.Windows.Forms.Label labelProjectNo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
 
     }
 }

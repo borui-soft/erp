@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.15";
+            this.label3.Text = "当前软件版本：V2.5.18";
 
             // 
             // richTextBox1
@@ -82,8 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、增加功能，从材料跟踪情况页面中转领料单和采购申请单时，自动填写生产编号\r\n";
-            this.richTextBox1.Text += "2、基础资料模块：供应商和客户资料页面，增加调整分组功能\r\n";
+            this.richTextBox1.Text = "1、新增功能：所有单据录入时，针对录入错误的行提供右键菜单删除行数据功能\r\n";
+            this.richTextBox1.Text += "2、新增功能：所有具备红字功能的单据，当此单据时红字单据时，红字单据字样会被导出到套打模板中\r\n";
 
             // Fo
             // 

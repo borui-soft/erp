@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMaterielInOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -100,6 +101,8 @@
             this.panelSummary = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
             this.panelInLedger = new System.Windows.Forms.Panel();
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,6 +114,7 @@
             this.groupBox18.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.panelSummary.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -300,13 +304,14 @@
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 164);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDataList.RowTemplate.Height = 23;
             this.dataGridViewDataList.Size = new System.Drawing.Size(1005, 265);
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -873,6 +878,20 @@
             this.panelInLedger.TabIndex = 106;
             this.panelInLedger.Visible = false;
             // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 48);
+            // 
             // FormMaterielInOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -943,6 +962,7 @@
             this.groupBox20.ResumeLayout(false);
             this.panelSummary.ResumeLayout(false);
             this.panelSummary.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1020,6 +1040,8 @@
         private System.Windows.Forms.ToolStripButton blueBill;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panelInLedger;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
 
     }
 }

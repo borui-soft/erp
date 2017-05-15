@@ -880,6 +880,16 @@ namespace MainProgram
             return value;
         }
 
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            {
+                m_rowIndex = e.RowIndex;
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
         private void ToolStripMenuItemCheckDetailed_Click(object sender, EventArgs e)
         {
             if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
@@ -897,19 +907,26 @@ namespace MainProgram
                 FormMaterielDetailed fmd = new FormMaterielDetailed(materielID, this.labelProject.Text);
                 fmd.ShowDialog();
             }
-            else 
+            else
             {
                 MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
             }
         }
 
-        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        private void ToolStripMenuItemDelRow_Click(object sender, EventArgs e)
         {
-            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
             {
-                m_rowIndex = e.RowIndex;
+                string rowNum = dataGridViewDataList.Rows[m_rowIndex].Cells[0].Value.ToString();
 
-                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+                if (MessageBoxExtend.messageQuestion("确认删除第" + rowNum + "行的数据吗？"))
+                {
+                    m_dateGridVeiwListDataList.delDataGridVewRow(Convert.ToInt32(rowNum), DateGridVeiwListDataListRowCount);
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
             }
         }
     }

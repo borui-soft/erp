@@ -159,5 +159,18 @@ namespace MainProgram.bus
                 m_dataGridView.Rows[rowIndex].Cells[i].Value = "";
             }
         }
+
+        public void delDataGridVewRow(int currentRowIndex, int rowCount)
+        {
+            for (int i = currentRowIndex; i < rowCount; i++)
+            {
+                for (int j = 1; j < m_columnsInfo.Count; j++)
+                {
+                    m_dataGridView.Rows[i - 1].Cells[j].Value = m_dataGridView.Rows[i].Cells[j].Value;
+                }
+            }
+
+            clearDataGridViewRow(rowCount - 1);
+        }
     }
 }

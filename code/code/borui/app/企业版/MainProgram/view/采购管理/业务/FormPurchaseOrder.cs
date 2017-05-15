@@ -1015,5 +1015,55 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
             }
         }
+
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            {
+                m_rowIndex = e.RowIndex;
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void ToolStripMenuItemCheckDetailed_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                int materielID = Convert.ToInt32(dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString());
+
+                if (this.textBoxContractNum.Text.Length <= 0)
+                {
+                    if (!MessageBoxExtend.messageQuestion("材料表编号为空, 可能无法显示出材料表中的相关数据, 是否继续查看?"))
+                    {
+                        return;
+                    }
+                }
+
+                FormMaterielDetailed fmd = new FormMaterielDetailed(materielID, this.textBoxContractNum.Text);
+                fmd.ShowDialog();
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
+
+        private void ToolStripMenuItemDelRow_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                string rowNum = dataGridViewDataList.Rows[m_rowIndex].Cells[0].Value.ToString();
+
+                if (MessageBoxExtend.messageQuestion("确认删除第" + rowNum + "行的数据吗？"))
+                {
+                    m_dateGridVeiwListDataList.delDataGridVewRow(Convert.ToInt32(rowNum), DateGridVeiwListDataListRowCount);
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
     }
 }

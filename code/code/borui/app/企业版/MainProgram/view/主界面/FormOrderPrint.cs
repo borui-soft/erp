@@ -519,7 +519,16 @@ namespace MainProgram
             table = MaterielInEarningsOrder.getInctance().getMaterielInEarningsOrderInfoFromBillNumber(m_billNubmber);
 
             stringReplace(table.billNumber, "[1]");
-            stringReplace("", "[2]");
+
+            if (table.isRedBill == 1)
+            {
+                stringReplace("(红字单据)", "[2]");
+            }
+            else
+            {
+                stringReplace("", "[2]");
+            }
+
             stringReplace(table.makeOrderStaffName, "[3]");
 
             double sum = 0.0;
@@ -593,7 +602,16 @@ namespace MainProgram
             table = MaterielOutEarningsOrder.getInctance().getMaterielOutEarningsOrderInfoFromBillNumber(m_billNubmber);
 
             stringReplace(table.billNumber, "[1]");
-            stringReplace("", "[2]");
+
+            if (table.isRedBill == 1)
+            {
+                stringReplace("(红字单据)", "[2]");
+            }
+            else
+            {
+                stringReplace("", "[2]");
+            }
+
             stringReplace(table.makeOrderStaffName, "[3]");
 
             double sum = 0.0;

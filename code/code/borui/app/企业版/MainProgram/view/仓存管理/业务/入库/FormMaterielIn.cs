@@ -209,6 +209,12 @@ namespace MainProgram
             this.textBoxSummary.Visible = false;
             this.labelSummary.Visible = true;
             this.labelSummary.Text = this.textBoxSummary.Text;
+
+            if (panelRed.Visible)
+            {
+                this.labelSummary.Text += "(红色单据)";
+            }
+
             this.textBoxSummary.Text = "";
         }
         #endregion

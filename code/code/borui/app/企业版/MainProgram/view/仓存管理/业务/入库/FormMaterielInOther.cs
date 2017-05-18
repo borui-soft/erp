@@ -635,9 +635,6 @@ namespace MainProgram
                 this.dateTimePickerTradingDate.Visible = false;
                 this.textBoxSummary.Visible = false;
 
-                this.dataGridViewDataList.Enabled = false;
-                this.dataGridViewDataCount.Enabled = false;
-
                 this.redBill.Enabled = false;
                 this.blueBill.Enabled = false;
 

@@ -171,7 +171,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
-                // m_dateGridViewExtend.addDataGridViewColumn("所属部件", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("部分名称", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("设计", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
@@ -424,7 +424,7 @@ namespace MainProgram
                         temp.Add(record.billNumber);
                         temp.Add(record.projectNum);
                         temp.Add(record.makeNum);
-                        //temp.Add(record.deviceName);
+                        temp.Add(record.subName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.designStaffName);
 

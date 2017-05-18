@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMaterielInEarningsOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -215,8 +215,8 @@
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 125);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDataList.RowTemplate.Height = 23;
             this.dataGridViewDataList.Size = new System.Drawing.Size(1005, 265);
             this.dataGridViewDataList.TabIndex = 25;
@@ -723,7 +723,7 @@
             // 
             this.panelRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRed.BackgroundImage = global::MainProgram.Properties.Resources.红字;
-            this.panelRed.Location = new System.Drawing.Point(903, 1);
+            this.panelRed.Location = new System.Drawing.Point(901, 1);
             this.panelRed.Name = "panelRed";
             this.panelRed.Size = new System.Drawing.Size(62, 33);
             this.panelRed.TabIndex = 102;
@@ -743,12 +743,12 @@
             this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemDelRow});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(113, 26);
             // 
             // ToolStripMenuItemDelRow
             // 
             this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
-            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItemDelRow.Text = "删除行";
             this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
             // 

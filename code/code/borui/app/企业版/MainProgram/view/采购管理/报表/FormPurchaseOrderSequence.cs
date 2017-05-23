@@ -470,10 +470,22 @@ namespace MainProgram
                         temp.Add(record.srcOrderNum);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sourceBillNumber);
-                        temp.Add(record.sumMoney);
-                        temp.Add(record.sumTransportationCost);
-                        temp.Add(record.sumOtherCost);
-                        temp.Add(record.totalMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add(Convert.ToDouble(record.sumMoney) * -1);
+                            temp.Add(Convert.ToDouble(record.sumTransportationCost) * -1);
+                            temp.Add(Convert.ToDouble(record.sumOtherCost) * -1);
+                            temp.Add(Convert.ToDouble(record.totalMoney) * -1);
+                        }
+                        else
+                        {
+                            temp.Add(record.sumMoney);
+                            temp.Add(record.sumTransportationCost);
+                            temp.Add(record.sumOtherCost);
+                            temp.Add(record.totalMoney);
+                        }
+
                         temp.Add(record.staffSaveName);
                         temp.Add(record.staffCheckName);
                         temp.Add(record.businessPeopleName);
@@ -633,7 +645,16 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.orderReviewStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -718,7 +739,16 @@ namespace MainProgram
                         temp.Add("");
                         temp.Add(record.billNumber);
                         temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.orderReviewStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -831,7 +861,16 @@ namespace MainProgram
                         temp.Add("");
                         temp.Add(record.billNumber);
                         temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.orderReviewStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);

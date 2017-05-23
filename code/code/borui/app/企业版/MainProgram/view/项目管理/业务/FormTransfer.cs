@@ -40,9 +40,10 @@ namespace MainProgram
             Parameter,
             RequestValue,
 
-            // 代表实际库存，项目预占库存
-            Value,
+            // 代表实际库存，项目预占库存,总预占量
+            ProValueCount,
             ProjectProValue,
+            Value,
 
 
             TransferValue,
@@ -82,8 +83,9 @@ namespace MainProgram
 
             m_dateGridVeiwListDataList.addDataGridViewColumn("项目需求量", 70, true, true);
 
+            m_dateGridVeiwListDataList.addDataGridViewColumn("总预占数量", 70, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("本项目\n预占数量", 70, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("实际库存", 70, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("项目预占数量", 80, true, true);
 
 
             m_dateGridVeiwListDataList.addDataGridViewColumn("已转数量", 60, true, true);
@@ -171,8 +173,9 @@ namespace MainProgram
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.TransferValue].Value = Convert.ToDouble(record[3]);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.OtherValue].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
 
-                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[4]);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.ProValueCount].Value = Convert.ToDouble(record[4]);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.ProjectProValue].Value = Convert.ToDouble(record[5]);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[6]);
 
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Select] =  new DataGridViewCheckBoxCell();
             }
@@ -232,12 +235,13 @@ namespace MainProgram
                     record.Add(requestValue);
                     record.Add(proValue);
 
+                    // 库存预占情况,本项目预占量
+                    record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
+                    record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, tmp.billNumber));
+
                     // 得到实际库存
                     InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
                     record.Add(MaterielCountdata.value);
-
-                    // 库存预占情况,本项目预占量
-                    record.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, tmp.billNumber));
 
                     // 使用行号+序列号+序号的和作为一行数据的唯一标识
                     record.Add(PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
@@ -284,12 +288,13 @@ namespace MainProgram
                     record1.Add(tmp1.value);
                     record1.Add(proValue1);
 
+                    // 库存预占情况,本项目预占量
+                    record1.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp1.materielID));
+                    record1.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp1.materielID, tmp1.billNumber));
+
                     // 得到实际库存
                     InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp1.materielID);
                     record1.Add(MaterielCountdata.value);
-
-                    // 库存预占情况,本项目预占量
-                    record1.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp1.materielID, tmp1.billNumber));
 
                     // 使用行号+序列号+序号的和作为一行数据的唯一标识
                     record1.Add(PublicFuction.getXXMateaielOrderSign(tmp1.rowNumber, tmp1.sequence, tmp1.no));

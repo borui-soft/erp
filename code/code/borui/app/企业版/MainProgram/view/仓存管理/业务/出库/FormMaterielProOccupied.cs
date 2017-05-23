@@ -19,7 +19,7 @@ namespace MainProgram
         private int m_applyStaffPkey = -1;
         private string m_billNumber = "";
         private readonly int BillTypeNumber = 17;
-        private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
+        private int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
         private bool m_isRedBill = false;
@@ -58,13 +58,20 @@ namespace MainProgram
 
         private void FormMaterielProOccupied_Load(object sender, EventArgs e)
         {
-            // DataGridView初始化
-            dataGridViewInit();
-            
             if (m_proInfoList.Count > 0)
             {
+                DateGridVeiwListDataListRowCount = m_proInfoList.Count;
+
+                // DataGridView初始化
+                dataGridViewInit();
+
                 readProInfoListToUI();
                 return;
+            }
+            else
+            {
+                // DataGridView初始化
+                dataGridViewInit();
             }
 
             if (m_billNumber.Length == 0)

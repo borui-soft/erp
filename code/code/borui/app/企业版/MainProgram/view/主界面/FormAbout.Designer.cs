@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.20";
+            this.label3.Text = "当前软件版本：V2.5.25";
 
             // 
             // richTextBox1
@@ -82,8 +82,11 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、在序时薄中查看产品入库单、盘盈入库单、其他入库单时，支持数据列表栏可拖动功能\r\n";
-            this.richTextBox1.Text += "2、xxx材料表序时薄，增加部分名称栏\r\n";
+            this.richTextBox1.Text = "1、所有单据序时薄当显示红色单据时，金额显示为负数\r\n";
+            this.richTextBox1.Text += "2、总材料表转采购、选择物料页面增加预占总量栏\r\n";
+            this.richTextBox1.Text += "3、库存预占单序时薄增加物料型号栏\r\n";
+            this.richTextBox1.Text += "4、解决库存预占单打开时出现错误的提示的问题\r\n";
+            this.richTextBox1.Text += "5、当套打的单据为红字单据时，金额部分全部显示为负数\r\n";
 
             // Fo
             // 

@@ -458,15 +458,35 @@ namespace MainProgram
                 m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[7].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[9].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 9] = m_dataGridView.Rows[row].Cells[10].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[12].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 11] = m_dataGridView.Rows[row].Cells[13].Value.ToString().Trim();
+
+                if (table.isRedBill == 1)
+                {
+                    m_excelApp.Cells[row + 6, 9] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[10].Value.ToString().Trim()) * -1;
+                    m_excelApp.Cells[row + 6, 10] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[11].Value.ToString().Trim()) * -1;
+                    m_excelApp.Cells[row + 6, 11] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[13].Value.ToString().Trim()) * -1;
+                }
+                else
+                {
+                    m_excelApp.Cells[row + 6, 9] = m_dataGridView.Rows[row].Cells[10].Value.ToString().Trim();
+                    m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[11].Value.ToString().Trim();
+                    m_excelApp.Cells[row + 6, 11] = m_dataGridView.Rows[row].Cells[13].Value.ToString().Trim();
+                }
             }
 
             stringReplace(Convert.ToString(sum1), "[5]");
-            stringReplace(Convert.ToString(sum2), "[6]");
-            stringReplace(Convert.ToString(sum3), "[7]");
-            stringReplace(Convert.ToString(sum4), "[8]");
+
+            if (table.isRedBill == 1)
+            {
+                stringReplace(Convert.ToString(sum2 * -1), "[6]");
+                stringReplace(Convert.ToString(sum3 * -1), "[7]");
+                stringReplace(Convert.ToString(sum4 * -1), "[8]");
+            }
+            else
+            {
+                stringReplace(Convert.ToString(sum2), "[6]");
+                stringReplace(Convert.ToString(sum3), "[7]");
+                stringReplace(Convert.ToString(sum4), "[8]");
+            }
         }
 
         private void exportPurchaseApplyData()

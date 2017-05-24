@@ -308,6 +308,7 @@ namespace MainProgram
                 if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
                 {
                     m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                    m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text;
 
                     updateDataGridView(getCurrentNodeAllChildNodesMateriel());
                 }

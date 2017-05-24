@@ -161,6 +161,7 @@ namespace MainProgram.model
             bool isRet = false;
 
             string sql = "SELECT COUNT(*) FROM BASE_DB_BACKUP_RECORD where backup_time >= '" + DateTime.Now.ToString("yyyyMMdd") + "'";
+            sql += " AND NAME = '" + DbPublic.getInctance().getCurrentLoginUserName() + "'";
 
             using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
             {

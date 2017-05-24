@@ -62,7 +62,7 @@ namespace MainProgram
             statusBarText += "用户：" + DbPublic.getInctance().getCurrentLoginUserName();
             this.toolStripStatusLabel.Text = statusBarText;
 
-            // 2017-5-10 开启一个新的现成，完成数据库备份
+            // 2017-5-10 开启一个新的线程，完成数据库备份
             Thread databaseBackTread = new Thread(new ThreadStart(ThreadFuction));
             databaseBackTread.Start();
         }
@@ -71,9 +71,8 @@ namespace MainProgram
         {
             DbBackupRecordTable record = new DbBackupRecordTable();
 
-            // 当前用户为manager，且当天第一次登录时，自动做一下数据备份
-            if (DbPublic.getInctance().getCurrentLoginUserName().ToLower() == "manager" &&
-                DbBackupRecord.getInctance().isBackTheDay())
+            // 当xx当xx用户第一次登录时，自动做一下数据备份
+            if (DbBackupRecord.getInctance().isBackTheDay())
             {
                 record.name = DbPublic.getInctance().getCurrentLoginUserName();
                 record.hostName = Dns.GetHostName();

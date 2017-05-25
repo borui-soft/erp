@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.27";
+            this.label3.Text = "当前软件版本：V2.5.28";
 
             // 
             // richTextBox1
@@ -82,8 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、数据库备份方式，修改为任何用户当天第一次登录均会备份数据库\r\n";
-            this.richTextBox1.Text += "2、解决领料单无法套打的问题\r\n";
+            this.richTextBox1.Text = "1、针对领料单审核慢的问题进行优化，优化后审核速率提升60%左右\r\n";
+            this.richTextBox1.Text += "2、针对所有出货类单据审核速度进行优化\r\n";
 
             // Fo
             // 

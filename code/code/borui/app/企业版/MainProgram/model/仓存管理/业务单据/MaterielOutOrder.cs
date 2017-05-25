@@ -39,6 +39,16 @@ namespace MainProgram.model
 
         public void insert(MaterielOutOrderTable record, bool isDisplayMessageBox = true)
         {
+            for (int i = 0; i < 50000; i++)
+            {
+                string sql1 = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT]([DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(5,'2017-05-25','" + Convert.ToString(i) + "','111','222','','3','961.29',1,9,8,0)";
+                string sql2 = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER], [XX_TABLE_ROW_NUM],[PRICE],[VALUE],[NOTE])VALUES('1',3,'" + Convert.ToString(i) + "','',674.99,1,'')";
+
+
+                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, sql1);
+                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, sql2);
+            }
+
             MaterielOutOrderTable oldRecord = new MaterielOutOrderTable();
 
             string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT]([DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],";

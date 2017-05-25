@@ -11,6 +11,7 @@ using System.Collections;
 using System.Diagnostics;
 using MainProgram.bus;
 using MainProgram.model;
+using TIV.Core.TivLogger;
 
 namespace MainProgram
 {
@@ -312,19 +313,26 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            TivLog.Logger.Info("AAAAAAAAAAA");
             // 得到详细的销售信息
             ArrayList dataList = getMaterielOutOrderDetailsValue();
 
+            TivLog.Logger.Info("BBBBBBBBBBBBB");
             if (dataList.Count > 0)
             {
                 // 销售订单表头和表尾信息
+                TivLog.Logger.Info("CCCCCCCC");
                 MaterielOutOrderTable record = getMaterielOutOrderValue();
                 if (orderInfoIsFull(record) && orderDetailsIsFull(dataList))
                 {
+                    TivLog.Logger.Info("DDDDDD");
                     MaterielOutOrder.getInctance().insert(record, false);
+                    TivLog.Logger.Info("EEEEEEEEEEEEE");
                     MaterielOutOrderDetails.getInctance().insert(dataList);
+                    TivLog.Logger.Info("FFFFFFFFF");
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
+                    TivLog.Logger.Info("GGGGGGGGGG");
                     if (m_billNumber.Length == 0)
                     {
                         MessageBoxExtend.messageOK("数据保存成功");
@@ -461,13 +469,18 @@ namespace MainProgram
         {
             try
             {
+                TivLog.Logger.Info("11111111111111");
                 save_Click(sender, e);
+                TivLog.Logger.Info("22222222222222");
                 bool isRet = MaterielOutOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+                TivLog.Logger.Info("3333333");
 
                 // 自动消除库存占用
                 if (isRet)
                 {
+                    TivLog.Logger.Info("44444444444");
                     AutoDelMateriePro(m_billNumber);
+                    TivLog.Logger.Info("5555555555");
                 }
             }
             catch (Exception exp)

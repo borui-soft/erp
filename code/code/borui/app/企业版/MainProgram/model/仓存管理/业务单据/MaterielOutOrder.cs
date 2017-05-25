@@ -6,6 +6,7 @@ using System.Text;
 using TIV.Core.DatabaseAccess;
 using MainProgram.bus;
 using MainProgram.model;
+using TIV.Core.TivLogger;
 
 namespace MainProgram.model
 {
@@ -37,27 +38,15 @@ namespace MainProgram.model
             return m_instance;
         }
 
-        public void insert(MaterielOutOrderTable record, bool isDisplayMessageBox = true)
+        public void insert(MaterielOutOrderTable record, bool isDisplayMessageBox = true, bool isReLoad = true)
         {
-            for (int i = 0; i < 50000; i++)
-            {
-                string sql1 = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT]([DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(5,'2017-05-25','" + Convert.ToString(i) + "','111','222','','3','961.29',1,9,8,0)";
-                string sql2 = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER], [XX_TABLE_ROW_NUM],[PRICE],[VALUE],[NOTE])VALUES('1',3,'" + Convert.ToString(i) + "','',674.99,1,'')";
-
-
-                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, sql1);
-                DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, sql2);
-            }
-
-            MaterielOutOrderTable oldRecord = new MaterielOutOrderTable();
-
             string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT]([DEPARTMENT_ID],[TRADING_DATE],[BILL_NUMBER],";
             insert += "[PROJECT_NO],[MAKE_NO],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[MAKE_ORDER_STAFF],[STAFF_SAVE_ID],[MATERIEL_STAFF],[IS_RED_BILL]) VALUES(";
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
             if (checkBillIsExist(record.billNumber))
             {
-                delete(record.billNumber);
+                delete(record.billNumber, false);
             }
 
             insert += record.departmentID + ",";
@@ -87,7 +76,10 @@ namespace MainProgram.model
                     MessageBoxExtend.messageOK("数据保存成功");
                 }
 
-                load();
+                if (isReLoad)
+                {
+                    load();
+                }
             }
             catch (Exception error)
             {
@@ -98,7 +90,7 @@ namespace MainProgram.model
             writeOperatorLog(304, OperatorLogType.Add, record.billNumber);
         }
 
-        public void delete(string billNumber)
+        public void delete(string billNumber, bool isReLoad = true)
         {
             string delete = "DELETE FROM WAREHOUSE_MANAGEMENT_OUT WHERE BILL_NUMBER = '" + billNumber + "'"; 
 
@@ -106,7 +98,10 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, delete);
 
-                load();
+                if (isReLoad)
+                {
+                    load();
+                }
             }
             catch (Exception error)
             {
@@ -238,6 +233,8 @@ namespace MainProgram.model
                     StorageStockDetail.getInctance().insert(storageStockDetailRecord);
                     #endregion
                 }
+
+                InitMateriel.getInctance().refreshRecord();
             }
 
             return isRet;

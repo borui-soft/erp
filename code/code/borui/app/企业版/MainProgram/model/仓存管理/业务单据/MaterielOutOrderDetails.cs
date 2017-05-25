@@ -50,7 +50,7 @@ namespace MainProgram.model
                         if (i == 0 && checkBillIsExist(record.billNumber))
                         {
                             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
-                            delete(record.billNumber);
+                            delete(record.billNumber, false);
                         }
 
                         string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_OUT_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER], [XX_TABLE_ROW_NUM]";
@@ -85,7 +85,7 @@ namespace MainProgram.model
             }
         }
 
-        public void delete(string billNumber)
+        public void delete(string billNumber, bool isReLoad = true)
         {
             string delete = "DELETE FROM WAREHOUSE_MANAGEMENT_OUT_DETAILS WHERE BILL_NUMBER = '" + billNumber + "'";
 
@@ -93,7 +93,10 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, delete);
 
-                load();
+                if (isReLoad)
+                {
+                    load();
+                }
             }
             catch (Exception error)
             {

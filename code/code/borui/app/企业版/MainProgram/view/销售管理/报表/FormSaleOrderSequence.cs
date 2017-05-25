@@ -152,7 +152,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("领料部门", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("日期", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("总材料表单据编号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
                 m_dateGridViewExtend.addDataGridViewColumn("数量", 80);

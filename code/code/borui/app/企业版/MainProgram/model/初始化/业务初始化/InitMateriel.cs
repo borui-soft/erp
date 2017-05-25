@@ -335,8 +335,6 @@ namespace MainProgram.model
             try
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
-
-                load();
             }
             catch (Exception error)
             {

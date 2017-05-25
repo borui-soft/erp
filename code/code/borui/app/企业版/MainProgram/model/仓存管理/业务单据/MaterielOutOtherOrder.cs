@@ -236,6 +236,8 @@ namespace MainProgram.model
                     StorageStockDetail.getInctance().insert(storageStockDetailRecord);
                     #endregion
                 }
+
+                InitMateriel.getInctance().refreshRecord();
             }
 
             return isRet;

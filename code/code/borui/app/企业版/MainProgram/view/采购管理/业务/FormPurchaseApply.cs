@@ -856,7 +856,7 @@ namespace MainProgram
 
                 setMatetielInfoToDataGridView(Convert.ToString(record[1]), index);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
-                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = Convert.ToString(record[6]);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = Convert.ToString(record[7]);
                 setTurnoverInfoDataGridView(index);
             }
         }

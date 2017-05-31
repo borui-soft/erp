@@ -457,32 +457,34 @@ namespace MainProgram
                 m_excelApp.Cells[row + 6, 5] = record.model;
                 m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[7].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[8].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[9].Value.ToString().Trim();
 
                 if (table.isRedBill == 1)
                 {
+                    m_excelApp.Cells[row + 6, 8] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[9].Value.ToString().Trim()) * -1;
                     m_excelApp.Cells[row + 6, 9] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[10].Value.ToString().Trim()) * -1;
                     m_excelApp.Cells[row + 6, 10] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[11].Value.ToString().Trim()) * -1;
                     m_excelApp.Cells[row + 6, 11] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[13].Value.ToString().Trim()) * -1;
                 }
                 else
                 {
+                    m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[9].Value.ToString().Trim();
                     m_excelApp.Cells[row + 6, 9] = m_dataGridView.Rows[row].Cells[10].Value.ToString().Trim();
                     m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[11].Value.ToString().Trim();
                     m_excelApp.Cells[row + 6, 11] = m_dataGridView.Rows[row].Cells[13].Value.ToString().Trim();
                 }
             }
 
-            stringReplace(Convert.ToString(sum1), "[5]");
 
             if (table.isRedBill == 1)
             {
+                stringReplace(Convert.ToString(sum1 * -1), "[5]");
                 stringReplace(Convert.ToString(sum2 * -1), "[6]");
                 stringReplace(Convert.ToString(sum3 * -1), "[7]");
                 stringReplace(Convert.ToString(sum4 * -1), "[8]");
             }
             else
             {
+                stringReplace(Convert.ToString(sum1), "[5]");
                 stringReplace(Convert.ToString(sum2), "[6]");
                 stringReplace(Convert.ToString(sum3), "[7]");
                 stringReplace(Convert.ToString(sum4), "[8]");
@@ -865,6 +867,7 @@ namespace MainProgram
                 m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Unit].Value.ToString().Trim();
                 m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Value].Value.ToString().Trim();
                 m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Note].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.MakeNum].Value.ToString().Trim();
 
                 sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielInOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }
@@ -896,6 +899,7 @@ namespace MainProgram
                 m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Model].Value.ToString().Trim();
                 m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Unit].Value.ToString().Trim();
                 m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.MakeNum].Value.ToString().Trim();
 
                 sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormSaleOutOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }

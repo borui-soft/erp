@@ -45,6 +45,7 @@ namespace MainProgram
             TransportationCost,
             OtherCost,
             SumTurnover,
+            MakeNum
         };
 
         public FormSaleOutOrder(string billNumber = "")
@@ -106,14 +107,15 @@ namespace MainProgram
                 m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 161, true, true);
             }
 
-            m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 83, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 63, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn(" 基本\n 单位", 100, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("单价(*)", 100, true, false);
             m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 100, true, false);
             m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("应缴税\n税率%", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("应缴税金额", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("总金额", 100, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("应缴税\n税率%", 80, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("应缴税金额", 80, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("总金额", 80, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("生成编号", 80, true, false);
 
             m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
             m_dateGridVeiwListDataList.initDataGridViewData(DateGridVeiwListDataListRowCount);
@@ -616,6 +618,7 @@ namespace MainProgram
                     record.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     record.costApportionments = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value.ToString());
                     record.noCostApportionments = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value.ToString());
+                    record.makeNum = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeNum].Value.ToString();
                     record.billNumber = this.labelBillNumber.Text;
 
                     list.Add(record);
@@ -862,7 +865,7 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (m_columnIndex != (int)DataGridColumnName.MatetielNumber)
+            if (m_columnIndex != (int)DataGridColumnName.MatetielNumber && m_columnIndex != (int)DataGridColumnName.MakeNum)
             {
                 e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
                     this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
@@ -989,6 +992,7 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = record.costApportionments;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.noCostApportionments;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeNum].Value = record.makeNum;
             }
 
             // 如果单据已审核，则禁用页面所有控件

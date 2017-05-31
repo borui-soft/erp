@@ -512,10 +512,12 @@ namespace MainProgram
 
                         if (record.isRedBill == 1)
                         {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
                             temp.Add((Convert.ToDouble(record.sumMoney) * -1));
                         }
                         else
                         {
+                            temp.Add(record.sumValue);
                             temp.Add(record.sumMoney);
                         }
 
@@ -605,14 +607,15 @@ namespace MainProgram
                         temp.Add("");
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.sumValue);
 
                         if (record.isRedBill == 1)
                         {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
                             temp.Add((Convert.ToDouble(record.sumMoney) * -1));
                         }
                         else
                         {
+                            temp.Add(record.sumValue);
                             temp.Add(record.sumMoney);
                         }
 
@@ -704,14 +707,15 @@ namespace MainProgram
                         temp.Add(record.billNumber);
                         temp.Add(record.projectNo);
                         temp.Add(record.makeNo);
-                        temp.Add(record.sumValue);
 
                         if (record.isRedBill == 1)
                         {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
                             temp.Add((Convert.ToDouble(record.sumMoney) * -1));
                         }
                         else
                         {
+                            temp.Add(record.sumValue);
                             temp.Add(record.sumMoney);
                         }
 

@@ -41,6 +41,7 @@ namespace MainProgram
             Value,
             Price,
             Turnover,
+            MakeNum,
             Note
         };
 
@@ -88,11 +89,12 @@ namespace MainProgram
             }
 
             m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 83, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("基本\n单位", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("备注", 203, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("基本\n单位", 80, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 80, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 80, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 80, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("生产编号", 100, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("备注", 183, true, false);
 
             m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
             m_dateGridVeiwListDataList.initDataGridViewData(DateGridVeiwListDataListRowCount);
@@ -380,6 +382,7 @@ namespace MainProgram
                     record.price = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
                     record.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     record.note = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value.ToString();
+                    record.makeNum = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeNum].Value.ToString();
 
                     list.Add(record);
                 }
@@ -599,7 +602,9 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (m_columnIndex != (int)DataGridColumnName.Note && m_columnIndex != (int)DataGridColumnName.MatetielNumber)
+            if (m_columnIndex != (int)DataGridColumnName.Note && 
+                m_columnIndex != (int)DataGridColumnName.MatetielNumber &&
+                m_columnIndex != (int)DataGridColumnName.MakeNum)
             {
                 e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
                     this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
@@ -747,6 +752,7 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Note].Value = record.note;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MakeNum].Value = record.makeNum;
             }
         }
 

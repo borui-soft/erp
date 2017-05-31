@@ -54,13 +54,14 @@ namespace MainProgram.model
                         }
 
                         string insert = "INSERT INTO [dbo].[WAREHOUSE_MANAGEMENT_IN_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER]";
-                        insert += ",[PRICE],[VALUE],[NOTE])VALUES(";
+                        insert += ",[PRICE],[VALUE],[MAKE_NUM],[NOTE])VALUES(";
 
                         insert += "'" + record.rowNumber + "',";
                         insert += record.materielID + ",";
                         insert += "'" + record.billNumber + "',";
                         insert += record.price + ",";
                         insert += record.value + ",";
+                        insert += "'" + record.makeNum + "',";
                         insert += "'" + record.note + "'";
                         insert += ")";
 
@@ -105,7 +106,7 @@ namespace MainProgram.model
         {
             m_tableDataList.Clear();
 
-            string querySQL = "SELECT A1.[PKEY],A1.[ROW_NUMBER],A1.[MATERIEL_ID], A1.[BILL_NUMBER],A1.[PRICE],A1.[VALUE],A1.[NOTE] ";
+            string querySQL = "SELECT A1.[PKEY],A1.[ROW_NUMBER],A1.[MATERIEL_ID], A1.[BILL_NUMBER],A1.[PRICE],A1.[VALUE],A1.[NOTE],A1.[MAKE_NUM] ";
             querySQL += " FROM [WAREHOUSE_MANAGEMENT_IN_DETAILS] A1, WAREHOUSE_MANAGEMENT_IN A2";
             querySQL += " WHERE A1.BILL_NUMBER = A2.BILL_NUMBER";
             querySQL += " ORDER BY A1.[PKEY]";
@@ -133,6 +134,7 @@ namespace MainProgram.model
                     record.sumMoney = record.price * record.value;
 
                     record.note = DbDataConvert.ToString(row["NOTE"]);
+                    record.makeNum = DbDataConvert.ToString(row["MAKE_NUM"]);
 
                     m_tableDataList.Add(m_tableDataList.Count, record);
                 }
@@ -249,5 +251,8 @@ namespace MainProgram.model
         public double value { get; set; }
         public double sumMoney { get; set; }
         public string note { get; set; }
+
+        // 生产编号
+        public string makeNum { get; set; }
     }
 }

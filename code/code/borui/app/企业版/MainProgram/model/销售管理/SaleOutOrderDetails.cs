@@ -54,13 +54,16 @@ namespace MainProgram.model
                         }
 
                         string insert = "INSERT INTO [dbo].[SALE_OUT_ORDER_DETAILS]([ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER]";
-                        insert += ",[PRICE],[VALUE],[TRANSPORTATION_COST],[OTHER_COST])VALUES(";
+                        insert += ",[PRICE],[VALUE],[MAKE_NUM],[TRANSPORTATION_COST],[OTHER_COST])VALUES(";
 
                         insert += "'" + record.rowNumber + "',";
                         insert += record.materielID + ",";
                         insert += "'" + record.billNumber + "',";
                         insert += record.price + ",";
                         insert += record.value + ",";
+
+                        insert += "'" + record.makeNum + "',";
+
                         insert += record.costApportionments + ",";
                         insert += record.noCostApportionments;
                         insert += ")";
@@ -126,7 +129,7 @@ namespace MainProgram.model
         private void load()
         {
             string sql = "SELECT [PKEY],[ROW_NUMBER],[MATERIEL_ID],[BILL_NUMBER],[PRICE],[VALUE]";
-            sql += ",[TRANSPORTATION_COST],[OTHER_COST] FROM [dbo].[SALE_OUT_ORDER_DETAILS] ORDER BY PKEY";
+            sql += ",[TRANSPORTATION_COST],[OTHER_COST],[MAKE_NUM] FROM [dbo].[SALE_OUT_ORDER_DETAILS] ORDER BY PKEY";
 
             m_tableDataList.Clear();
 
@@ -154,6 +157,8 @@ namespace MainProgram.model
                     record.costApportionments = DbDataConvert.ToDouble(row["TRANSPORTATION_COST"]);
                     record.noCostApportionments = DbDataConvert.ToDouble(row["OTHER_COST"]);
                     record.totalMoney = record.sumMoney + record.costApportionments + record.noCostApportionments;
+
+                    record.makeNum = DbDataConvert.ToString(row["MAKE_NUM"]);
 
                     m_tableDataList.Add(m_tableDataList.Count, record);
                 }
@@ -422,6 +427,10 @@ namespace MainProgram.model
         // 非成本费用
         public double noCostApportionments { get; set; }
         public double totalMoney { get; set; }
+
+        // 生产编号
+        public string makeNum { get; set; }
+
     }
 
     public class SaleProfitCounInfoStruct

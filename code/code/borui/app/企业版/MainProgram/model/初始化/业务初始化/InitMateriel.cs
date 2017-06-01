@@ -183,10 +183,10 @@ namespace MainProgram.model
                     record.price = DbDataConvert.ToDouble(row[3]);
 
                     // 根据物料ID，得到物料信息
-                    MaterielTable materielInfo = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
-                    record.name = materielInfo.name;
-                    record.storage = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materielInfo.storage);
-                    record.unitPurchase = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materielInfo.unit);
+                    //MaterielTable materielInfo = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
+                    //record.name = materielInfo.name;
+                    //record.storage = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materielInfo.storage);
+                    //record.unitPurchase = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materielInfo.unit);
 
                     m_materielStockList.Add(m_materielStockList.Count, record);
                 }
@@ -335,6 +335,7 @@ namespace MainProgram.model
             try
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
+                load();
             }
             catch (Exception error)
             {
@@ -366,8 +367,8 @@ namespace MainProgram.model
         public int materielID { get; set; }
         public double value { get; set; }
         public double price { get; set; }
-        public string name { get; set; }
-        public string unitPurchase { get; set; }
-        public string storage { get; set; }
+        //public string name { get; set; }
+        //public string unitPurchase { get; set; }
+        //public string storage { get; set; }
     }
 }

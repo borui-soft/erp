@@ -508,7 +508,6 @@ namespace MainProgram
                         temp.Add(record.billNumber);
                         temp.Add(record.srcOrderNum);
                         temp.Add(record.makeNo);
-                        temp.Add(record.sumValue);
 
                         if (record.isRedBill == 1)
                         {

@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.31";
+            this.label3.Text = "当前软件版本：V2.5.32";
 
             // 
             // richTextBox1
@@ -82,7 +82,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、解决销售出库单中存在相同物料ID时，物料库存更新错误的问题\r\n";
+            this.richTextBox1.Text = "1、解决生产领料序时薄无法显示领料单的问题\r\n";
 
             // Fo
             // 

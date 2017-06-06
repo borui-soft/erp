@@ -953,7 +953,7 @@ namespace MainProgram
 
                 record = m_proInfoList[index];
 
-                if (Convert.ToString(record[6]) == xxMatetielTableRowNum)
+                if (Convert.ToString(record[7]) == xxMatetielTableRowNum)
                 {
                     value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
                     break;

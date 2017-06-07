@@ -417,7 +417,7 @@
             this.dataGridViewDataListChangeOfter.RowTemplate.Height = 23;
             this.dataGridViewDataListChangeOfter.Size = new System.Drawing.Size(898, 220);
             this.dataGridViewDataListChangeOfter.TabIndex = 123;
-            this.dataGridViewDataListChangeOfter.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataListChangeOfter_CellBeginEdit);
+            this.dataGridViewDataListChangeOfter.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataListChangeOfter.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataListChangeOfter_CellEndEdit);
             // 
             // label7

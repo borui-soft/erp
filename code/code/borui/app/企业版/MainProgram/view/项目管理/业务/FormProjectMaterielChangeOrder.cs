@@ -166,14 +166,14 @@ namespace MainProgram
 
             if (m_tablesType == 1)
             {
-                m_dateGridVeiwListDataList.addDataGridViewColumn("序号(*)", 40, true, true);
-                m_dateGridVeiwListDataList.addDataGridViewColumn("序列号(*)", 50, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序号(*)", 40, true, false);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序列号(*)", 50, true, false);
                 m_dateGridVeiwListDataList.addDataGridViewColumn("所属部件(*)", 95, true, true);
             }
             else
             {
-                m_dateGridVeiwListDataList.addDataGridViewColumn("序号(*)", 40, true, true);
-                m_dateGridVeiwListDataList.addDataGridViewColumn("序列号(*)", 50, false, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序号(*)", 40, true, false);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("序列号(*)", 50, false, false);
                 m_dateGridVeiwListDataList.addDataGridViewColumn("所属部件(*)", 145, true, true);
             }
 
@@ -356,6 +356,10 @@ namespace MainProgram
                 else
                 {
                     m_currentOrderInfo.materielIDs += dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString();
+                    m_currentOrderInfo.materielIDs += ",";
+                    m_currentOrderInfo.materielIDs += dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Num].Value.ToString();
+                    m_currentOrderInfo.materielIDs += ",";
+                    m_currentOrderInfo.materielIDs += dataGridViewDataListChange.Rows[rowIndex].Cells[(int)DataGridColumnName.Sequence].Value.ToString();
                     m_currentOrderInfo.materielIDs += "#";
                 }
             }
@@ -453,9 +457,11 @@ namespace MainProgram
 
                 if (record.value == 0)
                 {
-                    MessageBoxExtend.messageWarning("第[" + record.rowNumber + "]信息中物料数量不能为空");
-                    isRet = false;
-                    break;
+                    if (!MessageBoxExtend.messageQuestion("第[" + record.rowNumber + "]行信息中物料数量为0, 确实变更？"))
+                    {
+                        isRet = false;
+                        break;
+                    }
                 }
             }
 
@@ -655,15 +661,23 @@ namespace MainProgram
 
             // 变更前DataGridView 赋值
             string matetiels = m_currentOrderInfo.materielIDs;
-            matetiels = matetiels.Replace("##", "#");
-
             string[] sArray = matetiels.Split('#');
             int rowNum = 0;
             foreach (string index in sArray)
             {
                 if (index.ToString().Length > 0)
                 {
-                    setMatetielInfo(rowNum, index.ToString());
+                    string[] list = index.Split(',');
+
+                    if (list.Length > 1)
+                    {
+                        setMatetielInfo(rowNum, list[0], list[1], list[2]);
+                    }
+                    else
+                    {
+                        setMatetielInfo(rowNum, list[0], "", "");
+                    }
+
                     rowNum++;
                 }
             }
@@ -775,12 +789,18 @@ namespace MainProgram
 
         private void dataGridViewDataListChangeOfter_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
+            if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber ||
+                e.ColumnIndex == (int)DataGridColumnName.Num ||
+                e.ColumnIndex == (int)DataGridColumnName.Sequence )
             {
-                if (dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString().Length > 0)
+
+                string mateielID = dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MatetielNumber].EditedFormattedValue.ToString();
+                string num = dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Num].EditedFormattedValue.ToString();
+                string sequence = dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.Sequence].EditedFormattedValue.ToString();
+
+                if (mateielID.Length > 0)
                 {
                     bool isRet = false;
-                    string mateielID = dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString();
 
                     foreach (KeyValuePair<int, ProjectManagerDetailsTable> index in m_purchaseOrderDetails)
                     {
@@ -789,6 +809,16 @@ namespace MainProgram
 
                         if (index.Value.materielID == Convert.ToInt32(mateielID))
                         {
+                            if (e.ColumnIndex == (int)DataGridColumnName.Num && num.Length > 0 && index.Value.no != num)
+                            {
+                                continue;
+                            }
+
+                            if (e.ColumnIndex == (int)DataGridColumnName.Sequence && sequence.Length > 0 && index.Value.sequence != sequence)
+                            {
+                                continue;
+                            }
+
                             isRet = true;
 
                             dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
@@ -817,7 +847,7 @@ namespace MainProgram
                     if (!isRet)
                     {
                         MessageBoxExtend.messageWarning("物料[" + dataGridViewDataListChangeOfter.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString() +
-                            "]不属于原始单据，请重新输入或选择");
+                            "]不属于原始单据数据，请重新输入或选择");
                         m_dateGridVeiwListDataList.clearDataGridViewRow(e.RowIndex);
                     }
 
@@ -825,24 +855,7 @@ namespace MainProgram
             }
         }
 
-        private void dataGridViewDataListChangeOfter_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
-            {
-                //验证DataGridView是否又空的行
-                int nullRowNumber = m_dateGridVeiwListDataList.getExistNullRow(e.RowIndex);
-
-                if (nullRowNumber != -1)
-                {
-                    MessageBoxExtend.messageWarning("行号[" + Convert.ToString(nullRowNumber + 1) + "]数据为空，请现在空行中输入");
-                    dataGridViewDataListChangeOfter.CurrentCell = this.dataGridViewDataListChangeOfter.Rows[nullRowNumber].Cells[(int)DataGridColumnName.MatetielNumber];
-
-                    return;
-                }
-            }
-        }
-
-        private void setMatetielInfo(int rowIndex, string id)
+        private void setMatetielInfo(int rowIndex, string id, string num, string sequence)
         {
             // 根据单据编号，得到详细数据
             m_purchaseOrderDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(this.labelSrcOrderBillNum.Text);
@@ -854,6 +867,16 @@ namespace MainProgram
 
                 if (index.Value.materielID == Convert.ToInt32(id))
                 {
+                    if (sequence.Length > 0 && index.Value.sequence != sequence)
+                    {
+                        continue;
+                    }
+
+                    if (num.Length > 0 && index.Value.no != num)
+                    {
+                        continue;
+                    }
+
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.materielBrand;
                     dataGridViewDataListChangeOfter.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;

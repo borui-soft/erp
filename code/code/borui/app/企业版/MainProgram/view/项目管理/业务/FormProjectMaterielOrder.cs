@@ -364,9 +364,9 @@ namespace MainProgram
                 return false;
             }
 
-            if (record.deviceMode.Length > 50)
+            if (record.deviceMode.Length > 80)
             {
-                MessageBoxExtend.messageWarning("设备型号信息最大长度为50字符,目前输入的设备新号信息太长，请重新输入");
+                MessageBoxExtend.messageWarning("设备型号信息最大长度为80字符,目前输入的设备新号信息太长，请重新输入");
                 return false;
             }
 
@@ -406,9 +406,9 @@ namespace MainProgram
                 return false;
             }
 
-            if (record.makeNum.Length > 30)
+            if (record.makeNum.Length > 80)
             {
-                MessageBoxExtend.messageWarning("生产编号信息最大长度为30字符,目前输入的生产编号信息太长，请重新输入");
+                MessageBoxExtend.messageWarning("生产编号信息最大长度为80字符,目前输入的生产编号信息太长，请重新输入");
                 return false;
             }
 

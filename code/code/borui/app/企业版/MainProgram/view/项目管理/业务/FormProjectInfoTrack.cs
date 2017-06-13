@@ -87,11 +87,12 @@ namespace MainProgram
             addDataGridViewColumn("部分名称", 100);
 
             addDataGridViewColumn("ID", 30);
-            addDataGridViewColumn("物料名称", 100);
-            addDataGridViewColumn("物料编码", 60);
-            addDataGridViewColumn("型号", 60);
-            addDataGridViewColumn("参数", 60);
-            addDataGridViewColumn("数量", 60);
+            addDataGridViewColumn("物料名称", 90);
+            addDataGridViewColumn("物料编码", 90);
+            addDataGridViewColumn("型号", 50);
+            addDataGridViewColumn("参数", 50);
+            addDataGridViewColumn("材质", 50);
+            addDataGridViewColumn("数量", 50);
 
             addDataGridViewColumn("实际库存", 100);
             addDataGridViewColumn("预占库存总量", 100);
@@ -107,8 +108,8 @@ namespace MainProgram
             this.projectRowMergeView.ColumnHeadersHeight = 40;
             this.projectRowMergeView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.projectRowMergeView.MergeColumnNames.Add("单据编号");
-            this.projectRowMergeView.AddSpanHeader(3, 6, "物料需求");
-            this.projectRowMergeView.AddSpanHeader(9, 3, "库存情况");
+            this.projectRowMergeView.AddSpanHeader(3, 7, "物料需求");
+            this.projectRowMergeView.AddSpanHeader(10, 3, "库存情况");
 
             updateDataGridView();
         }
@@ -146,6 +147,7 @@ namespace MainProgram
                     temp.Add(tmp.num);
                     temp.Add(tmp.materielModel);
                     temp.Add(tmp.materielParameter);
+                    temp.Add(tmp.cl);
 
                     // 如果在变更数据表中找到了某条变更过的物料信息，则显示变更后的数量
                     int sign = PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no);
@@ -226,6 +228,7 @@ namespace MainProgram
                     temp.Add(tmp.num);
                     temp.Add(tmp.materielModel);
                     temp.Add(tmp.materielParameter);
+                    temp.Add(tmp.cl);
                     temp.Add(tmp.value);
 
                     // 得到实际库存

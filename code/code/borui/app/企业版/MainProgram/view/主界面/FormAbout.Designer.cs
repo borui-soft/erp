@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.35";
+            this.label3.Text = "当前软件版本：V2.5.40";
 
             // 
             // richTextBox1
@@ -82,7 +82,10 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、解决材料表中出现相同物料ID时，无法正确填写变更单的问题\r\n";
+            this.richTextBox1.Text = "1、总材料表：设备型号和生产编号，最大长度增加到最大80字节\r\n";
+            this.richTextBox1.Text += "2、领料表的：生产编号，增加到最大80字节\r\n";
+            this.richTextBox1.Text += "3、员工组织结构图页面中，支持顶层组织下先设置部门，再从部门下增加员工的功能\r\n";
+            this.richTextBox1.Text += "4、3中类型的材料跟踪表页面，支持材质信息的显示\r\n";
 
             // Fo
             // 

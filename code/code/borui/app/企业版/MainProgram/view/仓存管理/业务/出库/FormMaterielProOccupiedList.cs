@@ -85,7 +85,7 @@ namespace MainProgram
 
                     if (orderInof != null)
                     {
-                        if (record.isCancel == "1")
+                        if (record.isCancel == "1" || record.value <= 0.00)
                         {
                             continue;
                         }

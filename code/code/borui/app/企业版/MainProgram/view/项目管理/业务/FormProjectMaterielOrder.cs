@@ -352,7 +352,15 @@ namespace MainProgram
             else 
             {
                 m_currentOrderInfo.dataType = m_ProjectInfo.dataType;
-                m_currentOrderInfo.designStaffID = m_ProjectInfo.designStaffID;
+
+                if (m_staffPkey != -1)
+                {
+                    m_currentOrderInfo.designStaffID = m_staffPkey;
+                }
+                else 
+                {
+                    m_currentOrderInfo.designStaffID = m_ProjectInfo.designStaffID;
+                }
             }
         }
 

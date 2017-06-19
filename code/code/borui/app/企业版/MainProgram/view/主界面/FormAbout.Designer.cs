@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.40";
+            this.label3.Text = "当前软件版本：V2.5.50";
 
             // 
             // richTextBox1
@@ -82,10 +82,10 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、总材料表：设备型号和生产编号，最大长度增加到最大80字节\r\n";
-            this.richTextBox1.Text += "2、领料表的：生产编号，增加到最大80字节\r\n";
-            this.richTextBox1.Text += "3、员工组织结构图页面中，支持顶层组织下先设置部门，再从部门下增加员工的功能\r\n";
-            this.richTextBox1.Text += "4、3中类型的材料跟踪表页面，支持材质信息的显示\r\n";
+            this.richTextBox1.Text = "1、预占申请单：解决当单据物料数目大于12条时，页面无法打开的问题\r\n";
+            this.richTextBox1.Text += "2、库存预占序时薄：不在显示预占数量为0的物料预占信息\r\n";
+            this.richTextBox1.Text += "3、xx材料表:解决单据在未审核的状态下，无法修改设计人的问题\r\n";
+            this.richTextBox1.Text += "4、解决领料到审核后，自动消除库存占用数量再某些情况下错误的问题，变量类型有double修改为decimal \r\n";
 
             // Fo
             // 

@@ -681,6 +681,11 @@ namespace MainProgram
             SortedDictionary<int, MaterielProOccupiedOrderDetailsTable> orderDetails =
                 MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedInfoFromBillNumber(billNumber);
 
+            if (orderDetails.Count > DateGridVeiwListDataListRowCount)
+            {
+                m_dateGridVeiwListDataList.initDataGridViewData(orderDetails.Count + 1);
+            }
+
             foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index in orderDetails)
             {
                 MaterielProOccupiedOrderDetailsTable record = new MaterielProOccupiedOrderDetailsTable();

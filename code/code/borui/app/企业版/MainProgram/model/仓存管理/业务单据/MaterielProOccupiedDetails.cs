@@ -152,7 +152,7 @@ namespace MainProgram.model
             }
 
             ArrayList billNumList = MaterielProOccupiedOrder.getInctance().getAllReviewMaterielProBillNumFromProjectNum(projectNum);
-            double tmpValue = needCancelValue;
+            decimal tmpValue = (decimal)needCancelValue;
 
             for (int i = 0; i < billNumList.Count; i++)
             {
@@ -162,16 +162,16 @@ namespace MainProgram.model
                 {
                     if (index.Value.billNumber == billNumber && index.Value.materielID == materielID && index.Value.isCancel == "0")
                     {
-                        if (index.Value.value - tmpValue >= 0)
+                        if ((decimal)index.Value.value - tmpValue >= 0)
                         {
-                            updateRecordValue(index.Value.value - tmpValue, index.Value.pkey);
-                            tmpValue -= needCancelValue;
+                            updateRecordValue((decimal)index.Value.value - tmpValue, index.Value.pkey);
+                            tmpValue -= (decimal)needCancelValue;
                             break;
                         }
                         else
                         {
                             updateRecordValue(0, index.Value.pkey);
-                            tmpValue -= index.Value.value;
+                            tmpValue -= (decimal)index.Value.value;
                         }
                     }
                 }
@@ -186,7 +186,7 @@ namespace MainProgram.model
         }
 
         // 撤销单据
-        public void updateRecordValue(double value, int pkey)
+        public void updateRecordValue(decimal value, int pkey)
         {
             string delete = "UPDATE [dbo].[WAREHOUSE_MANAGEMENT_PRO_OCCUPIED_DETAILS] SET VALUE = " + value + " WHERE PKEY = " + pkey;
 

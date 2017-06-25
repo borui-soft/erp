@@ -671,6 +671,8 @@ namespace MainProgram
             stringReplace(table.billNumber, "[1]");
             stringReplace(table.exchangesUnit, "[2]");
             stringReplace(table.makeOrderStaffName, "[3]");
+            stringReplace(table.projectNo, "[5]");
+            stringReplace(table.makeNo, "[6]");
 
             double sum = 0.0;
             for (int row = 0; row < m_dataGridView.RowCount; row++)

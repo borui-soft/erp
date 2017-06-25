@@ -515,7 +515,7 @@
             // 
             this.panelIsReview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panelIsReview.BackgroundImage = global::MainProgram.Properties.Resources.已审核;
-            this.panelIsReview.Location = new System.Drawing.Point(962, -44);
+            this.panelIsReview.Location = new System.Drawing.Point(962, 6);
             this.panelIsReview.Name = "panelIsReview";
             this.panelIsReview.Size = new System.Drawing.Size(62, 33);
             this.panelIsReview.TabIndex = 75;
@@ -710,12 +710,12 @@
             this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemDelRow});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(113, 26);
             // 
             // ToolStripMenuItemDelRow
             // 
             this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
-            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItemDelRow.Text = "删除行";
             this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
             // 

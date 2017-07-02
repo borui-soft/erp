@@ -39,7 +39,7 @@ namespace MainProgram.model
 
             string insert = "INSERT INTO [dbo].[PURCHASE_IN_ORDER]([SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[CONTRACT_NUM],[PURCHASE_TYPE],";
             insert += "[PAYMENT_DATE],[EXCHANGES_UNIT],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],[TOTAL_MONEY],";
-            insert += "[BUSINESS_PEOPLE_ID],[MAKE_ORDER_STAFF],[SOURCE_BILL_TYPE],[SOURCE_BILL_NUMBER],[STAFF_SAVE_ID],";
+            insert += "[BUSINESS_PEOPLE_ID],[MAKE_ORDER_STAFF],[SOURCE_BILL_TYPE],[SOURCE_BILL_NUMBER],[PURCHASE_NUM],[STAFF_SAVE_ID],";
             insert += "[STAFF_CHECK_ID],[PAYMENT_OK],[PAYMENT_NO_OK],[IS_RED_BILL],[IS_IN_LEDGER]";
 
             // 根据单据编号，判断库中是否已经存在该单据 如果存在单据首先删除单据，然后再执行插入操作
@@ -75,6 +75,7 @@ namespace MainProgram.model
             insert += record.makeOrderStaff + ",";
             insert += "'" + record.sourceBillType + "',";
             insert += "'" + record.sourceBillNumber + "',";
+            insert += "'" + record.purchaseNum + "',";
             insert += record.staffSaveId + ",";
             insert += record.staffCheckId + ",";
             
@@ -403,7 +404,7 @@ namespace MainProgram.model
             string sql = "SELECT [PKEY],[SUPPLIER_ID],[TRADING_DATE],[BILL_NUMBER],[CONTRACT_NUM],[PURCHASE_TYPE],[PAYMENT_DATE],";
             sql += "[EXCHANGES_UNIT],[BUSINESS_PEOPLE_ID],[SUM_VALUE],[SUM_MONEY],[SUM_TRANSPORTATION_COST],[SUM_OTHER_COST],";
             sql += "[TOTAL_MONEY], [MAKE_ORDER_STAFF],[ORDERR_REVIEW],[REVIEW_DATE],[IS_REVIEW],";
-            sql += "[SOURCE_BILL_TYPE], [SOURCE_BILL_NUMBER],[STAFF_SAVE_ID],[STAFF_CHECK_ID],[PAYMENT_OK],[PAYMENT_NO_OK],";
+            sql += "[SOURCE_BILL_TYPE], [SOURCE_BILL_NUMBER],[PURCHASE_NUM],[STAFF_SAVE_ID],[STAFF_CHECK_ID],[PAYMENT_OK],[PAYMENT_NO_OK],";
             sql += "[IS_RED_BILL],[IS_IN_LEDGER],[ORDERR_IN_LEDGER],[IN_LEDGER_DATE] ";
             sql += "FROM [dbo].[PURCHASE_IN_ORDER] ORDER BY PKEY DESC";
 
@@ -448,6 +449,7 @@ namespace MainProgram.model
                     // 采购入库单比采购订单中多出的字段
                     record.sourceBillType = DbDataConvert.ToString(row["SOURCE_BILL_TYPE"]);
                     record.sourceBillNumber = DbDataConvert.ToString(row["SOURCE_BILL_NUMBER"]);
+                    record.purchaseNum = DbDataConvert.ToString(row["PURCHASE_NUM"]);
                     record.staffSaveId = DbDataConvert.ToInt32(row["STAFF_SAVE_ID"]);
                     record.staffSaveName = Staff.getInctance().getStaffNameFromPkey(record.staffSaveId);
                     record.staffCheckId = DbDataConvert.ToInt32(row["STAFF_CHECK_ID"]);
@@ -677,8 +679,9 @@ namespace MainProgram.model
         public string inLedgerDate { get; set; }
         public int isInLedger { get; set; }
 
-        // 总材料表单据编号
+        // 总材料表单据编号、采购合同编号
         public string srcOrderNum { get; set; }
+        public string purchaseNum { get; set; }
         
     }
 }

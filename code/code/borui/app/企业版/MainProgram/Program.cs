@@ -22,6 +22,7 @@ namespace MainProgram
                 LoginUserInfo m_currentLoginUser = new LoginUserInfo();
 
                 if (AccessAuthorization.getInctance().passwordIsValidate("Manager", "Manager", out m_currentLoginUser))
+                //if (AccessAuthorization.getInctance().passwordIsValidate("老王", "12345", out m_currentLoginUser))
                 {
                     DbPublic.getInctance().setCurrentLoginUserName(m_currentLoginUser.staffName);
                     DbPublic.getInctance().setCurrentLoginUserID(m_currentLoginUser.pkey);

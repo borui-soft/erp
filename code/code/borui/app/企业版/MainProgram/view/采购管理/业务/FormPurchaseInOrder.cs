@@ -561,6 +561,7 @@ namespace MainProgram
             record.sourceBillType = this.labelSourceOrderType.Text;
             record.sourceBillNumber = this.labelSourceOrderNumber.Text;
             record.srcOrderNum = this.labelContractNum.Text;
+            record.purchaseNum = this.labelPurchaseNum.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
@@ -1035,6 +1036,7 @@ namespace MainProgram
             this.labelSave.Visible = true;
             this.labelVerify.Visible = true;
             this.labelContractNum.Visible = true;
+            this.labelPurchaseNum.Visible = true;
             
             this.labelPurchaseName.Text = m_purchaseInOrder.supplierName;
             this.labelTradingDate.Text = m_purchaseInOrder.tradingDate;
@@ -1053,6 +1055,7 @@ namespace MainProgram
             this.labelSave.Text = m_purchaseInOrder.staffSaveName;
             this.labelVerify.Text = m_purchaseInOrder.staffCheckName;
             this.labelContractNum.Text = m_purchaseInOrder.srcOrderNum;
+            this.labelPurchaseNum.Text = m_purchaseInOrder.purchaseNum;
             
 
             // DataGridView 赋值
@@ -1288,6 +1291,27 @@ namespace MainProgram
             {
                 MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
             }
+        }
+
+        private void textBoxPurchaseNum_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseInOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelPurchaseNum.Visible = false;
+            this.textBoxPurchaseNum.Visible = true;
+
+            this.textBoxPurchaseNum.Text = this.labelPurchaseNum.Text;
+            this.textBoxPurchaseNum.Focus();
+        }
+
+        private void textBoxPurchaseNum_Leave(object sender, EventArgs e)
+        {
+            this.textBoxPurchaseNum.Visible = false;
+            this.labelPurchaseNum.Text = this.textBoxPurchaseNum.Text.ToString();
+            this.labelPurchaseNum.Visible = this.textBoxPurchaseNum.Text.Length > 0;
         }
     }
 }

@@ -414,7 +414,7 @@ namespace MainProgram
             stringReplace(projectInfo.projectNum, "[4]");
             stringReplace(table.makeOrderStaffName, "[9]");
             stringReplace(projectInfo.projectName, "[10]");
-            stringReplace(" ", "[11]");
+            stringReplace(table.purchaseNum, "[11]");
             stringReplace(table.exchangesUnit, "[12]");
 
             double sum1 = 0.0, sum2 = 0.0, sum3 = 0.0, sum4 = 0.0;

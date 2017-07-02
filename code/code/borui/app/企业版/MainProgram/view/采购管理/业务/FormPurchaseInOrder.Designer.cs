@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPurchaseInOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -147,6 +147,12 @@
             this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.labelPurchaseNum = new System.Windows.Forms.Label();
+            this.textBoxPurchaseNum = new System.Windows.Forms.TextBox();
+            this.labelPurchaseNumName = new System.Windows.Forms.Label();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -169,6 +175,7 @@
             this.groupBox20.SuspendLayout();
             this.panelContractNum.SuspendLayout();
             this.contextMenuStripDataGridView.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -187,7 +194,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(854, 91);
+            this.label7.Location = new System.Drawing.Point(851, 91);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 22;
@@ -260,7 +267,7 @@
             this.panel1.Controls.Add(this.labelPurchaseName);
             this.panel1.Controls.Add(this.panelPurchaseName);
             this.panel1.Controls.Add(this.textBoxPurchaseName);
-            this.panel1.Location = new System.Drawing.Point(115, 85);
+            this.panel1.Location = new System.Drawing.Point(116, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 21);
             this.panel1.TabIndex = 17;
@@ -302,7 +309,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(115, 106);
+            this.groupBox3.Location = new System.Drawing.Point(116, 106);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(165, 1);
             this.groupBox3.TabIndex = 16;
@@ -347,12 +354,12 @@
             this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDataList.Location = new System.Drawing.Point(12, 202);
+            this.dataGridViewDataList.Location = new System.Drawing.Point(12, 218);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDataList.RowTemplate.Height = 23;
-            this.dataGridViewDataList.Size = new System.Drawing.Size(1102, 265);
+            this.dataGridViewDataList.Size = new System.Drawing.Size(1102, 266);
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
@@ -364,7 +371,7 @@
             // 
             this.groupBox4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox4.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox4.Location = new System.Drawing.Point(90, 547);
+            this.groupBox4.Location = new System.Drawing.Point(90, 554);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(163, 1);
             this.groupBox4.TabIndex = 31;
@@ -376,7 +383,7 @@
             this.panel7.Controls.Add(this.labelBusinessPeople);
             this.panel7.Controls.Add(this.panelBusinessPeople);
             this.panel7.Controls.Add(this.textBoxBusinessPeople);
-            this.panel7.Location = new System.Drawing.Point(920, 492);
+            this.panel7.Location = new System.Drawing.Point(920, 507);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(165, 21);
             this.panel7.TabIndex = 29;
@@ -420,7 +427,7 @@
             // 
             this.textBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(918, 491);
+            this.textBox2.Location = new System.Drawing.Point(918, 506);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(165, 21);
             this.textBox2.TabIndex = 6;
@@ -431,7 +438,7 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox7.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox7.Controls.Add(this.groupBox8);
-            this.groupBox7.Location = new System.Drawing.Point(918, 513);
+            this.groupBox7.Location = new System.Drawing.Point(918, 517);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(165, 1);
             this.groupBox7.TabIndex = 28;
@@ -452,7 +459,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(21, 534);
+            this.label12.Location = new System.Drawing.Point(21, 541);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(47, 12);
             this.label12.TabIndex = 27;
@@ -464,7 +471,7 @@
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(849, 500);
+            this.label13.Location = new System.Drawing.Point(849, 515);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 12);
             this.label13.TabIndex = 26;
@@ -474,7 +481,7 @@
             // 
             this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(530, 179);
+            this.groupBox9.Location = new System.Drawing.Point(531, 169);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(165, 1);
             this.groupBox9.TabIndex = 41;
@@ -485,7 +492,7 @@
             this.panel10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel10.Controls.Add(this.labelSummary);
             this.panel10.Controls.Add(this.textBoxSummary);
-            this.panel10.Location = new System.Drawing.Point(530, 159);
+            this.panel10.Location = new System.Drawing.Point(531, 149);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(168, 21);
             this.panel10.TabIndex = 40;
@@ -518,7 +525,7 @@
             this.panel11.Controls.Add(this.panelPurchaseType);
             this.panel11.Controls.Add(this.labelPurchaseType);
             this.panel11.Controls.Add(this.comboBoxPurchaseType);
-            this.panel11.Location = new System.Drawing.Point(116, 123);
+            this.panel11.Location = new System.Drawing.Point(116, 118);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(165, 21);
             this.panel11.TabIndex = 39;
@@ -560,7 +567,7 @@
             // 
             this.groupBox11.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox11.Controls.Add(this.groupBox12);
-            this.groupBox11.Location = new System.Drawing.Point(115, 144);
+            this.groupBox11.Location = new System.Drawing.Point(115, 139);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(165, 1);
             this.groupBox11.TabIndex = 38;
@@ -581,7 +588,7 @@
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.Location = new System.Drawing.Point(446, 167);
+            this.label18.Location = new System.Drawing.Point(446, 157);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(35, 12);
             this.label18.TabIndex = 37;
@@ -592,7 +599,7 @@
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.Color.Transparent;
             this.label19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label19.Location = new System.Drawing.Point(18, 131);
+            this.label19.Location = new System.Drawing.Point(18, 126);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(77, 12);
             this.label19.TabIndex = 36;
@@ -789,7 +796,7 @@
             // 
             this.dataGridViewDataCount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dataGridViewDataCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 459);
+            this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 476);
             this.dataGridViewDataCount.Name = "dataGridViewDataCount";
             this.dataGridViewDataCount.RowTemplate.Height = 23;
             this.dataGridViewDataCount.Size = new System.Drawing.Size(1102, 22);
@@ -798,7 +805,7 @@
             // labelMakeBillStaff
             // 
             this.labelMakeBillStaff.AutoSize = true;
-            this.labelMakeBillStaff.Location = new System.Drawing.Point(92, 534);
+            this.labelMakeBillStaff.Location = new System.Drawing.Point(92, 541);
             this.labelMakeBillStaff.Name = "labelMakeBillStaff";
             this.labelMakeBillStaff.Size = new System.Drawing.Size(113, 12);
             this.labelMakeBillStaff.TabIndex = 20;
@@ -808,7 +815,7 @@
             // labelReviewBillStaff
             // 
             this.labelReviewBillStaff.AutoSize = true;
-            this.labelReviewBillStaff.Location = new System.Drawing.Point(515, 535);
+            this.labelReviewBillStaff.Location = new System.Drawing.Point(515, 542);
             this.labelReviewBillStaff.Name = "labelReviewBillStaff";
             this.labelReviewBillStaff.Size = new System.Drawing.Size(125, 12);
             this.labelReviewBillStaff.TabIndex = 61;
@@ -819,7 +826,7 @@
             // 
             this.groupBox13.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox13.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox13.Location = new System.Drawing.Point(513, 548);
+            this.groupBox13.Location = new System.Drawing.Point(513, 555);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Size = new System.Drawing.Size(163, 1);
             this.groupBox13.TabIndex = 63;
@@ -831,7 +838,7 @@
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label23.Location = new System.Drawing.Point(446, 535);
+            this.label23.Location = new System.Drawing.Point(446, 542);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(47, 12);
             this.label23.TabIndex = 62;
@@ -840,7 +847,7 @@
             // labelReviewDate
             // 
             this.labelReviewDate.AutoSize = true;
-            this.labelReviewDate.Location = new System.Drawing.Point(925, 536);
+            this.labelReviewDate.Location = new System.Drawing.Point(923, 543);
             this.labelReviewDate.Name = "labelReviewDate";
             this.labelReviewDate.Size = new System.Drawing.Size(95, 12);
             this.labelReviewDate.TabIndex = 64;
@@ -851,7 +858,7 @@
             // 
             this.groupBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox6.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox6.Location = new System.Drawing.Point(923, 548);
+            this.groupBox6.Location = new System.Drawing.Point(921, 555);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(163, 1);
             this.groupBox6.TabIndex = 66;
@@ -863,7 +870,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(849, 535);
+            this.label9.Location = new System.Drawing.Point(849, 542);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 12);
             this.label9.TabIndex = 65;
@@ -873,7 +880,7 @@
             // 
             this.groupBox10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox10.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox10.Location = new System.Drawing.Point(941, 181);
+            this.groupBox10.Location = new System.Drawing.Point(941, 171);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(163, 1);
             this.groupBox10.TabIndex = 69;
@@ -884,7 +891,7 @@
             this.panel6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel6.Controls.Add(this.labelPaymentDate);
             this.panel6.Controls.Add(this.dateTimePickerPaymentDate);
-            this.panel6.Location = new System.Drawing.Point(941, 161);
+            this.panel6.Location = new System.Drawing.Point(941, 151);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(165, 21);
             this.panel6.TabIndex = 68;
@@ -916,7 +923,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(855, 167);
+            this.label5.Location = new System.Drawing.Point(852, 157);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 12);
             this.label5.TabIndex = 67;
@@ -926,7 +933,7 @@
             // 
             this.groupBox14.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox14.Controls.Add(this.groupBox15);
-            this.groupBox14.Location = new System.Drawing.Point(530, 144);
+            this.groupBox14.Location = new System.Drawing.Point(531, 139);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.Size = new System.Drawing.Size(165, 1);
             this.groupBox14.TabIndex = 79;
@@ -946,7 +953,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(446, 131);
+            this.label3.Location = new System.Drawing.Point(446, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 78;
@@ -967,7 +974,7 @@
             // 
             this.groupBox16.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox16.Controls.Add(this.groupBox17);
-            this.groupBox16.Location = new System.Drawing.Point(937, 149);
+            this.groupBox16.Location = new System.Drawing.Point(937, 140);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(165, 1);
             this.groupBox16.TabIndex = 82;
@@ -987,7 +994,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(854, 132);
+            this.label6.Location = new System.Drawing.Point(851, 123);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 12);
             this.label6.TabIndex = 80;
@@ -1008,7 +1015,7 @@
             // labelSourceOrderType
             // 
             this.labelSourceOrderType.AutoSize = true;
-            this.labelSourceOrderType.Location = new System.Drawing.Point(533, 131);
+            this.labelSourceOrderType.Location = new System.Drawing.Point(534, 126);
             this.labelSourceOrderType.Name = "labelSourceOrderType";
             this.labelSourceOrderType.Size = new System.Drawing.Size(35, 12);
             this.labelSourceOrderType.TabIndex = 84;
@@ -1019,7 +1026,7 @@
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.panelSourceOrderType);
             this.panel2.Controls.Add(this.comboBoxSourceOrderType);
-            this.panel2.Location = new System.Drawing.Point(531, 123);
+            this.panel2.Location = new System.Drawing.Point(532, 118);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(165, 21);
             this.panel2.TabIndex = 85;
@@ -1049,7 +1056,7 @@
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.panelSourceOrderNumber);
             this.panel4.Controls.Add(this.textBoxSourceOrderNumber);
-            this.panel4.Location = new System.Drawing.Point(937, 128);
+            this.panel4.Location = new System.Drawing.Point(937, 119);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(165, 21);
             this.panel4.TabIndex = 86;
@@ -1078,7 +1085,7 @@
             // labelSourceOrderNumber
             // 
             this.labelSourceOrderNumber.AutoSize = true;
-            this.labelSourceOrderNumber.Location = new System.Drawing.Point(939, 133);
+            this.labelSourceOrderNumber.Location = new System.Drawing.Point(939, 124);
             this.labelSourceOrderNumber.Name = "labelSourceOrderNumber";
             this.labelSourceOrderNumber.Size = new System.Drawing.Size(35, 12);
             this.labelSourceOrderNumber.TabIndex = 87;
@@ -1090,7 +1097,7 @@
             this.panelStaffSave.Controls.Add(this.labelSave);
             this.panelStaffSave.Controls.Add(this.panelSave);
             this.panelStaffSave.Controls.Add(this.textBoxSave);
-            this.panelStaffSave.Location = new System.Drawing.Point(92, 492);
+            this.panelStaffSave.Location = new System.Drawing.Point(92, 507);
             this.panelStaffSave.Name = "panelStaffSave";
             this.panelStaffSave.Size = new System.Drawing.Size(165, 21);
             this.panelStaffSave.TabIndex = 90;
@@ -1132,7 +1139,7 @@
             // 
             this.textBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(90, 490);
+            this.textBox3.Location = new System.Drawing.Point(90, 505);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(165, 21);
             this.textBox3.TabIndex = 88;
@@ -1144,7 +1151,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label14.Location = new System.Drawing.Point(21, 500);
+            this.label14.Location = new System.Drawing.Point(21, 515);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(65, 12);
             this.label14.TabIndex = 89;
@@ -1156,7 +1163,7 @@
             this.panelStaffVerify.Controls.Add(this.labelVerify);
             this.panelStaffVerify.Controls.Add(this.panelVerify);
             this.panelStaffVerify.Controls.Add(this.textBoxVerify);
-            this.panelStaffVerify.Location = new System.Drawing.Point(516, 494);
+            this.panelStaffVerify.Location = new System.Drawing.Point(516, 509);
             this.panelStaffVerify.Name = "panelStaffVerify";
             this.panelStaffVerify.Size = new System.Drawing.Size(165, 21);
             this.panelStaffVerify.TabIndex = 93;
@@ -1186,7 +1193,7 @@
             // 
             this.textBoxVerify.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxVerify.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxVerify.Location = new System.Drawing.Point(2, 1);
+            this.textBoxVerify.Location = new System.Drawing.Point(-1, 0);
             this.textBoxVerify.Name = "textBoxVerify";
             this.textBoxVerify.ReadOnly = true;
             this.textBoxVerify.Size = new System.Drawing.Size(165, 21);
@@ -1198,7 +1205,7 @@
             // 
             this.textBox5.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox5.Location = new System.Drawing.Point(514, 492);
+            this.textBox5.Location = new System.Drawing.Point(514, 507);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(165, 21);
             this.textBox5.TabIndex = 91;
@@ -1210,7 +1217,7 @@
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.Transparent;
             this.label16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label16.Location = new System.Drawing.Point(445, 502);
+            this.label16.Location = new System.Drawing.Point(445, 517);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 92;
@@ -1221,7 +1228,7 @@
             this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox18.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox18.Controls.Add(this.groupBox19);
-            this.groupBox18.Location = new System.Drawing.Point(515, 514);
+            this.groupBox18.Location = new System.Drawing.Point(515, 531);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(165, 1);
             this.groupBox18.TabIndex = 94;
@@ -1241,7 +1248,7 @@
             this.groupBox20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox20.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox20.Controls.Add(this.groupBox21);
-            this.groupBox20.Location = new System.Drawing.Point(92, 514);
+            this.groupBox20.Location = new System.Drawing.Point(92, 528);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(165, 1);
             this.groupBox20.TabIndex = 95;
@@ -1288,7 +1295,7 @@
             this.panelSummary.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelSummary.Location = new System.Drawing.Point(677, 158);
+            this.panelSummary.Location = new System.Drawing.Point(678, 148);
             this.panelSummary.Name = "panelSummary";
             this.panelSummary.Size = new System.Drawing.Size(21, 21);
             this.panelSummary.TabIndex = 42;
@@ -1299,7 +1306,7 @@
             this.panelPaymentDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelPaymentDate.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelPaymentDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelPaymentDate.Location = new System.Drawing.Point(1083, 161);
+            this.panelPaymentDate.Location = new System.Drawing.Point(1083, 151);
             this.panelPaymentDate.Name = "panelPaymentDate";
             this.panelPaymentDate.Size = new System.Drawing.Size(21, 21);
             this.panelPaymentDate.TabIndex = 70;
@@ -1322,7 +1329,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(18, 167);
+            this.label11.Location = new System.Drawing.Point(18, 157);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 12);
             this.label11.TabIndex = 96;
@@ -1332,7 +1339,7 @@
             // 
             this.groupBox22.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox22.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox22.Location = new System.Drawing.Point(113, 182);
+            this.groupBox22.Location = new System.Drawing.Point(114, 172);
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.Size = new System.Drawing.Size(170, 1);
             this.groupBox22.TabIndex = 99;
@@ -1343,7 +1350,7 @@
             this.panelContractNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelContractNum.Controls.Add(this.labelContractNum);
             this.panelContractNum.Controls.Add(this.textBoxContractNum);
-            this.panelContractNum.Location = new System.Drawing.Point(116, 162);
+            this.panelContractNum.Location = new System.Drawing.Point(115, 152);
             this.panelContractNum.Name = "panelContractNum";
             this.panelContractNum.Size = new System.Drawing.Size(168, 21);
             this.panelContractNum.TabIndex = 98;
@@ -1378,26 +1385,91 @@
             this.toolStripSeparator7,
             this.ToolStripMenuItemDelRow});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 76);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 54);
             // 
             // ToolStripMenuItemCheckDetailed
             // 
             this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
-            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
             this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
             // 
             // ToolStripMenuItemDelRow
             // 
             this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
-            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemDelRow.Text = "删除行";
             this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox23.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox23.Location = new System.Drawing.Point(115, 204);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(170, 1);
+            this.groupBox23.TabIndex = 102;
+            this.groupBox23.TabStop = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel5.Controls.Add(this.labelPurchaseNum);
+            this.panel5.Controls.Add(this.textBoxPurchaseNum);
+            this.panel5.Location = new System.Drawing.Point(114, 184);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(168, 21);
+            this.panel5.TabIndex = 101;
+            this.panel5.Click += new System.EventHandler(this.textBoxPurchaseNum_Click);
+            this.panel5.Leave += new System.EventHandler(this.textBoxPurchaseNum_Leave);
+            // 
+            // labelPurchaseNum
+            // 
+            this.labelPurchaseNum.AutoSize = true;
+            this.labelPurchaseNum.Location = new System.Drawing.Point(2, 8);
+            this.labelPurchaseNum.Name = "labelPurchaseNum";
+            this.labelPurchaseNum.Size = new System.Drawing.Size(0, 12);
+            this.labelPurchaseNum.TabIndex = 20;
+            this.labelPurchaseNum.Visible = false;
+            // 
+            // textBoxPurchaseNum
+            // 
+            this.textBoxPurchaseNum.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxPurchaseNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxPurchaseNum.Location = new System.Drawing.Point(0, 0);
+            this.textBoxPurchaseNum.Name = "textBoxPurchaseNum";
+            this.textBoxPurchaseNum.Size = new System.Drawing.Size(169, 21);
+            this.textBoxPurchaseNum.TabIndex = 43;
+            this.textBoxPurchaseNum.Visible = false;
+            this.textBoxPurchaseNum.Click += new System.EventHandler(this.textBoxPurchaseNum_Click);
+            this.textBoxPurchaseNum.Leave += new System.EventHandler(this.textBoxPurchaseNum_Leave);
+            // 
+            // labelPurchaseNumName
+            // 
+            this.labelPurchaseNumName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelPurchaseNumName.AutoSize = true;
+            this.labelPurchaseNumName.BackColor = System.Drawing.Color.Transparent;
+            this.labelPurchaseNumName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelPurchaseNumName.Location = new System.Drawing.Point(17, 190);
+            this.labelPurchaseNumName.Name = "labelPurchaseNumName";
+            this.labelPurchaseNumName.Size = new System.Drawing.Size(83, 12);
+            this.labelPurchaseNumName.TabIndex = 100;
+            this.labelPurchaseNumName.Text = "采购合同编号:";
+            // 
+            // groupBox24
+            // 
+            this.groupBox24.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupBox24.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox24.Location = new System.Drawing.Point(921, 530);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(163, 1);
+            this.groupBox24.TabIndex = 64;
+            this.groupBox24.TabStop = false;
             // 
             // FormPurchaseInOrder
             // 
@@ -1405,6 +1477,10 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1126, 562);
+            this.Controls.Add(this.groupBox24);
+            this.Controls.Add(this.groupBox23);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.labelPurchaseNumName);
             this.Controls.Add(this.groupBox22);
             this.Controls.Add(this.panelContractNum);
             this.Controls.Add(this.label11);
@@ -1507,6 +1583,8 @@
             this.panelContractNum.ResumeLayout(false);
             this.panelContractNum.PerformLayout();
             this.contextMenuStripDataGridView.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1630,6 +1708,12 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label labelPurchaseNum;
+        private System.Windows.Forms.TextBox textBoxPurchaseNum;
+        private System.Windows.Forms.Label labelPurchaseNumName;
+        private System.Windows.Forms.GroupBox groupBox24;
 
     }
 }

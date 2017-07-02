@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.58";
+            this.label3.Text = "当前软件版本：V2.5.62";
 
             // 
             // richTextBox1
@@ -82,11 +82,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、所有销售类单据数据录入页面，增加品牌栏目，包含销售订单、销售出库单、领料单、盘亏毁损单、其他出库单\r\n";
-            this.richTextBox1.Text += "2、材料变更单套打模板中增加了部分名称和所属部件信息\r\n";
-            this.richTextBox1.Text += "3、其他出库单套打模板增加项目编号和生产编号信息\r\n";
-            this.richTextBox1.Text += "4、针对盘亏亏损单，当单据为已审核时，在单据右上角显示已审核字样\r\n";
-            this.richTextBox1.Text += "5、在各类单据中，需要选择部门时，在新打开的部门信息页面中，默认展开部门信息树节点\r\n";
+            this.richTextBox1.Text = "1、采购入库单新增采购合同编号信息\r\n";
+            this.richTextBox1.Text += "2、采购入库单套打模板增加合同编号的打印\r\n";
+            this.richTextBox1.Text += "3、存货核算模块的存货明细账页面，增加了是否能产看物料单价和金额的权限控制功能\r\n";
 
             // Fo
             // 

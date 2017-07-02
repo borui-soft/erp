@@ -379,3 +379,12 @@ ALTER TABLE [dbo].[PROJECT_MATERIE_MANAGER] ALTER COLUMN MAKE_NUM [nvarchar](80)
 
 -- 2017-6-13 生成领料表生产编号字段最长长度为由50字节扩展为80字节
 ALTER TABLE [dbo].[WAREHOUSE_MANAGEMENT_OUT] ALTER COLUMN MAKE_NO [nvarchar](80) COLLATE Chinese_PRC_CI_AS NULL;
+
+
+--2017-7-2 采购入库单信息表（PURCHASE_IN_ORDER）增加采购合同编号字段
+ALTER TABLE [dbo].[PURCHASE_IN_ORDER] ADD PURCHASE_NUM [nvarchar](80);
+
+--2017-7-2 为存货明细账页面增加金额关键信息查看权限
+insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (403, '存货明细金额', 4);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('可查看', 'dispaly', 403);
+insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('不可查看', 'nodispaly', 403);

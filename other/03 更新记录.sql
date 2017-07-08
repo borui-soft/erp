@@ -388,3 +388,6 @@ ALTER TABLE [dbo].[PURCHASE_IN_ORDER] ADD PURCHASE_NUM [nvarchar](80);
 insert into [BASE_MODULE_LIST] (ID, [name], sub_system_ID) values (403, '存货明细金额', 4);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('可查看', 'dispaly', 403);
 insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) values ('不可查看', 'nodispaly', 403);
+
+-- 2017-7-8 采购申请单中总材料表编号字段最长为由30字节扩展为80字节
+ALTER TABLE [dbo].[PURCHASE_APPLY_ORDER] ALTER COLUMN PROJECT_NUM [nvarchar](80) COLLATE Chinese_PRC_CI_AS;

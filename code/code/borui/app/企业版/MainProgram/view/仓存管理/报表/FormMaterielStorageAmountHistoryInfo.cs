@@ -103,6 +103,7 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 80);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 80);
             m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("材质", 80);
 
             // 日期控件默认值为上个月最后一天，且最大值为昨天
             DateTime nowDate = DateTime.Now;
@@ -200,6 +201,8 @@ namespace MainProgram
                 {
                     temp.Add("");
                 }
+
+                temp.Add(materiel.CZ);
 
                 string materielAttributeName = "";
                 if (AuxiliaryAttributelList.ContainsKey(materiel.materielAttribute))

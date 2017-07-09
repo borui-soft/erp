@@ -139,7 +139,7 @@ namespace MainProgram
             m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称(*)", 85, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn(" 规格\n 型号", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("尺寸", 60, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("材料", 60, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("材料", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("参数", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn(" 基本\n 单位", 70, true, true);
 
@@ -649,6 +649,7 @@ namespace MainProgram
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.CL].Value = record.CZ;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Size].Value = "";
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
                 AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitPurchase);

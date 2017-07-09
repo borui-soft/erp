@@ -35,7 +35,7 @@ namespace MainProgram.model
         {
             string insert = "INSERT INTO [dbo].[BASE_MATERIEL_LIST] ([SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[PARAMETER],";
             insert += "[MAX],[MIN],[WARRANTY],[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],";
-            insert += "[VALUATION],[NOTE],[STORAGE],[IS_FORBID]) VALUES(";
+            insert += "[VALUATION],[NOTE],[CZ],[ATTRIBUTE1],[ATTRIBUTE2],[STORAGE],[IS_FORBID]) VALUES(";
 
             insert += materiel.materielType + ",";
             insert += "'" + materiel.name + "',";
@@ -55,6 +55,11 @@ namespace MainProgram.model
             insert += materiel.unit + ",";
             insert += materiel.valuation + ",";
             insert += "'" + materiel.note + "',";
+
+            insert += "'" + materiel.CZ + "',";
+            insert += "'" + materiel.attribute1 + "',";
+            insert += "'" + materiel.attribute2 + "',";
+
             insert += materiel.storage + ", 0";
             insert += ")";
 
@@ -108,8 +113,11 @@ namespace MainProgram.model
             update += "[BRAND] = '" + materiel.brand + "',";
             update += "[PARAMETER] = '" + materiel.materielParameter + "',";
 
-            update += "[NOTE] = '" + materiel.note + "'";
+            update += "[CZ] = '" + materiel.CZ + "',";
+            update += "[ATTRIBUTE1] = '" + materiel.attribute1 + "',";
+            update += "[ATTRIBUTE2] = '" + materiel.attribute2 + "',";
 
+            update += "[NOTE] = '" + materiel.note + "'";
 
             update += " WHERE PKEY = " + Convert.ToString(pkey);
 
@@ -131,7 +139,8 @@ namespace MainProgram.model
         private void load()
         {
             string materielQuery = "SELECT [PKEY],[SUPPLIER_TYPE],[NAME],[NUM],[NAME_SHORT],[MODEL],[MNEMONIC_CODE],[BRAND],[PARAMETER], [MAX],[MIN],[WARRANTY],";
-            materielQuery += "[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],[VALUATION],[NOTE],[STORAGE],[IS_FORBID]";
+            materielQuery += "[MATERIEL_ATTRIBUTE],[UNIT],[UNIT_PURCHASE],[UNIT_SALE],[UNIT_STORAGE],[VALUATION],[NOTE],[STORAGE],[IS_FORBID],";
+            materielQuery += "[CZ],[ATTRIBUTE1],[ATTRIBUTE2] ";
             materielQuery += " FROM [dbo].[BASE_MATERIEL_LIST] ORDER BY PKEY";
 
             m_noForbidMaterielList.Clear();
@@ -163,6 +172,10 @@ namespace MainProgram.model
                     materiel.note = DbDataConvert.ToString(row["NOTE"]);
                     materiel.storage = DbDataConvert.ToInt32(row["STORAGE"]);
                     materiel.isForbid = DbDataConvert.ToInt32(row["IS_FORBID"]);
+
+                    materiel.CZ = DbDataConvert.ToString(row["CZ"]);
+                    materiel.attribute1 = DbDataConvert.ToString(row["ATTRIBUTE1"]);
+                    materiel.attribute2 = DbDataConvert.ToString(row["ATTRIBUTE2"]);
 
                     if (materiel.isForbid == 0)
                     {
@@ -412,6 +425,12 @@ namespace MainProgram.model
         public int valuation { get; set; }
         public string note { get; set; }
         public int isForbid { get; set; }
+
+
+        public string CZ { get; set; }
+        public string attribute1 { get; set; }
+        public string attribute2 { get; set; }
+        
 
         // 参数
         public string materielParameter { get; set; }

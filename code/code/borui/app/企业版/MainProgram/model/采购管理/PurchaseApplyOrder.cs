@@ -240,7 +240,7 @@ namespace MainProgram.model
                 PurchaseApplyOrderTable record = new PurchaseApplyOrderTable();
                 record = index.Value;
 
-                if (index.Value.srcOrderNum == projectNum)
+                if (index.Value.srcOrderNum .IndexOf(projectNum) >= 0)
                 {
                     list.Add(list.Count, index.Value);
                 }

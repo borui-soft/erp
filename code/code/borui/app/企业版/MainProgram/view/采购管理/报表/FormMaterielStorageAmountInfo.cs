@@ -112,6 +112,7 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 78);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 78);
             m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 78);
+            m_dataGridViewExtend.addDataGridViewColumn("材质", 70);
 
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
 
@@ -196,6 +197,8 @@ namespace MainProgram
                 {
                     temp.Add("");
                 }
+
+                temp.Add(materiel.CZ);
 
                 string materielAttributeName = "";
                 if (AuxiliaryAttributelList.ContainsKey(materiel.materielAttribute))

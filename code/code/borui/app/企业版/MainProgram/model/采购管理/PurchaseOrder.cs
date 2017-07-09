@@ -213,7 +213,7 @@ namespace MainProgram.model
                 PurchaseOrderTable record = new PurchaseOrderTable();
                 record = index.Value;
 
-                if (index.Value.xxMaterielTableNum == projectNum)
+                if (index.Value.xxMaterielTableNum.IndexOf(projectNum) >= 0)
                 {
                     list.Add(list.Count, index.Value);
                 }

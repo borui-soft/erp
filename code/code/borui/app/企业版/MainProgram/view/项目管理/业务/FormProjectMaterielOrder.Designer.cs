@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectMaterielOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -231,8 +231,8 @@
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 203);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDataList.RowTemplate.Height = 23;
             this.dataGridViewDataList.Size = new System.Drawing.Size(1102, 265);
             this.dataGridViewDataList.TabIndex = 25;
@@ -1003,12 +1003,12 @@
             this.toolStripSeparator6,
             this.ToolStripMenuItemDelRow});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 76);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(149, 54);
             // 
             // ToolStripMenuItemCheckDetailed
             // 
             this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
-            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
             this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
             // 
@@ -1020,7 +1020,7 @@
             // ToolStripMenuItemDelRow
             // 
             this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
-            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemDelRow.Text = "删除行";
             this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
             // 

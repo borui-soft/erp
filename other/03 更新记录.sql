@@ -391,3 +391,8 @@ insert into [BASE_ACTION_LIST] ([action_name],[ui_action_name], module_ID) value
 
 -- 2017-7-8 采购申请单中总材料表编号字段最长为由30字节扩展为80字节
 ALTER TABLE [dbo].[PURCHASE_APPLY_ORDER] ALTER COLUMN PROJECT_NUM [nvarchar](80) COLLATE Chinese_PRC_CI_AS;
+
+-- 2017-7-9 物料基本信息页面增加材质、属性1、属性2信息
+ALTER TABLE [dbo].[BASE_MATERIEL_LIST] ADD CZ [nvarchar](80);
+ALTER TABLE [dbo].[BASE_MATERIEL_LIST] ADD ATTRIBUTE1 [nvarchar](80);
+ALTER TABLE [dbo].[BASE_MATERIEL_LIST] ADD ATTRIBUTE2 [nvarchar](80);

@@ -43,6 +43,7 @@ namespace MainProgram
             Brand,
             Model,
             Unit,
+            CZ,
             Value,
             Price,
             Turnover,
@@ -107,9 +108,10 @@ namespace MainProgram
 
             m_dateGridVeiwListDataList.addDataGridViewColumn("品牌", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 60, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("基本\n单位", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 80, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("基本\n单位", 70, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("材质", 60, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 80, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 70, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 80, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("备注", 206, true, false);
             m_dateGridVeiwListDataList.addDataGridViewColumn("SID", 50, false, false);
@@ -567,7 +569,9 @@ namespace MainProgram
 
         private void dataGridViewDataList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (m_proInfoList.Count > 0 && e.ColumnIndex == (int)DataGridColumnName.Value)
+            if (e.ColumnIndex == (int)DataGridColumnName.Value &&
+                m_proInfoList.Count > 0 &&
+                m_rowIndex < m_proInfoList.Count)
             {
                 // 当value被改变后，
                 if (Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value.ToString()) >
@@ -640,6 +644,9 @@ namespace MainProgram
             dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
             dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
             AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
+            
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CZ].Value = record.CZ;
+
             dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
             dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
             dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
@@ -805,6 +812,7 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = materielInfo.brand;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitSale;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CZ].Value = materielInfo.CZ;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;

@@ -58,9 +58,9 @@ namespace MainProgram
             m_dataGridViewExtend.addDataGridViewColumn("品牌", 60);
             m_dataGridViewExtend.addDataGridViewColumn("参数", 60);
             m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 100);
-            //m_dataGridViewExtend.addDataGridViewColumn("物料属性", 100);
             m_dataGridViewExtend.addDataGridViewColumn("计价方式", 100);
             m_dataGridViewExtend.addDataGridViewColumn("基本单位", 100);
+            m_dataGridViewExtend.addDataGridViewColumn("物料材质", 100);
             m_dataGridViewExtend.addDataGridViewColumn("存货上限", 100);
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 100);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 100);
@@ -130,6 +130,8 @@ namespace MainProgram
                 {
                     temp.Add("");
                 }
+
+                temp.Add(materiel.CZ);
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);

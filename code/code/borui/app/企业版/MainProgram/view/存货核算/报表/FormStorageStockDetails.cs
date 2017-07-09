@@ -425,7 +425,7 @@ namespace MainProgram
         {
             string str = "";
 
-            if (date.Length > 0)
+            if (date != null && date.Length > 0)
             {
                 str = date.Substring(0, 4) + "." + date.Substring(monthStartPos, 2);
             }
@@ -533,11 +533,62 @@ namespace MainProgram
             FormStorageStockDetailsFilter fpicf = new FormStorageStockDetailsFilter();
             fpicf.ShowDialog();
 
+            // 物料区间
             m_countStartDate = fpicf.getFilterStartDate();
             m_countEndDate = fpicf.getFilterEndDate();
 
-            updateDataGridView(fpicf.getMaterielPkey());
-            
+            if (fpicf.getSelectMode() == 0)
+            {
+                // 查询所有物料
+                m_materielList = Materiel.getInctance().getAllMaterielInfo();
+
+                if (m_materielList.Count > 0)
+                {
+                    m_currentRecordIndex = 0;
+                }
+
+                updateDataGridView();
+            }
+            else if (fpicf.getSelectMode() == 1)
+            {
+                m_materielList = Materiel.getInctance().getAllMaterielInfo();
+
+                string startID = fpicf.getFilterStartID();
+                string endID = fpicf.getFilterEndID();
+
+                if (startID.Length <= 0 || endID.Length <= 0)
+                {
+                    MessageBoxExtend.messageWarning("物料区间起止ID为空, 请重新输入");
+                    return;
+                }
+
+                SortedDictionary<int, MaterielTable> materielListTemp = new SortedDictionary<int, MaterielTable>();
+
+                foreach (KeyValuePair<int, MaterielTable> i in m_materielList)
+                {
+                    MaterielTable materiel = new MaterielTable();
+
+                    if (i.Value.pkey >= Convert.ToInt32(startID) && i.Value.pkey <= Convert.ToInt32(endID))
+                    {
+                        materielListTemp.Add(materielListTemp.Count, i.Value);
+                    }
+                }
+
+                m_materielList.Clear();
+
+                if (materielListTemp.Count > 0)
+                {
+                    m_materielList = materielListTemp;
+                    m_currentRecordIndex = 0;
+                }
+
+                updateDataGridView();
+            }
+            else if (fpicf.getSelectMode() == 2)
+            {
+                // 查询单个物料
+                updateDataGridView(fpicf.getMaterielPkey());
+            }
         }
 
         private void dataGridViewList_DoubleClick(object sender, EventArgs e)

@@ -58,8 +58,52 @@ namespace MainProgram
                     return;
                 }
             }
+            else if (radioButtonInterregional.Checked)
+            {
+                m_materielPkey = -1;
+
+                if (this.textBoxStartID.Text.Length <= 0)
+                {
+                    MessageBoxExtend.messageWarning("输出的物料开始ID为空, 请重新输出");
+                    this.textBoxStartID.Text = "";
+
+                    return;
+                }
+
+                if (this.textBoxEndID.Text.Length <= 0)
+                {
+                    MessageBoxExtend.messageWarning("输出的物料结束ID为空, 请重新输出");
+                    this.textBoxEndID.Text = "";
+
+                    return;
+                }
+            }
 
             this.Close();
+        }
+
+        public int getSelectMode()
+        {
+            int mode = 0;
+
+            if (radioButtonAllMateriel.Checked)
+            {
+                mode = 0;
+            }
+            else if (radioButtonInterregional.Checked)
+            {
+                mode = 1;
+            }
+            else if (radioButtonMateriel.Checked)
+            {
+                mode = 2;
+            }
+            else
+            {
+                mode = 0;
+            }
+
+            return mode;
         }
 
         public string getFilterStartDate()
@@ -82,6 +126,16 @@ namespace MainProgram
             return m_materielPkey;
         }
 
+        public string getFilterStartID()
+        {
+            return this.textBoxStartID.Text.ToString();
+        }
+
+        public string getFilterEndID()
+        {
+            return this.textBoxEndID.Text.ToString();
+        }
+
         private void buttonSelect_Click(object sender, EventArgs e)
         {
             FormBaseMateriel fbs = new FormBaseMateriel(true);
@@ -94,15 +148,60 @@ namespace MainProgram
 
         private void radioButtonAllMateriel_Click(object sender, EventArgs e)
         {
+            this.textBoxName.Enabled = true;
+            this.buttonSelect.Enabled = true;
+
             if (radioButtonAllMateriel.Checked)
             {
                 m_materielPkey = -1;
+
                 this.buttonSelect.Enabled = false;
+                this.textBoxName.Enabled = false;
+                this.textBoxName.Text = "";
+
+                this.textBoxStartID.Enabled = false;
+                this.textBoxEndID.Enabled = false;
+                this.textBoxStartID.Text = "";
+                this.textBoxEndID.Text = "";
+            }
+            else if (radioButtonInterregional.Checked)
+            {
+                this.buttonSelect.Enabled = false;
+                this.textBoxName.Enabled = false;
+                this.textBoxName.Text = "";
+
+                this.textBoxStartID.Enabled = true;
+                this.textBoxEndID.Enabled = true;
+
+                this.textBoxStartID.Text = "";
+                this.textBoxEndID.Text = "";
+            }
+            else
+            {
+                this.textBoxStartID.Enabled = false;
+                this.textBoxEndID.Enabled = false;
+                this.textBoxStartID.Text = "";
+                this.textBoxEndID.Text = "";
+
+                this.buttonSelect.Enabled = true;
+                this.textBoxName.Enabled = true;
                 this.textBoxName.Text = "";
             }
-            else 
+        }
+
+        private void textBoxStartID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 单价只能只能输入数字或小数点或退格键
+            e.Handled = true;
+
+            if (e.KeyChar >= '0' && e.KeyChar <= '9')
             {
-                this.buttonSelect.Enabled = true;
+                e.Handled = false;
+            }
+
+            if (e.KeyChar == '\b')
+            {
+                e.Handled = false;
             }
         }
     }

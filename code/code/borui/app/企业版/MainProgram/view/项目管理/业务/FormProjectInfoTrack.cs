@@ -83,6 +83,8 @@ namespace MainProgram
         private void FormProjectInfoTrack_Load(object sender, EventArgs e)
         {
             addDataGridViewColumn("单据编号", 135);
+            addDataGridViewColumn("项目编号", 100);
+            addDataGridViewColumn("生产编号", 100);
             addDataGridViewColumn("设备型号", 100);
             addDataGridViewColumn("部分名称", 100);
 
@@ -108,10 +110,12 @@ namespace MainProgram
             this.projectRowMergeView.ColumnHeadersHeight = 40;
             this.projectRowMergeView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.projectRowMergeView.MergeColumnNames.Add("单据编号");
-            this.projectRowMergeView.AddSpanHeader(3, 7, "物料需求");
-            this.projectRowMergeView.AddSpanHeader(10, 3, "库存情况");
+            this.projectRowMergeView.AddSpanHeader(5, 7, "物料需求");
+            this.projectRowMergeView.AddSpanHeader(12, 3, "库存情况");
 
             updateDataGridView();
+            //projectRowMergeView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void updateDataGridView()
@@ -139,6 +143,8 @@ namespace MainProgram
                     ArrayList temp = new ArrayList();
 
                     temp.Add(record.billNumber);
+                    temp.Add(record.projectNum);
+                    temp.Add(record.makeNum);
                     temp.Add(record.deviceMode);
                     temp.Add(record.subName);
 
@@ -317,7 +323,7 @@ namespace MainProgram
                             if (projectRowMergeView.Rows[i].Cells[j].Selected)
                             {
                                 projectRowMergeView.Rows[i].Selected = true;
-                                m_billNumber = projectRowMergeView.Rows[i].Cells[3].Value.ToString();
+                                m_billNumber = projectRowMergeView.Rows[i].Cells[0].Value.ToString();
                                 return;
                             }
                         }
@@ -392,7 +398,7 @@ namespace MainProgram
             projectRowMergeView.Rows[e.RowIndex].Selected = true;
 
             m_billNumber = projectRowMergeView.Rows[e.RowIndex].Cells[0].Value.ToString();
-            m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[e.RowIndex].Cells[3].Value.ToString());
+            m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[e.RowIndex].Cells[5].Value.ToString());
         }
 
         #region DataGridView自定义方法
@@ -604,7 +610,7 @@ namespace MainProgram
             {
                 projectRowMergeView.Rows[e.RowIndex].Selected = true;
                 m_billNumber = projectRowMergeView.Rows[e.RowIndex].Cells[0].Value.ToString();
-                m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[e.RowIndex].Cells[3].Value.ToString());
+                m_materielPKey = Convert.ToInt32(projectRowMergeView.Rows[e.RowIndex].Cells[5].Value.ToString());
 
                 contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
             }

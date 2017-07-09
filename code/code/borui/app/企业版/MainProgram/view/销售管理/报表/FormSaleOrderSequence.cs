@@ -154,7 +154,8 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("日期", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("总材料表单据编号", 150);
-                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("数量", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("金额", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("领料人", 80);
@@ -507,6 +508,7 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.srcOrderNum);
+                        temp.Add(FormProject.getInctance().getProjectNumFromBillNumber(record.srcOrderNum));
                         temp.Add(record.makeNo);
 
                         if (record.isRedBill == 1)

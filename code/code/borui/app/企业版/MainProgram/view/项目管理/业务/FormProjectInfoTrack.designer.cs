@@ -82,7 +82,7 @@
             this.toolStripSeparator5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1330, 45);
+            this.toolStrip1.Size = new System.Drawing.Size(1182, 45);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -194,9 +194,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 722);
+            this.statusStrip.Location = new System.Drawing.Point(0, 360);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1330, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1182, 22);
             this.statusStrip.TabIndex = 29;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -327,7 +327,7 @@
             this.projectRowMergeView.Name = "projectRowMergeView";
             this.projectRowMergeView.ReadOnly = true;
             this.projectRowMergeView.RowTemplate.Height = 23;
-            this.projectRowMergeView.Size = new System.Drawing.Size(1330, 699);
+            this.projectRowMergeView.Size = new System.Drawing.Size(1182, 315);
             this.projectRowMergeView.TabIndex = 4;
             this.projectRowMergeView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.rowMergeView1_CellClick);
             this.projectRowMergeView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.projectRowMergeView_CellMouseDown);
@@ -337,9 +337,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1330, 744);
-            this.Controls.Add(this.statusStrip);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1182, 382);
             this.Controls.Add(this.projectRowMergeView);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormProjectInfoTrack";

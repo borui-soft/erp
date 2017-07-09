@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.5.62";
+            this.label3.Text = "当前软件版本：V2.6.0";
 
             // 
             // richTextBox1
@@ -82,9 +82,13 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、采购入库单新增采购合同编号信息\r\n";
-            this.richTextBox1.Text += "2、采购入库单套打模板增加合同编号的打印\r\n";
-            this.richTextBox1.Text += "3、存货核算模块的存货明细账页面，增加了是否能产看物料单价和金额的权限控制功能\r\n";
+            this.richTextBox1.Text = "1、物料基本信息页面，增加材质、属性1、属性2信息，其中属性1-2信息均为备用字段\r\n";
+            this.richTextBox1.Text += "2、实时库存和历史库存显示页面增加材质信息的显示\r\n";
+            this.richTextBox1.Text += "3、采购入库单和生成领料单增加材质栏，但目前还没有导出到套打模板中\r\n";
+            this.richTextBox1.Text += "4、解决项目跟踪情况页面无法正确显示物料采购申请数量、采购入库数量的bug\r\n";
+            this.richTextBox1.Text += "5、项目跟踪情况页面增加项目编号和生成编号的显示\r\n";
+            this.richTextBox1.Text += "6、生产领料单序时薄中增加项目编号栏目\r\n";
+            this.richTextBox1.Text += "7、存货明细账页面的过滤条件中，支持查询物料ID范围的明细账信息\r\n";
 
             // Fo
             // 

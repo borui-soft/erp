@@ -913,7 +913,6 @@ namespace MainProgram
             for (int index = 0; index < m_proInfoList.Count; index++)
             {
                 ArrayList record = new ArrayList();
-
                 record = m_proInfoList[index];
 
                 if (index == 0)
@@ -950,6 +949,18 @@ namespace MainProgram
 
                 setMatetielInfoToDataGridView(Convert.ToString(record[1]), index);
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
+
+
+                string xxMatetielTableRowNum = Convert.ToString(record[7]);
+                if (xxMatetielTableRowNum.Length > 0)
+                {
+                    ProjectManagerDetailsTable tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromRowNum(record[0].ToString(), Convert.ToInt32(record[7]));
+                    if (tmp.materielSize != null && tmp.materielSize.Length > 0)
+                    {
+                        dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Note].Value = "尺寸：" + tmp.materielSize;
+                    }
+                }
+
                 dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.xxMatetielTableRowNum].Value = Convert.ToString(record[7]);
 
                 setTurnoverInfoDataGridView(index);

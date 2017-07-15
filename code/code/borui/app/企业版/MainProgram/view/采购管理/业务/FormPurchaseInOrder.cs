@@ -32,7 +32,7 @@ namespace MainProgram
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         PurchaseInOrderTable m_purchaseInOrder = new PurchaseInOrderTable();
 
-        private enum DataGridColumnName
+        public enum DataGridColumnName
         {
             RowNum,
             MatetielNumber,

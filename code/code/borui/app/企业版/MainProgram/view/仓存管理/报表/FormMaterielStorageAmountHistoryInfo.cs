@@ -98,12 +98,13 @@ namespace MainProgram
                 m_dataGridViewExtend.addDataGridViewColumn("合计", 80);
             }
 
-            m_dataGridViewExtend.addDataGridViewColumn("单位", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("单位", 80); 
+            m_dataGridViewExtend.addDataGridViewColumn("参数", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("材质", 70);
             m_dataGridViewExtend.addDataGridViewColumn("存货上限", 80);
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 80);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 80);
             m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 80);
-            m_dataGridViewExtend.addDataGridViewColumn("材质", 80);
 
             // 日期控件默认值为上个月最后一天，且最大值为昨天
             DateTime nowDate = DateTime.Now;
@@ -116,6 +117,8 @@ namespace MainProgram
 
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
+
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private StorageStockDetailTable getMaterielHistoryInfoFromMaterielID(int pkey)
@@ -189,6 +192,8 @@ namespace MainProgram
                     temp.Add("");
                 }
 
+                temp.Add(materiel.materielParameter);
+                temp.Add(materiel.CZ);
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
@@ -201,8 +206,6 @@ namespace MainProgram
                 {
                     temp.Add("");
                 }
-
-                temp.Add(materiel.CZ);
 
                 string materielAttributeName = "";
                 if (AuxiliaryAttributelList.ContainsKey(materiel.materielAttribute))

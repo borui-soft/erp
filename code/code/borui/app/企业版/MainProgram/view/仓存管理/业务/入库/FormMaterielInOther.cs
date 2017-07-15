@@ -706,7 +706,8 @@ namespace MainProgram
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = materielInfo.materielParameter;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = materielInfo.brand;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = materielInfo.unit;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
+                    AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materielInfo.unitSale);
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CZ].Value = materielInfo.CZ;
 
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;

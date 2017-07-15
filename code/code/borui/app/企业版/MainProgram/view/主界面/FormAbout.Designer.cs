@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.0";
+            this.label3.Text = "当前软件版本：V2.6.5";
 
             // 
             // richTextBox1
@@ -82,13 +82,10 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、物料基本信息页面，增加材质、属性1、属性2信息，其中属性1-2信息均为备用字段\r\n";
-            this.richTextBox1.Text += "2、实时库存和历史库存显示页面增加材质信息的显示\r\n";
-            this.richTextBox1.Text += "3、采购入库单和生成领料单增加材质栏，但目前还没有导出到套打模板中\r\n";
-            this.richTextBox1.Text += "4、解决项目跟踪情况页面无法正确显示物料采购申请数量、采购入库数量的bug\r\n";
-            this.richTextBox1.Text += "5、项目跟踪情况页面增加项目编号和生成编号的显示\r\n";
-            this.richTextBox1.Text += "6、生产领料单序时薄中增加项目编号栏目\r\n";
-            this.richTextBox1.Text += "7、存货明细账页面的过滤条件中，支持查询物料ID范围的明细账信息\r\n";
+            this.richTextBox1.Text = "1、解决采购入库单单据套打时，信息错位的问题\r\n";
+            this.richTextBox1.Text += "2、其他入库单中增加物料参数、品牌、材质栏\r\n";
+            this.richTextBox1.Text += "3、总材料表转领料单时，自动在备注栏中增加尺寸信息\r\n";
+            this.richTextBox1.Text += "4、项目跟踪情况表中增加尺寸栏，且修正了变更数据显示错位的问题\r\n";
 
             // Fo
             // 

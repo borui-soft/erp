@@ -113,12 +113,12 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
+                load();
+
                 if (isDispalyMess)
                 {
                     MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
                 }
-
-                load();
             }
             catch (Exception error)
             {

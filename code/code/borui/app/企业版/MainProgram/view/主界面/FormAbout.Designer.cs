@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.6";
+            this.label3.Text = "当前软件版本：V2.6.8";
 
             // 
             // richTextBox1
@@ -82,8 +82,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、库存表、历史库存表增加物料参数栏\r\n";
-            this.richTextBox1.Text += "2、解决其他入库单物料单位显示错误的问题\r\n";
+            this.richTextBox1.Text = "1、完善所有单据审核和入账的功能，解决单据可能会存在重复入账的可能\r\n";
 
             // Fo
             // 

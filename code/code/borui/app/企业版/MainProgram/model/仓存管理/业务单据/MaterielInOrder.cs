@@ -134,9 +134,9 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
-                MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
-
                 load();
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
             }
             catch (Exception error)
             {
@@ -170,9 +170,9 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
-                MessageBoxExtend.messageOK("单据[" + billNumber + "]入账成功");
-
                 load();
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]入账成功");
             }
             catch (Exception error)
             {

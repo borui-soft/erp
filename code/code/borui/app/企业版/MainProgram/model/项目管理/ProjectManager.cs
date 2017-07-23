@@ -138,9 +138,9 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
-                MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
-
                 load();
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]审核成功");
             }
             catch (Exception error)
             {
@@ -163,9 +163,9 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
-                MessageBoxExtend.messageOK("单据[" + billNumber + "]已转换为等待变更审批状态!");
-
                 load();
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]已转换为等待变更审批状态!");
             }
             catch (Exception error)
             {
@@ -188,9 +188,9 @@ namespace MainProgram.model
             {
                 DatabaseAccessFactoryInstance.Instance.ExecuteCommand(FormMain.DB_NAME, update);
 
-                MessageBoxExtend.messageOK("单据[" + billNumber + "]变更审批成功,再次进入可编辑修改状态");
-
                 load();
+
+                MessageBoxExtend.messageOK("单据[" + billNumber + "]变更审批成功,再次进入可编辑修改状态");
             }
             catch (Exception error)
             {

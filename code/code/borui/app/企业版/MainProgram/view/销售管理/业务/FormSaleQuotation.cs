@@ -157,7 +157,7 @@ namespace MainProgram
             this.labelContact.Text = this.textBoxContact.Text;
             this.textBoxContact.Visible = false;
             this.labelContact.Visible = true;
-            this.textBoxContact.Text = "";
+            //this.textBoxContact.Text = "";
         }
 
         private void panel2_Click(object sender, EventArgs e)
@@ -182,7 +182,7 @@ namespace MainProgram
             this.labelTel.Text = this.textBoxTel.Text;
             this.textBoxTel.Visible = false;
             this.labelTel.Visible = true;
-            this.textBoxTel.Text = "";
+            //this.textBoxTel.Text = "";
         }
 
         private void panel4_Click(object sender, EventArgs e)
@@ -196,6 +196,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             SaleQuotationOrderTable saleQuotationOrder = new SaleQuotationOrderTable();
 
 

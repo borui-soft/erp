@@ -225,8 +225,8 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 164);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
@@ -237,6 +237,7 @@
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -452,8 +453,8 @@
             // 
             // dataGridViewDataCount
             // 
-            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 420);
             this.dataGridViewDataCount.Name = "dataGridViewDataCount";
@@ -882,12 +883,12 @@
             this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemDelRow});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(113, 26);
             // 
             // ToolStripMenuItemDelRow
             // 
             this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
-            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItemDelRow.Text = "删除行";
             this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
             // 

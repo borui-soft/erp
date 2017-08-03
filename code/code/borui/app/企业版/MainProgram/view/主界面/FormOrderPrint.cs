@@ -608,8 +608,9 @@ namespace MainProgram
 
                 m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Model].Value.ToString().Trim();
                 m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Unit].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Value].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Note].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.CZ].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 9] = m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Note].Value.ToString().Trim();
 
                 sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielInOtherOrder.DataGridColumnName.Value].Value.ToString().Trim());
             }

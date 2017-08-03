@@ -217,7 +217,7 @@ namespace MainProgram
                 this.labelSummary.Text += "(红色单据)";
             }
 
-            this.textBoxSummary.Text = "";
+            //this.textBoxSummary.Text = "";
         }
         #endregion
 
@@ -299,6 +299,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             // 得到详细的销售信息
             ArrayList dataList = getMaterielInOrderDetailsValue();
 

@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.8";
+            this.label3.Text = "当前软件版本：V2.6.12";
 
             // 
             // richTextBox1
@@ -82,7 +82,11 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、完善所有单据审核和入账的功能，解决单据可能会存在重复入账的可能\r\n";
+
+            this.richTextBox1.Text = "1、解决其他出库单等单据中的摘要信息，某些情况下无法保存的问题\r\n";
+            this.richTextBox1.Text += "2、其他出库单数据表格中，增加删除行的操作\r\n";
+            this.richTextBox1.Text += "3、领料单中的生产编号变为可输出项\r\n";
+            this.richTextBox1.Text += "4、其他入库单模板套打模板中增加材质列\r\n";
 
             // Fo
             // 

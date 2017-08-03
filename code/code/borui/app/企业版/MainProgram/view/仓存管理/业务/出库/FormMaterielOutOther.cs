@@ -167,7 +167,7 @@ namespace MainProgram
             this.textBoxSummary.Visible = false;
             this.labelSummary.Visible = true;
             this.labelSummary.Text = this.textBoxSummary.Text;
-            this.textBoxSummary.Text = "";
+            // this.textBoxSummary.Text = "";
 
             if (panelRed.Visible)
             {
@@ -254,6 +254,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+             this.ActiveControl = this.toolStrip1;
+
             // 得到详细的销售信息
             ArrayList dataList = getMaterielOutOtherOrderDetailsValue();
 
@@ -756,7 +758,7 @@ namespace MainProgram
             this.textBoxProjectNo.Visible = false;
             this.labelProjectNo.Visible = true;
             this.labelProjectNo.Text = this.textBoxProjectNo.Text;
-            this.textBoxProjectNo.Text = "";
+            //this.textBoxProjectNo.Text = "";
         }
 
         private void textBoxMakeNo_Click(object sender, EventArgs e)
@@ -775,7 +777,7 @@ namespace MainProgram
             this.textBoxMakeNo.Visible = false;
             this.labelMakeNo.Visible = true;
             this.labelMakeNo.Text = this.textBoxMakeNo.Text;
-            this.textBoxMakeNo.Text = "";
+            //this.textBoxMakeNo.Text = "";
         }
 
         private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -803,6 +805,11 @@ namespace MainProgram
             {
                 MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
             }
+        }
+
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

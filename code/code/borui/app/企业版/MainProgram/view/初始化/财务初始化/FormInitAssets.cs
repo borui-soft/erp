@@ -94,6 +94,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             if (this.save.Text == "修改")
             {
                 this.save.Text = "保存";

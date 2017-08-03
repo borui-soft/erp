@@ -133,6 +133,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             /** 
              * 函数处理逻辑
              * 1、得到页面所有控件的值

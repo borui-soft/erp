@@ -179,7 +179,7 @@ namespace MainProgram
             this.textBoxSummary.Visible = false;
             this.labelSummary.Visible = true;
             this.labelSummary.Text = this.textBoxSummary.Text;
-            this.textBoxSummary.Text = "";
+            //this.textBoxSummary.Text = "";
 
             if (panelRed.Visible)
             {
@@ -266,6 +266,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             // 得到详细的销售信息
             ArrayList dataList = getMaterielInOtherOrderDetailsValue();
 

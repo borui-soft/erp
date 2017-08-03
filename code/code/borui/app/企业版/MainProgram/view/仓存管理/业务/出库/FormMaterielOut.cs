@@ -230,7 +230,7 @@ namespace MainProgram
             this.textBoxSummary.Visible = false;
             this.labelSummary.Visible = true;
             this.labelSummary.Text = this.textBoxSummary.Text;
-            this.textBoxSummary.Text = "";
+            //this.textBoxSummary.Text = "";
 
             if (panelRed.Visible)
             {
@@ -317,6 +317,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             bool isReLoad = true;
 
             if (sender == null && e == null)
@@ -887,7 +889,7 @@ namespace MainProgram
             this.labelProjectNo.Text = this.labelProjectNo.Text.Replace("-", "_");
             this.labelProjectNo.Text = this.labelProjectNo.Text.Replace("—", "_");
 
-            this.textBoxProjectNo.Text = "";
+            //this.textBoxProjectNo.Text = "";
         }
 
         private void textBoxMakeNo_Click(object sender, EventArgs e)
@@ -905,7 +907,7 @@ namespace MainProgram
             this.textBoxMakeNo.Visible = false;
             this.labelMakeNo.Visible = true;
             this.labelMakeNo.Text = this.textBoxMakeNo.Text;
-            this.textBoxMakeNo.Text = "";
+            //this.textBoxMakeNo.Text = "";
         }
 
         private void readProInfoListToUI()
@@ -938,7 +940,7 @@ namespace MainProgram
                     // 生产编号初始化
                     FormProjectMaterielTable proInfo = FormProject.getInctance().getProjectInfoFromBillNumber(record[0].ToString());
                     this.textBoxMakeNo.Visible = false;
-                    this.textBoxMakeNo.ReadOnly = true;
+                    //this.textBoxMakeNo.ReadOnly = true;
 
                     this.labelMakeNo.Visible = true;
                     this.labelMakeNo.Text = proInfo.makeNum;

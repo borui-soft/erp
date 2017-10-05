@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormStorageStockDetailsFilter));
             this.buttonEnter = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxEndID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxStartID = new System.Windows.Forms.TextBox();
+            this.radioButtonInterregional = new System.Windows.Forms.RadioButton();
             this.radioButtonMateriel = new System.Windows.Forms.RadioButton();
             this.radioButtonAllMateriel = new System.Windows.Forms.RadioButton();
             this.buttonSelect = new System.Windows.Forms.Button();
@@ -41,12 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButtonInterregional = new System.Windows.Forms.RadioButton();
-            this.textBoxStartID = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxEndID = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +61,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBoxEndID);
             this.groupBox1.Controls.Add(this.label4);
@@ -84,6 +82,56 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "过滤条件";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(100, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(209, 12);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "把光标移动到输入框后可进行物料选择";
+            // 
+            // textBoxEndID
+            // 
+            this.textBoxEndID.Enabled = false;
+            this.textBoxEndID.Location = new System.Drawing.Point(179, 48);
+            this.textBoxEndID.Name = "textBoxEndID";
+            this.textBoxEndID.Size = new System.Drawing.Size(61, 21);
+            this.textBoxEndID.TabIndex = 14;
+            this.textBoxEndID.Enter += new System.EventHandler(this.textBoxEndID_Enter);
+            this.textBoxEndID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStartID_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(163, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(11, 12);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "-";
+            // 
+            // textBoxStartID
+            // 
+            this.textBoxStartID.Enabled = false;
+            this.textBoxStartID.Location = new System.Drawing.Point(99, 48);
+            this.textBoxStartID.Name = "textBoxStartID";
+            this.textBoxStartID.Size = new System.Drawing.Size(61, 21);
+            this.textBoxStartID.TabIndex = 12;
+            this.textBoxStartID.Enter += new System.EventHandler(this.textBoxStartID_Enter);
+            this.textBoxStartID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStartID_KeyPress);
+            // 
+            // radioButtonInterregional
+            // 
+            this.radioButtonInterregional.AutoSize = true;
+            this.radioButtonInterregional.Location = new System.Drawing.Point(9, 53);
+            this.radioButtonInterregional.Name = "radioButtonInterregional";
+            this.radioButtonInterregional.Size = new System.Drawing.Size(83, 16);
+            this.radioButtonInterregional.TabIndex = 11;
+            this.radioButtonInterregional.TabStop = true;
+            this.radioButtonInterregional.Text = "物料ID区间";
+            this.radioButtonInterregional.UseVisualStyleBackColor = true;
+            this.radioButtonInterregional.Click += new System.EventHandler(this.radioButtonAllMateriel_Click);
             // 
             // radioButtonMateriel
             // 
@@ -111,9 +159,9 @@
             // 
             // buttonSelect
             // 
-            this.buttonSelect.Location = new System.Drawing.Point(216, 81);
+            this.buttonSelect.Location = new System.Drawing.Point(246, 48);
             this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(61, 23);
+            this.buttonSelect.Size = new System.Drawing.Size(77, 56);
             this.buttonSelect.TabIndex = 7;
             this.buttonSelect.Text = "物料选择";
             this.buttonSelect.UseVisualStyleBackColor = true;
@@ -123,8 +171,9 @@
             // 
             this.textBoxName.Location = new System.Drawing.Point(99, 83);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(108, 21);
+            this.textBoxName.Size = new System.Drawing.Size(141, 21);
             this.textBoxName.TabIndex = 8;
+            this.textBoxName.Enter += new System.EventHandler(this.textBoxName_Enter);
             // 
             // comboBoxReview
             // 
@@ -176,63 +225,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "起止日期";
             // 
-            // radioButtonInterregional
-            // 
-            this.radioButtonInterregional.AutoSize = true;
-            this.radioButtonInterregional.Location = new System.Drawing.Point(9, 53);
-            this.radioButtonInterregional.Name = "radioButtonInterregional";
-            this.radioButtonInterregional.Size = new System.Drawing.Size(83, 16);
-            this.radioButtonInterregional.TabIndex = 11;
-            this.radioButtonInterregional.TabStop = true;
-            this.radioButtonInterregional.Text = "物料ID区间";
-            this.radioButtonInterregional.UseVisualStyleBackColor = true;
-            this.radioButtonInterregional.Click += new System.EventHandler(this.radioButtonAllMateriel_Click);
-            // 
-            // textBoxStartID
-            // 
-            this.textBoxStartID.Enabled = false;
-            this.textBoxStartID.Location = new System.Drawing.Point(99, 48);
-            this.textBoxStartID.Name = "textBoxStartID";
-            this.textBoxStartID.Size = new System.Drawing.Size(61, 21);
-            this.textBoxStartID.TabIndex = 12;
-            this.textBoxStartID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStartID_KeyPress);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(163, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 12);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "-";
-            // 
-            // textBoxEndID
-            // 
-            this.textBoxEndID.Enabled = false;
-            this.textBoxEndID.Location = new System.Drawing.Point(179, 48);
-            this.textBoxEndID.Name = "textBoxEndID";
-            this.textBoxEndID.Size = new System.Drawing.Size(61, 21);
-            this.textBoxEndID.TabIndex = 14;
-            this.textBoxEndID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStartID_KeyPress);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(241, 44);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 12);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "输入查询物料ID";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(241, 59);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 12);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "区间，如1-999";
-            // 
             // FormStorageStockDetailsFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -272,7 +264,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxStartID;
         private System.Windows.Forms.RadioButton radioButtonInterregional;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
     }
 }

@@ -17,6 +17,7 @@ namespace MainProgram
         private string m_startDate;
         private string m_endDate;
         private string m_allReview;
+        private int m_selectedTextboxIndex = 0;
 
         public FormStorageStockDetailsFilter()
         {
@@ -39,6 +40,8 @@ namespace MainProgram
 
             radioButtonAllMateriel.Checked = false;
             radioButtonMateriel.Checked = true;
+
+            this.buttonSelect.Enabled = false;
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)
@@ -138,24 +141,47 @@ namespace MainProgram
 
         private void buttonSelect_Click(object sender, EventArgs e)
         {
+            if (m_selectedTextboxIndex <= 0 || m_selectedTextboxIndex > 3)
+            {
+                MessageBoxExtend.messageWarning("请将光标移动到指定输入框中后再重新选择物料");
+                this.buttonSelect.Enabled = false;
+                return;
+            }
+
             FormBaseMateriel fbs = new FormBaseMateriel(true);
             fbs.ShowDialog();
 
             m_materielPkey = fbs.getSelectRecordPkey();
-            MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_materielPkey);
-            this.textBoxName.Text = materiel.name;
+
+            if(m_materielPkey != 0 )
+            {
+                if (m_selectedTextboxIndex == 1)
+                {
+                    this.textBoxStartID.Text = Convert.ToString(m_materielPkey);
+                }
+                else if (m_selectedTextboxIndex == 2)
+                {
+                    this.textBoxEndID.Text = Convert.ToString(m_materielPkey);
+                }
+                else
+                {
+                    MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_materielPkey);
+                    this.textBoxName.Text = materiel.name;
+                }
+            }
+
+            this.buttonSelect.Enabled = false;
+            m_selectedTextboxIndex = 0;
         }
 
         private void radioButtonAllMateriel_Click(object sender, EventArgs e)
         {
             this.textBoxName.Enabled = true;
-            this.buttonSelect.Enabled = true;
 
             if (radioButtonAllMateriel.Checked)
             {
                 m_materielPkey = -1;
 
-                this.buttonSelect.Enabled = false;
                 this.textBoxName.Enabled = false;
                 this.textBoxName.Text = "";
 
@@ -166,15 +192,17 @@ namespace MainProgram
             }
             else if (radioButtonInterregional.Checked)
             {
-                this.buttonSelect.Enabled = false;
                 this.textBoxName.Enabled = false;
                 this.textBoxName.Text = "";
 
                 this.textBoxStartID.Enabled = true;
                 this.textBoxEndID.Enabled = true;
 
-                this.textBoxStartID.Text = "";
-                this.textBoxEndID.Text = "";
+                if (m_selectedTextboxIndex != 1 && m_selectedTextboxIndex != 2)
+                {
+                    this.textBoxStartID.Text = "";
+                    this.textBoxEndID.Text = "";
+                }
             }
             else
             {
@@ -183,9 +211,14 @@ namespace MainProgram
                 this.textBoxStartID.Text = "";
                 this.textBoxEndID.Text = "";
 
-                this.buttonSelect.Enabled = true;
                 this.textBoxName.Enabled = true;
-                this.textBoxName.Text = "";
+
+                if (m_selectedTextboxIndex != 3)
+                {
+                    this.textBoxName.Text = "";
+                }
+
+                this.buttonSelect.Enabled = false;
             }
         }
 
@@ -203,6 +236,24 @@ namespace MainProgram
             {
                 e.Handled = false;
             }
+        }
+
+        private void textBoxStartID_Enter(object sender, EventArgs e)
+        {
+            this.buttonSelect.Enabled = true;
+            m_selectedTextboxIndex = 1;
+        }
+
+        private void textBoxEndID_Enter(object sender, EventArgs e)
+        {
+            this.buttonSelect.Enabled = true;
+            m_selectedTextboxIndex = 2;
+        }
+
+        private void textBoxName_Enter(object sender, EventArgs e)
+        {
+            this.buttonSelect.Enabled = true;
+            m_selectedTextboxIndex = 3;
         }
     }
 }

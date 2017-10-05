@@ -457,21 +457,22 @@ namespace MainProgram
                 m_excelApp.Cells[row + 6, 4] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.ContractMatetielName].Value.ToString().Trim();
                 m_excelApp.Cells[row + 6, 5] = record.model;
                 m_excelApp.Cells[row + 6, 6] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Unit].Value.ToString().Trim();
-                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Price].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 7] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.CZ].Value.ToString().Trim();
+                m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Price].Value.ToString().Trim();
 
                 if (table.isRedBill == 1)
                 {
-                    m_excelApp.Cells[row + 6, 8] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Value].Value.ToString().Trim()) * -1;
-                    m_excelApp.Cells[row + 6, 9] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Turnover].Value.ToString().Trim()) * -1;
-                    m_excelApp.Cells[row + 6, 10] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.TransportationCost].Value.ToString().Trim()) * -1;
-                    m_excelApp.Cells[row + 6, 11] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.SumTurnover].Value.ToString().Trim()) * -1;
+                    m_excelApp.Cells[row + 6, 9] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Value].Value.ToString().Trim()) * -1;
+                    m_excelApp.Cells[row + 6, 10] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Turnover].Value.ToString().Trim()) * -1;
+                    m_excelApp.Cells[row + 6, 11] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.TransportationCost].Value.ToString().Trim()) * -1;
+                    m_excelApp.Cells[row + 6, 12] = Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.SumTurnover].Value.ToString().Trim()) * -1;
                 }
                 else
                 {
-                    m_excelApp.Cells[row + 6, 8] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Value].Value.ToString().Trim();
-                    m_excelApp.Cells[row + 6, 9] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Turnover].Value.ToString().Trim();
-                    m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.TransportationCost].Value.ToString().Trim();
-                    m_excelApp.Cells[row + 6, 11] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.SumTurnover].Value.ToString().Trim();
+                    m_excelApp.Cells[row + 6, 9] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Value].Value.ToString().Trim();
+                    m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.Turnover].Value.ToString().Trim();
+                    m_excelApp.Cells[row + 6, 11] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.TransportationCost].Value.ToString().Trim();
+                    m_excelApp.Cells[row + 6, 12] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseInOrder.DataGridColumnName.SumTurnover].Value.ToString().Trim();
                 }
             }
 

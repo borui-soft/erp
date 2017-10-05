@@ -157,7 +157,7 @@ namespace MainProgram.model
                     record.sumMoney = record.price * record.value;
                     record.costApportionments = DbDataConvert.ToDouble(row["TRANSPORTATION_COST"]);
                     record.noCostApportionments = DbDataConvert.ToDouble(row["OTHER_COST"]);
-                    record.totalMoney = record.sumMoney + record.costApportionments + record.noCostApportionments;
+                    record.totalMoney = record.sumMoney + record.costApportionments - record.noCostApportionments;
 
                     m_tableDataList.Add(m_tableDataList.Count, record);
                 }

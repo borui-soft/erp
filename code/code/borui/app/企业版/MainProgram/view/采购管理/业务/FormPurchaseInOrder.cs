@@ -907,7 +907,7 @@ namespace MainProgram
                 {
                     double transportationCost = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value.ToString());
                     double otherCost = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value.ToString());
-                    double sumTurnover = turnover + transportationCost + otherCost;
+                    double sumTurnover = turnover + transportationCost - otherCost;
                     dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = Convert.ToString(sumTurnover);
                 }
             }
@@ -932,7 +932,7 @@ namespace MainProgram
                 otherCost = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value.ToString());
             }
 
-            double sumTurnover = turnover + transportationCost + otherCost;
+            double sumTurnover = turnover + transportationCost - otherCost;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = Convert.ToString(sumTurnover);
 
             // 当本次采购发生了运输费用或者其他费用时，需要把费用平均到每件货物单价上

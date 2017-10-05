@@ -347,7 +347,7 @@ namespace MainProgram.model
                 if (record.sumMoney != record.totalMoney)
                 {
                     // 如果物料总费用和总金额不相等，代表有需要计入成本的费用发生，需要重新核算物料单价
-                    materielRecord.price = (record.costApportionments + record.sumMoney) / record.value;
+                    materielRecord.price = (record.costApportionments + record.sumMoney - record.noCostApportionments) / record.value;
                 }
 
                 if (m_isRedBill)

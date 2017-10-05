@@ -8,7 +8,7 @@
 		<UserName>sa</UserName>
 		<Password>admin</Password>
 		<ConnTimeOut>2000</ConnTimeOut>
-		<ConnectionString>Provider=SQLNCLI.1;Data Source=127.0.0.1;Initial Catalog=ERP;User Id=sa;Password=admin;</ConnectionString>
+		<ConnectionString>Provider=SQLNCLI.1;Data Source=127.0.0.1;Initial Catalog=ERP;User Id=sa;Password=admin123;</ConnectionString>
 		<ConnDatabase>ERP</ConnDatabase>
 	</Connection>
 	<Connection name="MASTER">
@@ -18,7 +18,7 @@
 		<UserName>sa</UserName>
 		<Password>admin</Password>
 		<ConnTimeOut>2000</ConnTimeOut>
-		<ConnectionString>Provider=SQLNCLI.1;Data Source=127.0.0.1;Initial Catalog=MASTER;User Id=sa;Password=admin;</ConnectionString>
+		<ConnectionString>Provider=SQLNCLI.1;Data Source=127.0.0.1;Initial Catalog=MASTER;User Id=sa;Password=admin123;</ConnectionString>
 		<ConnDatabase>MASTER</ConnDatabase>
 	</Connection>
 </DatabaseConfiguration>

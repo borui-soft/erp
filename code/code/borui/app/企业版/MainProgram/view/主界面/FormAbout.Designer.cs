@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.12";
+            this.label3.Text = "当前软件版本：V2.6.15";
 
             // 
             // richTextBox1
@@ -82,11 +82,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-
-            this.richTextBox1.Text = "1、解决其他出库单等单据中的摘要信息，某些情况下无法保存的问题\r\n";
-            this.richTextBox1.Text += "2、其他出库单数据表格中，增加删除行的操作\r\n";
-            this.richTextBox1.Text += "3、领料单中的生产编号变为可输出项\r\n";
-            this.richTextBox1.Text += "4、其他入库单模板套打模板中增加材质列\r\n";
+            this.richTextBox1.Text = "1、针对采购入库单中的不计入成本费用做了修改,之前的计算方式是：总金额= 金额+计入成本费用+不计入成本费用，修改为：总金额= 金额+计入成本费用-不计入成本费用\r\n";
+            this.richTextBox1.Text += "2、采购入库模板中增加材质列，单据对应的套打代码函数做了相应的改动支持材质信息的引出\r\n";
+            this.richTextBox1.Text += "3、物料明细账页面->过滤条件页面：物料区间ID均支持为可选择的方式，之前只是允许用户输入\r\n";
 
             // Fo
             // 

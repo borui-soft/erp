@@ -393,8 +393,7 @@ namespace MainProgram
                 m_excelApp.Cells[row + 6, 9] = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", record.storage);
                 m_excelApp.Cells[row + 6, 10] = m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Note].Value.ToString().Trim();
 
-                sum += tmp.value;
-
+                sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormMaterielOutOrder.DataGridColumnName.Value].Value.ToString());
             }
 
             stringReplace(Convert.ToString(sum), "[8]");

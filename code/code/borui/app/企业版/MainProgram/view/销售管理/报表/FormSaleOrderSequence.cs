@@ -991,5 +991,40 @@ namespace MainProgram
 
             updateDataGridView();
         }
+
+        private void toolStripButtonReset_Click(object sender, EventArgs e)
+        {
+            FormStorageSequenceFilter fssf = new FormStorageSequenceFilter(true);
+            if (fssf.ShowDialog() == DialogResult.OK)
+            {
+                // 隐藏当前窗口
+                this.Hide();
+
+                //得到界面用户选定的值
+                FormStorageSequenceFilterValue filter = fssf.getFilterUIValue();
+                FormSaleOrderSequence.OrderType type = new FormSaleOrderSequence.OrderType();
+
+                if (filter.sequenceType == "0")
+                {
+                    type = FormSaleOrderSequence.OrderType.SaleOut;
+                }
+                else if (filter.sequenceType == "1")
+                {
+                    type = FormSaleOrderSequence.OrderType.StorageMaterielOut;
+                }
+                else if (filter.sequenceType == "2")
+                {
+                    type = FormSaleOrderSequence.OrderType.StorageOutCheck;
+                }
+                else if (filter.sequenceType == "3")
+                {
+                    type = FormSaleOrderSequence.OrderType.StorageOutOther;
+                }
+
+                FormSaleOrderSequence fphpc = new FormSaleOrderSequence(type);
+                fphpc.setDataFilter(filter);
+                fphpc.ShowDialog();
+            }
+        }
     }
 }

@@ -1135,5 +1135,40 @@ namespace MainProgram
 
             updateDataGridView();
         }
+
+        private void toolStripButtonReset_Click(object sender, EventArgs e)
+        {
+            FormStorageSequenceFilter fssf = new FormStorageSequenceFilter(false);
+            if (fssf.ShowDialog() == DialogResult.OK)
+            {
+                // 隐藏当前窗口
+                this.Hide();
+
+                //得到界面用户选定的值
+                FormStorageSequenceFilterValue filter = fssf.getFilterUIValue();
+                FormPurchaseOrderSequence.OrderType type = new FormPurchaseOrderSequence.OrderType();
+
+                if (filter.sequenceType == "0")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.PurchaseIn;
+                }
+                else if (filter.sequenceType == "1")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.StorageProductIn;
+                }
+                else if (filter.sequenceType == "2")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.StorageInCheck;
+                }
+                else if (filter.sequenceType == "3")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.StorageInOther;
+                }
+
+                FormPurchaseOrderSequence fphpc = new FormPurchaseOrderSequence(type);
+                fphpc.setDataFilter(filter);
+                fphpc.ShowDialog();
+            }
+        }
     }
 }

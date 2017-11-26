@@ -36,13 +36,14 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.printDisplay = new System.Windows.Forms.ToolStripButton();
             this.print = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.close = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewList = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonReset = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewList)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.printDisplay,
             this.print,
             this.toolStripSeparator1,
+            this.toolStripButtonReset,
             this.toolStripButtonRefresh,
             this.toolStripSeparator4,
             this.close,
@@ -130,6 +132,25 @@
             this.print.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.print.Click += new System.EventHandler(this.print_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.Image = global::MainProgram.Properties.Resources.review;
+            this.toolStripButtonRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(36, 42);
+            this.toolStripButtonRefresh.Text = "刷新";
+            this.toolStripButtonRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonRefresh.ToolTipText = "刷新";
+            this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -168,24 +189,19 @@
             this.dataGridViewList.Click += new System.EventHandler(this.dataGridViewBilConfigList_Click);
             this.dataGridViewList.DoubleClick += new System.EventHandler(this.dataGridViewMaterielList_DoubleClick);
             // 
-            // toolStripButtonRefresh
+            // toolStripButtonReset
             // 
-            this.toolStripButtonRefresh.Image = global::MainProgram.Properties.Resources.review;
-            this.toolStripButtonRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolStripButtonRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
-            this.toolStripButtonRefresh.Size = new System.Drawing.Size(36, 42);
-            this.toolStripButtonRefresh.Text = "刷新";
-            this.toolStripButtonRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButtonRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButtonRefresh.ToolTipText = "刷新";
-            this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
+            this.toolStripButtonReset.Image = global::MainProgram.Properties.Resources.Filter;
+            this.toolStripButtonReset.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonReset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonReset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonReset.Name = "toolStripButtonReset";
+            this.toolStripButtonReset.Size = new System.Drawing.Size(84, 42);
+            this.toolStripButtonReset.Text = "重置过滤条件";
+            this.toolStripButtonReset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButtonReset.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.toolStripButtonReset.ToolTipText = "刷新";
+            this.toolStripButtonReset.Click += new System.EventHandler(this.toolStripButtonReset_Click);
             // 
             // FormSaleOrderSequence
             // 
@@ -222,5 +238,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
+        private System.Windows.Forms.ToolStripButton toolStripButtonReset;
     }
 }

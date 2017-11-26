@@ -35,6 +35,7 @@
             this.labelProjectNum = new System.Windows.Forms.Label();
             this.comboBoxReview = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.listViewProList = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.listViewProList);
             this.groupBox1.Controls.Add(this.textBoxProjectNum);
             this.groupBox1.Controls.Add(this.labelProjectNum);
             this.groupBox1.Controls.Add(this.comboBoxReview);
@@ -65,8 +67,9 @@
             // 
             this.textBoxProjectNum.Location = new System.Drawing.Point(79, 21);
             this.textBoxProjectNum.Name = "textBoxProjectNum";
-            this.textBoxProjectNum.Size = new System.Drawing.Size(339, 21);
+            this.textBoxProjectNum.Size = new System.Drawing.Size(216, 21);
             this.textBoxProjectNum.TabIndex = 0;
+            this.textBoxProjectNum.TextChanged += new System.EventHandler(this.textBoxProjectNum_TextChanged);
             // 
             // labelProjectNum
             // 
@@ -94,6 +97,18 @@
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "审核标志";
+            // 
+            // listViewProList
+            // 
+            this.listViewProList.Location = new System.Drawing.Point(291, 21);
+            this.listViewProList.Name = "listViewProList";
+            this.listViewProList.Size = new System.Drawing.Size(137, 85);
+            this.listViewProList.TabIndex = 7;
+            this.listViewProList.UseCompatibleStateImageBehavior = false;
+            this.listViewProList.Visible = false;
+            this.listViewProList.Leave += new System.EventHandler(this.listViewProList_Leave);
+            this.listViewProList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewProList_MouseClick);
+            this.listViewProList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewProList_MouseDoubleClick);
             // 
             // FormProjectInfoTrackFilter
             // 
@@ -124,5 +139,6 @@
         private System.Windows.Forms.ComboBox comboBoxReview;
         private System.Windows.Forms.Label labelProjectNum;
         private System.Windows.Forms.TextBox textBoxProjectNum;
+        private System.Windows.Forms.ListView listViewProList;
     }
 }

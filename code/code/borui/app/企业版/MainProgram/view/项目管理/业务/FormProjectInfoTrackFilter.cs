@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Collections;
 using System.Windows.Forms;
 using MainProgram.bus;
+using MainProgram.model;
 
 namespace MainProgram
 {
@@ -29,6 +31,9 @@ namespace MainProgram
             this.comboBoxReview.SelectedIndex = 1;
 
             this.textBoxProjectNum.Focus();
+
+            this.listViewProList.Columns.Add("双击可快速选择编号", 140, HorizontalAlignment.Left);
+            ListViewExtend.setListViewAttribute(listViewProList, 16);
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)
@@ -57,6 +62,51 @@ namespace MainProgram
         public FormProjectInfoTrackFilterValue getFilterUIValue()
         {
             return m_formStorageSequenceFilterValue;
+        }
+
+        private void buttonSelectProject_Click(object sender, EventArgs e)
+        {
+            // SELECT DISTINCT(PROJECT_NUM) FROM [PROJECT_MATERIE_MANAGER]
+        }
+
+        private void textBoxProjectNum_TextChanged(object sender, EventArgs e)
+        {
+            if (this.textBoxProjectNum.Text.Length <= 0)
+            {
+                this.listViewProList.Visible = false;
+                return;
+            }
+
+            this.listViewProList.Visible = true;
+            this.listViewProList.Items.Clear();
+
+            ArrayList list = FormProject.getInctance().getProjectNumList(this.textBoxProjectNum.Text);
+
+            for(int i = 0; i < list.Count; i++)
+            {
+                ArrayList record = new ArrayList();
+                record.Add(list[i].ToString());
+
+                ListViewExtend.insertDataToListView(this.listViewProList, record);
+            }
+        }
+
+        private void listViewProList_MouseClick(object sender, MouseEventArgs e)
+        {
+            string projectNum = this.listViewProList.SelectedItems[0].Text.ToString();
+            this.textBoxProjectNum.Text = projectNum;
+
+            this.listViewProList.Hide();
+        }
+
+        private void listViewProList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            listViewProList_MouseClick(sender, e);
+        }
+
+        private void listViewProList_Leave(object sender, EventArgs e)
+        {
+            this.listViewProList.Hide();
         }
     }
 

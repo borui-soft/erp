@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using System.Text;
+using System.Collections;
 using TIV.Core.DatabaseAccess;
 using MainProgram.bus;
 using MainProgram.model;
@@ -433,8 +434,6 @@ namespace MainProgram.model
             return record.dataType;
         }
 
-        
-
         public bool checkBillIsExist(string billNumber)
         {
             bool isRet = false;
@@ -451,6 +450,25 @@ namespace MainProgram.model
             }
 
             return isRet;
+        }
+
+        public ArrayList getProjectNumList(string projectNo)
+        {
+            ArrayList list = new ArrayList();
+
+            string sql = "SELECT DISTINCT(PROJECT_NUM) FROM [PROJECT_MATERIE_MANAGER] where PROJECT_NUM LIKE \'";
+            sql += projectNo;
+            sql += "%'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    list.Add(DbDataConvert.ToString(row["PROJECT_NUM"]));
+                }
+            }
+
+            return list;
         }
     }
 

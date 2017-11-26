@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.15";
+            this.label3.Text = "当前软件版本：V2.6.18";
 
             // 
             // richTextBox1
@@ -82,9 +82,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、针对采购入库单中的不计入成本费用做了修改,之前的计算方式是：总金额= 金额+计入成本费用+不计入成本费用，修改为：总金额= 金额+计入成本费用-不计入成本费用\r\n";
-            this.richTextBox1.Text += "2、采购入库模板中增加材质列，单据对应的套打代码函数做了相应的改动支持材质信息的引出\r\n";
-            this.richTextBox1.Text += "3、物料明细账页面->过滤条件页面：物料区间ID均支持为可选择的方式，之前只是允许用户输入\r\n";
+            this.richTextBox1.Text = "1、解决生产领料单套打时，某些情况下物料总数量打印错误的bug\r\n";
+            this.richTextBox1.Text += "2、各类出入库序时薄页面增加“重置过滤条件”按钮\r\n";
+            this.richTextBox1.Text += "3、点击“项目整体跟踪情况”后打开的“数据过滤器”页面，可根据户输入的项目编号，模糊搜索出相似的项目编号再右侧列表显示出来，供用户快速选择\r\n";
 
             // Fo
             // 

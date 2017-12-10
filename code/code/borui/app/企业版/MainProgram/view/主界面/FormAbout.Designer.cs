@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.18";
+            this.label3.Text = "当前软件版本：V2.6.20";
 
             // 
             // richTextBox1
@@ -82,9 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、解决生产领料单套打时，某些情况下物料总数量打印错误的bug\r\n";
-            this.richTextBox1.Text += "2、各类出入库序时薄页面增加“重置过滤条件”按钮\r\n";
-            this.richTextBox1.Text += "3、点击“项目整体跟踪情况”后打开的“数据过滤器”页面，可根据户输入的项目编号，模糊搜索出相似的项目编号再右侧列表显示出来，供用户快速选择\r\n";
+            this.richTextBox1.Text = "1、所有出入库单据，再更新物料库存和交易明细前，先再交易明细表中查查有没有相同的记录，防止出现重复出入库的问题\r\n";
+            this.richTextBox1.Text += "2、针对所有出库类单据，修改某些情况下(同一张单据中存在多个相同的物料ID)库存数量小于出库数量情况下，依然能出库成功的bug\r\n";
 
             // Fo
             // 

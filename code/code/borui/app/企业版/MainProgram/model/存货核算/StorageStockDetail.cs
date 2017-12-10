@@ -34,13 +34,14 @@ namespace MainProgram.model
         public void insert(StorageStockDetailTable record)
         {
             string insert = "INSERT INTO [dbo].[STORAGE_STOCK_DETAIL]([MATERIEL_ID],[TRADING_DATE],[BILL_NUMBER],[THINGS_TYPE]";
-            insert += ",[IS_IN],[VALUE],[PRICE],[STORAGE_VALUE],[STORAGE_PRICE]) VALUES(";
+            insert += ",[IS_IN],[MATERIEL_ROW_NUMBER],[VALUE],[PRICE],[STORAGE_VALUE],[STORAGE_PRICE]) VALUES(";
 
             insert += record.materielID + ",";
             insert += "'" + record.tradingDate + "',";
             insert += "'" + record.billNumber + "',";
             insert += "'" + record.thingsType + "',";
             insert += record.isIn + ",";
+            insert += Convert.ToInt32(record.materielRowNumber) + ",";
             insert += record.value + ",";
             insert += record.price + ",";
             insert += record.storageValue + ",";
@@ -251,6 +252,37 @@ namespace MainProgram.model
 
             return list;
         }
+
+        /*
+         * 日期：2017-12-10
+         * 函数功能：根据参数查询到STORAGE_STOCK_DETAIL表中是否已经存在了一条一模一样的数据，
+         *              
+         * 参数 billNumber：单据号
+         *      recordRowNo：物料ID,在交易单据中的行号
+         * 
+         * 返回值：当存在相同的数据时反馈true；其他情况反馈fasle
+         * 备注：为解决某些情况下，数据存在重复的出入库问题，特此增加此函数
+         * 
+         * */
+        public bool isExistSameRecord(string billNumber, string recordRowNo)
+        {
+            bool isRet = false;
+
+            string sql = "SELECT COUNT(*) FROM STORAGE_STOCK_DETAIL WHERE BILL_NUMBER = \'" + billNumber;
+            sql += "\' AND MATERIEL_ROW_NUMBER = '" + recordRowNo + "\'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                int recordCount = DbDataConvert.ToInt32(dataTable.Rows[0][0]);
+
+                if (recordCount > 0)
+                {
+                    isRet = true;
+                }
+            }
+
+            return isRet;
+        }
     }
 
     public class StorageStockDetailTable
@@ -259,6 +291,7 @@ namespace MainProgram.model
 
         public int materielID { get; set; }
         public string materielName { get; set; }
+        public string materielRowNumber { get; set; }
         public string model { get; set; }
 
         public string tradingDate { get; set; }

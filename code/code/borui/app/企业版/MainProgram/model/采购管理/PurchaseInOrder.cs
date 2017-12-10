@@ -338,6 +338,12 @@ namespace MainProgram.model
             foreach (KeyValuePair<int, PurchaseInOrderDetailsTable> index in dataList)
             {
                 PurchaseInOrderDetailsTable record = index.Value;
+
+                if (StorageStockDetail.getInctance().isExistSameRecord(record.billNumber, record.rowNumber))
+                {
+                    continue;
+                }
+
                 #region 更新库存汇总表(INIT_STORAGE_STOCK)
                 InitMaterielTable materielRecord = new InitMaterielTable();
                 materielRecord.materielID = record.materielID;
@@ -367,6 +373,7 @@ namespace MainProgram.model
                 storageStockDetailRecord.billNumber = billNumber;
                 storageStockDetailRecord.thingsType = "采购入库";
                 storageStockDetailRecord.isIn = 1;
+                storageStockDetailRecord.materielRowNumber = record.rowNumber;
 
                 // 本次交易数量和单价
                 if (m_isRedBill)

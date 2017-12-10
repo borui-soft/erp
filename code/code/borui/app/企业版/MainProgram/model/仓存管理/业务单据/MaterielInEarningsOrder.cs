@@ -190,6 +190,11 @@ namespace MainProgram.model
             {
                 MaterielInEarningsOrderDetailsTable record = index.Value;
 
+                if (StorageStockDetail.getInctance().isExistSameRecord(record.billNumber, record.rowNumber))
+                {
+                    continue;
+                }
+
                 //InitMaterielTable materielRecord = new InitMaterielTable();
                 //materielRecord.materielID = record.materielID;
                 //materielRecord.value = (int)record.value;
@@ -226,6 +231,7 @@ namespace MainProgram.model
                 storageStockDetailRecord.billNumber = billNumber;
                 storageStockDetailRecord.thingsType = "盘盈入库";
                 storageStockDetailRecord.isIn = 1;
+                storageStockDetailRecord.materielRowNumber = record.rowNumber;
 
                 // 本次交易数量和单价
                 if (m_isRedBill)

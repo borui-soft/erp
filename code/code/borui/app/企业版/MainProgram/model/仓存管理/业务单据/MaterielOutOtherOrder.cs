@@ -188,6 +188,12 @@ namespace MainProgram.model
                     //}
 
                     //InitMateriel.getInctance().materielOutStorage(materielRecord.materielID, materielRecord.value);
+
+                    if (StorageStockDetail.getInctance().isExistSameRecord(record.billNumber, record.rowNumber))
+                    {
+                        continue;
+                    }
+
                     #region 更新库存汇总表(INIT_STORAGE_STOCK)
 
                     // 交易完毕后库存数量
@@ -217,6 +223,7 @@ namespace MainProgram.model
                     storageStockDetailRecord.billNumber = billNumber;
                     storageStockDetailRecord.thingsType = "其他出库";
                     storageStockDetailRecord.isIn = 0;
+                    storageStockDetailRecord.materielRowNumber = record.rowNumber;
 
                     // 本次交易数量和单价
                     if (m_isRedBill)

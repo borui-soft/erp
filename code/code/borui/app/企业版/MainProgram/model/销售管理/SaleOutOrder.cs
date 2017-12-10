@@ -306,6 +306,22 @@ namespace MainProgram.model
             }
         }
 
+        private double getMaterielCountFromID(int materielID, SortedDictionary<int, SaleOutOrderDetailsTable> dataList)
+        {
+            double value = 0.0;
+
+            // 得到datalist中，同一个物料ID的数量累加和
+            foreach (KeyValuePair<int, SaleOutOrderDetailsTable> index in dataList)
+            {
+                if (index.Value.materielID == materielID)
+                {
+                    value += index.Value.value;
+                }
+            }
+
+            return value;
+        }
+
         private bool updateMaterielData(string billNumber)
         {
             bool isRet = true;
@@ -320,16 +336,12 @@ namespace MainProgram.model
                 {
                     SaleOutOrderDetailsTable record = index.Value;
 
-                    InitMaterielTable materielRecord = new InitMaterielTable();
-                    materielRecord.materielID = record.materielID;
-                    materielRecord.value = record.value;
-
                     InitMaterielTable materielStorageData = InitMateriel.getInctance().getMaterielInfoFromMaterielID(record.materielID);
 
-                    if (materielStorageData.value < materielRecord.value)
+                    if (materielStorageData.value < getMaterielCountFromID(record.materielID, dataList))
                     {
                         isRet = false;
-                        MessageBoxExtend.messageWarning("物料：[" + materielRecord.materielID + "]库存数量小于当前交易数量,单据审核失败");
+                        MessageBoxExtend.messageWarning("物料：[" + record.materielID + "]库存数量小于当前交易数量,单据审核失败");
                         break;
                     }
                 }

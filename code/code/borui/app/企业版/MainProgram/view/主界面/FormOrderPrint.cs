@@ -737,9 +737,17 @@ namespace MainProgram
             double sum = 0.0;
             for (int row = 0; row < m_dataGridView.RowCount; row++)
             {
-                if (m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0 || row > 40)
+                if (m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.MatetielNumber].Value.ToString().Length == 0)
                 {
                     break;
+                }
+
+                if (row >= 40)
+                {
+                    Microsoft.Office.Interop.Excel.Range range = m_excelApp.Rows[row + startRowIndex, Type.Missing];
+
+                    range.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlDirection.xlUp,
+                        Microsoft.Office.Interop.Excel.XlInsertFormatOrigin.xlFormatFromLeftOrAbove);
                 }
 
                 m_excelApp.Cells[row + startRowIndex, 1] = m_dataGridView.Rows[row].Cells[(int)FormProjectMaterielOrder.DataGridColumnName.Num].Value.ToString().Trim();

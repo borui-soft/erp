@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.20";
+            this.label3.Text = "当前软件版本：V2.6.21";
 
             // 
             // richTextBox1
@@ -82,8 +82,8 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、所有出入库单据，再更新物料库存和交易明细前，先再交易明细表中查查有没有相同的记录，防止出现重复出入库的问题\r\n";
-            this.richTextBox1.Text += "2、针对所有出库类单据，修改某些情况下(同一张单据中存在多个相同的物料ID)库存数量小于出库数量情况下，依然能出库成功的bug\r\n";
+            this.richTextBox1.Text = "1、解决总材料数据大于40行是，部分数据无法导出的问题\r\n";
+            //this.richTextBox1.Text += "2、针对所有出库类单据，修改某些情况下(同一张单据中存在多个相同的物料ID)库存数量小于出库数量情况下，依然能出库成功的bug\r\n";
 
             // Fo
             // 

@@ -498,6 +498,9 @@ namespace MainProgram
 
             SortedDictionary<int, MaterielOutOrderDetailsTable> proInfoList = MaterielOutOrderDetails.getInctance().getMaterielOutInfoFromBillNumber(billNumber);
 
+
+            TivLog.Logger.Info("projectNum = " + projectNum.ToString() + ", billNumber = "+ billNumber.ToString() + ", 需消除预占信息的物料共计" + proInfoList.Count.ToString() + "条.");
+
             foreach (KeyValuePair<int, MaterielOutOrderDetailsTable> index in proInfoList)
             {
                 MaterielOutOrderDetailsTable record = index.Value;

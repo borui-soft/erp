@@ -7,6 +7,7 @@ using TIV.Core.DatabaseAccess;
 using System.Collections;
 using MainProgram.bus;
 using MainProgram.model;
+using TIV.Core.TivLogger;
 
 
 namespace MainProgram.model
@@ -146,6 +147,8 @@ namespace MainProgram.model
         // 取消xx项目下的xx物料的库存占用xx数量
         public void cancelMaterielPro(string projectNum, int materielID, double needCancelValue)
         {
+            TivLog.Logger.Info("projectNum = " + projectNum + ", materielID = " + materielID + ", needCancelValue = " + needCancelValue);
+
             if (m_tableDataList.Count == 0)
             {
                 load();
@@ -154,9 +157,13 @@ namespace MainProgram.model
             ArrayList billNumList = MaterielProOccupiedOrder.getInctance().getAllReviewMaterielProBillNumFromProjectNum(projectNum);
             decimal tmpValue = (decimal)needCancelValue;
 
+            TivLog.Logger.Info("billNumList.count = " + billNumList.Count);
+
             for (int i = 0; i < billNumList.Count; i++)
             {
                 string billNumber = billNumList[i].ToString();
+
+                TivLog.Logger.Info("billNumList[i].ToString() = " + billNumber);
 
                 foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index in m_tableDataList)
                 {
@@ -164,12 +171,16 @@ namespace MainProgram.model
                     {
                         if ((decimal)index.Value.value - tmpValue >= 0)
                         {
+                            TivLog.Logger.Info("index.Value.pkey = " + index.Value.pkey + ", value = " + 
+                                index.Value.value + needCancelValue + ", needCancelValue = " + needCancelValue);
+
                             updateRecordValue((decimal)index.Value.value - tmpValue, index.Value.pkey);
                             tmpValue -= (decimal)needCancelValue;
                             break;
                         }
                         else
                         {
+                            TivLog.Logger.Info("index.Value.pkey = " + index.Value.pkey + ", value = 0");
                             updateRecordValue(0, index.Value.pkey);
                             tmpValue -= (decimal)index.Value.value;
                         }

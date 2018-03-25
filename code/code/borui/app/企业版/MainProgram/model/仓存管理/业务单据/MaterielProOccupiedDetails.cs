@@ -163,8 +163,6 @@ namespace MainProgram.model
             {
                 string billNumber = billNumList[i].ToString();
 
-                TivLog.Logger.Info("billNumList[i].ToString() = " + billNumber);
-
                 foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index in m_tableDataList)
                 {
                     if (index.Value.billNumber == billNumber && index.Value.materielID == materielID && index.Value.isCancel == "0")
@@ -172,7 +170,7 @@ namespace MainProgram.model
                         if ((decimal)index.Value.value - tmpValue >= 0)
                         {
                             TivLog.Logger.Info("index.Value.pkey = " + index.Value.pkey + ", value = " + 
-                                index.Value.value + needCancelValue + ", needCancelValue = " + needCancelValue);
+                                index.Value.value + ", needCancelValue = " + needCancelValue);
 
                             updateRecordValue((decimal)index.Value.value - tmpValue, index.Value.pkey);
                             tmpValue -= (decimal)needCancelValue;

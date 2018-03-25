@@ -557,13 +557,13 @@ namespace MainProgram
 
         private void selectSourceOrder_Click(object sender, EventArgs e)
         {
-            //if (m_rowIndex != -1 && m_columnIndex == (int)DataGridColumnName.MatetielNumber)
-            //{
-            //    FormBaseMateriel fbm = new FormBaseMateriel(true);
-            //    fbm.ShowDialog();
-            //    this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = Convert.ToString(fbm.getSelectRecordPkey());
-            //    this.dataGridViewDataList.CurrentCell = this.dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price];
-            //}
+            if (m_rowIndex != -1 && m_columnIndex == (int)DataGridColumnName.MatetielNumber)
+            {
+                FormBaseMateriel fbm = new FormBaseMateriel(true);
+                fbm.ShowDialog();
+                this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = Convert.ToString(fbm.getSelectRecordPkey());
+                this.dataGridViewDataList.CurrentCell = this.dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Num];
+            }
         }
 
         private void calculator_Click(object sender, EventArgs e)

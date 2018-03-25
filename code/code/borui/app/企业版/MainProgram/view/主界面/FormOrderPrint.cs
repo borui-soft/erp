@@ -516,19 +516,20 @@ namespace MainProgram
                 int materielID = Convert.ToInt32(m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielNumber].Value.ToString());
                 ProjectManagerDetailsTable tmp = ProjectManagerDetails.getInctance().getMaterielInfoFromBillNumber(table.srcOrderNum, materielID);
 
-                m_excelApp.Cells[row + startRowIndex, 2] = projectInfo.projectName;
-                m_excelApp.Cells[row + startRowIndex, 3] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Brand].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielName].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 5] = "";
-                m_excelApp.Cells[row + startRowIndex, 6] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Model].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 7] = tmp.cl;
-                m_excelApp.Cells[row + startRowIndex, 8] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Unit].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 9] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Value].Value.ToString().Trim();
-                m_excelApp.Cells[row + startRowIndex, 10] = tmp.useDate;
-                m_excelApp.Cells[row + startRowIndex, 11] = "";
+                m_excelApp.Cells[row + startRowIndex, 2] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielNumber].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 3] = projectInfo.projectName;
+                m_excelApp.Cells[row + startRowIndex, 4] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Brand].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 5] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.MatetielName].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 6] = "";
+                m_excelApp.Cells[row + startRowIndex, 7] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Model].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 8] = tmp.cl;
+                m_excelApp.Cells[row + startRowIndex, 9] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Unit].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 10] = m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Value].Value.ToString().Trim();
+                m_excelApp.Cells[row + startRowIndex, 11] = tmp.useDate;
                 m_excelApp.Cells[row + startRowIndex, 12] = "";
+                m_excelApp.Cells[row + startRowIndex, 13] = "";
 
-                sum += tmp.value;
+                sum += Convert.ToDouble(m_dataGridView.Rows[row].Cells[(int)FormPurchaseApply.DataGridColumnName.Value].Value.ToString().Trim());
             }
 
             stringReplace(Convert.ToString(sum), "[4]");

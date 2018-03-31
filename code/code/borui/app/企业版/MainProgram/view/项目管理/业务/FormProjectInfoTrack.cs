@@ -37,6 +37,7 @@ namespace MainProgram
         private FormProjectInfoTrackFilterValue m_proInfo = new FormProjectInfoTrackFilterValue();
         private SortedDictionary<int, FormProjectMaterielTable> m_dataList = new SortedDictionary<int, FormProjectMaterielTable>();
         private SortedDictionary<int, DataGridViewColumnInfoStruct> m_columnsInfo = new SortedDictionary<int, DataGridViewColumnInfoStruct>();
+        SortedDictionary<int, ArrayList> m_projectInfoList = new SortedDictionary<int, ArrayList>();
 
         public FormProjectInfoTrack(OrderType orderType, bool isSelectOrderNumber = false)
         {
@@ -122,206 +123,209 @@ namespace MainProgram
 
         private void updateDataGridView()
         {
-            SortedDictionary<int, ArrayList> projectInfoList = new SortedDictionary<int, ArrayList>();
+            m_projectInfoList.Clear();
 
-            SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
-            list = FormProject.getInctance().getAllPurchaseOrderInfo(m_proInfo.projectNum, m_proInfo.allReview, m_orderType);;
-
-            for (int index = 0; index < list.Count; index++)
+            if (m_proInfo.billNumber.Length > 0)
             {
-                FormProjectMaterielTable record = new FormProjectMaterielTable();
-                record = (FormProjectMaterielTable)list[index];
+                FormProjectMaterielTable record = FormProject.getInctance().getProjectInfoFromBillNumber(m_proInfo.billNumber);
+                getInfoListFromBillNumber(record);
+            }
+            else
+            {
+                SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
+                list = FormProject.getInctance().getAllPurchaseOrderInfo(m_proInfo.projectNum, m_proInfo.allReview, m_orderType);
 
-                SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
-                listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
-
-                SortedDictionary<int, ProjectManagerDetailsTable> changeMaterielList = FormProjectInfoChange.getInctance().getMaterielDetailsFromSrcBillNumber(record.billNumber);
-
-                for (int index2 = 0; index2 < listDetails.Count; index2++)
+                for (int index = 0; index < list.Count; index++)
                 {
-                    ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
-                    tmp = (ProjectManagerDetailsTable)listDetails[index2];
+                    FormProjectMaterielTable record = new FormProjectMaterielTable();
+                    record = (FormProjectMaterielTable)list[index];
 
-                    // 物料数量可能会存在变更，若发生变更，需要使用变更后数量代替原有数量，在一个材料表中，序号是唯一值
-                    double actualValue = 0.0;
-                    int sign = Convert.ToInt32(tmp.no);
-                    TivLog.Logger.Info("tmp.materielID = " + tmp.materielID + ", tmp.no = " + tmp.no);
-
-                    string nos = "";
-                    foreach (KeyValuePair<int, ProjectManagerDetailsTable> index8888 in changeMaterielList)
-                    {
-                        nos += index8888.Key;
-                        nos += ",";
-                    }
-
-                    TivLog.Logger.Info("nos = " + nos);
-                    if (changeMaterielList.ContainsKey(sign))
-                    {
-                        TivLog.Logger.Info("1111");
-                        if (tmp.materielID != changeMaterielList[sign].materielID)
-                        {
-                            // 相当于变更时，使用使用了另外一种物料替换了现有物料,
-                            tmp.materielID = changeMaterielList[sign].materielID;
-                            tmp.materielName = changeMaterielList[sign].materielName;
-                            tmp.num = changeMaterielList[sign].num;
-                            tmp.materielModel = changeMaterielList[sign].materielModel;
-                            tmp.materielParameter = changeMaterielList[sign].materielParameter;
-                            tmp.cl = changeMaterielList[sign].cl;
-                            tmp.materielSize = changeMaterielList[sign].materielSize;
-                        }
-
-                        actualValue = changeMaterielList[sign].value;
-                        changeMaterielList.Remove(sign);
-                    }
-                    else
-                    {
-                        actualValue = tmp.value;
-                    }
-
-                    ArrayList temp = new ArrayList();
-
-                    temp.Add(record.billNumber);
-                    temp.Add(record.projectNum);
-                    temp.Add(record.makeNum);
-                    temp.Add(record.deviceMode);
-                    temp.Add(record.subName);
-
-                    temp.Add(tmp.materielID);
-                    temp.Add(tmp.materielName);
-                    temp.Add(tmp.num);
-                    temp.Add(tmp.materielModel);
-                    temp.Add(tmp.materielParameter);
-                    temp.Add(tmp.cl);
-                    temp.Add(tmp.materielSize);
-                    temp.Add(actualValue);
-
-                    // 得到实际库存
-                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
-                    temp.Add(MaterielCountdata.value);
-
-                    // 库存预占情况,包含总预占量和本项目预占量
-                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
-                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, record.billNumber));
-                    
-
-                    // 转采购申请单数量
-                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, 
-                        PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
-                    temp.Add(appylyCount);
-
-                    // 采购订单数量
-                    SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
-                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
-
-                    double orderCount = 0;
-                    for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
-                    {
-                        PurchaseOrderTable recordOrder = new PurchaseOrderTable();
-                        recordOrder = (PurchaseOrderTable)listOrderList[indexOrderList];
-
-                        orderCount += PurchaseOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
-                    }
-                    temp.Add(orderCount);
-
-                    // 采购入库数量
-                    SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
-                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
-
-                    double purchaseInOrderValueCount = 0;
-                    for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
-                    {
-                        PurchaseInOrderTable recordOrder = new PurchaseInOrderTable();
-                        recordOrder = (PurchaseInOrderTable)purchaseInOrderList[indexOrderList];
-
-                        purchaseInOrderValueCount += PurchaseInOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
-                    }
-                    temp.Add(purchaseInOrderValueCount);
-
-                    // 生产领料数量
-                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, 
-                        PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
-                    temp.Add(materielOutOrderValueCount);
-
-                    projectInfoList.Add(projectInfoList.Count, temp);
-                }
-
-                // 如果changeMaterielList.count大于0 则代表有
-                foreach (KeyValuePair<int, ProjectManagerDetailsTable> index3 in changeMaterielList)
-                {
-                    ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
-                    tmp = index3.Value;
-
-                    ArrayList temp = new ArrayList();
-
-                    temp.Add(record.billNumber);
-                    temp.Add(record.projectNum);
-                    temp.Add(record.makeNum);
-                    temp.Add(record.deviceMode);
-                    temp.Add(record.subName);
-
-                    temp.Add(tmp.materielID);
-                    temp.Add(tmp.materielName);
-                    temp.Add(tmp.num);
-                    temp.Add(tmp.materielModel);
-                    temp.Add(tmp.materielParameter);
-                    temp.Add(tmp.cl);
-                    temp.Add(tmp.materielSize);
-                    temp.Add(tmp.value);
-
-                    // 得到实际库存
-                    InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
-                    temp.Add(MaterielCountdata.value);
-
-                    // 库存预占情况,包含总预占量和本项目预占量
-                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
-                    temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, record.billNumber));
-
-
-                    // 转采购申请单数量
-                    double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber,
-                        PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
-                    temp.Add(appylyCount);
-
-                    // 采购订单数量
-                    SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
-                    listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
-
-                    double orderCount = 0;
-                    for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
-                    {
-                        PurchaseOrderTable recordOrder = new PurchaseOrderTable();
-                        recordOrder = (PurchaseOrderTable)listOrderList[indexOrderList];
-
-                        orderCount += PurchaseOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
-                    }
-                    temp.Add(orderCount);
-
-                    // 采购入库数量
-                    SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
-                    purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
-
-                    double purchaseInOrderValueCount = 0;
-                    for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
-                    {
-                        PurchaseInOrderTable recordOrder = new PurchaseInOrderTable();
-                        recordOrder = (PurchaseInOrderTable)purchaseInOrderList[indexOrderList];
-
-                        purchaseInOrderValueCount += PurchaseInOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
-                    }
-                    temp.Add(purchaseInOrderValueCount);
-
-                    // 生产领料数量
-                    double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber,
-                        PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
-                    temp.Add(materielOutOrderValueCount);
-
-                    projectInfoList.Add(projectInfoList.Count, temp);
+                    getInfoListFromBillNumber(record);
                 }
             }
 
-            initDataGridViewData(projectInfoList, 3);
+            initDataGridViewData(m_projectInfoList, 3);
 
-            m_dataGridRecordCount = projectInfoList.Count;
+            m_dataGridRecordCount = m_projectInfoList.Count;
+        }
+
+        private void getInfoListFromBillNumber(FormProjectMaterielTable record)
+        {
+            SortedDictionary<int, ProjectManagerDetailsTable> listDetails = new SortedDictionary<int, ProjectManagerDetailsTable>();
+            listDetails = ProjectManagerDetails.getInctance().getPurchaseInfoFromBillNumber(record.billNumber);
+
+            SortedDictionary<int, ProjectManagerDetailsTable> changeMaterielList = FormProjectInfoChange.getInctance().getMaterielDetailsFromSrcBillNumber(record.billNumber);
+
+            for (int index2 = 0; index2 < listDetails.Count; index2++)
+            {
+                ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+                tmp = (ProjectManagerDetailsTable)listDetails[index2];
+
+                // 物料数量可能会存在变更，若发生变更，需要使用变更后数量代替原有数量，在一个材料表中，序号是唯一值
+                double actualValue = 0.0;
+                int sign = Convert.ToInt32(tmp.no);
+
+                if (changeMaterielList.ContainsKey(sign))
+                {
+                    if (tmp.materielID != changeMaterielList[sign].materielID)
+                    {
+                        // 相当于变更时，使用使用了另外一种物料替换了现有物料,
+                        tmp.materielID = changeMaterielList[sign].materielID;
+                        tmp.materielName = changeMaterielList[sign].materielName;
+                        tmp.num = changeMaterielList[sign].num;
+                        tmp.materielModel = changeMaterielList[sign].materielModel;
+                        tmp.materielParameter = changeMaterielList[sign].materielParameter;
+                        tmp.cl = changeMaterielList[sign].cl;
+                        tmp.materielSize = changeMaterielList[sign].materielSize;
+                    }
+
+                    actualValue = changeMaterielList[sign].value;
+                    changeMaterielList.Remove(sign);
+                }
+                else
+                {
+                    actualValue = tmp.value;
+                }
+
+                ArrayList temp = new ArrayList();
+
+                temp.Add(record.billNumber);
+                temp.Add(record.projectNum);
+                temp.Add(record.makeNum);
+                temp.Add(record.deviceMode);
+                temp.Add(record.subName);
+
+                temp.Add(tmp.materielID);
+                temp.Add(tmp.materielName);
+                temp.Add(tmp.num);
+                temp.Add(tmp.materielModel);
+                temp.Add(tmp.materielParameter);
+                temp.Add(tmp.cl);
+                temp.Add(tmp.materielSize);
+                temp.Add(actualValue);
+
+                // 得到实际库存
+                InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
+                temp.Add(MaterielCountdata.value);
+
+                // 库存预占情况,包含总预占量和本项目预占量
+                temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
+                temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, record.billNumber));
+                    
+
+                // 转采购申请单数量
+                double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber, 
+                    PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
+                temp.Add(appylyCount);
+
+                // 采购订单数量
+                SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
+                listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
+
+                double orderCount = 0;
+                for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
+                {
+                    PurchaseOrderTable recordOrder = new PurchaseOrderTable();
+                    recordOrder = (PurchaseOrderTable)listOrderList[indexOrderList];
+
+                    orderCount += PurchaseOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                }
+                temp.Add(orderCount);
+
+                // 采购入库数量
+                SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
+                purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
+
+                double purchaseInOrderValueCount = 0;
+                for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
+                {
+                    PurchaseInOrderTable recordOrder = new PurchaseInOrderTable();
+                    recordOrder = (PurchaseInOrderTable)purchaseInOrderList[indexOrderList];
+
+                    purchaseInOrderValueCount += PurchaseInOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                }
+                temp.Add(purchaseInOrderValueCount);
+
+                // 生产领料数量
+                double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber, 
+                    PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
+                temp.Add(materielOutOrderValueCount);
+
+                m_projectInfoList.Add(m_projectInfoList.Count, temp);
+            }
+
+            // 如果changeMaterielList.count大于0 则代表有
+            foreach (KeyValuePair<int, ProjectManagerDetailsTable> index3 in changeMaterielList)
+            {
+                ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
+                tmp = index3.Value;
+
+                ArrayList temp = new ArrayList();
+
+                temp.Add(record.billNumber);
+                temp.Add(record.projectNum);
+                temp.Add(record.makeNum);
+                temp.Add(record.deviceMode);
+                temp.Add(record.subName);
+
+                temp.Add(tmp.materielID);
+                temp.Add(tmp.materielName);
+                temp.Add(tmp.num);
+                temp.Add(tmp.materielModel);
+                temp.Add(tmp.materielParameter);
+                temp.Add(tmp.cl);
+                temp.Add(tmp.materielSize);
+                temp.Add(tmp.value);
+
+                // 得到实际库存
+                InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);
+                temp.Add(MaterielCountdata.value);
+
+                // 库存预占情况,包含总预占量和本项目预占量
+                temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID));
+                temp.Add(MaterielProOccupiedOrderDetails.getInctance().getMaterielProCountInfoFromProject(tmp.materielID, record.billNumber));
+
+
+                // 转采购申请单数量
+                double appylyCount = PurchaseApplyOrderDetails.getInctance().getPurchaseValueFromProjectNumber(record.billNumber,
+                    PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
+                temp.Add(appylyCount);
+
+                // 采购订单数量
+                SortedDictionary<int, PurchaseOrderTable> listOrderList = new SortedDictionary<int, PurchaseOrderTable>();
+                listOrderList = PurchaseOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
+
+                double orderCount = 0;
+                for (int indexOrderList = 0; indexOrderList < listOrderList.Count; indexOrderList++)
+                {
+                    PurchaseOrderTable recordOrder = new PurchaseOrderTable();
+                    recordOrder = (PurchaseOrderTable)listOrderList[indexOrderList];
+
+                    orderCount += PurchaseOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                }
+                temp.Add(orderCount);
+
+                // 采购入库数量
+                SortedDictionary<int, PurchaseInOrderTable> purchaseInOrderList = new SortedDictionary<int, PurchaseInOrderTable>();
+                purchaseInOrderList = PurchaseInOrder.getInctance().getAllPurchaseOrderInfoFromProjectNum(record.billNumber);
+
+                double purchaseInOrderValueCount = 0;
+                for (int indexOrderList = 0; indexOrderList < purchaseInOrderList.Count; indexOrderList++)
+                {
+                    PurchaseInOrderTable recordOrder = new PurchaseInOrderTable();
+                    recordOrder = (PurchaseInOrderTable)purchaseInOrderList[indexOrderList];
+
+                    purchaseInOrderValueCount += PurchaseInOrderDetails.getInctance().getPurchaseValueFromBillNumber(recordOrder.billNumber, tmp.materielID);
+                }
+                temp.Add(purchaseInOrderValueCount);
+
+                // 生产领料数量
+                double materielOutOrderValueCount = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(record.billNumber,
+                    PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
+                temp.Add(materielOutOrderValueCount);
+
+                m_projectInfoList.Add(m_projectInfoList.Count, temp);
+            }
         }
 
         private void billDetail_Click(object sender, EventArgs e)

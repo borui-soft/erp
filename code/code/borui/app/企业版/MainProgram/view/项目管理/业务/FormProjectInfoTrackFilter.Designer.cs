@@ -31,17 +31,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProjectInfoTrackFilter));
             this.buttonEnter = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listViewProList = new System.Windows.Forms.ListView();
             this.textBoxProjectNum = new System.Windows.Forms.TextBox();
             this.labelProjectNum = new System.Windows.Forms.Label();
             this.comboBoxReview = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.listViewProList = new System.Windows.Forms.ListView();
+            this.textBoxBillNumber = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonEnter
             // 
-            this.buttonEnter.Location = new System.Drawing.Point(371, 125);
+            this.buttonEnter.Location = new System.Drawing.Point(366, 153);
             this.buttonEnter.Name = "buttonEnter";
             this.buttonEnter.Size = new System.Drawing.Size(75, 23);
             this.buttonEnter.TabIndex = 0;
@@ -51,6 +53,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBoxBillNumber);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.listViewProList);
             this.groupBox1.Controls.Add(this.textBoxProjectNum);
             this.groupBox1.Controls.Add(this.labelProjectNum);
@@ -58,10 +62,22 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(433, 94);
+            this.groupBox1.Size = new System.Drawing.Size(433, 134);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "过滤条件";
+            // 
+            // listViewProList
+            // 
+            this.listViewProList.Location = new System.Drawing.Point(291, 21);
+            this.listViewProList.Name = "listViewProList";
+            this.listViewProList.Size = new System.Drawing.Size(137, 85);
+            this.listViewProList.TabIndex = 7;
+            this.listViewProList.UseCompatibleStateImageBehavior = false;
+            this.listViewProList.Visible = false;
+            this.listViewProList.Leave += new System.EventHandler(this.listViewProList_Leave);
+            this.listViewProList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewProList_MouseClick);
+            this.listViewProList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewProList_MouseDoubleClick);
             // 
             // textBoxProjectNum
             // 
@@ -84,7 +100,7 @@
             // 
             this.comboBoxReview.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxReview.FormattingEnabled = true;
-            this.comboBoxReview.Location = new System.Drawing.Point(79, 59);
+            this.comboBoxReview.Location = new System.Drawing.Point(79, 86);
             this.comboBoxReview.Name = "comboBoxReview";
             this.comboBoxReview.Size = new System.Drawing.Size(108, 20);
             this.comboBoxReview.TabIndex = 5;
@@ -92,30 +108,35 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 62);
+            this.label3.Location = new System.Drawing.Point(7, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "审核标志";
             // 
-            // listViewProList
+            // textBoxBillNumber
             // 
-            this.listViewProList.Location = new System.Drawing.Point(291, 21);
-            this.listViewProList.Name = "listViewProList";
-            this.listViewProList.Size = new System.Drawing.Size(137, 85);
-            this.listViewProList.TabIndex = 7;
-            this.listViewProList.UseCompatibleStateImageBehavior = false;
-            this.listViewProList.Visible = false;
-            this.listViewProList.Leave += new System.EventHandler(this.listViewProList_Leave);
-            this.listViewProList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewProList_MouseClick);
-            this.listViewProList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewProList_MouseDoubleClick);
+            this.textBoxBillNumber.Location = new System.Drawing.Point(78, 53);
+            this.textBoxBillNumber.Name = "textBoxBillNumber";
+            this.textBoxBillNumber.Size = new System.Drawing.Size(216, 21);
+            this.textBoxBillNumber.TabIndex = 8;
+            this.textBoxBillNumber.TextChanged += new System.EventHandler(this.textBoxBillNumber_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "材料表编号";
             // 
             // FormProjectInfoTrackFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(455, 161);
+            this.ClientSize = new System.Drawing.Size(455, 188);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonEnter);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -140,5 +161,7 @@
         private System.Windows.Forms.Label labelProjectNum;
         private System.Windows.Forms.TextBox textBoxProjectNum;
         private System.Windows.Forms.ListView listViewProList;
+        private System.Windows.Forms.TextBox textBoxBillNumber;
+        private System.Windows.Forms.Label label1;
     }
 }

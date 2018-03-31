@@ -16,6 +16,7 @@ namespace MainProgram
     {
         private FormProjectInfoTrackFilterValue m_formStorageSequenceFilterValue = new FormProjectInfoTrackFilterValue();
         private bool m_isStorageOut = false;
+        private bool m_isAciveProjectNum = false;
 
         public FormProjectInfoTrackFilter(bool isStorageOut)
         {
@@ -55,6 +56,8 @@ namespace MainProgram
                 m_formStorageSequenceFilterValue.allReview = "0";
             }
 
+            m_formStorageSequenceFilterValue.billNumber = this.textBoxBillNumber.Text;
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -89,12 +92,22 @@ namespace MainProgram
 
                 ListViewExtend.insertDataToListView(this.listViewProList, record);
             }
+
+            m_isAciveProjectNum = true;
         }
 
         private void listViewProList_MouseClick(object sender, MouseEventArgs e)
         {
-            string projectNum = this.listViewProList.SelectedItems[0].Text.ToString();
-            this.textBoxProjectNum.Text = projectNum;
+            string value = this.listViewProList.SelectedItems[0].Text.ToString();
+
+            if (m_isAciveProjectNum)
+            {
+                this.textBoxProjectNum.Text = value;
+            }
+            else
+            {
+                this.textBoxBillNumber.Text = value;
+            }
 
             this.listViewProList.Hide();
         }
@@ -108,11 +121,36 @@ namespace MainProgram
         {
             this.listViewProList.Hide();
         }
+
+        private void textBoxBillNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (this.textBoxBillNumber.Text.Length <= 0)
+            {
+                this.listViewProList.Visible = false;
+                return;
+            }
+
+            this.listViewProList.Visible = true;
+            this.listViewProList.Items.Clear();
+
+            ArrayList list = FormProject.getInctance().getbillNumberList(this.textBoxProjectNum.Text, this.textBoxBillNumber.Text);
+            
+            for (int i = 0; i < list.Count; i++)
+            {
+                ArrayList record = new ArrayList();
+                record.Add(list[i].ToString());
+
+                ListViewExtend.insertDataToListView(this.listViewProList, record);
+            }
+
+            m_isAciveProjectNum = false;
+        }
     }
 
     public class FormProjectInfoTrackFilterValue
     {
         public string projectNum { get; set; }
+        public string billNumber { get; set; }
         public string allReview { get; set; }
     }
 }

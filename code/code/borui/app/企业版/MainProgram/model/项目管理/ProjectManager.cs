@@ -456,7 +456,7 @@ namespace MainProgram.model
         {
             ArrayList list = new ArrayList();
 
-            string sql = "SELECT DISTINCT(PROJECT_NUM) FROM [PROJECT_MATERIE_MANAGER] where PROJECT_NUM LIKE \'";
+            string sql = "SELECT DISTINCT(PROJECT_NUM) FROM [PROJECT_MATERIE_MANAGER] where PROJECT_NUM LIKE \'%";
             sql += projectNo;
             sql += "%'";
 
@@ -465,6 +465,26 @@ namespace MainProgram.model
                 foreach (DataRow row in dataTable.Rows)
                 {
                     list.Add(DbDataConvert.ToString(row["PROJECT_NUM"]));
+                }
+            }
+
+            return list;
+        }
+
+        public ArrayList getbillNumberList(string projectNo, string billNumber)
+        {
+            ArrayList list = new ArrayList();
+
+            string sql = "SELECT BILL_NUMBER FROM [PROJECT_MATERIE_MANAGER] where PROJECT_NUM = '" + projectNo;
+            sql += "' AND BILL_NUMBER LIKE \'%";
+            sql += billNumber;
+            sql += "%'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    list.Add(DbDataConvert.ToString(row["BILL_NUMBER"]));
                 }
             }
 

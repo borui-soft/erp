@@ -199,11 +199,29 @@ namespace MainProgram
                 ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
                 tmp = (ProjectManagerDetailsTable)listDetails[index];
 
-                // 单据需要的数量
-                double requestValue = tmp.value;
-
+                // 单据所需物料
+                double requestValue = 0.0;
                 // 已转数量
                 double proValue = 0.0;
+
+                // 物料数量可能会存在变更，若发生变更，需要使用变更后数量代替原有数量，在一个材料表中，序号是唯一值
+                int sign = Convert.ToInt32(tmp.no);
+                if (changeMaterielList.ContainsKey(sign))
+                {
+                    if (tmp.materielID != changeMaterielList[sign].materielID)
+                    {
+                        // 相当于变更时，使用使用了另外一种物料替换了现有物料,
+                        tmp.materielID = changeMaterielList[sign].materielID;
+                    }
+
+                    requestValue = changeMaterielList[sign].value;
+                    changeMaterielList.Remove(sign);
+                }
+                else
+                {
+                    requestValue = tmp.value;
+                }
+
 
                 if (m_dataType == 1)
                 {
@@ -218,14 +236,6 @@ namespace MainProgram
                 {
                     proValue = MaterielOutOrderDetails.getInctance().getMaterielCountInfoFromProject(tmp.billNumber,
                         PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no));
-                }
-
-                // 如果此物料在变更单中出现过，则使用变更但中的数量
-                int sign = PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no);
-                if (changeMaterielList.ContainsKey(sign))
-                {
-                    requestValue = changeMaterielList[sign].value;
-                    changeMaterielList.Remove(sign);
                 }
 
                 if (requestValue - proValue > 0)

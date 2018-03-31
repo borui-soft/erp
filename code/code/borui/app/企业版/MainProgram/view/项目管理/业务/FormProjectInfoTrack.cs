@@ -10,6 +10,7 @@ using System.Collections;
 using MainProgram.model;
 using MainProgram.bus;
 using Excel = Microsoft.Office.Interop.Excel;
+using TIV.Core.TivLogger;
 
 namespace MainProgram
 {
@@ -141,6 +142,42 @@ namespace MainProgram
                     ProjectManagerDetailsTable tmp = new ProjectManagerDetailsTable();
                     tmp = (ProjectManagerDetailsTable)listDetails[index2];
 
+                    // 物料数量可能会存在变更，若发生变更，需要使用变更后数量代替原有数量，在一个材料表中，序号是唯一值
+                    double actualValue = 0.0;
+                    int sign = Convert.ToInt32(tmp.no);
+                    TivLog.Logger.Info("tmp.materielID = " + tmp.materielID + ", tmp.no = " + tmp.no);
+
+                    string nos = "";
+                    foreach (KeyValuePair<int, ProjectManagerDetailsTable> index8888 in changeMaterielList)
+                    {
+                        nos += index8888.Key;
+                        nos += ",";
+                    }
+
+                    TivLog.Logger.Info("nos = " + nos);
+                    if (changeMaterielList.ContainsKey(sign))
+                    {
+                        TivLog.Logger.Info("1111");
+                        if (tmp.materielID != changeMaterielList[sign].materielID)
+                        {
+                            // 相当于变更时，使用使用了另外一种物料替换了现有物料,
+                            tmp.materielID = changeMaterielList[sign].materielID;
+                            tmp.materielName = changeMaterielList[sign].materielName;
+                            tmp.num = changeMaterielList[sign].num;
+                            tmp.materielModel = changeMaterielList[sign].materielModel;
+                            tmp.materielParameter = changeMaterielList[sign].materielParameter;
+                            tmp.cl = changeMaterielList[sign].cl;
+                            tmp.materielSize = changeMaterielList[sign].materielSize;
+                        }
+
+                        actualValue = changeMaterielList[sign].value;
+                        changeMaterielList.Remove(sign);
+                    }
+                    else
+                    {
+                        actualValue = tmp.value;
+                    }
+
                     ArrayList temp = new ArrayList();
 
                     temp.Add(record.billNumber);
@@ -156,18 +193,7 @@ namespace MainProgram
                     temp.Add(tmp.materielParameter);
                     temp.Add(tmp.cl);
                     temp.Add(tmp.materielSize);
-
-                    // 如果在变更数据表中找到了某条变更过的物料信息，则显示变更后的数量
-                    int sign = PublicFuction.getXXMateaielOrderSign(tmp.rowNumber, tmp.sequence, tmp.no);
-                    if (changeMaterielList.ContainsKey(sign))
-                    {
-                        temp.Add(changeMaterielList[sign].value);
-                        changeMaterielList.Remove(sign);
-                    }
-                    else
-                    {
-                        temp.Add(tmp.value);
-                    }
+                    temp.Add(actualValue);
 
                     // 得到实际库存
                     InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(tmp.materielID);

@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.6.25";
+            this.label3.Text = "当前软件版本：V2.6.26";
 
             // 
             // richTextBox1
@@ -82,9 +82,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、完善预占库存自动消除时的日志打印\r\n";
-            this.richTextBox1.Text += "2、解决xx材料表录入界面，点击资料按钮无法打开资料窗口的问题\r\n";
-            this.richTextBox1.Text += "3、采购申请单导出时，支持物料ID信息的导出\r\n";
+            this.richTextBox1.Text = "1、修改xx材料表跟踪情况页面，无法显示变更后数据的问题\r\n";
+            //this.richTextBox1.Text += "2、解决xx材料表录入界面，点击资料按钮无法打开资料窗口的问题\r\n";
+            //this.richTextBox1.Text += "3、采购申请单导出时，支持物料ID信息的导出\r\n";
 
             // Fo
             // 

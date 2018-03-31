@@ -224,7 +224,7 @@ namespace MainProgram.model
 
                 foreach (KeyValuePair<int, ProjectManagerDetailsTable> index2 in tmp)
                 {
-                    int sign = PublicFuction.getXXMateaielOrderSign(index2.Value.rowNumber, index2.Value.sequence, index2.Value.no);
+                    int sign = Convert.ToInt32(index2.Value.no);
                     materielDetails[sign] = index2.Value;
                 }
             }

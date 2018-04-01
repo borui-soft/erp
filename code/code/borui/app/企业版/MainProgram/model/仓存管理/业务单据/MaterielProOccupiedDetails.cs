@@ -283,30 +283,35 @@ namespace MainProgram.model
         public double getMaterielProCountInfoFromProject(int materielID, string projectNum = "")
         {
             double sum = 0.0;
-            m_materielProlist.Clear();
 
-            SortedDictionary<int, MaterielProOccupiedOrderTable> list =
-                MaterielProOccupiedOrder.getInctance().getAllMaterielProOccupiedOrderInfo();
-
-            for (int index = 0; index < list.Count; index++)
+            if (projectNum.Length == 0)
             {
-                MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
-                record = (MaterielProOccupiedOrderTable)list[index];
-
-                if (projectNum.Length == 0 ||
-                    (projectNum.Length > 0 && record.srcOrderNum == projectNum))
+                foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index2 in m_tableDataList)
                 {
-                    SortedDictionary<int, MaterielProOccupiedOrderDetailsTable> listDetails =
-                        MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedInfoFromBillNumber(record.billNumber);
-
-                    for (int index2 = 0; index2 < listDetails.Count; index2++)
+                    if (index2.Value.materielID == materielID && index2.Value.isCancel == "0")
                     {
-                        MaterielProOccupiedOrderDetailsTable recordDeatils = new MaterielProOccupiedOrderDetailsTable();
-                        recordDeatils = (MaterielProOccupiedOrderDetailsTable)listDetails[index2];
+                        sum += index2.Value.value;
+                    }
+                }
+            }
+            else
+            {
+                SortedDictionary<int, MaterielProOccupiedOrderTable> list =
+                    MaterielProOccupiedOrder.getInctance().getAllMaterielProOccupiedOrderInfo();
 
-                        if (recordDeatils.materielID == materielID)
+                for (int index = 0; index < list.Count; index++)
+                {
+                    MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
+                    record = (MaterielProOccupiedOrderTable)list[index];
+
+                    if (record.srcOrderNum == projectNum)
+                    {
+                        foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index3 in m_tableDataList)
                         {
-                            sum += recordDeatils.value;
+                            if (index3.Value.billNumber == record.billNumber && index3.Value.materielID == materielID && index3.Value.isCancel == "0")
+                            {
+                                sum += index3.Value.value;
+                            }
                         }
                     }
                 }

@@ -31,6 +31,26 @@ namespace MainProgram.model
             return m_instance;
         }
 
+        public bool checkBillIsReview(string billNumber)
+        {
+            bool isRet = false;
+
+            string sql = "SELECT [IS_REVIEW] FROM PURCHASE_APPLY_ORDER WHERE BILL_NUMBER = '" + billNumber + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                if (dataTable.Rows.Count > 0)
+                {
+                    if (DbDataConvert.ToString(dataTable.Rows[0][0]) == "1")
+                    {
+                        isRet = true;
+                    }
+                }
+            }
+
+            return isRet;
+        }
+
         public void insert(PurchaseApplyOrderTable record, bool isDisplayMessageBox = true)
         {
             string insert = "INSERT INTO [dbo].[PURCHASE_APPLY_ORDER]([APPLY_ID],[TRADING_DATE],[BILL_NUMBER],[PROJECT_NUM],[PAYMENT_DATE],";

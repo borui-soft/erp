@@ -83,6 +83,26 @@ namespace MainProgram.model
             writeOperatorLog(101, OperatorLogType.Add, record.billNumber);
         }
 
+        public bool checkBillIsReview(string billNumber)
+        {
+            bool isRet = false;
+
+            string sql = "SELECT [IS_REVIEW] FROM PURCHASE_ORDER WHERE BILL_NUMBER = '" + billNumber + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                if (dataTable.Rows.Count > 0)
+                {
+                    if (DbDataConvert.ToString(dataTable.Rows[0][0]) == "1")
+                    {
+                        isRet = true;
+                    }
+                }
+            }
+
+            return isRet;
+        }
+
         public void delete(string biilNumber)
         {
             string delete = "DELETE FROM PURCHASE_ORDER WHERE BILL_NUMBER = '" + biilNumber + "'"; 

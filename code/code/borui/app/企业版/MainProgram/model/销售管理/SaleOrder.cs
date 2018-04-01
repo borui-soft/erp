@@ -36,6 +36,26 @@ namespace MainProgram.model
             load();
         }
 
+        public bool checkBillIsReview(string billNumber)
+        {
+            bool isRet = false;
+
+            string sql = "SELECT [IS_REVIEW] FROM SALE_ORDER WHERE BILL_NUMBER = '" + billNumber + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                if (dataTable.Rows.Count > 0)
+                {
+                    if (DbDataConvert.ToString(dataTable.Rows[0][0]) == "1")
+                    {
+                        isRet = true;
+                    }
+                }
+            }
+
+            return isRet;
+        }
+
         public void insert(SaleOrderTable record, bool isDisplayMessageBox = true)
         {
             string insert = "INSERT INTO [dbo].[SALE_ORDER]([CUSTOMER_ID],[TRADING_DATE],[BILL_NUMBER],[SALE_TYPE],";

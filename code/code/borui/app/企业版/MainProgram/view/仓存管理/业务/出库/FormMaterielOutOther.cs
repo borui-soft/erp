@@ -23,7 +23,8 @@ namespace MainProgram
         private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
-        private bool m_isRedBill = false;
+        private bool m_isRedBill = false; 
+        private bool m_isSaveSuccess = false;
 
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
@@ -254,6 +255,15 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccess = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                MaterielOutOtherOrder.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
              this.ActiveControl = this.toolStrip1;
 
             // 得到详细的销售信息
@@ -268,6 +278,8 @@ namespace MainProgram
                     MaterielOutOtherOrder.getInctance().insert(record, false);
                     MaterielOutOtherOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
+
+                    m_isSaveSuccess = true;
 
                     if (m_billNumber.Length == 0)
                     {
@@ -398,7 +410,11 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                MaterielOutOtherOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+
+                if (m_isSaveSuccess)
+                {
+                    MaterielOutOtherOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+                }
             }
             catch (Exception exp)
             {

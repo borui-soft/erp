@@ -26,6 +26,7 @@ namespace MainProgram
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
         private bool m_isRedBill = false;
+        private bool m_isSaveSuccess = false;
 
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
@@ -523,6 +524,15 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccess = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                PurchaseInOrder.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
             this.ActiveControl = this.toolStrip1;
 
             // 得到详细的采购信息
@@ -538,6 +548,7 @@ namespace MainProgram
                     PurchaseInOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
+                    m_isSaveSuccess = true;
                     if (m_billNumber.Length == 0)
                     {
                         MessageBoxExtend.messageOK("数据保存成功");
@@ -708,7 +719,11 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                PurchaseInOrder.getInctance().billReview(m_billNumber);
+
+                if (m_isSaveSuccess)
+                {
+                    PurchaseInOrder.getInctance().billReview(m_billNumber);
+                }
             }
             catch (Exception exp)
             {

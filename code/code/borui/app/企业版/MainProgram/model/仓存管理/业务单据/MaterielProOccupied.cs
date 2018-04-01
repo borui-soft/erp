@@ -281,17 +281,16 @@ namespace MainProgram.model
         {
             bool isRet = false;
 
-            foreach (KeyValuePair<int, MaterielProOccupiedOrderTable> index in m_tableDataList)
-            {
-                MaterielProOccupiedOrderTable record = new MaterielProOccupiedOrderTable();
+            string sql = "SELECT [IS_REVIEW] FROM WAREHOUSE_MANAGEMENT_PRO_OCCUPIED WHERE BILL_NUMBER = '" + billNumber + "'";
 
-                if (index.Value.billNumber == billNumber)
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                if (dataTable.Rows.Count > 0)
                 {
-                    if (index.Value.isReview == "1")
+                    if (DbDataConvert.ToString(dataTable.Rows[0][0]) == "1")
                     {
                         isRet = true;
                     }
-                    break;
                 }
             }
 

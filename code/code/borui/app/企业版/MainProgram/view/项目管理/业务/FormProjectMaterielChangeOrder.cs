@@ -295,6 +295,15 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccessFul = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                FormProjectInfoChange.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
             this.ActiveControl = this.toolStrip1;
 
             // 得到详细的采购信息

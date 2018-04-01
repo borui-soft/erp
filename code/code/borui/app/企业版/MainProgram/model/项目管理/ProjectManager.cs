@@ -127,6 +127,26 @@ namespace MainProgram.model
             }
         }
 
+        public bool checkBillIsReview(string billNumber)
+        {
+            bool isRet = false;
+
+            string sql = "SELECT [IS_REVIEW] FROM PROJECT_MATERIE_MANAGER WHERE BILL_NUMBER = '" + billNumber + "'";
+
+            using (DataTable dataTable = DatabaseAccessFactoryInstance.Instance.QueryDataTable(FormMain.DB_NAME, sql))
+            {
+                if (dataTable.Rows.Count > 0)
+                {
+                    if (DbDataConvert.ToString(dataTable.Rows[0][0]) == "1")
+                    {
+                        isRet = true;
+                    }
+                }
+            }
+
+            return isRet;
+        }
+
         public void billReview(string billNumber)
         {
             string update = "UPDATE [dbo].[PROJECT_MATERIE_MANAGER] SET ";

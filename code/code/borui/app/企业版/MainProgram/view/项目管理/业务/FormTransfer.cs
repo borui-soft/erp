@@ -205,8 +205,13 @@ namespace MainProgram
                 double proValue = 0.0;
 
                 // 物料数量可能会存在变更，若发生变更，需要使用变更后数量代替原有数量，在一个材料表中，序号是唯一值
-                int sign = Convert.ToInt32(tmp.no);
-                if (changeMaterielList.ContainsKey(sign))
+                int sign = 0;
+                if (tmp.no.Length > 0)
+                {
+                    sign = Convert.ToInt32(tmp.no);
+                }
+
+                if (changeMaterielList.Count > 0 && changeMaterielList.ContainsKey(sign))
                 {
                     if (tmp.materielID != changeMaterielList[sign].materielID)
                     {

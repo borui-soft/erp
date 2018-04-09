@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.7.0";
+            this.label3.Text = "当前软件版本：V2.7.1";
 
             // 
             // richTextBox1
@@ -82,10 +82,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、材料跟踪表跟踪情况页面，解决部分变更后数据无法显示的问题\r\n";
-            this.richTextBox1.Text += "2、项目跟踪情况数据过滤页面，支持单据号的输出功能\r\n";
-            this.richTextBox1.Text += "3、所有单据保存或审核前添加重新查看单据是否已审核功能，防止单据重复审核\r\n";
-            this.richTextBox1.Text += "4、优化xx材料标跟踪情况的页面数据展示速率\r\n";
+            this.richTextBox1.Text = "1、解决材料跟踪情况表备用项目无法显示的问题\r\n";
 
             // Fo
             // 

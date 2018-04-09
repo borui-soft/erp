@@ -244,8 +244,12 @@ namespace MainProgram.model
 
                 foreach (KeyValuePair<int, ProjectManagerDetailsTable> index2 in tmp)
                 {
-                    int sign = Convert.ToInt32(index2.Value.no);
-                    materielDetails[sign] = index2.Value;
+                    int sign = 0;
+                    if (index2.Value.no.Length > 0)
+                    {
+                        sign = Convert.ToInt32(index2.Value.no);
+                        materielDetails[sign] = index2.Value;
+                    }
                 }
             }
 

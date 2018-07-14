@@ -33,10 +33,17 @@ namespace MainProgram.bus
             double moneyCount = oldMoney + newMoney;
             double materielSum = oldMaterielCount + currentInStorageCount;
 
-            newPrice = moneyCount / materielSum;
+            if (materielSum != 0)
+            {
+                newPrice = moneyCount / materielSum;
 
-            // 保留2位小数儿
-            newPrice = (double)(Math.Round(newPrice * 100)) / 100;
+                // 保留2位小数儿
+                newPrice = (double)(Math.Round(newPrice * 100)) / 100;
+            }
+            else 
+            {
+                newPrice = currnetInStoragePrice;
+            }
 
             return newPrice;
         }

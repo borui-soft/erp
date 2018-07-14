@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.7.5";
+            this.label3.Text = "当前软件版本：V2.7.6";
 
             // 
             // richTextBox1
@@ -82,9 +82,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、采购申请单，总材料变更单导出时模板中增加了参数一栏，并且套打的时候参数可自动导出\r\n";
-            this.richTextBox1.Text = "2、采购申请单，材料一栏的数据来源改成物料基本信息的材质信息\r\n";
-            this.richTextBox1.Text = "3、采购申请单，物料使用日期填写为采购申请单表头的期望交货日期";
+            this.richTextBox1.Text = "1、针对入库业务，修改calculateMaterielNewPrice函数中除数为0是引起的单价计算失败的问题";
 
             // Fo
             // 

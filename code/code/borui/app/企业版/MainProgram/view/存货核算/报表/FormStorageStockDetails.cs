@@ -161,8 +161,8 @@ namespace MainProgram
 
             if (firstRecord != null)
             {
-                firstRow.Add(firstRecord.storageValue);
-
+                firstRow.Add((double)(Math.Round(firstRecord.storageValue * 100)) / 100);
+                
                 if (m_isDisplayJG)
                 {
                     firstRow.Add(firstRecord.storagePrice);
@@ -282,7 +282,7 @@ namespace MainProgram
                     temp.Add("");
                     temp.Add("");
 
-                    temp.Add(record.storageValue);
+                    temp.Add((double)(Math.Round(record.storageValue * 100)) / 100);
 
                     if (m_isDisplayJG)
                     {
@@ -393,8 +393,7 @@ namespace MainProgram
             lastRow.Add("");
             lastRow.Add("");
 
-
-            lastRow.Add(stockSumValue);
+            lastRow.Add((double)(Math.Round(stockSumValue * 100)) / 100);
 
             if (m_isDisplayJG)
             {

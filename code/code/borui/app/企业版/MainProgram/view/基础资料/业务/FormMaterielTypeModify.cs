@@ -17,8 +17,6 @@ namespace MainProgram
 
     public partial class FormMaterielTypeModify : Form
     {
-        private int m_materielRecordCount = 0;
-
         private bool m_isSave = false;
         private int m_materielGroupPkey = 1;
         private string m_materielGroupName = "";

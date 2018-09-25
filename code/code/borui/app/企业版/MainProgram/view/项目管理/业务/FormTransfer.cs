@@ -18,7 +18,6 @@ namespace MainProgram
     public partial class FormTransfer : Form
     {
         private string m_billNumber = "";
-        private readonly int DateGridVeiwListDataListRowCount = 100;
         private int m_rowIndex = -1, m_columnIndex = -1;
 
         private string m_projectNum = "";

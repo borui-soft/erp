@@ -73,7 +73,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V2.7.8";
+            this.label3.Text = "当前软件版本：V3.0.0";
 
             // 
             // richTextBox1
@@ -82,7 +82,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、针对存货核算模块，出入库明细页面，将物料进出库数量展示形式，由科学计数法形式修改为保留两位小数的方式";
+            this.richTextBox1.Text = "1、系统架构调整, 将mode、bus、view层代码进行了剥离，是系统扩展更方便";
 
             // Fo
             // 

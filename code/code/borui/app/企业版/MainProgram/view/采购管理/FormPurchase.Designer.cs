@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panelPurchaseApply = new System.Windows.Forms.Panel();
+            this.labelPurchaseApply = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelPurchaseIn = new System.Windows.Forms.Panel();
@@ -36,6 +39,8 @@
             this.labelPurchaseInvoice = new System.Windows.Forms.Label();
             this.panelPurchaseOrder = new System.Windows.Forms.Panel();
             this.labelPurchaseOrder = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panelPurchaseApply.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelPurchaseIn.SuspendLayout();
@@ -43,11 +48,49 @@
             this.panelPurchaseOrder.SuspendLayout();
             this.SuspendLayout();
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackgroundImage = global::MainProgram.Properties.Resources.下箭头_;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox3.Location = new System.Drawing.Point(117, 148);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(23, 121);
+            this.pictureBox3.TabIndex = 23;
+            this.pictureBox3.TabStop = false;
+            // 
+            // panelPurchaseApply
+            // 
+            this.panelPurchaseApply.BackgroundImage = global::MainProgram.Properties.Resources.采购管理_采购申请;
+            this.panelPurchaseApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelPurchaseApply.Controls.Add(this.labelPurchaseApply);
+            this.panelPurchaseApply.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelPurchaseApply.Location = new System.Drawing.Point(80, 50);
+            this.panelPurchaseApply.Name = "panelPurchaseApply";
+            this.panelPurchaseApply.Size = new System.Drawing.Size(103, 92);
+            this.panelPurchaseApply.TabIndex = 19;
+            this.panelPurchaseApply.Click += new System.EventHandler(this.panelPurchaseApply_Click);
+            this.panelPurchaseApply.MouseEnter += new System.EventHandler(this.panelPurchaseApply_MouseEnter);
+            this.panelPurchaseApply.MouseLeave += new System.EventHandler(this.panelPurchaseApply_MouseEnter);
+            // 
+            // labelPurchaseApply
+            // 
+            this.labelPurchaseApply.AutoSize = true;
+            this.labelPurchaseApply.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelPurchaseApply.ForeColor = System.Drawing.Color.Black;
+            this.labelPurchaseApply.Location = new System.Drawing.Point(19, 74);
+            this.labelPurchaseApply.Name = "labelPurchaseApply";
+            this.labelPurchaseApply.Size = new System.Drawing.Size(63, 14);
+            this.labelPurchaseApply.TabIndex = 0;
+            this.labelPurchaseApply.Text = "采购申请";
+            this.labelPurchaseApply.Click += new System.EventHandler(this.panelPurchaseApply_Click);
+            this.labelPurchaseApply.MouseEnter += new System.EventHandler(this.panelPurchaseApply_MouseEnter);
+            this.labelPurchaseApply.MouseLeave += new System.EventHandler(this.panelPurchaseApply_MouseEnter);
+            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::MainProgram.Properties.Resources.右箭头;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(457, 256);
+            this.pictureBox2.Location = new System.Drawing.Point(456, 315);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(123, 23);
             this.pictureBox2.TabIndex = 22;
@@ -57,7 +100,7 @@
             // 
             this.pictureBox1.BackgroundImage = global::MainProgram.Properties.Resources.右箭头;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(199, 256);
+            this.pictureBox1.Location = new System.Drawing.Point(198, 315);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(123, 23);
             this.pictureBox1.TabIndex = 21;
@@ -69,7 +112,7 @@
             this.panelPurchaseIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelPurchaseIn.Controls.Add(this.labelPurchaseIn);
             this.panelPurchaseIn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelPurchaseIn.Location = new System.Drawing.Point(337, 215);
+            this.panelPurchaseIn.Location = new System.Drawing.Point(336, 274);
             this.panelPurchaseIn.Name = "panelPurchaseIn";
             this.panelPurchaseIn.Size = new System.Drawing.Size(103, 92);
             this.panelPurchaseIn.TabIndex = 19;
@@ -97,7 +140,7 @@
             this.panelPurchaseInvoice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelPurchaseInvoice.Controls.Add(this.labelPurchaseInvoice);
             this.panelPurchaseInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelPurchaseInvoice.Location = new System.Drawing.Point(601, 215);
+            this.panelPurchaseInvoice.Location = new System.Drawing.Point(600, 274);
             this.panelPurchaseInvoice.Name = "panelPurchaseInvoice";
             this.panelPurchaseInvoice.Size = new System.Drawing.Size(103, 92);
             this.panelPurchaseInvoice.TabIndex = 20;
@@ -125,7 +168,7 @@
             this.panelPurchaseOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelPurchaseOrder.Controls.Add(this.labelPurchaseOrder);
             this.panelPurchaseOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelPurchaseOrder.Location = new System.Drawing.Point(81, 215);
+            this.panelPurchaseOrder.Location = new System.Drawing.Point(80, 274);
             this.panelPurchaseOrder.Name = "panelPurchaseOrder";
             this.panelPurchaseOrder.Size = new System.Drawing.Size(103, 92);
             this.panelPurchaseOrder.TabIndex = 18;
@@ -153,6 +196,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.panelPurchaseApply);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelPurchaseIn);
@@ -161,6 +206,9 @@
             this.Name = "FormPurchase";
             this.Text = "采购管理";
             this.Load += new System.EventHandler(this.FormPurchase_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panelPurchaseApply.ResumeLayout(false);
+            this.panelPurchaseApply.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelPurchaseIn.ResumeLayout(false);
@@ -183,5 +231,8 @@
         private System.Windows.Forms.Label labelPurchaseInvoice;
         private System.Windows.Forms.Panel panelPurchaseInvoice;
         private System.Windows.Forms.Panel panelPurchaseOrder;
+        private System.Windows.Forms.Panel panelPurchaseApply;
+        private System.Windows.Forms.Label labelPurchaseApply;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }

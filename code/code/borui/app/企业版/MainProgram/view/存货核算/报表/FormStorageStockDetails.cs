@@ -23,6 +23,9 @@ namespace MainProgram
         private SortedDictionary<int, MaterielTable> m_materielList = new SortedDictionary<int, MaterielTable>();
         private PurchaseInOrderTable m_purchaseInOrder = new PurchaseInOrderTable();
 
+        private bool m_isDisplayJG = false;
+        private int m_moduleID = 403;
+
         public FormStorageStockDetails()
         {
             InitializeComponent();
@@ -41,6 +44,19 @@ namespace MainProgram
             {
                 m_currentRecordIndex = 0;
             }
+
+            // 判断下是否有查看单价的权限
+            SortedDictionary<int, ActionTable> list = MainProgram.model.Action.getInctance().getActionInfoFromModuleID(m_moduleID);
+
+            foreach (KeyValuePair<int, ActionTable> index in list)
+            {
+                if (index.Value.uiActionName == "dispaly")
+                {
+                    m_isDisplayJG = AccessAuthorization.getInctance().isAccessAuthorization(index.Value.pkey,
+                                 Convert.ToString(DbPublic.getInctance().getCurrentLoginUserID()));
+                }
+            }
+
         }
 
         private void FormPurchaseInfoCount_Load(object sender, EventArgs e)
@@ -51,19 +67,30 @@ namespace MainProgram
             m_dateGridViewExtend.addDataGridViewColumn("事务类型", 80);
 
             m_dateGridViewExtend.addDataGridViewColumn("数量\n(入库)", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("单价\n(入库)", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("金额\n(入库)", 65);
+            if (m_isDisplayJG)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("单价\n(入库)", 65);
+                m_dateGridViewExtend.addDataGridViewColumn("金额\n(入库)", 65);
+            }
             m_dateGridViewExtend.addDataGridViewColumn("供应商\n(入库)", 100);
 
+
             m_dateGridViewExtend.addDataGridViewColumn("数量\n(出库)", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("单价\n(出库)", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("金额\n(出库)", 65);
+            if (m_isDisplayJG)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("单价\n(出库)", 65);
+                m_dateGridViewExtend.addDataGridViewColumn("金额\n(出库)", 65);
+            }
             m_dateGridViewExtend.addDataGridViewColumn("项目编号\n(出库)", 65);
             m_dateGridViewExtend.addDataGridViewColumn("生成编号\n(出库)", 65);
 
+
             m_dateGridViewExtend.addDataGridViewColumn("结存数量", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("结存单价", 65);
-            m_dateGridViewExtend.addDataGridViewColumn("结存金额", 65);
+            if (m_isDisplayJG)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("结存单价", 65);
+                m_dateGridViewExtend.addDataGridViewColumn("结存金额", 65);
+            }
 
             m_dateGridViewExtend.initDataGridViewColumn(this.dataGridViewList);
 
@@ -114,26 +141,43 @@ namespace MainProgram
             firstRow.Add("");
             firstRow.Add("期初结存");
             firstRow.Add("");
+
+            if (m_isDisplayJG)
+            {
+                firstRow.Add("");
+                firstRow.Add("");
+            }
             firstRow.Add("");
             firstRow.Add("");
-            firstRow.Add("");
-            firstRow.Add("");
-            firstRow.Add("");
-            firstRow.Add("");
+
+            if (m_isDisplayJG)
+            {
+                firstRow.Add("");
+                firstRow.Add("");
+            }
+
             firstRow.Add("");
             firstRow.Add("");
 
             if (firstRecord != null)
             {
-                firstRow.Add(firstRecord.storageValue);
-                firstRow.Add(firstRecord.storagePrice);
-                firstRow.Add((double)(Math.Round(firstRecord.storageMoney * 100)) / 100);
+                firstRow.Add((double)(Math.Round(firstRecord.storageValue * 100)) / 100);
+                
+                if (m_isDisplayJG)
+                {
+                    firstRow.Add(firstRecord.storagePrice);
+                    firstRow.Add((double)(Math.Round(firstRecord.storageMoney * 100)) / 100);
+                }
             }
             else
             {
                 firstRow.Add("0");
-                firstRow.Add("0");
-                firstRow.Add("0");
+
+                if (m_isDisplayJG)
+                {
+                    firstRow.Add("0");
+                    firstRow.Add("0");
+                }
             }
 
             sortedDictionaryList.Add(sortedDictionaryList.Count, firstRow);
@@ -162,20 +206,27 @@ namespace MainProgram
                 {
                     // 出库类单据
                     temp.Add("");
-                    temp.Add("");
-                    temp.Add("");
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add("");
+                        temp.Add("");
+                    }
                     temp.Add("");
 
                     temp.Add(record.value);
-                    temp.Add(record.price);
-                    temp.Add(record.value * record.price);
+
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add(record.price);
+                        temp.Add(record.value * record.price);
+                    }
 
                     // 未完成：这里的信息需要显示项目编号和生产编号，如何添加
                     string projectNo = "", makeNo = "";
                     if (record.thingsType == "生产领料")
                     {
                         MaterielOutOrderTable materieOutOrder = MaterielOutOrder.getInctance().getMaterielOutOrderInfoFromBillNumber(record.billNumber);
-                        projectNo = materieOutOrder.projectNo;
+                        projectNo = materieOutOrder.srcOrderNum;
                         makeNo = materieOutOrder.makeNo;
                     }
                     else if (record.thingsType == "其他出库")
@@ -189,20 +240,26 @@ namespace MainProgram
                     temp.Add(makeNo);
 
                     temp.Add(record.storageValue);
-                    temp.Add(record.storagePrice);
-                    temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
+
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add(record.storagePrice);
+                        temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
+                    }
 
                     outSumValue += record.value;
                     outSumMoney += record.value * record.price;
                 }
                 else if (record.isIn == 1)
                 {
-
                     // 入库类单据
                     temp.Add(record.value);
-                    temp.Add(record.price);
 
-                    temp.Add(record.value * record.price);
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add(record.price);
+                        temp.Add(record.value * record.price);
+                    }
 
                     if (record.thingsType == "采购入库")
                     {
@@ -215,14 +272,23 @@ namespace MainProgram
                     }
 
                     temp.Add("");
-                    temp.Add("");
-                    temp.Add("");
+
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add("");
+                        temp.Add("");
+                    }
+
                     temp.Add("");
                     temp.Add("");
 
-                    temp.Add(record.storageValue);
-                    temp.Add(record.storagePrice);
-                    temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
+                    temp.Add((double)(Math.Round(record.storageValue * 100)) / 100);
+
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add(record.storagePrice);
+                        temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
+                    }
 
                     inSumValue += record.value;
                     inSumMoney += record.value * record.price;
@@ -231,17 +297,29 @@ namespace MainProgram
                 {
                     // 其他类型单据
                     temp.Add("");
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add("");
+                        temp.Add("");
+                    }
                     temp.Add("");
                     temp.Add("");
-                    temp.Add("");
-                    temp.Add("");
-                    temp.Add("");
-                    temp.Add("");
+
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add("");
+                        temp.Add("");
+                    }
+
                     temp.Add("");
                     temp.Add("");
                     temp.Add(record.storageValue);
-                    temp.Add(record.storagePrice);
-                    temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
+
+                    if (m_isDisplayJG)
+                    {
+                        temp.Add(record.storagePrice);
+                        temp.Add((double)(Math.Round(record.storageMoney * 100)) / 100);
+                    }
                 }
                 if(index == list.Count - 1)
                 {
@@ -261,18 +339,30 @@ namespace MainProgram
             sumRow.Add("合计");
 
             sumRow.Add(inSumValue);
-            sumRow.Add(getPercentValue(inSumMoney, inSumValue));
-            sumRow.Add(inSumMoney);
+
+            if (m_isDisplayJG)
+            {
+                sumRow.Add(getPercentValue(inSumMoney, inSumValue));
+                sumRow.Add(inSumMoney);
+            }
+
             sumRow.Add("");
 
             sumRow.Add(outSumValue);
-            sumRow.Add(getPercentValue(outSumMoney, outSumValue));
-            sumRow.Add(outSumMoney);
+            if (m_isDisplayJG)
+            {
+                sumRow.Add(getPercentValue(outSumMoney, outSumValue));
+                sumRow.Add(outSumMoney);
+            }
             sumRow.Add("");
             sumRow.Add("");
             sumRow.Add("");
-            sumRow.Add("");
-            sumRow.Add("");
+
+            if (m_isDisplayJG)
+            {
+                sumRow.Add("");
+                sumRow.Add("");
+            }
 
             sortedDictionaryList.Add(sortedDictionaryList.Count, sumRow);
             #endregion
@@ -282,19 +372,34 @@ namespace MainProgram
             lastRow.Add("");
             lastRow.Add("");
             lastRow.Add("期末结存");
+
+
             lastRow.Add("");
-            lastRow.Add("");
-            lastRow.Add("");
-            lastRow.Add("");
-            lastRow.Add("");
-            lastRow.Add("");
-            lastRow.Add("");
+
+            if (m_isDisplayJG)
+            {
+                lastRow.Add("");
+                lastRow.Add("");
+            }
             lastRow.Add("");
             lastRow.Add("");
 
-            lastRow.Add(stockSumValue);
-            lastRow.Add(stockSumPrice);
-            lastRow.Add((double)(Math.Round(stockSumMoney * 100)) / 100);
+            if (m_isDisplayJG)
+            {
+                lastRow.Add("");
+                lastRow.Add("");
+            }
+
+            lastRow.Add("");
+            lastRow.Add("");
+
+            lastRow.Add((double)(Math.Round(stockSumValue * 100)) / 100);
+
+            if (m_isDisplayJG)
+            {
+                lastRow.Add(stockSumPrice);
+                lastRow.Add((double)(Math.Round(stockSumMoney * 100)) / 100);
+            }
 
             sortedDictionaryList.Add(sortedDictionaryList.Count, lastRow);
             #endregion
@@ -319,7 +424,7 @@ namespace MainProgram
         {
             string str = "";
 
-            if (date.Length > 0)
+            if (date != null && date.Length > 0)
             {
                 str = date.Substring(0, 4) + "." + date.Substring(monthStartPos, 2);
             }
@@ -427,11 +532,62 @@ namespace MainProgram
             FormStorageStockDetailsFilter fpicf = new FormStorageStockDetailsFilter();
             fpicf.ShowDialog();
 
+            // 物料区间
             m_countStartDate = fpicf.getFilterStartDate();
             m_countEndDate = fpicf.getFilterEndDate();
 
-            updateDataGridView(fpicf.getMaterielPkey());
-            
+            if (fpicf.getSelectMode() == 0)
+            {
+                // 查询所有物料
+                m_materielList = Materiel.getInctance().getAllMaterielInfo();
+
+                if (m_materielList.Count > 0)
+                {
+                    m_currentRecordIndex = 0;
+                }
+
+                updateDataGridView();
+            }
+            else if (fpicf.getSelectMode() == 1)
+            {
+                m_materielList = Materiel.getInctance().getAllMaterielInfo();
+
+                string startID = fpicf.getFilterStartID();
+                string endID = fpicf.getFilterEndID();
+
+                if (startID.Length <= 0 || endID.Length <= 0)
+                {
+                    MessageBoxExtend.messageWarning("物料区间起止ID为空, 请重新输入");
+                    return;
+                }
+
+                SortedDictionary<int, MaterielTable> materielListTemp = new SortedDictionary<int, MaterielTable>();
+
+                foreach (KeyValuePair<int, MaterielTable> i in m_materielList)
+                {
+                    MaterielTable materiel = new MaterielTable();
+
+                    if (i.Value.pkey >= Convert.ToInt32(startID) && i.Value.pkey <= Convert.ToInt32(endID))
+                    {
+                        materielListTemp.Add(materielListTemp.Count, i.Value);
+                    }
+                }
+
+                m_materielList.Clear();
+
+                if (materielListTemp.Count > 0)
+                {
+                    m_materielList = materielListTemp;
+                    m_currentRecordIndex = 0;
+                }
+
+                updateDataGridView();
+            }
+            else if (fpicf.getSelectMode() == 2)
+            {
+                // 查询单个物料
+                updateDataGridView(fpicf.getMaterielPkey());
+            }
         }
 
         private void dataGridViewList_DoubleClick(object sender, EventArgs e)

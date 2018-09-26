@@ -16,6 +16,9 @@ namespace MainProgram
     {
         public enum OrderType
         {
+            // 采购申请单序时簿
+            PurchaseApplyOrder,
+
             // 采购订单序时簿
             PurchaseOrder,
 
@@ -39,11 +42,18 @@ namespace MainProgram
 
             // 其他入库
             StorageInOther,
+
+            // 设备总材料表
+            DevMaterielInfo,
+            EleMaterielInfo,
+            EngMaterielInfo,
+            ChangeApply
         };
 
         private int m_dataGridRecordCount = 0;
         private OrderType m_orderType;
         private string m_billNumber = "";
+        private string m_projectNum = "";
         private bool m_isSelectOrderNumber;
 
         private DataGridViewExtend m_dateGridViewExtend = new DataGridViewExtend();
@@ -58,6 +68,10 @@ namespace MainProgram
             if (m_orderType == OrderType.PurchaseOrder)
             {
                 this.Text = "采购订单序时薄";
+            }
+            else if (m_orderType == OrderType.PurchaseApplyOrder)
+            {
+                this.Text = "采购申请单序时薄";
             }
             else if (m_orderType == OrderType.PurchaseIn)
             {
@@ -90,6 +104,26 @@ namespace MainProgram
                 // 仓存管理-其他入库
                 this.Text = "其他入库序时薄";
             }
+            else if (m_orderType == OrderType.DevMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                this.Text = "设备总材料表序时薄";
+            }
+            else if (m_orderType == OrderType.EleMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                this.Text = "电器总材料表序时薄";
+            }
+            else if (m_orderType == OrderType.EngMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                this.Text = "工程总材料表序时薄";
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                // 仓存管理-其他入库
+                this.Text = "总材变更申请序时薄";
+            }
 
             m_isSelectOrderNumber = isSelectOrderNumber;
         }
@@ -102,7 +136,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("供应商", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("合同编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("约定到货日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -115,6 +149,35 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("审核员", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 100);
             }
+            else if (m_orderType == OrderType.PurchaseApplyOrder)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("申请人", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("期望到货日期", 140);
+                m_dateGridViewExtend.addDataGridViewColumn("总金额", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 100);
+            }
+            else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("设备型号", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("制表日期", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("部分名称", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("设计", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("是否审核", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
+            }
             else if (m_orderType == OrderType.PurchaseIn)
             {
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
@@ -122,7 +185,7 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("交易日期", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("交易类型", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("合同编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("约定付款日期", 160);
                 m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
                 m_dateGridViewExtend.addDataGridViewColumn("金额合计", 100);
@@ -210,6 +273,17 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("审核人", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
             }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
+                m_dateGridViewExtend.addDataGridViewColumn("源单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("设计人", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("变更设计人", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("制单员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核员", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 80);
+            }
             else
             {
                 MessageBoxExtend.messageWarning("暂时不支持的序时薄类型");
@@ -243,7 +317,7 @@ namespace MainProgram
                         temp.Add(record.supplierName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.purchaseType);
+                        temp.Add(record.xxMaterielTableNum);
                         temp.Add(record.deliveryDate);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sumMoney);
@@ -252,6 +326,107 @@ namespace MainProgram
                         temp.Add(record.totalMoney);
                         temp.Add(record.businessPeopleName);
                         temp.Add(record.makeOrderStaffName);
+
+                        if (record.isReview == "0")
+                        {
+                            temp.Add("否");
+                        }
+                        else
+                        {
+                            temp.Add("是");
+                        }
+
+                        temp.Add(record.orderrReviewName);
+                        temp.Add(record.reviewDate);
+
+                        sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
+                    }
+                }
+
+                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+            }
+            else if (m_orderType == OrderType.PurchaseApplyOrder)
+            {
+                SortedDictionary<int, PurchaseApplyOrderTable> list = new SortedDictionary<int, PurchaseApplyOrderTable>();
+                list = PurchaseApplyOrder.getInctance().getAllPurchaseOrderInfo();
+
+                m_dataGridRecordCount = list.Count;
+
+                for (int index = 0; index < list.Count; index++)
+                {
+                    PurchaseApplyOrderTable record = new PurchaseApplyOrderTable();
+                    record = (PurchaseApplyOrderTable)list[index];
+
+                    if (m_filter.startDate == null || (record.tradingDate.CompareTo(m_filter.startDate) >= 0 && record.tradingDate.CompareTo(m_filter.endDate) <= 0))
+                    {
+                        ArrayList temp = new ArrayList();
+
+                        temp.Add(record.pkey);
+                        temp.Add(record.applyName);
+                        temp.Add(record.tradingDate);
+                        temp.Add(record.billNumber);
+                        temp.Add(record.srcOrderNum);
+                        temp.Add(record.paymentDate);
+                        temp.Add(record.totalMoney);
+                        temp.Add(record.makeOrderStaffName);
+
+                        if (record.isReview == "0")
+                        {
+                            temp.Add("否");
+                        }
+                        else
+                        {
+                            temp.Add("是");
+                        }
+
+                        temp.Add(record.orderrReviewName);
+                        temp.Add(record.reviewDate);
+
+                        sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
+                    }
+                }
+
+                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+            }
+            else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+            {
+                int dataType = 1;
+                if (m_orderType == OrderType.DevMaterielInfo)
+                {
+                    dataType = 1;
+                }
+                else if (m_orderType == OrderType.EleMaterielInfo)
+                {
+                    dataType = 2;
+                }
+                else if (m_orderType == OrderType.EngMaterielInfo)
+                {
+                    dataType = 3;
+                }
+
+                SortedDictionary<int, FormProjectMaterielTable> list = new SortedDictionary<int, FormProjectMaterielTable>();
+                list = FormProject.getInctance().getAllPurchaseOrderInfo(dataType);
+
+                m_dataGridRecordCount = list.Count;
+
+                for (int index = 0; index < list.Count; index++)
+                {
+                    FormProjectMaterielTable record = new FormProjectMaterielTable();
+                    record = (FormProjectMaterielTable)list[index];
+
+                    if (m_filter.startDate == null || (record.makeOrderDate.CompareTo(m_filter.startDate) >= 0 && record.makeOrderDate.CompareTo(m_filter.endDate) <= 0))
+                    {
+                        ArrayList temp = new ArrayList();
+
+                        temp.Add(record.pkey);
+                        temp.Add(record.deviceMode);
+                        temp.Add(record.makeOrderDate);
+                        temp.Add(record.billNumber);
+                        temp.Add(record.projectNum);
+                        temp.Add(record.makeNum);
+                        temp.Add(record.subName);
+                        temp.Add(record.makeOrderStaffName);
+                        temp.Add(record.designStaffName);
 
                         if (record.isReview == "0")
                         {
@@ -292,13 +467,25 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
                         temp.Add(record.purchaseType);
-                        temp.Add(record.contractNum);
+                        temp.Add(record.srcOrderNum);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sourceBillNumber);
-                        temp.Add(record.sumMoney);
-                        temp.Add(record.sumTransportationCost);
-                        temp.Add(record.sumOtherCost);
-                        temp.Add(record.totalMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add(Convert.ToDouble(record.sumMoney) * -1);
+                            temp.Add(Convert.ToDouble(record.sumTransportationCost) * -1);
+                            temp.Add(Convert.ToDouble(record.sumOtherCost) * -1);
+                            temp.Add(Convert.ToDouble(record.totalMoney) * -1);
+                        }
+                        else
+                        {
+                            temp.Add(record.sumMoney);
+                            temp.Add(record.sumTransportationCost);
+                            temp.Add(record.sumOtherCost);
+                            temp.Add(record.totalMoney);
+                        }
+
                         temp.Add(record.staffSaveName);
                         temp.Add(record.staffCheckName);
                         temp.Add(record.businessPeopleName);
@@ -457,8 +644,18 @@ namespace MainProgram
                         temp.Add(record.departmentName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumValue);
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.orderReviewStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -542,8 +739,18 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add("");
                         temp.Add(record.billNumber);
-                        temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumValue);
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.orderReviewStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -551,6 +758,34 @@ namespace MainProgram
 
                         sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
                     }
+                }
+
+                m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                SortedDictionary<int, FormProjectMaterielChangeTable> list = new SortedDictionary<int, FormProjectMaterielChangeTable>();
+                list = FormProjectInfoChange.getInctance().getAllChangeRecord();
+
+                m_dataGridRecordCount = list.Count;
+
+                for (int index = 0; index < list.Count; index++)
+                {
+                    FormProjectMaterielChangeTable record = new FormProjectMaterielChangeTable();
+                    record = (FormProjectMaterielChangeTable)list[index];
+
+                    ArrayList temp = new ArrayList();
+
+                    temp.Add(record.pkey);
+                    temp.Add(record.srcBillNumber);
+                    temp.Add(record.designStaffName);
+                    temp.Add(record.billNumber);
+                    temp.Add(record.designStaffName);
+                    temp.Add(record.makeOrderStaffName);
+                    temp.Add(record.orderrReviewName);
+                    temp.Add(record.reviewDate);
+
+                    sortedDictionaryList.Add(sortedDictionaryList.Count, temp);
                 }
 
                 m_dateGridViewExtend.initDataGridViewData(sortedDictionaryList, 3);
@@ -627,8 +862,18 @@ namespace MainProgram
                         temp.Add(record.tradingDate);
                         temp.Add("");
                         temp.Add(record.billNumber);
-                        temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumValue);
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.orderReviewStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -718,6 +963,7 @@ namespace MainProgram
                             {
                                 dataGridViewList.Rows[i].Selected = true;
                                 m_billNumber = dataGridViewList.Rows[i].Cells[3].Value.ToString();
+                                m_projectNum = dataGridViewList.Rows[i].Cells[4].Value.ToString();
                                 checkAccountBillDetaile();
                                 return;
                             }
@@ -770,10 +1016,43 @@ namespace MainProgram
                     fmoo.ShowDialog();
                     updateDataGridView();
                 }
+                else if (m_orderType == OrderType.ChangeApply)
+                {
+                    FormProjectMaterielChangeOrder fmoo = new FormProjectMaterielChangeOrder(m_billNumber);
+                    fmoo.ShowDialog();
+                    updateDataGridView();
+                }
                 else if (m_orderType == OrderType.StorageInOther)
                 {
                     FormMaterielInOtherOrder fmoo = new FormMaterielInOtherOrder(m_billNumber);
                     fmoo.ShowDialog();
+                    updateDataGridView();
+                }
+                else if (m_orderType == OrderType.PurchaseApplyOrder)
+                {
+                    FormPurchaseApply fpa = new FormPurchaseApply(m_billNumber);
+                    fpa.ShowDialog();
+                    updateDataGridView();
+                }
+
+                else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+                {
+                    int dataType = 1;
+                    if (m_orderType == OrderType.DevMaterielInfo)
+                    {
+                        dataType = 1;
+                    }
+                    else if (m_orderType == OrderType.EleMaterielInfo)
+                    {
+                        dataType = 2;
+                    }
+                    else if (m_orderType == OrderType.EngMaterielInfo)
+                    {
+                        dataType = 3;
+                    }
+
+                    FormProjectMaterielOrder fpmo = new FormProjectMaterielOrder(dataType, m_billNumber);
+                    fpmo.ShowDialog();
                     updateDataGridView();
                 }
                 else
@@ -788,6 +1067,11 @@ namespace MainProgram
             return m_billNumber;
         }
 
+        public string getSelectOrderProjectNum()
+        {
+            return m_projectNum;
+        }
+
         public void setDataFilter(FormStorageSequenceFilterValue filter)
         {
             m_filter = filter;
@@ -799,10 +1083,12 @@ namespace MainProgram
             if (m_orderType == OrderType.PurchaseOrder)
             {
                 PurchaseOrder.getInctance().refreshRecord();
+                PurchaseOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.PurchaseIn)
             {
                 PurchaseInOrder.getInctance().refreshRecord();
+                PurchaseInOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.PurchaseInvoice)
             {
@@ -810,28 +1096,79 @@ namespace MainProgram
             else if (m_orderType == OrderType.PurchaseOrderExcute)
             {
                 PurchaseOrder.getInctance().refreshRecord();
+                PurchaseOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.PurchaseInOrderExcute)
             {
                 PurchaseInOrder.getInctance().refreshRecord();
+                PurchaseInOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.StorageProductIn)
             {
                 // 仓存管理-产品入库
                 MaterielInOrder.getInctance().refreshRecord();
+                MaterielInOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.StorageInCheck)
             {
                 // 仓存管理-盘盈入库
                 MaterielInEarningsOrder.getInctance().refreshRecord();
+                MaterielInEarningsOrderDetails.getInctance().refreshRecord();
             }
             else if (m_orderType == OrderType.StorageInOther)
             {
                 // 仓存管理-其他入库
                 MaterielInOtherOrder.getInctance().refreshRecord();
+                MaterielInOtherOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.ChangeApply)
+            {
+                FormProjectInfoChange.getInctance().refreshRecord();
+                ProjectManagerDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.DevMaterielInfo || m_orderType == OrderType.EleMaterielInfo || m_orderType == OrderType.EngMaterielInfo)
+            {
+                // 仓存管理-其他入库
+                FormProject.getInctance().refreshRecord();
+                ProjectManagerDetails.getInctance().refreshRecord();
             }
 
             updateDataGridView();
+        }
+
+        private void toolStripButtonReset_Click(object sender, EventArgs e)
+        {
+            FormStorageSequenceFilter fssf = new FormStorageSequenceFilter(false);
+            if (fssf.ShowDialog() == DialogResult.OK)
+            {
+                // 隐藏当前窗口
+                this.Hide();
+
+                //得到界面用户选定的值
+                FormStorageSequenceFilterValue filter = fssf.getFilterUIValue();
+                FormPurchaseOrderSequence.OrderType type = new FormPurchaseOrderSequence.OrderType();
+
+                if (filter.sequenceType == "0")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.PurchaseIn;
+                }
+                else if (filter.sequenceType == "1")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.StorageProductIn;
+                }
+                else if (filter.sequenceType == "2")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.StorageInCheck;
+                }
+                else if (filter.sequenceType == "3")
+                {
+                    type = FormPurchaseOrderSequence.OrderType.StorageInOther;
+                }
+
+                FormPurchaseOrderSequence fphpc = new FormPurchaseOrderSequence(type);
+                fphpc.setDataFilter(filter);
+                fphpc.ShowDialog();
+            }
         }
     }
 }

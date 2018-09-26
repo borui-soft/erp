@@ -29,6 +29,7 @@ namespace MainProgram
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         PurchaseOrderTable m_purchaseOrder = new PurchaseOrderTable();
+        private bool m_isSaveSuccess = false;
 
         private enum DataGridColumnName
         {
@@ -356,6 +357,17 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccess = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                PurchaseOrder.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
+            this.ActiveControl = this.toolStrip1;
+
             // 得到详细的采购信息
             ArrayList dataList = getPurchaseOrderDetailsValue();
 
@@ -369,6 +381,7 @@ namespace MainProgram
                     PurchaseOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
+                    m_isSaveSuccess = true;
                     if (m_billNumber.Length == 0)
                     {
                         MessageBoxExtend.messageOK("数据保存成功");
@@ -394,6 +407,9 @@ namespace MainProgram
             record.deliveryDate = this.labelDeliveryDate.Text;
             record.paymentDate = this.labelPaymentDate.Text;
             record.exchangesUnit = this.labelSummary.Text;
+
+            record.xxMaterielTableNum = this.labelContractNum.Text;
+            record.srcOrderNum = this.labelSourceOrderNumber.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
@@ -515,8 +531,11 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                PurchaseOrder.getInctance().billReview(m_billNumber);
-                MessageBoxExtend.messageOK("单据审核成功");
+                if (m_isSaveSuccess)
+                {
+                    PurchaseOrder.getInctance().billReview(m_billNumber);
+                    MessageBoxExtend.messageOK("单据审核成功");
+                }
             }
             catch (Exception exp)
             {
@@ -602,17 +621,28 @@ namespace MainProgram
         
         private void setMatetielInfoToDataGridView(string id)
         {
-            double pkey = Convert.ToDouble(id.ToString());
             //使用这个输入的值，匹配物料编号
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id != record.num || record.pkey == 0)
+            if (record == null || id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
-                //使用这个输入的值，匹配物料key
+                try
+                {
+                    //使用这个输入的值，匹配物料key
+                    double pkey = Convert.ToDouble(id.ToString());
 
-                record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+                    record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
 
-                if (pkey != record.pkey || record.pkey == 0)
+                    if (pkey != record.pkey || record.pkey == 0)
+                    {
+                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                            "]不存在，请重新输入或选择");
+                        m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+
+                        return;
+                    }
+                }
+                catch
                 {
                     MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                         "]不存在，请重新输入或选择");
@@ -698,8 +728,15 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar, 
-                this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+            if (m_columnIndex != (int)DataGridColumnName.MatetielNumber)
+            {
+                e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
+                    this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
 
         private void dataGridViewDataList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -775,6 +812,9 @@ namespace MainProgram
             this.labelMakeBillStaff.Visible = true;
             this.labelReviewBillStaff.Visible = true;
             this.labelReviewDate.Visible = true;
+
+            this.labelContractNum.Visible = true;
+            this.labelSourceOrderNumber.Visible = true;
             
             this.labelPurchaseName.Text = m_purchaseOrder.supplierName;
             this.labelTradingDate.Text = m_purchaseOrder.tradingDate;
@@ -783,6 +823,9 @@ namespace MainProgram
             this.labelDeliveryDate.Text = m_purchaseOrder.deliveryDate;
             this.labelPaymentDate.Text = m_purchaseOrder.paymentDate;
             this.labelSummary.Text = m_purchaseOrder.exchangesUnit;
+
+            this.labelContractNum.Text = m_purchaseOrder.xxMaterielTableNum;
+            this.labelSourceOrderNumber.Text = m_purchaseOrder.srcOrderNum;
 
             m_staffPkey = m_purchaseOrder.businessPeopleId;
             this.labelBusinessPeople.Text = m_purchaseOrder.businessPeopleName;
@@ -865,6 +908,177 @@ namespace MainProgram
                     UserInterfaceActonState.setUserInterfaceActonState(activeObject,
                         ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
                 }
+            }
+        }
+
+        private void textBoxContractNum_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelContractNum.Visible = false;
+            this.textBoxContractNum.Visible = true;
+
+            this.textBoxContractNum.Text = this.labelContractNum.Text;
+
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("—", "_");
+
+            this.textBoxContractNum.Focus();
+        }
+
+        private void panelContractNum_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelContractNum.Visible = false;
+            this.textBoxContractNum.Visible = true;
+
+            this.textBoxContractNum.Text = this.labelContractNum.Text;
+
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("—", "_");
+
+            this.textBoxContractNum.Focus();
+        }
+
+        private void panelContractNum_Leave(object sender, EventArgs e)
+        {
+            this.textBoxContractNum.Visible = false;
+            this.labelContractNum.Text = this.textBoxContractNum.Text.ToString();
+
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("-", "_");
+            this.textBoxContractNum.Text = this.textBoxContractNum.Text.Replace("—", "_");
+
+            this.labelContractNum.Visible = this.textBoxContractNum.Text.Length > 0;
+        }
+
+        private void panelSourceOrderNumber_DoubleClick(object sender, EventArgs e)
+        {
+            if (!this.textBoxSourceOrderNumber.Visible)
+            {
+                this.labelSourceOrderNumber.Visible = false;
+                this.textBoxSourceOrderNumber.Visible = true;
+            }
+            else
+            {
+                FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseApplyOrder, true);
+                fpos.ShowDialog();
+
+                string strSrcApplyOrderNum = fpos.getSelectOrderNumber();
+                this.labelContractNum.Text = fpos.getSelectOrderProjectNum();
+
+                this.textBoxSourceOrderNumber.Text = strSrcApplyOrderNum;
+                this.textBoxSourceOrderNumber.Visible = true;
+                this.labelContractNum.Visible = true;
+
+                writeBillDetailsInfoFromBillNumber(strSrcApplyOrderNum);
+            }
+        }
+
+        private void panelSourceOrderNumber_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseOrder.isReview == "1")
+            {
+                return;
+            }
+
+            if (!this.textBoxSourceOrderNumber.Visible)
+            {
+                this.labelSourceOrderNumber.Visible = false;
+                this.textBoxSourceOrderNumber.Visible = true;
+                this.textBoxSourceOrderNumber.Focus();
+            }
+        }
+
+        private void textBoxSourceOrderNumber_Leave(object sender, EventArgs e)
+        {
+            this.textBoxSourceOrderNumber.Visible = false;
+            this.labelSourceOrderNumber.Text = this.textBoxSourceOrderNumber.Text.ToString();
+            this.labelSourceOrderNumber.Visible = this.textBoxSourceOrderNumber.Text.Length > 0;
+        }
+
+        private void writeBillDetailsInfoFromBillNumber(string billNumber)
+        {
+            // DataGridView 赋值
+            SortedDictionary<int, PurchaseApplyOrderDetailsTable> purchaseOrderDetails =
+                PurchaseApplyOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
+
+            foreach (KeyValuePair<int, PurchaseApplyOrderDetailsTable> index in purchaseOrderDetails)
+            {
+                PurchaseApplyOrderDetailsTable record = new PurchaseApplyOrderDetailsTable();
+                record = index.Value;
+
+                int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = 0;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+            }
+        }
+
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            {
+                m_rowIndex = e.RowIndex;
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void ToolStripMenuItemCheckDetailed_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                int materielID = Convert.ToInt32(dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString());
+
+                if (this.textBoxContractNum.Text.Length <= 0)
+                {
+                    if (!MessageBoxExtend.messageQuestion("材料表编号为空, 可能无法显示出材料表中的相关数据, 是否继续查看?"))
+                    {
+                        return;
+                    }
+                }
+
+                FormMaterielDetailed fmd = new FormMaterielDetailed(materielID, this.textBoxContractNum.Text);
+                fmd.ShowDialog();
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
+
+        private void ToolStripMenuItemDelRow_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                string rowNum = dataGridViewDataList.Rows[m_rowIndex].Cells[0].Value.ToString();
+
+                if (MessageBoxExtend.messageQuestion("确认删除第" + rowNum + "行的数据吗？"))
+                {
+                    m_dateGridVeiwListDataList.delDataGridVewRow(Convert.ToInt32(rowNum), DateGridVeiwListDataListRowCount);
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
             }
         }
     }

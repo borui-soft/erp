@@ -17,11 +17,10 @@ namespace MainProgram
 
     public partial class FormMaterielTypeModify : Form
     {
-        private int m_materielRecordCount = 0;
-
         private bool m_isSave = false;
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private string m_materielGroupName = "";
+        private int m_type = 1;
 
         private TreeNode m_rootNode;
         private TreeViewExtend m_tree;
@@ -29,9 +28,24 @@ namespace MainProgram
         private DataGridViewExtend m_dataGridViewExtend = new DataGridViewExtend();
 
 
-        public FormMaterielTypeModify()
+        public FormMaterielTypeModify(int type = 1)
         {
             InitializeComponent();
+
+            m_type = type;
+
+            if (m_type == 1)
+            {
+                this.Text = "物料分组调整";
+            }
+            else if (m_type == 2)
+            {
+                this.Text = "客户分组调整";
+            }
+            else if (m_type == 3)
+            {
+                this.Text = "供应商分组调整";
+            }
         }
 
         private void FormBaseMateriel_Load(object sender, EventArgs e)
@@ -48,18 +62,80 @@ namespace MainProgram
             }
 
             m_tree = new TreeViewExtend(this.treeViewMaterielOrg);
-            int rootNodePkey = MaterielOrgStruct.getInctance().getRootNodePkey();
 
-            int rooNodeValue = MaterielOrgStruct.getInctance().getNoteValueFromPkey(rootNodePkey);
-            string rootName = MaterielType.getInctance().getMaterielTypeNameFromPkey(rooNodeValue);
+            if (m_type == 1)
+            {
+                int rootNodePkey = MaterielOrgStruct.getInctance().getRootNodePkey();
 
-            m_rootNode = this.treeViewMaterielOrg.Nodes.Add(Convert.ToString(rooNodeValue), rootName);
+                int rooNodeValue = MaterielOrgStruct.getInctance().getNoteValueFromPkey(rootNodePkey);
+                string rootName = MaterielType.getInctance().getMaterielTypeNameFromPkey(rooNodeValue);
 
-            processDutyOrgNode(rootNodePkey, m_rootNode);
+                m_rootNode = this.treeViewMaterielOrg.Nodes.Add(Convert.ToString(rooNodeValue), rootName);
+
+                processDutyOrgNodeMateriel(rootNodePkey, m_rootNode);
+            }
+            else if (m_type == 2)
+            {
+                int rootNodePkey = CustomerOrgStruct.getInctance().getRootNodePkey();
+
+                int rooNodeValue = CustomerOrgStruct.getInctance().getNoteValueFromPkey(rootNodePkey);
+                string rootName = CustomerType.getInctance().getCustomerTypeNameFromPkey(rooNodeValue);
+
+                m_rootNode = this.treeViewMaterielOrg.Nodes.Add(Convert.ToString(rooNodeValue), rootName);
+
+                processDutyOrgNodeCustomer(rootNodePkey, m_rootNode);
+            }
+            else if (m_type == 3)
+            {
+                int rootNodePkey = SupplierOrgStruct.getInctance().getRootNodePkey();
+
+                int rooNodeValue = SupplierOrgStruct.getInctance().getNoteValueFromPkey(rootNodePkey);
+                string rootName = SupplierType.getInctance().getSupplierTypeNameFromPkey(rooNodeValue);
+
+                m_rootNode = this.treeViewMaterielOrg.Nodes.Add(Convert.ToString(rooNodeValue), rootName);
+
+                processDutyOrgNodeSupplier(rootNodePkey, m_rootNode);
+
+            }
+
             m_rootNode.Expand();
         }
 
-        private void processDutyOrgNode(int parentID, TreeNode node)
+        private void processDutyOrgNodeSupplier(int parentID, TreeNode node)
+        {
+            string nodeName = "";
+            TreeNode currentNode;
+            ArrayList nodeList = SupplierOrgStruct.getInctance().getNodesFormParentID(parentID);
+
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                SupplierOrgStructTable record = (SupplierOrgStructTable)nodeList[i];
+
+                nodeName = SupplierType.getInctance().getSupplierTypeNameFromPkey(record.value);
+
+                currentNode = m_tree.addNode(node, nodeName, 0, 1, Convert.ToString(record.value));
+                processDutyOrgNodeSupplier(record.pkey, currentNode);
+            }
+        }
+
+        private void processDutyOrgNodeCustomer(int parentID, TreeNode node)
+        {
+            string nodeName = "";
+            TreeNode currentNode;
+            ArrayList nodeList = CustomerOrgStruct.getInctance().getNodesFormParentID(parentID);
+
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                CustomerOrgStructTable record = (CustomerOrgStructTable)nodeList[i];
+
+                nodeName = CustomerType.getInctance().getCustomerTypeNameFromPkey(record.value);
+
+                currentNode = m_tree.addNode(node, nodeName, 0, 1, Convert.ToString(record.value));
+                processDutyOrgNodeCustomer(record.pkey, currentNode);
+            }
+        }
+
+        private void processDutyOrgNodeMateriel(int parentID, TreeNode node)
         {
             string nodeName = "";
             TreeNode currentNode;
@@ -79,7 +155,7 @@ namespace MainProgram
                 }
 
                 currentNode = m_tree.addNode(node, nodeName, 0, 1, Convert.ToString(record.value));
-                processDutyOrgNode(record.pkey, currentNode);
+                processDutyOrgNodeMateriel(record.pkey, currentNode);
             }
         }
 
@@ -90,8 +166,11 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
-                m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text.ToString();
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                    m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text.ToString();
+                }
             }
             else 
             {
@@ -107,46 +186,46 @@ namespace MainProgram
             }
         }
 
-        private void SuppierGroupDelete_Click(object sender, EventArgs e)
-        {
-            if (MessageBoxExtend.messageQuestion("确定删除[" + m_materielGroupName + "]分组信息吗?"))
-            {
-                if (m_materielRecordCount > 0)
-                {
-                    MessageBoxExtend.messageWarning("[" + m_materielGroupName + "] 删除失败,请先删除物料记录然后重试.");
-                }
-                else
-                {
-                    MaterielType.getInctance().delete(m_materielGroupPkey);
-                    MaterielOrgStruct.getInctance().delete(MaterielOrgStruct.getInctance().getPkeyFromValue(m_materielGroupPkey));
-                    refreshTreeView();
-                }
-            }
-        }
+        //private void SuppierGroupDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (MessageBoxExtend.messageQuestion("确定删除[" + m_materielGroupName + "]分组信息吗?"))
+        //    {
+        //        if (m_materielRecordCount > 0)
+        //        {
+        //            MessageBoxExtend.messageWarning("[" + m_materielGroupName + "] 删除失败,请先删除物料记录然后重试.");
+        //        }
+        //        else
+        //        {
+        //            MaterielType.getInctance().delete(m_materielGroupPkey);
+        //            MaterielOrgStruct.getInctance().delete(MaterielOrgStruct.getInctance().getPkeyFromValue(m_materielGroupPkey));
+        //            refreshTreeView();
+        //        }
+        //    }
+        //}
 
-        private SortedDictionary<int, MaterielTable> getCurrentNodeAllChildNodesMateriel()
-        {
-            SortedDictionary<int, MaterielTable> materielList = new SortedDictionary<int, MaterielTable>();
-            SortedDictionary<int, int> childNodeValues = MaterielOrgStruct.getInctance().getAllChildNodeValue(m_materielGroupPkey);
+        //private SortedDictionary<int, MaterielTable> getCurrentNodeAllChildNodesMateriel()
+        //{
+        //    SortedDictionary<int, MaterielTable> materielList = new SortedDictionary<int, MaterielTable>();
+        //    SortedDictionary<int, int> childNodeValues = MaterielOrgStruct.getInctance().getAllChildNodeValue(m_materielGroupPkey);
 
-            if (!childNodeValues.ContainsKey(m_materielGroupPkey))
-            {
-                childNodeValues.Add(m_materielGroupPkey, m_materielGroupPkey);
-            }
+        //    if (!childNodeValues.ContainsKey(m_materielGroupPkey))
+        //    {
+        //        childNodeValues.Add(m_materielGroupPkey, m_materielGroupPkey);
+        //    }
 
-            foreach (KeyValuePair<int, int> index in childNodeValues)
-            {
-                SortedDictionary<int, MaterielTable> temp = Materiel.getInctance().getMaterielInfoFromMaterielType(index.Value);
+        //    foreach (KeyValuePair<int, int> index in childNodeValues)
+        //    {
+        //        SortedDictionary<int, MaterielTable> temp = Materiel.getInctance().getMaterielInfoFromMaterielType(index.Value);
 
-                foreach (KeyValuePair<int, MaterielTable> i in temp)
-                {
-                    MaterielTable materiel = new MaterielTable();
-                    materielList.Add(materielList.Count, (MaterielTable)i.Value);
-                }
-            }
+        //        foreach (KeyValuePair<int, MaterielTable> i in temp)
+        //        {
+        //            MaterielTable materiel = new MaterielTable();
+        //            materielList.Add(materielList.Count, (MaterielTable)i.Value);
+        //        }
+        //    }
 
-            return materielList;
-        }
+        //    return materielList;
+        //}
 
         private void buttonClose_Click(object sender, EventArgs e)
         {

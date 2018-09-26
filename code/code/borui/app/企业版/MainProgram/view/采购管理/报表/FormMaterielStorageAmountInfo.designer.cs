@@ -47,12 +47,15 @@
             this.dataGridViewMaterielList = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.textBoxSerach = new System.Windows.Forms.TextBox();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemToApply = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterielList)).BeginInit();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -226,8 +229,9 @@
             this.dataGridViewMaterielList.ReadOnly = true;
             this.dataGridViewMaterielList.RowHeadersWidth = 4;
             this.dataGridViewMaterielList.RowTemplate.Height = 23;
-            this.dataGridViewMaterielList.Size = new System.Drawing.Size(955, 472);
+            this.dataGridViewMaterielList.Size = new System.Drawing.Size(957, 472);
             this.dataGridViewMaterielList.TabIndex = 0;
+            this.dataGridViewMaterielList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMaterielList_CellMouseDown);
             this.dataGridViewMaterielList.Click += new System.EventHandler(this.dataGridViewMaterielList_Click);
             // 
             // textBoxSerach
@@ -243,6 +247,22 @@
             this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_MouseClick);
             this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_Click);
             this.textBoxSerach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSerach_KeyDown);
+            // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemToApply});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(137, 26);
+            // 
+            // ToolStripMenuItemToApply
+            // 
+            this.ToolStripMenuItemToApply.BackColor = System.Drawing.Color.Transparent;
+            this.ToolStripMenuItemToApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ToolStripMenuItemToApply.Name = "ToolStripMenuItemToApply";
+            this.ToolStripMenuItemToApply.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemToApply.Text = "转采购申请";
+            this.ToolStripMenuItemToApply.Click += new System.EventHandler(this.ToolStripMenuItemToApply_Click);
             // 
             // FormMaterielStorageAmountInfo
             // 
@@ -266,6 +286,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterielList)).EndInit();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,5 +311,7 @@
         private System.Windows.Forms.TextBox textBoxSerach;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemToApply;
     }
 }

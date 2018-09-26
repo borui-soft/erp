@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSaleOutOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -137,6 +138,8 @@
             this.panelSummary = new System.Windows.Forms.Panel();
             this.panelPaymentDate = new System.Windows.Forms.Panel();
             this.panelTradingDate = new System.Windows.Forms.Panel();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -158,6 +161,7 @@
             this.groupBox18.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.panelIsReview.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -338,13 +342,14 @@
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 202);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDataList.RowTemplate.Height = 23;
             this.dataGridViewDataList.Size = new System.Drawing.Size(1102, 265);
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -658,7 +663,7 @@
             // 
             // blueBill
             // 
-            this.blueBill.Image = global::MainProgram.Properties.Resources.红字蓝字;
+            this.blueBill.Image = global::MainProgram.Properties.Resources.蓝字;
             this.blueBill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.blueBill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.blueBill.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -701,7 +706,7 @@
             this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printDisplay.Name = "printDisplay";
             this.printDisplay.Size = new System.Drawing.Size(60, 42);
-            this.printDisplay.Text = "打印预览";
+            this.printDisplay.Text = "单据套打";
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
@@ -1305,6 +1310,20 @@
             this.panelTradingDate.TabIndex = 21;
             this.panelTradingDate.Click += new System.EventHandler(this.panelDateTime_Click);
             // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 48);
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
             // FormSaleOutOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1407,6 +1426,7 @@
             this.groupBox18.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
             this.panelIsReview.ResumeLayout(false);
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1521,6 +1541,8 @@
         private System.Windows.Forms.ToolStripButton blueBill;
         private System.Windows.Forms.Panel panelRed;
         private System.Windows.Forms.Panel panelInLedger;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
 
     }
 }

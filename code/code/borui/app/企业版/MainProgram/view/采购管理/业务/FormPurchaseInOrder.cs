@@ -26,20 +26,24 @@ namespace MainProgram
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
         private bool m_isRedBill = false;
+        private bool m_isSaveSuccess = false;
 
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         PurchaseInOrderTable m_purchaseInOrder = new PurchaseInOrderTable();
 
-        private enum DataGridColumnName
+        public enum DataGridColumnName
         {
             RowNum,
             MatetielNumber,
             MatetielName,
+            ContractMatetielName,
             Model,
+            Parameter,
             Brand,
             Unit,
+            CZ,
             Price,
             Value,
             Turnover,
@@ -68,6 +72,7 @@ namespace MainProgram
 
             // 源单类型初始化
             this.labelSourceOrderType.Visible = true;
+            this.comboBoxSourceOrderType.Items.Add("采购申请单");
             this.comboBoxSourceOrderType.Items.Add("采购订单");
             this.comboBoxSourceOrderType.Items.Add("采购发票");
             this.comboBoxSourceOrderType.SelectedIndex = 0;
@@ -96,25 +101,29 @@ namespace MainProgram
         {
             // 物料资料初始化
             m_dateGridVeiwListDataList.addDataGridViewColumn("行号", 55, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\\编码(*)", 100, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("物料ID\\编码(*)", 70, true, false);
 
             if (DateGridVeiwListDataListRowCount > 12)
             {
-                m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 144, true, true); 
+                m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 104, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("合同\n物料名称", 110, true, false); 
             }
             else
             {
-                m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 161, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 117, true, true);
+                m_dateGridVeiwListDataList.addDataGridViewColumn("合同\n物料名称", 113, true, false); 
             }
-            m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 63, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 60, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("参数", 63, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("品牌", 60, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("单位", 60, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("单价(*)", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("应计\n成本费用", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("不计\n成本费用", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("总金额", 100, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("材质", 60, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("单价(*)", 70, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 70, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 70, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("应计\n成本费用", 75, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("不计\n成本费用", 75, true, false);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("总金额", 80, true, true);
 
             m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
             m_dateGridVeiwListDataList.initDataGridViewData(DateGridVeiwListDataListRowCount);
@@ -323,15 +332,41 @@ namespace MainProgram
             {
                 if (comboBoxSourceOrderType.SelectedIndex == 0)
                 {
+                    FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseApplyOrder, true);
+                    fpos.ShowDialog();
+
+                    string sourceBillNumber = fpos.getSelectOrderNumber();
+
+                    // 自动填充总源单据号
+                    this.textBoxSourceOrderNumber.Text = sourceBillNumber;
+                    this.textBoxSourceOrderNumber.Visible = true;
+                    
+                    // 自动填充DataGridView区域
+                    writeBillDetailsInfoFromBillNumber(sourceBillNumber);
+
+                    // 自动填写总材料表编号
+                    this.labelContractNum.Visible = true;
+                    PurchaseApplyOrderTable tmp = PurchaseApplyOrder.getInctance().getPurchaseInfoFromBillNumber(sourceBillNumber);
+                    this.labelContractNum.Text = tmp.srcOrderNum;
+                }
+                else if (comboBoxSourceOrderType.SelectedIndex == 1)
+                {
                     FormPurchaseOrderSequence fpos = new FormPurchaseOrderSequence(FormPurchaseOrderSequence.OrderType.PurchaseOrder, true);
                     fpos.ShowDialog();
 
                     string sourceBillNumber = fpos.getSelectOrderNumber();
 
+                    // 自动填充总源单据号
                     this.textBoxSourceOrderNumber.Text = sourceBillNumber;
                     this.textBoxSourceOrderNumber.Visible = true;
 
+                    // 自动填充DataGridView区域
                     writeBillDetailsInfoFromBillNumber(sourceBillNumber);
+
+                    // 自动填写总材料表编号
+                    this.labelContractNum.Visible = true;
+                    PurchaseOrderTable tmp = PurchaseOrder.getInctance().getPurchaseInfoFromBillNumber(sourceBillNumber);
+                    this.labelContractNum.Text = tmp.srcOrderNum;
                 }
             }
         }
@@ -365,6 +400,11 @@ namespace MainProgram
             this.panelSummary.Visible = true;
             this.labelSummary.Text = this.textBoxSummary.Text.ToString();
             this.labelSummary.Visible = this.textBoxSummary.Text.Length > 0;
+
+            if (panelRed.Visible)
+            {
+                this.labelSummary.Text += "(红色单据)";
+            }
         }
         #endregion
 
@@ -484,6 +524,17 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccess = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                PurchaseInOrder.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
+            this.ActiveControl = this.toolStrip1;
+
             // 得到详细的采购信息
             ArrayList dataList = getPurchaseInOrderDetailsValue();
 
@@ -497,6 +548,7 @@ namespace MainProgram
                     PurchaseInOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
 
+                    m_isSaveSuccess = true;
                     if (m_billNumber.Length == 0)
                     {
                         MessageBoxExtend.messageOK("数据保存成功");
@@ -523,7 +575,8 @@ namespace MainProgram
             record.exchangesUnit = this.labelSummary.Text;
             record.sourceBillType = this.labelSourceOrderType.Text;
             record.sourceBillNumber = this.labelSourceOrderNumber.Text;
-            record.contractNum = this.labelContractNum.Text;
+            record.srcOrderNum = this.labelContractNum.Text;
+            record.purchaseNum = this.labelPurchaseNum.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
@@ -590,6 +643,12 @@ namespace MainProgram
                 return false;
             }
 
+            if (record.srcOrderNum.Length > 60)
+            {
+                MessageBoxExtend.messageWarning("项目编号信息最大长度为60字符,目前输入的项目编号信息太长，请重新输入");
+                return false;
+            }
+
             return true;
         }
 
@@ -609,6 +668,9 @@ namespace MainProgram
 
                     record.rowNumber = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.RowNum].Value.ToString();
                     record.materielID = Convert.ToInt32(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
+
+                    record.contractMaterielName = dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.ContractMatetielName].Value.ToString();
+
                     record.price = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
                     record.value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                     record.costApportionments = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value.ToString());
@@ -657,7 +719,11 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                PurchaseInOrder.getInctance().billReview(m_billNumber);
+
+                if (m_isSaveSuccess)
+                {
+                    PurchaseInOrder.getInctance().billReview(m_billNumber);
+                }
             }
             catch (Exception exp)
             {
@@ -705,7 +771,16 @@ namespace MainProgram
 
         private void printDisplay_Click(object sender, EventArgs e)
         {
-            PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
+            // PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
+            if (m_billNumber.Length > 0)
+            {
+                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, m_billNumber, this.dataGridViewDataList);
+                fop.ShowDialog();
+            }
+            else 
+            {
+                MessageBoxExtend.messageWarning("请先保存数据再打印");
+            }
         }
 
         private void print_Click(object sender, EventArgs e)
@@ -781,17 +856,28 @@ namespace MainProgram
         
         private void setMatetielInfoToDataGridView(string id)
         {
-            double pkey = Convert.ToDouble(id.ToString());
             //使用这个输入的值，匹配物料编号
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id != record.num || record.pkey == 0)
+            if (record == null || id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
-                //使用这个输入的值，匹配物料key
+                try
+                {
+                    //使用这个输入的值，匹配物料key
+                    double pkey = Convert.ToDouble(id.ToString());
 
-                record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+                    record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
 
-                if (pkey != record.pkey || record.pkey == 0)
+                    if (pkey != record.pkey || record.pkey == 0)
+                    {
+                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                            "]不存在，请重新输入或选择");
+                        m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+
+                        return;
+                    }
+                }
+                catch
                 {
                     MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                         "]不存在，请重新输入或选择");
@@ -804,9 +890,11 @@ namespace MainProgram
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.materielParameter;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
                 AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitPurchase);
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.CZ].Value = record.CZ;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = "0";
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
@@ -834,7 +922,7 @@ namespace MainProgram
                 {
                     double transportationCost = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value.ToString());
                     double otherCost = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value.ToString());
-                    double sumTurnover = turnover + transportationCost + otherCost;
+                    double sumTurnover = turnover + transportationCost - otherCost;
                     dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = Convert.ToString(sumTurnover);
                 }
             }
@@ -859,7 +947,7 @@ namespace MainProgram
                 otherCost = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value.ToString());
             }
 
-            double sumTurnover = turnover + transportationCost + otherCost;
+            double sumTurnover = turnover + transportationCost - otherCost;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = Convert.ToString(sumTurnover);
 
             // 当本次采购发生了运输费用或者其他费用时，需要把费用平均到每件货物单价上
@@ -878,8 +966,15 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar, 
-                this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+            if (m_columnIndex != (int)DataGridColumnName.MatetielNumber && m_columnIndex != (int)DataGridColumnName.ContractMatetielName)
+            {
+                e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
+                    this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
 
         private void dataGridViewDataList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -961,11 +1056,12 @@ namespace MainProgram
             this.labelSave.Visible = true;
             this.labelVerify.Visible = true;
             this.labelContractNum.Visible = true;
+            this.labelPurchaseNum.Visible = true;
             
             this.labelPurchaseName.Text = m_purchaseInOrder.supplierName;
             this.labelTradingDate.Text = m_purchaseInOrder.tradingDate;
             this.labelBillNumber.Text = m_purchaseInOrder.billNumber;
-            this.labelContractNum.Text = m_purchaseInOrder.contractNum;
+            this.labelContractNum.Text = m_purchaseInOrder.srcOrderNum;
             this.labelPurchaseType.Text = m_purchaseInOrder.purchaseType;
             this.labelPaymentDate.Text = m_purchaseInOrder.paymentDate;
             this.labelSummary.Text = m_purchaseInOrder.exchangesUnit;
@@ -978,7 +1074,8 @@ namespace MainProgram
             this.labelSourceOrderNumber.Text = m_purchaseInOrder.sourceBillNumber;
             this.labelSave.Text = m_purchaseInOrder.staffSaveName;
             this.labelVerify.Text = m_purchaseInOrder.staffCheckName;
-            this.labelContractNum.Text = m_purchaseInOrder.contractNum;
+            this.labelContractNum.Text = m_purchaseInOrder.srcOrderNum;
+            this.labelPurchaseNum.Text = m_purchaseInOrder.purchaseNum;
             
 
             // DataGridView 赋值
@@ -991,12 +1088,16 @@ namespace MainProgram
                 record = index.Value;
 
                 int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+                MaterielTable materielInfo = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
 
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.ContractMatetielName].Value = record.contractMaterielName;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Parameter].Value = record.parameter;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CZ].Value = materielInfo.CZ;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
@@ -1063,29 +1164,61 @@ namespace MainProgram
 
         private void writeBillDetailsInfoFromBillNumber(string billNumber)
         {
-
-            // DataGridView 赋值
-            SortedDictionary<int, PurchaseOrderDetailsTable> purchaseOrderDetails =
-                PurchaseOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
-
-            foreach (KeyValuePair<int, PurchaseOrderDetailsTable> index in purchaseOrderDetails)
+            if (comboBoxSourceOrderType.SelectedIndex == 0)
             {
-                PurchaseOrderDetailsTable record = new PurchaseOrderDetailsTable();
-                record = index.Value;
+                // DataGridView 赋值
+                SortedDictionary<int, PurchaseApplyOrderDetailsTable> purchaseOrderDetails =
+                    PurchaseApplyOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
 
-                int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+                foreach (KeyValuePair<int, PurchaseApplyOrderDetailsTable> index in purchaseOrderDetails)
+                {
+                    PurchaseApplyOrderDetailsTable record = new PurchaseApplyOrderDetailsTable();
+                    record = index.Value;
 
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = record.transportationCost;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
-                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                    int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+                    MaterielTable materielInfo = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
+
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CZ].Value = materielInfo.CZ;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = "0";
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                }
+            }
+            else if (comboBoxSourceOrderType.SelectedIndex == 1)
+            {
+                // DataGridView 赋值
+                SortedDictionary<int, PurchaseOrderDetailsTable> purchaseOrderDetails =
+                    PurchaseOrderDetails.getInctance().getPurchaseInfoFromBillNumber(billNumber);
+
+                foreach (KeyValuePair<int, PurchaseOrderDetailsTable> index in purchaseOrderDetails)
+                {
+                    PurchaseOrderDetailsTable record = new PurchaseOrderDetailsTable();
+                    record = index.Value;
+
+                    int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+                    MaterielTable materielInfo = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
+
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitPurchase;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.CZ].Value = materielInfo.CZ;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = record.value;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = record.sumMoney;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.TransportationCost].Value = record.transportationCost;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.OtherCost].Value = record.otherCost;
+                    dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.SumTurnover].Value = record.totalMoney;
+                }
             }
         }
 
@@ -1130,6 +1263,81 @@ namespace MainProgram
             this.textBoxContractNum.Visible = false;
             this.labelContractNum.Text = this.textBoxContractNum.Text.ToString();
             this.labelContractNum.Visible = this.textBoxContractNum.Text.Length > 0;
+
+            this.labelContractNum.Text = this.labelContractNum.Text.Replace("-", "_");
+            this.labelContractNum.Text = this.labelContractNum.Text.Replace("-", "_");
+            this.labelContractNum.Text = this.labelContractNum.Text.Replace("—", "_");
+        }
+
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            {
+                m_rowIndex = e.RowIndex;
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void ToolStripMenuItemCheckDetailed_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                int materielID = Convert.ToInt32(dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString());
+
+                if (this.labelContractNum.Text.Length <= 0)
+                {
+                    if (!MessageBoxExtend.messageQuestion("材料表编号为空, 可能无法显示出材料表中的相关数据, 是否继续查看?"))
+                    {
+                        return;
+                    }
+                }
+
+                FormMaterielDetailed fmd = new FormMaterielDetailed(materielID, this.labelContractNum.Text);
+                fmd.ShowDialog();
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
+
+        private void ToolStripMenuItemDelRow_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                string rowNum = dataGridViewDataList.Rows[m_rowIndex].Cells[0].Value.ToString();
+
+                if (MessageBoxExtend.messageQuestion("确认删除第" + rowNum + "行的数据吗？"))
+                {
+                    m_dateGridVeiwListDataList.delDataGridVewRow(Convert.ToInt32(rowNum), DateGridVeiwListDataListRowCount);
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
+            }
+        }
+
+        private void textBoxPurchaseNum_Click(object sender, EventArgs e)
+        {
+            if (m_purchaseInOrder.isReview == "1")
+            {
+                return;
+            }
+
+            this.labelPurchaseNum.Visible = false;
+            this.textBoxPurchaseNum.Visible = true;
+
+            this.textBoxPurchaseNum.Text = this.labelPurchaseNum.Text;
+            this.textBoxPurchaseNum.Focus();
+        }
+
+        private void textBoxPurchaseNum_Leave(object sender, EventArgs e)
+        {
+            this.textBoxPurchaseNum.Visible = false;
+            this.labelPurchaseNum.Text = this.textBoxPurchaseNum.Text.ToString();
+            this.labelPurchaseNum.Visible = this.textBoxPurchaseNum.Text.Length > 0;
         }
     }
 }

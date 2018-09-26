@@ -315,6 +315,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "FormSaleReport";
             this.Text = "销售管理报表";
+            this.Load += new System.EventHandler(this.FormSaleReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

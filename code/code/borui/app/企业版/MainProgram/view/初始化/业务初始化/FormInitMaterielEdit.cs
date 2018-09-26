@@ -16,15 +16,14 @@ namespace MainProgram
         private bool m_isAddToInitMaterielList = false;
         private bool m_isEditMaterielData = false;
         private int m_materielPkey = 0;
-        private int m_storageStockTablePkey = 0;
         private string m_materielName = "";
 
-        public FormInitMaterielEdit(string winText, bool isEditMaterielData = true, int pkey = 0)
+        public FormInitMaterielEdit(string winText, bool isEditMaterielData = true, int materielPkey = 0)
         {
             InitializeComponent();
             m_isEditMaterielData = isEditMaterielData;
             this.Text = winText;
-            m_storageStockTablePkey = pkey;
+            m_materielPkey = materielPkey;
         }
 
         private void FormInitMaterielEdit_Load(object sender, EventArgs e)
@@ -37,14 +36,22 @@ namespace MainProgram
                 this.textBoxValue.Enabled = false;
                 this.buttonEnter.Enabled = false;
 
-                InitMaterielTable materielStock = InitMateriel.getInctance().getMaterielInfoFromPkey(m_storageStockTablePkey);
-                m_materielPkey = materielStock.materielID;
                 MaterielTable materiel = Materiel.getInctance().getMaterielInfoFromPkey(m_materielPkey);
                 this.textBoxName.Text = Convert.ToString(materiel.pkey) + "-" + materiel.name;
-                this.textBoxValue.Text = Convert.ToString(materielStock.value);
-                this.textBoxPrice.Text = Convert.ToString(materielStock.price);
-
                 m_materielName = materiel.name;
+
+                if (InitMateriel.getInctance().checkMaterielIsExist(m_materielPkey))
+                {
+                    InitMaterielTable materielStock = InitMateriel.getInctance().getMaterielInfoFromMaterielID(m_materielPkey);
+
+                    this.textBoxValue.Text = Convert.ToString(materielStock.value);
+                    this.textBoxPrice.Text = Convert.ToString(materielStock.price);
+                }
+                else 
+                {
+                    this.textBoxValue.Text = "0";
+                    this.textBoxPrice.Text = "0";
+                }
             }
         }
 
@@ -79,14 +86,14 @@ namespace MainProgram
                 return;
             }
 
-            if (m_isEditMaterielData && InitSubSystemSign.getInctance().isBusinessSystemInit())
+            if (MessageBoxExtend.messageQuestion("请确认是否要对[" + m_materielName + "]的成本进行调整，这将会影响到此物料实时库存的加权单价?"))
             {
-                if (MessageBoxExtend.messageQuestion("请确认是否要对[" + m_materielName + "]的成本进行调整，这将会影响到此物料实时库存的加权单价?"))
+                if (InitMateriel.getInctance().checkMaterielIsExist(m_materielPkey))
                 {
                     // 第一步 插入插入到存货明细表（STORAGE_STOCK_DETAIL），已解决实际库存和历史库存信息可能不对应的问题
                     StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
                     storageStockDetailRecord.materielID = m_materielPkey;
-                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd");
+                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
                     storageStockDetailRecord.billNumber = BillNumber.getInctance().getNewBillNumber(20, DateTime.Now.ToString("yyyy-MM-dd"));
                     storageStockDetailRecord.thingsType = "期初成本调整";
                     storageStockDetailRecord.isIn = 3;
@@ -104,25 +111,37 @@ namespace MainProgram
                     InitMaterielTable record = new InitMaterielTable();
                     record.materielID = m_materielPkey;
                     record.price = Convert.ToDouble(this.textBoxPrice.Text.ToString());
-                    record.value = Convert.ToDouble(this.textBoxValue.Text.ToString());
+                    record.value = materielStorageData.value;
 
-                    if (!m_isEditMaterielData)
-                    {
-                        InitMateriel.getInctance().insert(record);
-                    }
-                    else
-                    {
-                        InitMateriel.getInctance().update(m_storageStockTablePkey, record);
-                    }
+                    InitMateriel.getInctance().update(materielStorageData.pkey, record);
+                }
+                else
+                {
+                    // 第一步 插入插入到存货明细表（STORAGE_STOCK_DETAIL），已解决实际库存和历史库存信息可能不对应的问题
+                    StorageStockDetailTable storageStockDetailRecord = new StorageStockDetailTable();
+                    storageStockDetailRecord.materielID = m_materielPkey;
+                    storageStockDetailRecord.tradingDate = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
+                    storageStockDetailRecord.billNumber = BillNumber.getInctance().getNewBillNumber(20, DateTime.Now.ToString("yyyy-MM-dd"));
+                    storageStockDetailRecord.thingsType = "期初成本调整";
+                    storageStockDetailRecord.isIn = 3;
+                    storageStockDetailRecord.value = 0;
+                    storageStockDetailRecord.price = 0;
+                    storageStockDetailRecord.storageValue = 0.0;
+                    storageStockDetailRecord.storagePrice = Convert.ToDouble(this.textBoxPrice.Text.ToString());
+                    StorageStockDetail.getInctance().insert(storageStockDetailRecord);
 
-                    m_isAddToInitMaterielList = true;
-                    this.Close();
+                    // 第二步 更新实时库存表（INIT_STORAGE_STOCK）
+                    InitMaterielTable record = new InitMaterielTable();
+                    record.materielID = m_materielPkey;
+                    record.price = Convert.ToDouble(this.textBoxPrice.Text.ToString());
+                    record.value = 0.0;
+                    InitMateriel.getInctance().insert(record, true);
                 }
 
+                m_isAddToInitMaterielList = true;
+                this.Close();
             }
-
-
-
+            
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -185,6 +204,11 @@ namespace MainProgram
             // 物料数量只能输入数字或退格键
             e.Handled = true;
             if (e.KeyChar >= '0' && e.KeyChar <= '9')
+            {
+                e.Handled = false;
+            }
+
+            if (e.KeyChar == '.' && this.textBoxPrice.Text.IndexOf(".") == -1)
             {
                 e.Handled = false;
             }

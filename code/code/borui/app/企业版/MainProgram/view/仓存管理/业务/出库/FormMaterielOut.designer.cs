@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMaterielOutOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
@@ -107,6 +108,10 @@
             this.labelMakeNo = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -120,6 +125,7 @@
             this.panelSummary.SuspendLayout();
             this.panelProject.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -231,7 +237,7 @@
             this.panel1.Controls.Add(this.labelSaleName);
             this.panel1.Controls.Add(this.panelDepartmentName);
             this.panel1.Controls.Add(this.textBoxDepartmentName);
-            this.panel1.Location = new System.Drawing.Point(96, 85);
+            this.panel1.Location = new System.Drawing.Point(115, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 21);
             this.panel1.TabIndex = 17;
@@ -262,7 +268,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(96, 106);
+            this.groupBox3.Location = new System.Drawing.Point(115, 106);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(165, 1);
             this.groupBox3.TabIndex = 16;
@@ -304,8 +310,8 @@
             // 
             // dataGridViewDataList
             // 
-            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 164);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
@@ -316,6 +322,7 @@
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -433,7 +440,7 @@
             // 
             // blueBill
             // 
-            this.blueBill.Image = global::MainProgram.Properties.Resources.红字蓝字;
+            this.blueBill.Image = global::MainProgram.Properties.Resources.蓝字;
             this.blueBill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.blueBill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.blueBill.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -457,7 +464,7 @@
             this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printDisplay.Name = "printDisplay";
             this.printDisplay.Size = new System.Drawing.Size(60, 42);
-            this.printDisplay.Text = "打印预览";
+            this.printDisplay.Text = "单据套打";
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
@@ -531,8 +538,8 @@
             // 
             // dataGridViewDataCount
             // 
-            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDataCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDataCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataCount.Location = new System.Drawing.Point(12, 420);
             this.dataGridViewDataCount.Name = "dataGridViewDataCount";
@@ -856,7 +863,7 @@
             // 
             this.textBoxProjectNo.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxProjectNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxProjectNo.Location = new System.Drawing.Point(96, 122);
+            this.textBoxProjectNo.Location = new System.Drawing.Point(116, 122);
             this.textBoxProjectNo.Name = "textBoxProjectNo";
             this.textBoxProjectNo.Size = new System.Drawing.Size(164, 21);
             this.textBoxProjectNo.TabIndex = 106;
@@ -867,7 +874,7 @@
             // panelProject
             // 
             this.panelProject.Controls.Add(this.labelProjectNo);
-            this.panelProject.Location = new System.Drawing.Point(95, 121);
+            this.panelProject.Location = new System.Drawing.Point(115, 121);
             this.panelProject.Name = "panelProject";
             this.panelProject.Size = new System.Drawing.Size(166, 22);
             this.panelProject.TabIndex = 108;
@@ -890,15 +897,15 @@
             this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(18, 127);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 12);
+            this.label6.Size = new System.Drawing.Size(95, 12);
             this.label6.TabIndex = 107;
-            this.label6.Text = "项目编号:";
+            this.label6.Text = "总材料表单据号:";
             // 
             // groupBox7
             // 
             this.groupBox7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox7.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox7.Location = new System.Drawing.Point(95, 143);
+            this.groupBox7.Location = new System.Drawing.Point(115, 143);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(166, 1);
             this.groupBox7.TabIndex = 105;
@@ -955,6 +962,34 @@
             this.groupBox8.Size = new System.Drawing.Size(166, 1);
             this.groupBox8.TabIndex = 109;
             this.groupBox8.TabStop = false;
+            // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCheckDetailed,
+            this.toolStripSeparator1,
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 76);
+            // 
+            // ToolStripMenuItemCheckDetailed
+            // 
+            this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
+            this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
             // 
             // FormMaterielOutOrder
             // 
@@ -1037,6 +1072,7 @@
             this.panelProject.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1121,6 +1157,10 @@
         private System.Windows.Forms.Label labelMakeNo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
 
     }
 }

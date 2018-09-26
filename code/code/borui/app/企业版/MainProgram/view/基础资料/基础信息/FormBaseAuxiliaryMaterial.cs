@@ -28,6 +28,8 @@ namespace MainProgram
 
         private TreeNode m_rootNode;
         private TreeViewExtend m_tree;
+        private TreeNode m_defaultSelectNode;
+        
 
         private DataGridViewExtend m_dataGridViewExtend = new DataGridViewExtend();
 
@@ -63,6 +65,11 @@ namespace MainProgram
                 AuxiliaryMaterial.getInctance().getAuxiliaryMaterialTableNameFromPkey(m_groupPkey))
                 );
 
+            if (m_tables != null && m_tables.Count == 1)
+            {
+                this.treeView.SelectedNode = m_defaultSelectNode;
+            }
+
             setPageActionEnable();
         }
 
@@ -73,19 +80,16 @@ namespace MainProgram
 
             SortedDictionary<int, ArrayList> customers = new SortedDictionary<int, ArrayList>();
 
-            for (int i = 0; i < customerList.Count; i++)
-            {
-                AuxiliaryMaterialDataTable record = new AuxiliaryMaterialDataTable();
-                record = (AuxiliaryMaterialDataTable)customerList[i];
-
+            foreach (KeyValuePair<int, AuxiliaryMaterialDataTable> index2 in customerList)
+           {
                 ArrayList temp = new ArrayList();
 
-                temp.Add(record.pkey);
-                temp.Add(record.name);
-                temp.Add(record.desc);
+                temp.Add(index2.Value.pkey);
+                temp.Add(index2.Value.name);
+                temp.Add(index2.Value.desc);
 
-                customers.Add(i, temp);
-            }
+                customers.Add(customers.Count, temp);
+           }
 
             m_dataGridViewExtend.initDataGridViewData(customers);
         }
@@ -103,7 +107,7 @@ namespace MainProgram
                 record = index.Value;
                 if(isNeedDisplay(record.tableName))
                 {
-                    m_tree.addNode(m_rootNode, record.nodeName, 0, 1, Convert.ToString(record.pkey));
+                    m_defaultSelectNode = m_tree.addNode(m_rootNode, record.nodeName, 0, 1, Convert.ToString(record.pkey));
                 }
             }
 

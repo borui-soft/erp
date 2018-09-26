@@ -28,38 +28,51 @@ namespace MainProgram
         {
             m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dateGridViewExtend.addDataGridViewColumn("物料编号", 80);
-            m_dateGridViewExtend.addDataGridViewColumn("物料名称", 150);
-            m_dateGridViewExtend.addDataGridViewColumn("计价单位", 150);
+            m_dateGridViewExtend.addDataGridViewColumn("物料名称", 300);
             m_dateGridViewExtend.addDataGridViewColumn("收料仓库", 150);
             m_dateGridViewExtend.addDataGridViewColumn("单价", 100);
             m_dateGridViewExtend.addDataGridViewColumn("数量", 100);
 
             m_dateGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
-            updateDataGridView(InitMateriel.getInctance().getAllInitMaterielInfo());
+            //updateDataGridView(InitMateriel.getInctance().getAllInitMaterielInfo());
+            updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
 
             setPageActionEnable();
         }
 
-        private void updateDataGridView(SortedDictionary<int, InitMaterielTable> settlmentWayList)
+        private void updateDataGridView(SortedDictionary<int, MaterielTable> settlmentWayList)
         {
             m_dataGridRecordCount = settlmentWayList.Count;
 
             SortedDictionary<int, ArrayList> settlmentWayLArrary = new SortedDictionary<int, ArrayList>();
 
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryStorelList =
+    AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_STORAGE_LIST");
+
             for (int i = 0; i < settlmentWayList.Count; i++)
             {
-                InitMaterielTable record = new InitMaterielTable();
-                record = (InitMaterielTable)settlmentWayList[i];
+                MaterielTable record = new MaterielTable();
+                record = (MaterielTable)settlmentWayList[i];
 
                 ArrayList temp = new ArrayList();
 
                 temp.Add(record.pkey);
-                temp.Add(record.materielID);
+                temp.Add(record.num);
                 temp.Add(record.name);
-                temp.Add(record.unitPurchase);
-                temp.Add(record.storage);
-                temp.Add(record.price);
-                temp.Add(record.value);
+
+                if (AuxiliaryStorelList.ContainsKey(record.storage))
+                {
+                    temp.Add(AuxiliaryStorelList[record.storage].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID(record.pkey);
+
+                temp.Add(MaterielCountdata.price);
+                temp.Add(MaterielCountdata.value);
 
                 settlmentWayLArrary.Add(i, temp);
             }
@@ -80,7 +93,7 @@ namespace MainProgram
             FormInitMaterielEdit fime = new FormInitMaterielEdit("添加物料初始资料", false);
             fime.ShowDialog();
 
-            updateDataGridView(InitMateriel.getInctance().getAllInitMaterielInfo());
+            updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 
         private void modify_Click(object sender, EventArgs e)
@@ -88,7 +101,7 @@ namespace MainProgram
             FormInitMaterielEdit fime = new FormInitMaterielEdit("编辑物料初始资料", true, m_currentDataGridViedRecordPkey);
             fime.ShowDialog();
 
-            updateDataGridView(InitMateriel.getInctance().getAllInitMaterielInfo());
+            updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 
         private void delete_Click(object sender, EventArgs e)
@@ -106,7 +119,7 @@ namespace MainProgram
                 if (MessageBoxExtend.messageQuestion("确定删除[" + m_currentDataGridViedRecordName + "]库存信息吗?"))
                 {
                     InitMateriel.getInctance().delete(m_currentDataGridViedRecordPkey);
-                    updateDataGridView(InitMateriel.getInctance().getAllInitMaterielInfo());
+                    updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
                 }
             }
         }
@@ -122,7 +135,7 @@ namespace MainProgram
                 if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
                 {
                     InitMateriel.getInctance().fileImport(openFileDialog1.FileName);
-                    updateDataGridView(InitMateriel.getInctance().getAllInitMaterielInfo());
+                    updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
                 }
             }
         }
@@ -228,6 +241,42 @@ namespace MainProgram
                     }
                 }
             }
+        }
+
+        private void textBoxSerach_Click(object sender, EventArgs e)
+        {
+            this.textBoxSerach.Text = "";
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
+        }
+
+        private void textBoxSerach_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBoxSerach.Text = "";
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
+        }
+
+        private void textBoxSerach_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                updateDataGridView(Materiel.getInctance().getMaterielInfoFromSerachTerm(this.textBoxSerach.Text));
+
+                this.textBoxSerach.ForeColor = System.Drawing.SystemColors.ScrollBar;
+                this.textBoxSerach.Text = "输入物料名称或编码或助记码，按回车键实现快速查找";
+            }
+        }
+
+        private void textBoxSerach_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.textBoxSerach.Text = "";
+            this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
+        }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            InitMateriel.getInctance().refreshRecord();
+            Materiel.getInctance().refreshRecord();
+            updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
     }
 }

@@ -63,6 +63,8 @@
             this.ToolStripMenuItemNoForbidSupplier = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.textBoxSerach = new System.Windows.Forms.TextBox();
+            this.toolStripMenuItemChange = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -347,7 +349,7 @@
             this.dataGridViewSupplierList.ReadOnly = true;
             this.dataGridViewSupplierList.RowHeadersWidth = 4;
             this.dataGridViewSupplierList.RowTemplate.Height = 23;
-            this.dataGridViewSupplierList.Size = new System.Drawing.Size(757, 421);
+            this.dataGridViewSupplierList.Size = new System.Drawing.Size(759, 421);
             this.dataGridViewSupplierList.TabIndex = 0;
             this.dataGridViewSupplierList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewSupplierList_CellMouseDown);
             this.dataGridViewSupplierList.Click += new System.EventHandler(this.dataGridViewSupplierList_Click);
@@ -359,11 +361,13 @@
             this.ToolStripMenuItemAddSupplier,
             this.ToolStripMenuItemModifySupplier,
             this.ToolStripMenuItemDeleteSupplier,
+            this.toolStripSeparator7,
+            this.toolStripMenuItemChange,
             this.toolStripSeparator6,
             this.ToolStripMenuItemForbidSupplier,
             this.ToolStripMenuItemNoForbidSupplier});
             this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
-            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(113, 120);
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(161, 170);
             // 
             // ToolStripMenuItemAddSupplier
             // 
@@ -371,7 +375,7 @@
             this.ToolStripMenuItemAddSupplier.BackgroundImage = global::MainProgram.Properties.Resources.add;
             this.ToolStripMenuItemAddSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemAddSupplier.Name = "ToolStripMenuItemAddSupplier";
-            this.ToolStripMenuItemAddSupplier.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemAddSupplier.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemAddSupplier.Text = "新增";
             this.ToolStripMenuItemAddSupplier.Click += new System.EventHandler(this.add_Click);
             // 
@@ -381,8 +385,8 @@
             this.ToolStripMenuItemModifySupplier.BackgroundImage = global::MainProgram.Properties.Resources.modify;
             this.ToolStripMenuItemModifySupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemModifySupplier.Name = "ToolStripMenuItemModifySupplier";
-            this.ToolStripMenuItemModifySupplier.Size = new System.Drawing.Size(112, 22);
-            this.ToolStripMenuItemModifySupplier.Text = "修改";
+            this.ToolStripMenuItemModifySupplier.Size = new System.Drawing.Size(160, 22);
+            this.ToolStripMenuItemModifySupplier.Text = "修改供应商资料";
             this.ToolStripMenuItemModifySupplier.Click += new System.EventHandler(this.modify_Click);
             // 
             // ToolStripMenuItemDeleteSupplier
@@ -391,21 +395,21 @@
             this.ToolStripMenuItemDeleteSupplier.BackgroundImage = global::MainProgram.Properties.Resources.delete;
             this.ToolStripMenuItemDeleteSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemDeleteSupplier.Name = "ToolStripMenuItemDeleteSupplier";
-            this.ToolStripMenuItemDeleteSupplier.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemDeleteSupplier.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemDeleteSupplier.Text = "删除";
             this.ToolStripMenuItemDeleteSupplier.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(109, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(157, 6);
             // 
             // ToolStripMenuItemForbidSupplier
             // 
             this.ToolStripMenuItemForbidSupplier.BackgroundImage = global::MainProgram.Properties.Resources.forbid;
             this.ToolStripMenuItemForbidSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemForbidSupplier.Name = "ToolStripMenuItemForbidSupplier";
-            this.ToolStripMenuItemForbidSupplier.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemForbidSupplier.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemForbidSupplier.Text = "禁用";
             this.ToolStripMenuItemForbidSupplier.Click += new System.EventHandler(this.forbid_Click);
             // 
@@ -414,7 +418,7 @@
             this.ToolStripMenuItemNoForbidSupplier.BackgroundImage = global::MainProgram.Properties.Resources.noForbid;
             this.ToolStripMenuItemNoForbidSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ToolStripMenuItemNoForbidSupplier.Name = "ToolStripMenuItemNoForbidSupplier";
-            this.ToolStripMenuItemNoForbidSupplier.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemNoForbidSupplier.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemNoForbidSupplier.Text = "反禁用";
             this.ToolStripMenuItemNoForbidSupplier.Click += new System.EventHandler(this.noForbid_Click);
             // 
@@ -431,6 +435,22 @@
             this.textBoxSerach.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSerach_MouseClick);
             this.textBoxSerach.DoubleClick += new System.EventHandler(this.textBoxSerach_DoubleClick);
             this.textBoxSerach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSerach_KeyDown);
+            // 
+            // toolStripMenuItemChange
+            // 
+            this.toolStripMenuItemChange.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItemChange.BackgroundImage = global::MainProgram.Properties.Resources.modify;
+            this.toolStripMenuItemChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItemChange.Name = "toolStripMenuItemChange";
+            this.toolStripMenuItemChange.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemChange.Text = "调整分组";
+            this.toolStripMenuItemChange.Click += new System.EventHandler(this.toolStripSeparator7_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(157, 6);
+            this.toolStripSeparator7.Click += new System.EventHandler(this.toolStripSeparator7_Click);
             // 
             // FormBaseSupplier
             // 
@@ -496,5 +516,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemNoForbidSupplier;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TextBox textBoxSerach;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChange;
     }
 }

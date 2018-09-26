@@ -10,6 +10,7 @@ using System.Collections;
 using TIV.Core.DatabaseAccess;
 using MainProgram.model;
 using MainProgram.bus;
+using TIV.Core.TivLogger;
 
 namespace MainProgram
 {
@@ -19,7 +20,7 @@ namespace MainProgram
     {
         private int m_materielRecordCount = 0;
 
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private string m_materielGroupName = "";
 
         private int m_currentDataGridViedRecordPkey = 0;
@@ -40,33 +41,34 @@ namespace MainProgram
 
         private void FormBaseMateriel_Load(object sender, EventArgs e)
         {
-            // 树控件初始化
+            // 树控件初始化 
             refreshTreeView();
 
             // DataGridView控件初始化
             m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dataGridViewExtend.addDataGridViewColumn("物料组", 200, false);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
-            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 100);
+            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 80);
+
+            m_dataGridViewExtend.addDataGridViewColumn("分组名称", 120);
+
             m_dataGridViewExtend.addDataGridViewColumn("物料简称", 100);
             m_dataGridViewExtend.addDataGridViewColumn("助记码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("规格型号", 100);
             m_dataGridViewExtend.addDataGridViewColumn("品牌", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("参数", 60);
             m_dataGridViewExtend.addDataGridViewColumn("收料仓库", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("物料属性", 100);
             m_dataGridViewExtend.addDataGridViewColumn("计价方式", 100);
             m_dataGridViewExtend.addDataGridViewColumn("基本单位", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("采购单位", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("销售单位", 100);
-            m_dataGridViewExtend.addDataGridViewColumn("库存单位", 100, false);
+            m_dataGridViewExtend.addDataGridViewColumn("物料材质", 100);
             m_dataGridViewExtend.addDataGridViewColumn("存货上限", 100);
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 100);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 100);
             m_dataGridViewExtend.addDataGridViewColumn("备注", 100);
 
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
-            updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
 
+            updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
             setPageActionEnable();
 
             ToolStripMenuItemAddMateriel.Enabled = this.add.Enabled;
@@ -83,35 +85,58 @@ namespace MainProgram
 
             SortedDictionary<int, ArrayList> materiels = new SortedDictionary<int, ArrayList>();
 
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryMaterialList =
+                AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_UNIT_LIST");
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryStorelList =
+                AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_STORAGE_LIST");
+
             for (int i = 0; i < materielList.Count; i++)
             {
                 MaterielTable materiel = new MaterielTable();
                 materiel = (MaterielTable)materielList[i];
 
                 ArrayList temp = new ArrayList();
-
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.materielType);
                 temp.Add(materiel.name);
                 temp.Add(materiel.num);
+
+                temp.Add(MaterielType.getInctance().getMaterielTypeNameFromPkey(materiel.materielType));
+
                 temp.Add(materiel.nameShort);
                 temp.Add(materiel.mnemonicCode);
                 temp.Add(materiel.model);
                 temp.Add(materiel.brand);
+                temp.Add(materiel.materielParameter);
 
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materiel.storage));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_VALUATION_TYPE_LIST", materiel.valuation));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unit));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitPurchase));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitSale));
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitStorage));
+                if (AuxiliaryStorelList.ContainsKey(materiel.storage))
+                {
+                    temp.Add(AuxiliaryStorelList[materiel.storage].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
 
+                temp.Add("移动加权平均");
+
+                if (AuxiliaryMaterialList.ContainsKey(materiel.unit))
+                {
+                    temp.Add(AuxiliaryMaterialList[materiel.unit].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                temp.Add(materiel.CZ);
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
                 temp.Add(materiel.note);
-                materiels.Add(i, temp);
+                materiels.Add(materiels.Count, temp);
             }
 
             m_dataGridViewExtend.initDataGridViewData(materiels, 4);
@@ -252,6 +277,26 @@ namespace MainProgram
 
         private void close_Click(object sender, EventArgs e)
         {
+            // for test
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    addMaterielTypeTest(1);
+            //}
+
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    addMaterielTypeTest(7 + i);
+            //}
+
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //    addMateriel(7 + i);
+            //}
+
             this.Close();
         }
 
@@ -262,10 +307,13 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
-                m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text.ToString();
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                    m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text;
 
-                updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                    updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                }
             }
             else 
             {
@@ -474,6 +522,51 @@ namespace MainProgram
                     }
                 }
             }
+        }
+
+
+        /*
+         * 各种测试代码如下
+         * 
+         * */
+        private bool addMaterielTypeTest(int materielGroupPkey)
+        {
+            MaterielTypeTable materielType = new MaterielTypeTable();
+
+            materielType.name = "addMaterielTypeTest";
+            materielType.num = "0";
+            materielType.desc = "addMaterielTypeTest desc";
+
+            MaterielType.getInctance().insert(materielType, false);
+
+
+            // 物料组织结构
+            MaterielOrgStructTable materielOrgInfo = new MaterielOrgStructTable();
+
+            materielOrgInfo.parentPkey = MaterielOrgStruct.getInctance().getPkeyFromValue(materielGroupPkey);
+            materielOrgInfo.value = MaterielType.getInctance().getMaxPkey();
+            MaterielOrgStruct.getInctance().insert(materielOrgInfo,false);
+
+            return true;
+        }
+
+        private bool addMateriel(int materielGroupPkey)
+        {
+            MaterielTable materiel = new MaterielTable();
+
+            materiel.materielType = materielGroupPkey;
+            materiel.name = "name-" + Convert.ToString(materielGroupPkey);
+
+            materiel.num = "1";
+            materiel.nameShort = "2";
+            materiel.model = "3";
+            materiel.mnemonicCode = "4";
+            materiel.brand = "5";
+            materiel.materielParameter = "6";
+
+            Materiel.getInctance().insert(materiel, false);
+
+            return true;
         }
     }
 }

@@ -46,14 +46,15 @@ namespace MainProgram
             {
                 // 其他出库单序时薄
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
-                m_dateGridViewExtend.addDataGridViewColumn("名称", 140);
-                m_dateGridViewExtend.addDataGridViewColumn("申请人", 80);
+                m_dateGridViewExtend.addDataGridViewColumn("名称", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("型号", 70);
+                m_dateGridViewExtend.addDataGridViewColumn("申请人", 70);
                 m_dateGridViewExtend.addDataGridViewColumn("申请日期", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("申请数量", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("单据号", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("是否已审核", 140);
-                m_dateGridViewExtend.addDataGridViewColumn("审核人", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("审核人", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("审核日期", 100);
             }
             else
             {
@@ -84,7 +85,7 @@ namespace MainProgram
 
                     if (orderInof != null)
                     {
-                        if (record.isCancel == "1")
+                        if (record.isCancel == "1" || record.value <= 0.00)
                         {
                             continue;
                         }
@@ -93,6 +94,7 @@ namespace MainProgram
 
                         temp.Add(record.pkey);
                         temp.Add(record.materielName);
+                        temp.Add(record.materielModel);
 
                         temp.Add(orderInof.applyStaffName);
                         temp.Add(orderInof.tradingDate);
@@ -169,7 +171,7 @@ namespace MainProgram
                             if (dataGridViewList.Rows[i].Cells[j].Selected)
                             {
                                 dataGridViewList.Rows[i].Selected = true;
-                                m_billNumber = dataGridViewList.Rows[i].Cells[5].Value.ToString();
+                                m_billNumber = dataGridViewList.Rows[i].Cells[6].Value.ToString();
                                 m_pkey = dataGridViewList.Rows[i].Cells[0].Value.ToString();
                                 m_currentSelectRecordName = dataGridViewList.Rows[i].Cells[1].Value.ToString();
                                 return;
@@ -198,7 +200,7 @@ namespace MainProgram
                             if (dataGridViewList.Rows[i].Cells[j].Selected)
                             {
                                 dataGridViewList.Rows[i].Selected = true;
-                                m_billNumber = dataGridViewList.Rows[i].Cells[5].Value.ToString();
+                                m_billNumber = dataGridViewList.Rows[i].Cells[6].Value.ToString();
                                 m_pkey = dataGridViewList.Rows[i].Cells[0].Value.ToString();
                                 m_currentSelectRecordName = dataGridViewList.Rows[i].Cells[1].Value.ToString();
                                 checkAccountBillDetaile();
@@ -272,6 +274,14 @@ namespace MainProgram
             {
                 MaterielProOccupiedOrderDetails.getInctance().delProOccupied(m_pkey);
             }
+
+            updateDataGridView();
+        }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            MaterielProOccupiedOrder.getInctance().refreshRecord();
+            MaterielProOccupiedOrderDetails.getInctance().refreshRecord();
 
             updateDataGridView();
         }

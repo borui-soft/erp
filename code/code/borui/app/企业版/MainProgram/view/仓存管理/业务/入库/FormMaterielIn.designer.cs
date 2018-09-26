@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMaterielInOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
@@ -100,6 +101,8 @@
             this.panelSummary = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
             this.panelInLedger = new System.Windows.Forms.Panel();
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,6 +114,7 @@
             this.groupBox18.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.panelSummary.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -307,6 +311,7 @@
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -426,7 +431,7 @@
             // 
             // blueBill
             // 
-            this.blueBill.Image = global::MainProgram.Properties.Resources.红字蓝字;
+            this.blueBill.Image = global::MainProgram.Properties.Resources.蓝字;
             this.blueBill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.blueBill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.blueBill.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -469,7 +474,7 @@
             this.printDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printDisplay.Name = "printDisplay";
             this.printDisplay.Size = new System.Drawing.Size(60, 42);
-            this.printDisplay.Text = "打印预览";
+            this.printDisplay.Text = "单据套打";
             this.printDisplay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.printDisplay.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.printDisplay.Click += new System.EventHandler(this.printDisplay_Click);
@@ -817,7 +822,7 @@
             // 
             this.panelRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRed.BackgroundImage = global::MainProgram.Properties.Resources.红字;
-            this.panelRed.Location = new System.Drawing.Point(901, 1);
+            this.panelRed.Location = new System.Drawing.Point(899, 1);
             this.panelRed.Name = "panelRed";
             this.panelRed.Size = new System.Drawing.Size(62, 33);
             this.panelRed.TabIndex = 102;
@@ -872,6 +877,20 @@
             this.panelInLedger.Size = new System.Drawing.Size(61, 33);
             this.panelInLedger.TabIndex = 106;
             this.panelInLedger.Visible = false;
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(113, 26);
             // 
             // FormMaterielInOrder
             // 
@@ -943,6 +962,7 @@
             this.groupBox20.ResumeLayout(false);
             this.panelSummary.ResumeLayout(false);
             this.panelSummary.PerformLayout();
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1020,6 +1040,8 @@
         private System.Windows.Forms.ToolStripButton blueBill;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panelInLedger;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
 
     }
 }

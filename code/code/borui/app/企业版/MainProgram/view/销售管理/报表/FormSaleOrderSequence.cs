@@ -152,9 +152,10 @@ namespace MainProgram
                 m_dateGridViewExtend.addDataGridViewColumn("ID", 30);
                 m_dateGridViewExtend.addDataGridViewColumn("领料部门", 140);
                 m_dateGridViewExtend.addDataGridViewColumn("日期", 80);
-                m_dateGridViewExtend.addDataGridViewColumn("单据号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 120);
-                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 120);
+                m_dateGridViewExtend.addDataGridViewColumn("单据号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("总材料表单据编号", 150);
+                m_dateGridViewExtend.addDataGridViewColumn("项目编号", 100);
+                m_dateGridViewExtend.addDataGridViewColumn("生产编号", 100);
                 m_dateGridViewExtend.addDataGridViewColumn("数量", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("金额", 80);
                 m_dateGridViewExtend.addDataGridViewColumn("领料人", 80);
@@ -282,10 +283,22 @@ namespace MainProgram
                         temp.Add(record.saleType);
                         temp.Add(record.paymentDate);
                         temp.Add(record.sourceBillNumber);
-                        temp.Add(record.sumMoney);
-                        temp.Add(record.sumTransportationCost);
-                        temp.Add(record.sumOtherCost);
-                        temp.Add(record.totalMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add(Convert.ToDouble(record.sumMoney) * -1);
+                            temp.Add(Convert.ToDouble(record.sumTransportationCost) * -1);
+                            temp.Add(Convert.ToDouble(record.sumOtherCost) * -1);
+                            temp.Add(Convert.ToDouble(record.totalMoney) * -1);
+                        }
+                        else
+                        {
+                            temp.Add(record.sumMoney);
+                            temp.Add(record.sumTransportationCost);
+                            temp.Add(record.sumOtherCost);
+                            temp.Add(record.totalMoney);
+                        }
+
                         temp.Add(record.staffSaveName);
                         temp.Add(record.staffCheckName);
                         temp.Add(record.businessPeopleName);
@@ -494,10 +507,21 @@ namespace MainProgram
                         temp.Add(record.departmentName);
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.projectNo);
+                        temp.Add(record.srcOrderNum);
+                        temp.Add(FormProject.getInctance().getProjectNumFromBillNumber(record.srcOrderNum));
                         temp.Add(record.makeNo);
-                        temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumValue);
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.materielOutStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -584,8 +608,18 @@ namespace MainProgram
                         temp.Add("");
                         temp.Add(record.tradingDate);
                         temp.Add(record.billNumber);
-                        temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumValue);
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.materielOutStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -674,8 +708,18 @@ namespace MainProgram
                         temp.Add(record.billNumber);
                         temp.Add(record.projectNo);
                         temp.Add(record.makeNo);
-                        temp.Add(record.sumValue);
-                        temp.Add(record.sumMoney);
+
+                        if (record.isRedBill == 1)
+                        {
+                            temp.Add((Convert.ToDouble(record.sumValue) * -1));
+                            temp.Add((Convert.ToDouble(record.sumMoney) * -1));
+                        }
+                        else
+                        {
+                            temp.Add(record.sumValue);
+                            temp.Add(record.sumMoney);
+                        }
+
                         temp.Add(record.materielOutStaffName);
                         temp.Add(record.makeOrderStaffName);
                         temp.Add(record.orderrReviewName);
@@ -888,6 +932,99 @@ namespace MainProgram
         public void setDataFilter(FormStorageSequenceFilterValue filter)
         {
             m_filter = filter;
+        }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            // 刷新按钮逻辑
+            if (m_orderType == OrderType.SaleQuotation)
+            {
+                // 销售管理-销售报价单序时簿
+                SaleQuotationOrder.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleOrder)
+            {
+                // 销售管理-销售订单序时簿
+                SaleOrder.getInctance().refreshRecord();
+                SaleOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleOut)
+            {
+                // 销售管理-销售出库单序时簿
+                SaleOutOrder.getInctance().refreshRecord();
+                SaleOutOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleInvoice)
+            {
+                // 销售管理-销售发票序时簿(暂时为空就可以)
+            }
+            else if (m_orderType == OrderType.SaleOrderExcute)
+            {
+                // 销售管理-销售订单执行情况
+                SaleOrder.getInctance().refreshRecord();
+                SaleOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.SaleOutOrderExcute)
+            {
+                // 销售管理-销售出库单收款情况
+                SaleOutOrder.getInctance().refreshRecord();
+                SaleOutOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.StorageMaterielOut)
+            {
+                // 仓存管理-生产领料
+                MaterielOutOrder.getInctance().refreshRecord();
+                MaterielOutOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.StorageOutCheck)
+            {
+                // 仓存管理-盘亏亏损
+                MaterielOutEarningsOrder.getInctance().refreshRecord();
+                MaterielOutEarningsOrderDetails.getInctance().refreshRecord();
+            }
+            else if (m_orderType == OrderType.StorageOutOther)
+            {
+                // 仓存管理-其他出库
+                MaterielOutOtherOrder.getInctance().refreshRecord();
+                MaterielOutOtherOrderDetails.getInctance().refreshRecord();
+            }
+
+            updateDataGridView();
+        }
+
+        private void toolStripButtonReset_Click(object sender, EventArgs e)
+        {
+            FormStorageSequenceFilter fssf = new FormStorageSequenceFilter(true);
+            if (fssf.ShowDialog() == DialogResult.OK)
+            {
+                // 隐藏当前窗口
+                this.Hide();
+
+                //得到界面用户选定的值
+                FormStorageSequenceFilterValue filter = fssf.getFilterUIValue();
+                FormSaleOrderSequence.OrderType type = new FormSaleOrderSequence.OrderType();
+
+                if (filter.sequenceType == "0")
+                {
+                    type = FormSaleOrderSequence.OrderType.SaleOut;
+                }
+                else if (filter.sequenceType == "1")
+                {
+                    type = FormSaleOrderSequence.OrderType.StorageMaterielOut;
+                }
+                else if (filter.sequenceType == "2")
+                {
+                    type = FormSaleOrderSequence.OrderType.StorageOutCheck;
+                }
+                else if (filter.sequenceType == "3")
+                {
+                    type = FormSaleOrderSequence.OrderType.StorageOutOther;
+                }
+
+                FormSaleOrderSequence fphpc = new FormSaleOrderSequence(type);
+                fphpc.setDataFilter(filter);
+                fphpc.ShowDialog();
+            }
         }
     }
 }

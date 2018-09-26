@@ -25,7 +25,7 @@ namespace MainProgram
         }
 
         private int m_materielRecordCount = 0;
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private int m_currentDataGridViedRecordPkey = 0;
         private bool m_isDisplayJG = false;
         private string m_materielGroupName = "";
@@ -87,9 +87,10 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 170);
-            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 100);
+            m_dataGridViewExtend.addDataGridViewColumn("物料编号", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("分组名称", 120);
             m_dataGridViewExtend.addDataGridViewColumn("型号", 60);
             m_dataGridViewExtend.addDataGridViewColumn("品牌", 60);
             m_dataGridViewExtend.addDataGridViewColumn("实际库存", 78);
@@ -107,6 +108,8 @@ namespace MainProgram
             // ++2016-11-11
 
             m_dataGridViewExtend.addDataGridViewColumn("单位", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("参数", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("材质", 70);
             m_dataGridViewExtend.addDataGridViewColumn("存货上限", 78);
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 78);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 78);
@@ -116,6 +119,8 @@ namespace MainProgram
 
             getMaterielProOccupiedList();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
+
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void updateDataGridView(SortedDictionary<int, MaterielTable> materielList)
@@ -124,6 +129,16 @@ namespace MainProgram
             m_materielRecordCount = materielList.Count;
 
             SortedDictionary<int, ArrayList> materiels = new SortedDictionary<int, ArrayList>();
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryMaterialList =
+    AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_UNIT_LIST");
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryStorelList =
+                AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_STORAGE_LIST");
+
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryAttributelList =
+                AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_MATERIEL_ATTRIBUTE");
+            
 
             for (int i = 0; i < materielList.Count; i++)
             {
@@ -135,6 +150,7 @@ namespace MainProgram
                 temp.Add(materiel.pkey);
                 temp.Add(materiel.name);
                 temp.Add(materiel.num);
+                temp.Add(MaterielType.getInctance().getMaterielTypeNameFromPkey(materiel.materielType));
                 temp.Add(materiel.model);
                 temp.Add(materiel.brand);
 
@@ -163,16 +179,38 @@ namespace MainProgram
                     temp.Add(MaterielCountdata.value);
                 }
 
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitStorage));
+                if (AuxiliaryMaterialList.ContainsKey(materiel.unit))
+                {
+                    temp.Add(AuxiliaryMaterialList[materiel.unit].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                temp.Add(materiel.materielParameter);
+                temp.Add(materiel.CZ);
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materiel.storage));
 
+                if (AuxiliaryStorelList.ContainsKey(materiel.storage))
+                {
+                    temp.Add(AuxiliaryStorelList[materiel.storage].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                string materielAttributeName = "";
+                if (AuxiliaryAttributelList.ContainsKey(materiel.materielAttribute))
+                {
+                    materielAttributeName = AuxiliaryAttributelList[materiel.materielAttribute].name;
+                }
+                
                 if (m_displayDataType == (int)DisplayDataType.Materiel)
                 {
-                    string materielAttributeName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute);
-
                     if (materielAttributeName.IndexOf("外购") != -1)
                     {
                         materiels.Add(materiels.Count, temp);
@@ -181,8 +219,6 @@ namespace MainProgram
                 }
                 else if (m_displayDataType == (int)DisplayDataType.Product)
                 {
-                    string materielAttributeName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute);
-
                     if (materielAttributeName.IndexOf("外购") == -1)
                     {
                         materiels.Add(materiels.Count, temp);
@@ -201,28 +237,28 @@ namespace MainProgram
 
             if (m_isDisplayJG)
             {
-                m_dataGridViewExtend.initDataGridViewData(materiels, 9);
+                m_dataGridViewExtend.initDataGridViewData(materiels, 8);
             }
             else
             {
-                m_dataGridViewExtend.initDataGridViewData(materiels, 7);
+                m_dataGridViewExtend.initDataGridViewData(materiels, 6);
             }
 
             this.dataGridViewMaterielList.Columns[1].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-            this.dataGridViewMaterielList.Columns[5].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+            this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
 
             if (m_isDisplayJG)
             {
-                this.dataGridViewMaterielList.Columns[6].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.dataGridViewMaterielList.Columns[7].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
-                this.dataGridViewMaterielList.Columns[10].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[8].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[11].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
 
                 this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
                 this.labelCountInfo.Text += "  累计金额[" + Convert.ToString(sum) + "]";
             }
             else 
             {
-                this.dataGridViewMaterielList.Columns[8].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                this.dataGridViewMaterielList.Columns[9].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 this.labelCountInfo.Text = "[" + m_materielGroupName + "]类材料总计[" + Convert.ToString(materiels.Count) + "]条";
             }
         }
@@ -309,10 +345,13 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
-                m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text;
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                    m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text;
 
-                updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                    updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                }
             }
             else 
             {
@@ -399,18 +438,38 @@ namespace MainProgram
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            MaterielProOccupiedOrder.getInctance().refrensRecord();
-            MaterielProOccupiedOrderDetails.getInctance().refrensRecord();
+            MaterielProOccupiedOrder.getInctance().refreshRecord();
+            MaterielProOccupiedOrderDetails.getInctance().refreshRecord();
             getMaterielProOccupiedList();
 
+            MaterielType.getInctance().refreshRecord();
+            MaterielOrgStruct.getInctance().refreshRecord();
+
             refreshTreeView();
-            Materiel.getInctance().refrensRecord();
+            Materiel.getInctance().refreshRecord();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 
         private void getMaterielProOccupiedList()
         {
             m_materielProlist = MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedList();
+        }
+
+        private void ToolStripMenuItemToApply_Click(object sender, EventArgs e)
+        {
+            FormPurchaseApply fpa = new FormPurchaseApply("");
+            fpa.ShowDialog();
+        }
+
+        private void dataGridViewMaterielList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < m_materielRecordCount))
+            {
+                dataGridViewMaterielList.Rows[e.RowIndex].Selected = true;
+                m_currentDataGridViedRecordPkey = Convert.ToInt32(dataGridViewMaterielList.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
         }
     }
 }

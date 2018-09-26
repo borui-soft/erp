@@ -448,5 +448,29 @@ namespace MainProgram
             this.textBoxSerach.Text = "";
             this.textBoxSerach.ForeColor = System.Drawing.SystemColors.MenuText;
         }
+
+        private void toolStripSeparator7_Click(object sender, EventArgs e)
+        {
+            FormMaterielTypeModify fmtm = new FormMaterielTypeModify(3);
+            fmtm.ShowDialog();
+
+            if (fmtm.getIsSave())
+            {
+                int pkey = fmtm.getSelectRecordPkey();
+                string typeName = fmtm.getSelectTypeName();
+
+                if (m_currentDataGridViedRecordCompanyName.Length > 0)
+                {
+                    if (MessageBoxExtend.messageQuestion("确定调整供应商[" + m_currentDataGridViedRecordCompanyName + "]至[" + typeName + "]分组吗?"))
+                    {
+                        if (Supplier.getInctance().modifyMaterielType(pkey, m_currentDataGridViedRecordPkey))
+                        {
+                            MessageBoxExtend.messageOK("供应商分组调整成功");
+                            updateDataGridView(getCurrentNodeAllChildNodesSupplier());
+                        }
+                    }
+                }
+            }
+        }
     }
 }

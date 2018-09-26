@@ -18,7 +18,7 @@ namespace MainProgram
         private CashCashsubLedgerTable m_cashRecord = new CashCashsubLedgerTable();
         private BankCashsubLedgerTable m_bankRecord = new BankCashsubLedgerTable();
 
-        private int PAYMENT_ORDER_BILL_NUMBER = 17;
+        private int PAYMENT_ORDER_BILL_NUMBER = 61;
         private string PAYMENT_ORDER_BILL_NAME = "付款单";
         private string m_billNumber = "";
         private bool m_isBankBill = false;
@@ -132,6 +132,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             /** 
              * 函数处理逻辑
              * 1、得到页面所有控件的值

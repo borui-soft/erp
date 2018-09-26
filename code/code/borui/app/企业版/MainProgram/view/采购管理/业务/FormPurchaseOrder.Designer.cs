@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPurchaseOrder));
             this.labelBillNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.panelSummary = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
@@ -104,6 +104,24 @@
             this.dateTimePickerDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
             this.panelIsReview = new System.Windows.Forms.Panel();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.panelContractNum = new System.Windows.Forms.Panel();
+            this.labelContractNum = new System.Windows.Forms.Label();
+            this.textBoxContractNum = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelSourceOrderNumber = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panelSourceOrderNumber = new System.Windows.Forms.Panel();
+            this.textBoxSourceOrderNumber = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.contextMenuStripDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemCheckDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemDelRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,6 +135,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataCount)).BeginInit();
             this.panel6.SuspendLayout();
             this.panel14.SuspendLayout();
+            this.panelContractNum.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.contextMenuStripDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBillNumber
@@ -230,7 +252,7 @@
             this.panel1.Controls.Add(this.labelPurchaseName);
             this.panel1.Controls.Add(this.panelPurchaseName);
             this.panel1.Controls.Add(this.textBoxPurchaseName);
-            this.panel1.Location = new System.Drawing.Point(96, 85);
+            this.panel1.Location = new System.Drawing.Point(115, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 21);
             this.panel1.TabIndex = 17;
@@ -261,7 +283,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(96, 106);
+            this.groupBox3.Location = new System.Drawing.Point(115, 106);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(165, 1);
             this.groupBox3.TabIndex = 16;
@@ -308,13 +330,14 @@
             this.dataGridViewDataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDataList.Location = new System.Drawing.Point(12, 203);
             this.dataGridViewDataList.Name = "dataGridViewDataList";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewDataList.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewDataList.RowTemplate.Height = 23;
             this.dataGridViewDataList.Size = new System.Drawing.Size(1102, 265);
             this.dataGridViewDataList.TabIndex = 25;
             this.dataGridViewDataList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataList_CellBeginEdit);
             this.dataGridViewDataList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellEndEdit);
+            this.dataGridViewDataList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDataList_CellMouseDown);
             this.dataGridViewDataList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataList_CellValueChanged);
             this.dataGridViewDataList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataList_EditingControlShowing);
             // 
@@ -428,22 +451,12 @@
             this.label13.TabIndex = 26;
             this.label13.Text = "采购员(*):";
             // 
-            // groupBox9
-            // 
-            this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox9.Location = new System.Drawing.Point(99, 179);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(595, 1);
-            this.groupBox9.TabIndex = 41;
-            this.groupBox9.TabStop = false;
-            // 
             // panelSummary
             // 
             this.panelSummary.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelSummary.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
             this.panelSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelSummary.Location = new System.Drawing.Point(678, 158);
+            this.panelSummary.Location = new System.Drawing.Point(1087, 165);
             this.panelSummary.Name = "panelSummary";
             this.panelSummary.Size = new System.Drawing.Size(21, 21);
             this.panelSummary.TabIndex = 42;
@@ -454,9 +467,9 @@
             this.panel10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel10.Controls.Add(this.labelSummary);
             this.panel10.Controls.Add(this.textBoxSummary);
-            this.panel10.Location = new System.Drawing.Point(97, 159);
+            this.panel10.Location = new System.Drawing.Point(940, 166);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(600, 21);
+            this.panel10.Size = new System.Drawing.Size(166, 21);
             this.panel10.TabIndex = 40;
             this.panel10.Click += new System.EventHandler(this.panelSummary_Click);
             // 
@@ -474,9 +487,9 @@
             // 
             this.textBoxSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSummary.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxSummary.Location = new System.Drawing.Point(2, 0);
+            this.textBoxSummary.Location = new System.Drawing.Point(0, 0);
             this.textBoxSummary.Name = "textBoxSummary";
-            this.textBoxSummary.Size = new System.Drawing.Size(597, 21);
+            this.textBoxSummary.Size = new System.Drawing.Size(152, 21);
             this.textBoxSummary.TabIndex = 43;
             this.textBoxSummary.Visible = false;
             this.textBoxSummary.Click += new System.EventHandler(this.panelSummary_Click);
@@ -487,7 +500,7 @@
             this.panel11.Controls.Add(this.labelPurchaseType);
             this.panel11.Controls.Add(this.panelPurchaseType);
             this.panel11.Controls.Add(this.comboBoxPurchaseType);
-            this.panel11.Location = new System.Drawing.Point(96, 123);
+            this.panel11.Location = new System.Drawing.Point(115, 123);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(165, 21);
             this.panel11.TabIndex = 39;
@@ -529,7 +542,7 @@
             // 
             this.groupBox11.BackColor = System.Drawing.SystemColors.ControlText;
             this.groupBox11.Controls.Add(this.groupBox12);
-            this.groupBox11.Location = new System.Drawing.Point(96, 144);
+            this.groupBox11.Location = new System.Drawing.Point(115, 144);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(165, 1);
             this.groupBox11.TabIndex = 38;
@@ -550,7 +563,7 @@
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.Location = new System.Drawing.Point(18, 164);
+            this.label18.Location = new System.Drawing.Point(854, 169);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(35, 12);
             this.label18.TabIndex = 37;
@@ -920,12 +933,193 @@
             this.panelIsReview.TabIndex = 75;
             this.panelIsReview.Visible = false;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox9.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox9.Location = new System.Drawing.Point(940, 186);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(152, 1);
+            this.groupBox9.TabIndex = 41;
+            this.groupBox9.TabStop = false;
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox22.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox22.Location = new System.Drawing.Point(114, 184);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(167, 1);
+            this.groupBox22.TabIndex = 102;
+            this.groupBox22.TabStop = false;
+            // 
+            // panelContractNum
+            // 
+            this.panelContractNum.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelContractNum.Controls.Add(this.labelContractNum);
+            this.panelContractNum.Controls.Add(this.textBoxContractNum);
+            this.panelContractNum.Location = new System.Drawing.Point(114, 164);
+            this.panelContractNum.Name = "panelContractNum";
+            this.panelContractNum.Size = new System.Drawing.Size(168, 21);
+            this.panelContractNum.TabIndex = 101;
+            this.panelContractNum.Click += new System.EventHandler(this.panelContractNum_Click);
+            this.panelContractNum.Leave += new System.EventHandler(this.panelContractNum_Leave);
+            // 
+            // labelContractNum
+            // 
+            this.labelContractNum.AutoSize = true;
+            this.labelContractNum.Location = new System.Drawing.Point(2, 8);
+            this.labelContractNum.Name = "labelContractNum";
+            this.labelContractNum.Size = new System.Drawing.Size(0, 12);
+            this.labelContractNum.TabIndex = 20;
+            this.labelContractNum.Visible = false;
+            // 
+            // textBoxContractNum
+            // 
+            this.textBoxContractNum.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxContractNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxContractNum.Location = new System.Drawing.Point(0, 0);
+            this.textBoxContractNum.Name = "textBoxContractNum";
+            this.textBoxContractNum.Size = new System.Drawing.Size(169, 21);
+            this.textBoxContractNum.TabIndex = 43;
+            this.textBoxContractNum.Visible = false;
+            this.textBoxContractNum.Click += new System.EventHandler(this.textBoxContractNum_Click);
+            this.textBoxContractNum.Leave += new System.EventHandler(this.panelContractNum_Leave);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(18, 169);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(95, 12);
+            this.label11.TabIndex = 100;
+            this.label11.Text = "总材料表单据号:";
+            // 
+            // labelSourceOrderNumber
+            // 
+            this.labelSourceOrderNumber.AutoSize = true;
+            this.labelSourceOrderNumber.Location = new System.Drawing.Point(533, 170);
+            this.labelSourceOrderNumber.Name = "labelSourceOrderNumber";
+            this.labelSourceOrderNumber.Size = new System.Drawing.Size(35, 12);
+            this.labelSourceOrderNumber.TabIndex = 105;
+            this.labelSourceOrderNumber.Text = "     ";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.groupBox16);
+            this.panel4.Controls.Add(this.label10);
+            this.panel4.Controls.Add(this.panelSourceOrderNumber);
+            this.panel4.Controls.Add(this.textBoxSourceOrderNumber);
+            this.panel4.Location = new System.Drawing.Point(531, 165);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(165, 21);
+            this.panel4.TabIndex = 104;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox16.Controls.Add(this.groupBox17);
+            this.groupBox16.Location = new System.Drawing.Point(0, 20);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(165, 1);
+            this.groupBox16.TabIndex = 83;
+            this.groupBox16.TabStop = false;
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.BackColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox17.Location = new System.Drawing.Point(374, 0);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(264, 1);
+            this.groupBox17.TabIndex = 17;
+            this.groupBox17.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1, 8);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(0, 12);
+            this.label10.TabIndex = 19;
+            this.label10.Visible = false;
+            // 
+            // panelSourceOrderNumber
+            // 
+            this.panelSourceOrderNumber.BackgroundImage = global::MainProgram.Properties.Resources.Preview_16_;
+            this.panelSourceOrderNumber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelSourceOrderNumber.Location = new System.Drawing.Point(143, 1);
+            this.panelSourceOrderNumber.Name = "panelSourceOrderNumber";
+            this.panelSourceOrderNumber.Size = new System.Drawing.Size(21, 21);
+            this.panelSourceOrderNumber.TabIndex = 18;
+            this.panelSourceOrderNumber.Click += new System.EventHandler(this.panelSourceOrderNumber_Click);
+            this.panelSourceOrderNumber.DoubleClick += new System.EventHandler(this.panelSourceOrderNumber_DoubleClick);
+            // 
+            // textBoxSourceOrderNumber
+            // 
+            this.textBoxSourceOrderNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxSourceOrderNumber.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxSourceOrderNumber.Location = new System.Drawing.Point(-1, -1);
+            this.textBoxSourceOrderNumber.Name = "textBoxSourceOrderNumber";
+            this.textBoxSourceOrderNumber.ReadOnly = true;
+            this.textBoxSourceOrderNumber.Size = new System.Drawing.Size(165, 21);
+            this.textBoxSourceOrderNumber.TabIndex = 81;
+            this.textBoxSourceOrderNumber.Visible = false;
+            this.textBoxSourceOrderNumber.Leave += new System.EventHandler(this.textBoxSourceOrderNumber_Leave);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(447, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 12);
+            this.label6.TabIndex = 103;
+            this.label6.Text = "源申请单编号:";
+            // 
+            // contextMenuStripDataGridView
+            // 
+            this.contextMenuStripDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCheckDetailed,
+            this.toolStripSeparator7,
+            this.ToolStripMenuItemDelRow});
+            this.contextMenuStripDataGridView.Name = "contextMenuStripDataGridView";
+            this.contextMenuStripDataGridView.Size = new System.Drawing.Size(153, 76);
+            // 
+            // ToolStripMenuItemCheckDetailed
+            // 
+            this.ToolStripMenuItemCheckDetailed.Name = "ToolStripMenuItemCheckDetailed";
+            this.ToolStripMenuItemCheckDetailed.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCheckDetailed.Text = "查看物料详情";
+            this.ToolStripMenuItemCheckDetailed.Click += new System.EventHandler(this.ToolStripMenuItemCheckDetailed_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
+            // 
+            // ToolStripMenuItemDelRow
+            // 
+            this.ToolStripMenuItemDelRow.Name = "ToolStripMenuItemDelRow";
+            this.ToolStripMenuItemDelRow.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelRow.Text = "删除行";
+            this.ToolStripMenuItemDelRow.Click += new System.EventHandler(this.ToolStripMenuItemDelRow_Click);
+            // 
             // FormPurchaseOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1126, 536);
+            this.Controls.Add(this.labelSourceOrderNumber);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.groupBox22);
+            this.Controls.Add(this.panelContractNum);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.panelIsReview);
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.panelSummary);
@@ -998,6 +1192,12 @@
             this.panel6.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
+            this.panelContractNum.ResumeLayout(false);
+            this.panelContractNum.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
+            this.contextMenuStripDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1032,7 +1232,6 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Panel panelSummary;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel11;
@@ -1079,6 +1278,24 @@
         private System.Windows.Forms.Label labelSummary;
         private System.Windows.Forms.TextBox textBoxBusinessPeople;
         private System.Windows.Forms.Panel panelIsReview;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private System.Windows.Forms.Panel panelContractNum;
+        private System.Windows.Forms.Label labelContractNum;
+        private System.Windows.Forms.TextBox textBoxContractNum;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelSourceOrderNumber;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panelSourceOrderNumber;
+        private System.Windows.Forms.TextBox textBoxSourceOrderNumber;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.GroupBox groupBox17;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCheckDetailed;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelRow;
 
     }
 }

@@ -66,6 +66,9 @@
     <Reference Include="LumiSoft.Net">
       <HintPath>bin\Debug\LumiSoft.Net.dll</HintPath>
     </Reference>
+    <Reference Include="MainModel">
+      <HintPath>..\..\..\bus\MainView\bin\Debug\MainModel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -86,86 +89,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bus\AuthorizationAccess.cs" />
-    <Compile Include="bus\BillDataGridViewExtend.cs" />
-    <Compile Include="bus\ControlExtendLib.cs" />
-    <Compile Include="bus\DataGridViewMerge.cs" />
-    <Compile Include="bus\DbPublic.cs" />
-    <Compile Include="bus\ExcelDocProc.cs" />
-    <Compile Include="bus\MobileWeightedUnitPrice.cs" />
-    <Compile Include="bus\PrintBmpFile.cs" />
-    <Compile Include="bus\PrintDataGridView.cs" />
-    <Compile Include="bus\SerialNumberManager.cs" />
-    <Compile Include="bus\SystemActionList.cs" />
-    <Compile Include="model\ITableModel.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielInEarningsOrder.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielInEarningsOrderDetails.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielInOrder.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielInOrderDetails.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielInOtherOrder.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielInOtherOrderDetails.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielOutEarningsOrder.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielOutEarningsOrderDetails.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielOutOrder.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielOutOrderDetails.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielOutOtherOrder.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielOutOtherOrderDetails.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielProOccupied.cs" />
-    <Compile Include="model\仓存管理\业务单据\MaterielProOccupiedDetails.cs" />
-    <Compile Include="model\公共的\BillNumber.cs" />
-    <Compile Include="model\公共的\Version.cs" />
-    <Compile Include="model\初始化\InitSubSystemSign.cs" />
-    <Compile Include="model\初始化\业务初始化\InitAccountPayable.cs" />
-    <Compile Include="model\初始化\业务初始化\InitAccountReceivable.cs" />
-    <Compile Include="model\初始化\财务初始化\InitBankBalance.cs" />
-    <Compile Include="model\初始化\财务初始化\InitCashBalance.cs" />
-    <Compile Include="model\初始化\业务初始化\InitMateriel.cs" />
-    <Compile Include="model\基础资料\业务\BillConfig.cs" />
-    <Compile Include="model\基础资料\业务\Customer.cs" />
-    <Compile Include="model\基础资料\业务\CustomerOrgStruct.cs" />
-    <Compile Include="model\基础资料\业务\CustomerType.cs" />
-    <Compile Include="model\基础资料\业务\MaterielOrgStruct.cs" />
-    <Compile Include="model\基础资料\业务\MaterielType.cs" />
-    <Compile Include="model\基础资料\业务\Matetiel.cs" />
-    <Compile Include="model\基础资料\业务\SettlmentWay.cs" />
-    <Compile Include="model\基础资料\业务\Supplier.cs" />
-    <Compile Include="model\基础资料\业务\SupplierOrgStruct.cs" />
-    <Compile Include="model\基础资料\业务\SupplierType.cs" />
-    <Compile Include="model\基础资料\其他\OperatorLog.cs" />
-    <Compile Include="model\基础资料\基础信息\Action.cs" />
-    <Compile Include="model\基础资料\基础信息\ActionAndStaff.cs" />
-    <Compile Include="model\基础资料\基础信息\AuxiliaryMaterial.cs" />
-    <Compile Include="model\基础资料\基础信息\CurrentLoginUser.cs" />
-    <Compile Include="model\基础资料\基础信息\StaffOrgStruct.cs" />
-    <Compile Include="model\基础资料\基础信息\Staff.cs" />
-    <Compile Include="model\基础资料\基础信息\SubSystem.cs" />
-    <Compile Include="model\基础资料\基础信息\SystemInfo.cs" />
-    <Compile Include="model\基础资料\基础信息\SystemModule.cs" />
-    <Compile Include="model\基础资料\基础信息\UserOrgStruct.cs" />
-    <Compile Include="model\基础资料\数据库\DbBackConfig.cs" />
-    <Compile Include="model\基础资料\数据库\DbBackupRecord.cs" />
-    <Compile Include="model\基础资料\数据库\DbRollbackRecord.cs" />
-    <Compile Include="model\存货核算\StorageStockDetail.cs" />
-    <Compile Include="model\现金管理\业务\BalanceManager.cs" />
-    <Compile Include="model\现金管理\业务\BankBalanceLastMonth.cs" />
-    <Compile Include="model\现金管理\业务\BankCashsubLedger.cs" />
-    <Compile Include="model\现金管理\业务\CashBalanceLastMonth.cs" />
-    <Compile Include="model\现金管理\业务\CashCashsubLedger.cs" />
-    <Compile Include="model\现金管理\报表\CashAccountPayableDetail.cs" />
-    <Compile Include="model\现金管理\报表\CashAccountReceivableDetail.cs" />
-    <Compile Include="model\现金管理\报表\CompanyProfit.cs" />
-    <Compile Include="model\采购管理\PurchaseInOrder.cs" />
-    <Compile Include="model\采购管理\PurchaseInOrderDetails.cs" />
-    <Compile Include="model\采购管理\PurchaseOrder.cs" />
-    <Compile Include="model\采购管理\PurchaseOrderDetails.cs" />
-    <Compile Include="model\采购管理\SupplierPriceSheet.cs" />
-    <Compile Include="model\销售管理\SaleOutOrder.cs" />
-    <Compile Include="model\销售管理\SaleOutOrderDetails.cs" />
-    <Compile Include="model\销售管理\SaleOrder.cs" />
-    <Compile Include="model\销售管理\SaleOrderDetails.cs" />
-    <Compile Include="model\销售管理\SaleQuotationOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="source\FormFactory.cs" />
     <Compile Include="view\主界面\FormAbout.cs">
       <SubType>Form</SubType>
@@ -178,6 +108,12 @@
     </Compile>
     <Compile Include="view\主界面\FormModifyPassword.designer.cs">
       <DependentUpon>FormModifyPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\主界面\FormOrderPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\主界面\FormOrderPrint.designer.cs">
+      <DependentUpon>FormOrderPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="view\主界面\FormRegister.cs">
       <SubType>Form</SubType>
@@ -563,6 +499,24 @@
     <Compile Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.designer.cs">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\采购管理\业务\FormMaterielDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\采购管理\业务\FormMaterielDetailed.designer.cs">
+      <DependentUpon>FormMaterielDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\FormProduction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\FormProduction.designer.cs">
+      <DependentUpon>FormProduction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\FormProductionReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\FormProductionReport.designer.cs">
+      <DependentUpon>FormProductionReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\系统登录\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -587,11 +541,11 @@
     <Compile Include="view\采购管理\FormPurchaseReport.Designer.cs">
       <DependentUpon>FormPurchaseReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\采购管理\业务\FormAdjustAmount.cs">
+    <Compile Include="view\采购管理\业务\FormPurchaseApply.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\采购管理\业务\FormAdjustAmount.Designer.cs">
-      <DependentUpon>FormAdjustAmount.cs</DependentUpon>
+    <Compile Include="view\采购管理\业务\FormPurchaseApply.designer.cs">
+      <DependentUpon>FormPurchaseApply.cs</DependentUpon>
     </Compile>
     <Compile Include="view\采购管理\业务\FormPurchaseInOrder.cs">
       <SubType>Form</SubType>
@@ -695,21 +649,61 @@
     <Compile Include="view\销售管理\报表\FormSaleOrderSequence.designer.cs">
       <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrack.designer.cs">
+      <DependentUpon>FormProjectInfoTrack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrackFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectInfoTrackFilter.designer.cs">
+      <DependentUpon>FormProjectInfoTrackFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielChangeOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielChangeOrder.designer.cs">
+      <DependentUpon>FormProjectMaterielChangeOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectMaterielOrder.designer.cs">
+      <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormProjectOrderDetail.designer.cs">
+      <DependentUpon>FormProjectOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\FormTransfer.designer.cs">
+      <DependentUpon>FormTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\项目管理\业务\RowMergeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\项目管理\业务\RowMergeView.designer.cs">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="view\主界面\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\主界面\FormModifyPassword.resx">
       <DependentUpon>FormModifyPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\主界面\FormOrderPrint.resx">
+      <DependentUpon>FormOrderPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\主界面\FormRegister.resx">
       <DependentUpon>FormRegister.cs</DependentUpon>
@@ -903,6 +897,15 @@
     <EmbeddedResource Include="view\现金管理\报表\FormReceivablerAndPaymentOrder.resx">
       <DependentUpon>FormReceivablerAndPaymentOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\采购管理\业务\FormMaterielDetailed.resx">
+      <DependentUpon>FormMaterielDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\FormProduction.resx">
+      <DependentUpon>FormProduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\FormProductionReport.resx">
+      <DependentUpon>FormProductionReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\系统登录\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -917,8 +920,8 @@
     <EmbeddedResource Include="view\采购管理\FormPurchaseReport.resx">
       <DependentUpon>FormPurchaseReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\采购管理\业务\FormAdjustAmount.resx">
-      <DependentUpon>FormAdjustAmount.cs</DependentUpon>
+    <EmbeddedResource Include="view\采购管理\业务\FormPurchaseApply.resx">
+      <DependentUpon>FormPurchaseApply.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\采购管理\业务\FormPurchaseInOrder.resx">
       <DependentUpon>FormPurchaseInOrder.cs</DependentUpon>
@@ -971,6 +974,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\销售管理\报表\FormSaleOrderSequence.resx">
       <DependentUpon>FormSaleOrderSequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectInfoTrack.resx">
+      <DependentUpon>FormProjectInfoTrack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectInfoTrackFilter.resx">
+      <DependentUpon>FormProjectInfoTrackFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielChangeOrder.resx">
+      <DependentUpon>FormProjectMaterielChangeOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectMaterielOrder.resx">
+      <DependentUpon>FormProjectMaterielOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormProjectOrderDetail.resx">
+      <DependentUpon>FormProjectOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\FormTransfer.resx">
+      <DependentUpon>FormTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\项目管理\业务\RowMergeView.resx">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -1275,7 +1299,20 @@
     <None Include="image\帮助\png-0024.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="image\主界面\生产管理.jpg" />
+    <None Include="image\生产管理\项目信息.png" />
+    <None Include="image\生产管理\总材料表.png" />
+    <None Include="image\采购管理\采购管理-采购申请.png" />
+    <None Include="image\生产管理\设备总材料表.png" />
+    <None Include="image\生产管理\电器总材料表.png" />
+    <None Include="image\生产管理\工程总材料表.png" />
+    <None Include="image\生产管理\设备总材料表 .png" />
+    <None Include="image\生产管理\生产管理-电器总材料表.png" />
+    <None Include="image\生产管理\生产管理-工程总材料表.png" />
+    <None Include="image\生产管理\生产管理-设备总材料表 .png" />
     <Content Include="png-0013.ico" />
+    <None Include="Resources\变更单据.png" />
+    <Content Include="Resources\蓝字.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -1299,6 +1336,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

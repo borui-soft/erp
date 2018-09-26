@@ -24,17 +24,19 @@ namespace MainProgram
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
         private bool m_isRedBill = false;
+        private bool m_isSaveSuccess = false;
 
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         MaterielOutEarningsOrderTable m_materieOutOrder = new MaterielOutEarningsOrderTable();
 
-        private enum DataGridColumnName
+        public enum DataGridColumnName
         {
             RowNum,
             MatetielNumber,
             MatetielName,
+            Brand,
             Model,
             Unit,
             Value,
@@ -86,11 +88,12 @@ namespace MainProgram
                 m_dateGridVeiwListDataList.addDataGridViewColumn("物料名称", 161, true, true);
             }
 
-            m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 83, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("品牌", 60, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("型号", 63, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("基本\n单位", 100, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("数量(*)", 100, true, false);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 100, true, true);
-            m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 100, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("单价", 80, true, true);
+            m_dateGridVeiwListDataList.addDataGridViewColumn("金额", 80, true, true);
             m_dateGridVeiwListDataList.addDataGridViewColumn("备注", 203, true, false);
 
             m_dateGridVeiwListDataList.initDataGridViewColumn(this.dataGridViewDataList);
@@ -226,6 +229,17 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccess = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                MaterielOutEarningsOrder.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
+            this.ActiveControl = this.toolStrip1;
+
             // 得到详细的销售信息
             ArrayList dataList = getMaterielOutEarningsOrderDetailsValue();
 
@@ -238,6 +252,8 @@ namespace MainProgram
                     MaterielOutEarningsOrder.getInctance().insert(record, false);
                     MaterielOutEarningsOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
+
+                    m_isSaveSuccess = true;
 
                     if (m_billNumber.Length == 0)
                     {
@@ -364,7 +380,11 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                MaterielOutEarningsOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+
+                if (m_isSaveSuccess)
+                {
+                    MaterielOutEarningsOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+                }
             }
             catch (Exception exp)
             {
@@ -373,8 +393,17 @@ namespace MainProgram
         }
 
         private void printDisplay_Click(object sender, EventArgs e)
-        {
-            PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
+        {           
+            // PrintBmpFile.getInctance().printCurrentWin(Width, Height, this.Location.X, this.Location.Y, true);
+            if (m_billNumber.Length > 0)
+            {
+                FormOrderPrint fop = new FormOrderPrint(BillTypeNumber, m_billNumber, this.dataGridViewDataList);
+                fop.ShowDialog();
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("请先保存数据再打印");
+            }
         }
 
         private void print_Click(object sender, EventArgs e)
@@ -448,18 +477,29 @@ namespace MainProgram
             /* 如果是物料编码列，需要判断该物料编码是否存在
             * 如果存在读取相应的值填充DataGridView中对应的其他列，如果不存在该物料编码，则清空该行
             * */
-
-            double pkey = Convert.ToDouble(id.ToString());
+            double pkey = 0;
             //使用这个输入的值，匹配物料编号
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id != record.num || record.pkey == 0)
+            if (record == null || id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
-                //使用这个输入的值，匹配物料key
+                try
+                {
+                    //使用这个输入的值，匹配物料key
+                    pkey = Convert.ToDouble(id.ToString());
 
-                record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+                    record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
 
-                if (pkey != record.pkey || record.pkey == 0)
+                    if (pkey != record.pkey || record.pkey == 0)
+                    {
+                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                            "]不存在，请重新输入或选择");
+                        m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+
+                        return;
+                    }
+                }
+                catch
                 {
                     MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                         "]不存在，请重新输入或选择");
@@ -473,6 +513,7 @@ namespace MainProgram
 
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
+            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Brand].Value = record.brand;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
             dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
             AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
@@ -506,7 +547,7 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (m_columnIndex != (int)DataGridColumnName.Note)
+            if (m_columnIndex != (int)DataGridColumnName.Note && m_columnIndex != (int)DataGridColumnName.MatetielNumber)
             {
                 e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
                     this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
@@ -620,9 +661,11 @@ namespace MainProgram
                 record = index.Value;
 
                 int rowIndex = Convert.ToInt32(record.rowNumber.ToString()) - 1;
+                MaterielTable materielInfo = Materiel.getInctance().getMaterielInfoFromPkey(record.materielID);
 
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.materielID;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.materielName;
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Brand].Value = materielInfo.brand;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.materielModel;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value = record.materielUnitSale;
                 dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = record.price;
@@ -673,6 +716,33 @@ namespace MainProgram
                     UserInterfaceActonState.setUserInterfaceActonState(activeObject,
                         ((System.Reflection.MemberInfo)(activeObject.GetType())).Name.ToString(), isEnable);
                 }
+            }
+        }
+
+        private void dataGridViewDataList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right) && (e.RowIndex >= 0 && e.RowIndex < DateGridVeiwListDataListRowCount))
+            {
+                m_rowIndex = e.RowIndex;
+
+                contextMenuStripDataGridView.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void ToolStripMenuItemDelRow_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDataList.Rows[m_rowIndex].Cells[1].Value.ToString().Length > 0)
+            {
+                string rowNum = dataGridViewDataList.Rows[m_rowIndex].Cells[0].Value.ToString();
+
+                if (MessageBoxExtend.messageQuestion("确认删除第" + rowNum + "行的数据吗？"))
+                {
+                    m_dateGridVeiwListDataList.delDataGridVewRow(Convert.ToInt32(rowNum), DateGridVeiwListDataListRowCount);
+                }
+            }
+            else
+            {
+                MessageBoxExtend.messageWarning("选择行的物料ID为空, 请重新选择");
             }
         }
     }

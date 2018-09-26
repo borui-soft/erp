@@ -14,7 +14,7 @@ namespace MainProgram
 {
     public partial class FormReceivableOrder : Form
     {
-        private int PAYMENT_ORDER_BILL_NUMBER = 18;
+        private int PAYMENT_ORDER_BILL_NUMBER = 62;
         private string PAYMENT_ORDER_BILL_NAME = "收款单";
         private string m_billNumber = "";
         private bool m_isBankBill = false;
@@ -133,6 +133,8 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = this.toolStrip1;
+
             /** 
              * 函数处理逻辑
              * 1、得到页面所有控件的值

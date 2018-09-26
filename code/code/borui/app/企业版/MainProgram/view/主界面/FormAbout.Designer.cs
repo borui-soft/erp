@@ -45,15 +45,7 @@
             this.labelQuestion.Size = new System.Drawing.Size(131, 12);
             this.labelQuestion.TabIndex = 6;
             this.labelQuestion.Text = "欢迎您使用博锐ERP软件";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 101);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 12);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V1.10.10";
+
             // 
             // pictureBox1
             // 
@@ -72,6 +64,17 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 17;
             this.label1.Text = "版本更新说明";
+
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(131, 12);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "当前软件版本：V3.0.0";
+
             // 
             // richTextBox1
             // 
@@ -79,11 +82,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、物料页面，重新把物料ID显示出来\n2、采购入库页面，统一了合同编号的控件风格\n3、采购入库序时薄中，解决合同编号和物料类型显示顺序错误的问题\n4、生产领料序时" +
-    "薄和其他出库序时薄中，增加了项目编号和生产编号的显示\n5、所有出入库单据，录入物料明细时，可在页面上输入物料编码或物料ID后，直接将物料信息现在在页面上，增加易" +
-    "用性";
-            // 
-            // FormAbout
+            this.richTextBox1.Text = "1、系统架构调整, 将mode、bus、view层代码进行了剥离，是系统扩展更方便";
+
+            // Fo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

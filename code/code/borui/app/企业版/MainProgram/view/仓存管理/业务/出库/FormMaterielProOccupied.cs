@@ -19,15 +19,19 @@ namespace MainProgram
         private int m_applyStaffPkey = -1;
         private string m_billNumber = "";
         private readonly int BillTypeNumber = 17;
-        private readonly int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
+        private int DateGridVeiwListDataListRowCount = FormMain.DATA_GRID_VIEW_DEFAULT_ROW_COUNT;
         private int m_rowIndex = -1, m_columnIndex = -1;
         private bool m_isInit = false;
         private bool m_isRedBill = false;
+        private bool m_isSaveSuccess = false;
 
         public DataGridViewTextBoxEditingControl CellEdit = null;
         BillDataGridViewExtend m_dateGridVeiwListDataList = new BillDataGridViewExtend();
         DataGridViewExtend m_dateGridVeiwListDataCount = new DataGridViewExtend();
         MaterielProOccupiedOrderTable m_materieOutOrder = new MaterielProOccupiedOrderTable();
+
+        // 根据项目跟踪状况，直接形成预占数据
+        public SortedDictionary<int, ArrayList> m_proInfoList = new SortedDictionary<int, ArrayList>();
 
         private enum DataGridColumnName
         {
@@ -42,16 +46,34 @@ namespace MainProgram
             Note
         };
 
-        public FormMaterielProOccupied(string billNumber = "")
+        public FormMaterielProOccupied(string billNumber = "", SortedDictionary<int, ArrayList> proInfoList = null)
         {
             InitializeComponent();
             m_billNumber = billNumber;
+
+            if (proInfoList != null)
+            {
+                m_proInfoList = proInfoList;
+            }
         }
 
         private void FormMaterielProOccupied_Load(object sender, EventArgs e)
         {
-            // DataGridView初始化
-            dataGridViewInit();
+            if (m_proInfoList.Count > 0)
+            {
+                DateGridVeiwListDataListRowCount = m_proInfoList.Count;
+
+                // DataGridView初始化
+                dataGridViewInit();
+
+                readProInfoListToUI();
+                return;
+            }
+            else
+            {
+                // DataGridView初始化
+                dataGridViewInit();
+            }
 
             if (m_billNumber.Length == 0)
             {
@@ -62,7 +84,7 @@ namespace MainProgram
                 this.labelMakeBillStaff.Visible = true;
                 this.labelMakeBillStaff.Text = DbPublic.getInctance().getCurrentLoginUserName();
             }
-            else 
+            else
             {
                 readBillInfoToUI();
             }
@@ -162,7 +184,7 @@ namespace MainProgram
             this.textBoxSummary.Visible = false;
             this.labelSummary.Visible = true;
             this.labelSummary.Text = this.textBoxSummary.Text;
-            this.textBoxSummary.Text = "";
+            //this.textBoxSummary.Text = "";
         }
         #endregion
 
@@ -206,6 +228,17 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            m_isSaveSuccess = false;
+
+            if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
+                MaterielProOccupiedOrder.getInctance().checkBillIsReview(this.labelBillNumber.Text.ToString()))
+            {
+                MessageBoxExtend.messageWarning("单据已被审核，所有数据无法进行更改，无法重复保存或审核\r\n请重新登录或手动刷新后查看单据详情");
+                return;
+            }
+
+            this.ActiveControl = this.toolStrip1;
+
             // 得到详细的销售信息
             ArrayList dataList = getMaterielProOccupiedDetailsValue();
 
@@ -218,6 +251,8 @@ namespace MainProgram
                     MaterielProOccupiedOrder.getInctance().insert(record, false);
                     MaterielProOccupiedOrderDetails.getInctance().insert(dataList);
                     BillNumber.getInctance().inserBillNumber(BillTypeNumber, this.labelTradingDate.Text, this.labelBillNumber.Text.ToString());
+
+                    m_isSaveSuccess = true;
 
                     if (m_billNumber.Length == 0)
                     {
@@ -239,7 +274,7 @@ namespace MainProgram
 
             record.tradingDate = this.labelTradingDate.Text;
             record.billNumber = this.labelBillNumber.Text;
-            record.exchangesUnit = this.labelSummary.Text;
+            record.srcOrderNum = this.labelSummary.Text;
 
             record.sumValue = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Value].Value.ToString();
             record.sumMoney = this.dataGridViewDataCount.Rows[0].Cells[(int)DataGridColumnName.Turnover].Value.ToString();
@@ -294,7 +329,7 @@ namespace MainProgram
                 return false;
             }
 
-            if (record.exchangesUnit.Length == 0)
+            if (record.srcOrderNum.Length == 0)
             {
                 MessageBoxExtend.messageWarning("用途信息不能为空，单据保存失败");
                 return false;
@@ -341,7 +376,11 @@ namespace MainProgram
             try
             {
                 save_Click(sender, e);
-                MaterielProOccupiedOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+
+                if (m_isSaveSuccess)
+                {
+                    MaterielProOccupiedOrder.getInctance().billReview(m_billNumber, m_isRedBill);
+                }
             }
             catch (Exception exp)
             {
@@ -405,37 +444,61 @@ namespace MainProgram
 
         private void dataGridViewDataList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (m_proInfoList.Count > 0 && e.ColumnIndex == (int)DataGridColumnName.Value)
+            {
+                // 当value被改变后，
+                if (Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value.ToString()) >
+                    getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString()))
+                {
+                    MessageBoxExtend.messageWarning("物料数量以超过允许的最大值" + getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString()) + 
+                        ", 已强制修改为默认最大值");
+                    dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].Value = getMaxValue(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value.ToString());
+                }
+            }
+
             if (e.ColumnIndex == (int)DataGridColumnName.MatetielNumber)
             {
                 // 当用户选择的相应物料后，自动对DataGridView行某些值进行赋值
                 if (dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString().Length > 0)
                 {
-                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
+                    setMatetielInfoToDataGridView(dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString(), m_rowIndex);
                 }
             }
             else if (e.ColumnIndex == (int)DataGridColumnName.Price || e.ColumnIndex == (int)DataGridColumnName.Value)
             {
                 // 当单价和数量有变化时，自动计算物料金额
-                setTurnoverInfoDataGridView();
+                setTurnoverInfoDataGridView(m_rowIndex);
             }
         }
         
-        private void setMatetielInfoToDataGridView(string id)
+        private void setMatetielInfoToDataGridView(string id, int rowIndex)
         {
             /* 如果是物料编码列，需要判断该物料编码是否存在
             * 如果存在读取相应的值填充DataGridView中对应的其他列，如果不存在该物料编码，则清空该行
             * */
-            double pkey = Convert.ToDouble(id.ToString());
             //使用这个输入的值，匹配物料编号
+            double pkey = 0;
             MaterielTable record = Materiel.getInctance().getMaterielInfoFromNum(Convert.ToString(id));
 
-            if (id != record.num || record.pkey == 0)
+            if (record == null || id.ToLower() != record.num.ToLower() || record.pkey == 0)
             {
-                //使用这个输入的值，匹配物料key
+                try
+                {
+                    //使用这个输入的值，匹配物料key
+                    pkey = Convert.ToDouble(id.ToString());
 
-                record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
+                    record = Materiel.getInctance().getMaterielInfoFromPkey((int)pkey);
 
-                if (pkey != record.pkey || record.pkey == 0)
+                    if (pkey != record.pkey || record.pkey == 0)
+                    {
+                        MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
+                            "]不存在，请重新输入或选择");
+                        m_dateGridVeiwListDataList.clearDataGridViewRow(m_rowIndex);
+
+                        return;
+                    }
+                }
+                catch
                 {
                     MessageBoxExtend.messageWarning("[" + dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString() +
                         "]不存在，请重新输入或选择");
@@ -447,29 +510,29 @@ namespace MainProgram
 
             InitMaterielTable MaterielCountdata = InitMateriel.getInctance().getMaterielInfoFromMaterielID((int)pkey);
 
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielNumber].Value = record.pkey;
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.MatetielName].Value = record.name;
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Model].Value = record.model;
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Unit].Value =
             AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", record.unitSale);
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
-            dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value = Convert.ToString(MaterielCountdata.price);
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value = "0";
+            dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = "0";
         }
 
-        private void setTurnoverInfoDataGridView()
+        private void setTurnoverInfoDataGridView(int rowIndex)
         {
-            if (dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString().Length > 0 &&
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString().Length > 0)
+            if (dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString().Length > 0 &&
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString().Length > 0)
             {
-                double price = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
-                double value = Convert.ToDouble(dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
+                double price = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Price].Value.ToString());
+                double value = Convert.ToDouble(dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Value].Value.ToString());
                 double turnover = price * value;
 
                 // 金额信息保留2位小数儿
                 turnover = (double)(Math.Round(turnover * 100)) / 100;
 
-                dataGridViewDataList.Rows[m_rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = Convert.ToString(turnover);
+                dataGridViewDataList.Rows[rowIndex].Cells[(int)DataGridColumnName.Turnover].Value = Convert.ToString(turnover);
             }
         }
 
@@ -482,7 +545,7 @@ namespace MainProgram
 
         private void Cells_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (m_columnIndex != (int)DataGridColumnName.Note)
+            if (m_columnIndex != (int)DataGridColumnName.Note && m_columnIndex != (int)DataGridColumnName.MatetielNumber)
             {
                 e.Handled = m_dateGridVeiwListDataList.isValidDataGridViewCellValue(e.KeyChar,
                     this.dataGridViewDataList.Rows[m_rowIndex].Cells[m_columnIndex].EditedFormattedValue.ToString());
@@ -549,7 +612,7 @@ namespace MainProgram
             this.labelBillNumber.Text = m_materieOutOrder.billNumber;
             this.labelMakeBillStaff.Text = m_materieOutOrder.makeOrderStaffName;
             this.labelSave.Text = m_materieOutOrder.applyStaffName;
-            this.labelSummary.Text = m_materieOutOrder.exchangesUnit;
+            this.labelSummary.Text = m_materieOutOrder.srcOrderNum;
 
             // DataGridView 赋值
             writeBillDetailsInfoFromBillNumber(m_billNumber);
@@ -578,11 +641,68 @@ namespace MainProgram
             }
         }
 
+        private void readProInfoListToUI()
+        {
+            for (int index = 0; index < m_proInfoList.Count; index++)
+            {
+                ArrayList record = new ArrayList();
+
+                record = m_proInfoList[index];
+
+                if (index == 0)
+                {
+                    this.labelTradingDate.Visible = true;
+                    this.labelTradingDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    // 单据号
+                    this.labelBillNumber.Text = BillNumber.getInctance().getNewBillNumber(BillTypeNumber, DateTime.Now.ToString("yyyy-MM-dd"));
+
+                    // 制单人初始化
+                    this.labelMakeBillStaff.Visible = true;
+                    this.labelMakeBillStaff.Text = DbPublic.getInctance().getCurrentLoginUserName();
+
+                    this.labelSummary.Visible = true;
+                    this.labelSummary.Text = record[0].ToString();
+
+                    m_materieOutOrder.isReview = "1";
+                }
+
+                setMatetielInfoToDataGridView(Convert.ToString(record[1]), index);
+                dataGridViewDataList.Rows[index].Cells[(int)DataGridColumnName.Value].Value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
+
+                setTurnoverInfoDataGridView(index);
+            }
+        }
+
+        private double getMaxValue(string materielID)
+        {
+            double value = 0.0;
+
+            for (int index = 0; index < m_proInfoList.Count; index++)
+            {
+                ArrayList record = new ArrayList();
+
+                record = m_proInfoList[index];
+
+                if (record[1].ToString() == materielID)
+                {
+                    value = Convert.ToDouble(record[2]) - Convert.ToDouble(record[3]);
+                    break;
+                }
+            }
+            return value;
+        }
+
         private void writeBillDetailsInfoFromBillNumber(string billNumber)
         {
             // DataGridView 赋值
             SortedDictionary<int, MaterielProOccupiedOrderDetailsTable> orderDetails =
                 MaterielProOccupiedOrderDetails.getInctance().getMaterielProOccupiedInfoFromBillNumber(billNumber);
+
+            if (orderDetails.Count > DateGridVeiwListDataListRowCount)
+            {
+                m_dateGridVeiwListDataList.initDataGridViewData(orderDetails.Count + 1);
+            }
 
             foreach (KeyValuePair<int, MaterielProOccupiedOrderDetailsTable> index in orderDetails)
             {

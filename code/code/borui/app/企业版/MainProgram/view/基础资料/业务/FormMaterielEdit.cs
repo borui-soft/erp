@@ -158,10 +158,16 @@ namespace MainProgram
                 this.textBoxMnemonicCode.Text = m_materiel.mnemonicCode;
                 this.textBoxMIN.Text = Convert.ToString(m_materiel.min);
                 this.textBoxMAX.Text = Convert.ToString(m_materiel.max);
+                this.textBoxParameter.Text = m_materiel.materielParameter;
+
+                this.textBoxCZ.Text = m_materiel.CZ;
+                this.textBoxAttribute1.Text = m_materiel.attribute1;
+                this.textBoxAttribute2.Text = m_materiel.attribute2;
+
                 textBoxWarranty.Text = Convert.ToString(m_materiel.warramty);
                 comboBoxMaterielAttribut.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(MATERIEL_ATTRIBUTE_TABLE_NAME, m_materiel.materielAttribute);
                 comboBoxValuationType.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(VALUATION_TYPE_LIST_TABLE_NAME, m_materiel.valuation);
-                comboBoxStorage.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(VALUATION_TYPE_LIST_TABLE_NAME, m_materiel.storage);
+                comboBoxStorage.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(STORAGE_LIST_TABLE_NAME, m_materiel.storage);
                 comboBoxUnit.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(UNIT_LIST_TABLE_NAME, m_materiel.unit);
                 comboBoxUnitPurchase.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(UNIT_LIST_TABLE_NAME, m_materiel.unitPurchase);
                 comboBoxUnitSale.Text = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey(UNIT_LIST_TABLE_NAME, m_materiel.unitSale);
@@ -207,6 +213,7 @@ namespace MainProgram
             materiel.model = this.textBoxModel.Text.ToString();
             materiel.mnemonicCode = this.textBoxMnemonicCode.Text.ToString();
             materiel.brand = this.textBoxBrand.Text.ToString();
+            materiel.materielParameter = this.textBoxParameter.Text.ToString();
 
             if (this.textBoxMIN.Text.Length > 0)
             {
@@ -271,6 +278,10 @@ namespace MainProgram
             }
 
             materiel.note = this.textBoxNote.Text.ToString();
+
+            materiel.CZ = this.textBoxCZ.Text.ToString();
+            materiel.attribute1 = this.textBoxAttribute1.Text.ToString();
+            materiel.attribute2 = this.textBoxAttribute2.Text.ToString();
 
             return materiel;
         }
@@ -372,7 +383,14 @@ namespace MainProgram
                             if (m_materiel.name.CompareTo(this.textBoxName.Text) != 0 ||
                                 m_materiel.num.CompareTo(this.textBoxNum.Text) != 0 ||
                                 m_materiel.nameShort.CompareTo(this.textBoxShortName.Text) != 0 ||
+                                m_materiel.materielParameter.CompareTo(this.textBoxParameter.Text) != 0 ||
+                                m_materiel.brand.CompareTo(this.textBoxBrand.Text) != 0 ||
                                 m_materiel.model.CompareTo(this.textBoxModel.Text) != 0 ||
+
+                                m_materiel.CZ.CompareTo(this.textBoxCZ.Text) != 0 ||
+                                m_materiel.attribute1.CompareTo(this.textBoxAttribute1.Text) != 0 ||
+                                m_materiel.attribute2.CompareTo(this.textBoxAttribute2.Text) != 0 ||
+
                                 m_materiel.mnemonicCode.CompareTo(this.textBoxMnemonicCode.Text) != 0 ||
                                 m_materiel.min != ConvertExtend.toInt32(this.textBoxMIN.Text.ToString()) ||
                                 m_materiel.max != ConvertExtend.toInt32(this.textBoxMAX.Text.ToString()) ||

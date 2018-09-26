@@ -25,7 +25,7 @@ namespace MainProgram
         }
 
         private int m_materielRecordCount = 0;
-        private int m_materielGroupPkey = 0;
+        private int m_materielGroupPkey = 1;
         private int m_currentDataGridViedRecordPkey = 0;
         private bool m_isDisplayJG = false;
         private string m_materielGroupName = "";
@@ -84,7 +84,7 @@ namespace MainProgram
             refreshTreeView();
 
             // DataGridView控件初始化
-            m_dataGridViewExtend.addDataGridViewColumn("ID", 30, false);
+            m_dataGridViewExtend.addDataGridViewColumn("ID", 30);
             m_dataGridViewExtend.addDataGridViewColumn("物料名称", 200);
             m_dataGridViewExtend.addDataGridViewColumn("物料编码", 100);
             m_dataGridViewExtend.addDataGridViewColumn("简称", 80);
@@ -98,7 +98,9 @@ namespace MainProgram
                 m_dataGridViewExtend.addDataGridViewColumn("合计", 80);
             }
 
-            m_dataGridViewExtend.addDataGridViewColumn("单位", 80);
+            m_dataGridViewExtend.addDataGridViewColumn("单位", 80); 
+            m_dataGridViewExtend.addDataGridViewColumn("参数", 60);
+            m_dataGridViewExtend.addDataGridViewColumn("材质", 70);
             m_dataGridViewExtend.addDataGridViewColumn("存货上限", 80);
             m_dataGridViewExtend.addDataGridViewColumn("存货下限", 80);
             m_dataGridViewExtend.addDataGridViewColumn("保质期", 80);
@@ -115,6 +117,8 @@ namespace MainProgram
 
             m_dataGridViewExtend.initDataGridViewColumn(this.dataGridViewMaterielList);
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
+
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private StorageStockDetailTable getMaterielHistoryInfoFromMaterielID(int pkey)
@@ -150,6 +154,10 @@ namespace MainProgram
             //分别代表数量和单价
             double materielCountdataPrice = 0, materielCountdataValue = 0;
 
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryMaterialList = AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_UNIT_LIST");
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryStorelList = AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_STORAGE_LIST");
+            SortedDictionary<int, AuxiliaryMaterialDataTable> AuxiliaryAttributelList = AuxiliaryMaterial.getInctance().getAuxiliaryListFromTableName("BASE_MATERIEL_ATTRIBUTE");
+
             for (int i = 0; i < materielList.Count; i++)
             {
                 MaterielTable materiel = new MaterielTable();
@@ -175,16 +183,38 @@ namespace MainProgram
                     temp.Add((double)(Math.Round(materielCountdataValue * materielCountdataPrice * 100)) / 100);
                 }
 
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_UNIT_LIST", materiel.unitStorage));
+                if (AuxiliaryMaterialList.ContainsKey(materiel.unit))
+                {
+                    temp.Add(AuxiliaryMaterialList[materiel.unit].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                temp.Add(materiel.materielParameter);
+                temp.Add(materiel.CZ);
                 temp.Add(materiel.max);
                 temp.Add(materiel.min);
                 temp.Add(materiel.warramty);
-                temp.Add(AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_STORAGE_LIST", materiel.storage));
+
+                if (AuxiliaryStorelList.ContainsKey(materiel.storage))
+                {
+                    temp.Add(AuxiliaryStorelList[materiel.storage].name);
+                }
+                else
+                {
+                    temp.Add("");
+                }
+
+                string materielAttributeName = "";
+                if (AuxiliaryAttributelList.ContainsKey(materiel.materielAttribute))
+                {
+                    materielAttributeName = AuxiliaryAttributelList[materiel.materielAttribute].name;
+                }
 
                 if (m_displayDataType == (int)DisplayDataType.Materiel)
                 {
-                    string materielAttributeName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute);
-
                     if (materielAttributeName.IndexOf("外购") != -1)
                     {
                         materiels.Add(materiels.Count, temp);
@@ -193,8 +223,6 @@ namespace MainProgram
                 }
                 else if (m_displayDataType == (int)DisplayDataType.Product)
                 {
-                    string materielAttributeName = AuxiliaryMaterial.getInctance().getAuxiliaryMaterialNameFromPkey("BASE_MATERIEL_ATTRIBUTE", materiel.materielAttribute);
-
                     if (materielAttributeName.IndexOf("外购") == -1)
                     {
                         materiels.Add(materiels.Count, temp);
@@ -311,10 +339,13 @@ namespace MainProgram
                 this.treeViewMaterielOrg.SelectedNode.BackColor = Color.LightSteelBlue;
 
                 // 单击鼠标时，得到当前树节点Pkey及文本值
-                m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
-                m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text;
+                if (Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString()) != m_materielGroupPkey)
+                {
+                    m_materielGroupPkey = Convert.ToInt32(this.treeViewMaterielOrg.SelectedNode.Name.ToString());
+                    m_materielGroupName = this.treeViewMaterielOrg.SelectedNode.Text;
 
-                updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                    updateDataGridView(getCurrentNodeAllChildNodesMateriel());
+                }
             }
             else 
             {
@@ -402,7 +433,7 @@ namespace MainProgram
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
             refreshTreeView();
-            Materiel.getInctance().refrensRecord();
+            Materiel.getInctance().refreshRecord();
             updateDataGridView(Materiel.getInctance().getAllMaterielInfo());
         }
 

@@ -16,8 +16,8 @@ ERP系统采用模块化设计理念，整个系统分为9个子系统，分别�
 
 # 更多资料
 整套产品产品资料及配套安装包
-- 下载地址：https://pan.baidu.com/s/1-qMillWNGDF1byRNDXGeEw 
-- 提取密码：vqme
+- 下载地址：https://pan.baidu.com/s/1CUjYs-UtzKoj2skdwUiDJw 
+- 提取密码：xfnu
 
 # 开发环境
 - 数据库：SQL Server 2005

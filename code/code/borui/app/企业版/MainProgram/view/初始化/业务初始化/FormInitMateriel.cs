@@ -82,13 +82,13 @@ namespace MainProgram
 
         private void add_Click(object sender, EventArgs e)
         {
-            // shengguang++ 2016-11-05 当业务启动后，增加功能：不能再直接增加物料库存信息
+            // master++ 2016-11-05 当业务启动后，增加功能：不能再直接增加物料库存信息
             if (InitSubSystemSign.getInctance().isBusinessSystemInit())
             {
                 MessageBoxExtend.messageWarning("业务系统已启用，不能再直接添加物料库存信息，请通过物料入库方式完成此操作");
                 return;
             }
-            // ++shengguang
+            // ++master
 
             FormInitMaterielEdit fime = new FormInitMaterielEdit("添加物料初始资料", false);
             fime.ShowDialog();
@@ -106,13 +106,13 @@ namespace MainProgram
 
         private void delete_Click(object sender, EventArgs e)
         {
-            // shengguang++ 2016-11-05 当业务启动后，增加功能：不能再直接删除物料库存信息
+            // master++ 2016-11-05 当业务启动后，增加功能：不能再直接删除物料库存信息
             if (InitSubSystemSign.getInctance().isBusinessSystemInit())
             {
                 MessageBoxExtend.messageWarning("业务系统已启用，不能再直接删除物料库存信息，请通过物料出库方式完成此操作");
                 return;
             }
-            // ++shengguang
+            // ++master
 
             if (m_currentDataGridViedRecordPkey != 0)
             {

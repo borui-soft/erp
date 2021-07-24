@@ -45,7 +45,15 @@
             this.labelQuestion.Size = new System.Drawing.Size(131, 12);
             this.labelQuestion.TabIndex = 6;
             this.labelQuestion.Text = "欢迎您使用博锐ERP软件";
-
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 12);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "当前软件版本：V3.0.1";
             // 
             // pictureBox1
             // 
@@ -64,17 +72,6 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 17;
             this.label1.Text = "版本更新说明";
-
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 101);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 12);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "当前软件版本：V3.0.0";
-
             // 
             // richTextBox1
             // 
@@ -82,9 +79,10 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(385, 90);
             this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "1、系统架构调整, 将mode、bus、view层代码进行了剥离，是系统扩展更方便";
-
-            // Fo
+            this.richTextBox1.Text = "1、解决业务单据单元格未失去焦点(用户在某单元格输入了数据，数据输入完毕后未点击空白处)，此时用户点击保存按钮导致的程序读取单元格值错误的问题(针对所有业务单据)" +
+                "。";
+            // 
+            // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

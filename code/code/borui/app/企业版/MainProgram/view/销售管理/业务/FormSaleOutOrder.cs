@@ -493,6 +493,12 @@ namespace MainProgram
 
         private void save_Click(object sender, EventArgs e)
         {
+            // master++ 2021.7.24,解决用户反馈的bug
+            // 问题描述：单元格焦点未失去时(用户在某单元格数据了数据，数据输入完毕后未点击空白处)，此时，若用户点击保存按钮，会出现datagridview单元格数据不准确的问题
+            // 解决办法：在程序读取单元格值之前，将第0行、第0列选中，让其他单元格失去焦点
+            dataGridViewDataList.Rows[0].Cells[0].Selected = true;
+            // ++master 2021.7.24
+
             m_isSaveSuccess = false;
 
             if ((sender.ToString() == "保存" || sender.ToString() == "审核") &&
